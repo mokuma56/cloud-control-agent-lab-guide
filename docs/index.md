@@ -20,7 +20,7 @@ The lab follows three steps:
 ## How the lab is built
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph CC["Cisco Cloud Control (USC-Engineering tenant)"]
     Canvas["AI Canvas<br/>multi-domain troubleshooting"]
     Studio["Studio agent<br/>(your agent)"]
