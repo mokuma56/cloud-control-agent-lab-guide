@@ -82,6 +82,34 @@ The two OpenAPI files are the *what* (which calls exist). The two notes are the 
 them, and what the words mean at PseudoCo). Neither note contains the answer to any exercise. Every
 operation is listed in [Lab Tools reference](../reference/tools.md).
 
+### Two ways in: OpenAPI for Canvas, MCP for agents
+
+Lab Tools is one lab server that offers the same ten operations two ways, because the two Cloud Control
+tools you use connect differently:
+
+| Way in | Who uses it | Set up in | What it is |
+| --- | --- | --- | --- |
+| **OpenAPI** (the custom integration above) | Canvas, and Studio agents as an *API integration* | 1.1 (now) | The two API descriptions plus your seat token |
+| **MCP** (Model Context Protocol) | Studio agents | 3.3 step A | One shared MCP server URL; your seat token tells it which seat you are |
+
+MCP is an open standard for giving an AI assistant tools: the server lists its tools and their
+inputs, and the assistant calls them. Both ways reach the same lab server with **your seat token**, so
+both act as your seat and only your seat.
+
+When you build your agent in Part 2, its manifest lists the servers it may use:
+
+| In the agent manifest | What it is | Capabilities |
+| --- | --- | --- |
+| `meraki-server` | Cisco-provided MCP server for **Cisco Meraki** | Read the org: networks, switches and ports, clients, events, configuration change log |
+| `secure-access` | Cisco-provided MCP server for **Cisco Secure Access** | Read access and DNS activity, alerts and policy for the users and sites it protects |
+| `firewall-server` (if listed) | Cisco-provided MCP server for **Cisco Secure Firewall** | Read firewall policy and objects |
+| `byo-…` (a random ID) | **"Bring your own"** MCP: the Lab Tools MCP integration you add in 3.3 | The ten Lab Tools operations, as your seat |
+| API integration *PseudoCo Business Context* | The Lab Tools OpenAPI integration from 1.1 | The same Lab Tools operations, over REST |
+
+The Cisco ones come with Cloud Control: nothing to install. The `byo-` one is the point of 3.3: it is
+how you would give an agent your own company's tools (in Path B you even write one). Its ID differs for
+everyone. If your agent has no `byo-` entry yet, that is normal before 3.3.
+
 
 
 !!! info "Why a token and not a login"

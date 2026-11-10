@@ -99,6 +99,8 @@ Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid 
 
 *Further down: (1) the safety rules (a scheduled run never stops a lane on its own), (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
 
+What each server in (2) is, and why there are two ways to reach Lab Tools: see [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents).
+
 
 - [ ] **Instructions** include "propose, don't change" and "only after a human approves".
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
