@@ -1136,6 +1136,8 @@ remediation, and your agent verifies and turns your light off.</p>
 </ul>
 <p>Watch the projector board: bulbs light table by table, and the board records each seat's
 <strong>time to detect</strong>.</p>
+<p><img alt="19-board" loading="lazy" src="../../img/19-board.png" /></p>
+<p><em>The projector board: (1) a table's bulb in the color of the seat it is showing, (2) the five seats at that table, (3) what each agent said when it signaled.</em></p>
 <h2 id="2-wake-up-and-read-the-finding-about-10-min">2. Wake up and read the finding (about 10 min)<a class="headerlink" href="#2-wake-up-and-read-the-finding-about-10-min" title="Permanent link">&para;</a></h2>
 <p>Open your agent's latest run (or your Canvas answer). A good finding looks like this:</p>
 <div class="highlight"><pre><span></span><code>STATUS: issue
@@ -1154,13 +1156,19 @@ NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting app
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The source IP is <strong>yours</strong> (compare with <code>get_my_watch_scope</code>).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The ATTACK is supported by evidence, not assumed. See the <a href="../../reference/evidence/">evidence guide</a>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Your bulb is on in your color.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Your bulb is on in your color.</p>
+<p><img alt="11-lights-evidence" loading="lazy" src="../../img/11-lights-evidence.png" /></p>
+<p><em>A real finding for seat T3-C: (1) Secure Firewall events and IPS signatures from get_my_security_events, (2) NEXT STEP waits for approval.</em></p>
+</li>
 </ul>
 <h2 id="3-approve-the-remediation-about-5-min">3. Approve the remediation (about 5 min)<a class="headerlink" href="#3-approve-the-remediation-about-5-min" title="Permanent link">&para;</a></h2>
 <p>Reply to your agent or Canvas with an explicit approval:</p>
 <div class="highlight"><pre><span></span><code>Yes, approved: stop_my_lane for my watch source.
 </code></pre></div>
 <p>The agent calls <code>stop_my_lane</code>. Only your lane stops; your neighbors' bulbs stay on until they act.</p>
+<p><img alt="12-lights-approve" loading="lazy" src="../../img/12-lights-approve.png" /></p>
+<p><em>(1) signal_issue lit the purple bulb, (2) the agent asks before stop_my_lane, (3) the human approval.</em></p>
 <h2 id="4-verify-and-clear-about-5-min">4. Verify and clear (about 5 min)<a class="headerlink" href="#4-verify-and-clear-about-5-min" title="Permanent link">&para;</a></h2>
 <p>Ask your agent (or Canvas) to verify:</p>
 <div class="highlight"><pre><span></span><code>Re-check my security events for the last 5 minutes. If my source is quiet and my light is on,
@@ -1168,7 +1176,11 @@ call clear_issue and report STATUS: healthy.
 </code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Your bulb flashes green and goes dark (if you were the last open issue at your table).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The board shows your <strong>time to clear</strong>.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The board shows your <strong>time to clear</strong>.</p>
+<p><img alt="13-lights-healthy" loading="lazy" src="../../img/13-lights-healthy.png" /></p>
+<p><em>After the stop: (1) STATUS healthy, (2) the light is cleared and only this seat's source was affected.</em></p>
+</li>
 </ul>
 <div class="admonition success">
 <p class="admonition-title">Prizes</p>

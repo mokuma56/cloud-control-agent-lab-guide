@@ -1083,7 +1083,9 @@
 a test passes, so testing is part of building, not an extra.</p>
 </div>
 <h2 id="write-three-tests">Write three tests<a class="headerlink" href="#write-three-tests" title="Permanent link">&para;</a></h2>
-<p>In the agent's <strong>Test</strong> tab, add each scenario and its expected outcome, then run it.</p>
+<p>In the builder's <strong>Test</strong> tab, type the <strong>Scenario</strong>, add the <strong>Expected outcome</strong>, then select <strong>Run scenario</strong>. The suggested scenario links (Typical task, Missing information, Approval guardrail) prefill the same three tests.</p>
+<p><img alt="17-agent-test" loading="lazy" src="../../img/17-agent-test.png" /></p>
+<p><em>The Test tab: (1) Scenario, (2) Expected outcome, (3) suggested scenarios that match the three tests below, (4) Run scenario.</em></p>
 <table>
 <thead>
 <tr>
@@ -1115,7 +1117,11 @@ order, did it hold back on the stop?) and save the real light test for 3.3 and 3
 <h2 id="publish">Publish<a class="headerlink" href="#publish" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> All three tests pass. If one fails, fix the instructions by chatting with Studio and rerun.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Publish <strong>v1</strong>.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Publish <strong>v1</strong>.</p>
+<p><img alt="18-agent-schedule-gate" loading="lazy" src="../../img/18-agent-schedule-gate.png" /></p>
+<p><em>(1) Until a test on the latest saved draft passes, Schedule only says: Run a test on the latest saved changes first.</em></p>
+</li>
 </ul>
 <p>A fourth test you will add in 3.4: <em>"fault present, expect the light on."</em></p>
 

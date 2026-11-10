@@ -1087,7 +1087,11 @@ This is the "custom workflow that does anything you want" part of the lab.</p>
 <p>Studio agents use MCP or REST integrations registered in Studio. Lab Tools offers a shared MCP
 server: one URL for all 30 seats, and your seat token decides which seat you are.</p>
 <ol>
-<li><strong>Studio → Build → Integrations → Add → MCP</strong>.</li>
+<li>
+<p><strong>Studio → Build → Integrations → Add → MCP</strong>.</p>
+<p><img alt="08-studio-add-integration" loading="lazy" src="../../img/08-studio-add-integration.png" /></p>
+<p><em>(1) Choose MCP. Path A in step B uses REST API instead.</em></p>
+</li>
 <li>
 <p><strong>Connect</strong></p>
 <table>
@@ -1100,7 +1104,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 <tbody>
 <tr>
 <td>MCP server URL</td>
-<td>the <strong>Lab Tools MCP URL</strong> on your seat card</td>
+<td>the <strong>Lab Tools MCP URL</strong> on your seat card (screenshots use the placeholder <code>lab.example.com</code>)</td>
 </tr>
 <tr>
 <td>Display name</td>
@@ -1120,14 +1124,22 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 </tr>
 </tbody>
 </table>
+<p><img alt="09a-mcp-connect" loading="lazy" src="../../img/09a-mcp-connect.png" /></p>
+<p><em>Connect: (1) the Lab Tools MCP URL from your seat card (the example host here is a placeholder), (2) your display name, (3) open Advanced settings.</em></p>
+<p><img alt="09b-mcp-advanced" loading="lazy" src="../../img/09b-mcp-advanced.png" /></p>
+<p><em>Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas Direct on.</em></p>
 </li>
 <li>
 <p><strong>Authenticate and discover</strong>: authentication <strong>API key / bearer token</strong>, paste your <strong>seat
    token</strong>, then <strong>Discover tools</strong>. You should see <strong>10 tools</strong>:
    <code>get_my_watch_scope</code>, <code>get_my_security_events</code>, <code>get_recent_changes</code>, <code>get_business_services</code>,
    <code>get_oncall</code>, <code>get_saas_status</code>, <code>signal_issue</code>, <code>clear_issue</code>, <code>get_light_status</code>, <code>stop_my_lane</code>.</p>
+<p><img alt="09c-mcp-auth" loading="lazy" src="../../img/09c-mcp-auth.png" /></p>
+<p><em>Authenticate and discover: (1) API key / bearer token, (2) paste your seat token, (3) Discover tools.</em></p>
 </li>
-<li><strong>Capabilities and access</strong>: keep all 10 selected, then <strong>Save draft</strong>.</li>
+<li>
+<p><strong>Capabilities and access</strong>: keep all 10 selected, then <strong>Save draft</strong>.</p>
+</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Keep it Personal</p>
@@ -1135,7 +1147,11 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 tenant would then act as your seat.</p>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Studio → Manage → Integrations shows <code>&lt;your seat&gt; Lab Tools</code>, Personal, <strong>Configured</strong>.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Studio → Manage → Integrations shows <code>&lt;your seat&gt; Lab Tools</code>, Personal, <strong>Configured</strong>.</p>
+<p><img alt="09d-studio-manage" loading="lazy" src="../../img/09d-studio-manage.png" /></p>
+<p><em>Done: (1) your integration card, (2) in the Personal group, (3) Configured. The URL is blurred in this guide.</em></p>
+</li>
 </ul>
 <h2 id="b-your-own-workflow-pick-one-25-min">B. Your own workflow (pick one, 25 min)<a class="headerlink" href="#b-your-own-workflow-pick-one-25-min" title="Permanent link">&para;</a></h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Path A: REST API (no code)</label><label for="__tabbed_1_2">Path B: MCP server (code)</label></div>

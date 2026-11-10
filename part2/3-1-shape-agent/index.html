@@ -1106,8 +1106,14 @@ integrations it uses, what it may and may not do.</p>
 </div>
 <h2 id="describe-the-agent">Describe the agent<a class="headerlink" href="#describe-the-agent" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Open <strong>Studio → Build → Agent</strong>.</li>
-<li>Paste this description. Replace the bracketed parts with your own choices, and keep the rules.</li>
+<li>
+<p>Open <strong>Studio → Build → Agent</strong>.</p>
+<p><img alt="14-agent-shape" loading="lazy" src="../../img/14-agent-shape.png" /></p>
+<p><em>Shape the agent: (1) paste your description here. (2) The suggestion chips are examples; you do not need them.</em></p>
+</li>
+<li>
+<p>Paste this description. Replace the bracketed parts with your own choices, and keep the rules.</p>
+</li>
 </ol>
 <div class="highlight"><pre><span></span><code>Build a security troubleshooting agent for PseudoCo that keeps watch while I sleep.
 
@@ -1131,6 +1137,8 @@ agent has to work it out from Cisco telemetry. That is the multi-domain troubles
 </div>
 <h2 id="answer-studios-questions">Answer Studio's questions<a class="headerlink" href="#answer-studios-questions" title="Permanent link">&para;</a></h2>
 <p>Studio drafts a <strong>manifest</strong> and asks follow-up questions. Suggested answers:</p>
+<p><img alt="15-agent-builder" loading="lazy" src="../../img/15-agent-builder.png" /></p>
+<p><em>The agent builder: (1) chat with Studio to change the agent, (2) Review Agent shows the manifest and Test runs sandbox scenarios, (3) Schedule unlocks after a passing test.</em></p>
 <table>
 <thead>
 <tr>
@@ -1159,11 +1167,14 @@ agent has to work it out from Cisco telemetry. That is the multi-domain troubles
 </table>
 <h2 id="review-the-manifest">Review the manifest<a class="headerlink" href="#review-the-manifest" title="Permanent link">&para;</a></h2>
 <p>Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid editing blindly.</p>
+<p><img alt="16-agent-manifest" loading="lazy" src="../../img/16-agent-manifest.png" /></p>
+<p><em>The manifest: (1) Instructions, (2) MCP servers and API integrations, (3) Trigger and schedule, with the scheduled run prompt and run limit.</em></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Instructions</strong> include "propose, don't change" and "only after a human approves".</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Instructions</strong> tell it to call <code>get_my_watch_scope</code> first and ignore other seats' IPs.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Integrations</strong> list Lab Tools (or a placeholder for it).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Schedule</strong> is hourly or empty; you will set it in 3.4.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>MCP servers</strong> lists your Lab Tools integration, or nothing yet (you connect it in 3.3).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>API integrations</strong> is empty unless you build Path A in 3.3.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Trigger and schedule</strong> shows a scheduled run prompt and a run limit; the time is set in 3.4.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Save the draft.</li>
 </ul>
 <div class="admonition tip">
