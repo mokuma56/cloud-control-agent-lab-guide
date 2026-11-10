@@ -1381,11 +1381,21 @@ tenant would then act as your seat.</p>
 </li>
 </ul>
 <h2 id="b-your-own-workflow-pick-one-25-min">B. Your own workflow (pick one, 25 min)<a class="headerlink" href="#b-your-own-workflow-pick-one-25-min" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Step B is practice, not setup</p>
+<p>Your agent already has everything it needs for Lights Out from step A. Step B is where you learn how
+a custom integration is built, so you can do the same with your own company's systems later. Pick
+<strong>one</strong> path. <strong>Path A</strong> needs no code. <strong>Path B</strong> shows the code behind a tool: one small edit, and
+a button that fills in the answer if you would rather just see it work.</p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Path A: REST API (no code)</label><label for="__tabbed_1_2">Path B: MCP server (code)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>You import the Lab Actions API from its OpenAPI spec and make it <em>yours</em> by rewriting how the
-agent should use each operation.</p>
+<p><strong>What you are building.</strong> Most company systems already have a REST API described by an <strong>OpenAPI
+spec</strong>: a file listing every operation, its URL and its arguments. Studio can turn that spec straight
+into tools for your agent, with no code. Here you import the Lab Actions spec and make it <em>yours</em> by
+rewriting the <strong>descriptions</strong>: the sentences the agent reads to decide when to call each operation.
+A spec says <em>what</em> an operation does; your description says <em>when</em> your agent should use it.</p>
 <ol>
 <li><strong>Studio → Build → Integrations → Add → REST API</strong>.</li>
 <li><strong>Spec URL</strong>: paste your <strong>Lab Actions spec URL</strong> (or download it and upload the file).</li>
@@ -1437,12 +1447,49 @@ curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<p>You finish a small MCP server in Python and run it in your own <strong>MCP workspace</strong> on the lab
-server. Nothing to install: it runs in your browser.</p>
+<p><strong>What you are building.</strong> An <strong>MCP server</strong> is a small program that offers <em>tools</em> to an AI agent.
+Lab Tools from step A is one, written by the lab team. Here you run your own copy, finish one tool
+in it, and connect it to Studio: exactly what you would do to give an agent your own company's
+ticketing system, CMDB or any other API.</p>
+<p>Every tool has four parts. You will see them in the code:</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it is</th>
+<th>Who reads it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>for example <code>signal_issue</code></td>
+<td>the agent, to call it</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>one or two sentences on what it does and <em>when</em> to use it</td>
+<td>the agent, to decide whether to call it</td>
+</tr>
+<tr>
+<td><strong>Input schema</strong></td>
+<td>the arguments it takes, for example <code>severity</code> and <code>summary</code></td>
+<td>the agent, to fill in the call</td>
+</tr>
+<tr>
+<td><strong>Function</strong></td>
+<td>the Python that does the work, here one call to the Lab Tools API</td>
+<td>your server, when the agent calls</td>
+</tr>
+</tbody>
+</table>
+<p>Already done in your starter file: <code>get_recent_changes</code> and <code>get_business_services</code> (information <em>in</em>),
+and <code>clear_issue</code> (action <em>out</em>). <strong>Your one TODO is <code>signal_issue</code>.</strong> No time or no interest in code?
+Select <strong>Load finished version</strong> and skip to step 4.</p>
 <ol>
 <li>
-<p>Open <strong>Your MCP workspace</strong> and paste your seat token. You see your own copy of <code>tools.py</code>, a
-   test panel and your server's log.</p>
+<p><strong>Open your MCP workspace</strong> and paste your seat token. It is your own copy of the server, running
+   on the lab server. Nothing to install.</p>
 <div class="sc-copytable" markdown="">
 <table>
 <thead>
@@ -1463,56 +1510,46 @@ server. Nothing to install: it runs in your browser.</p>
 </tbody>
 </table>
 </div>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/22-workspace-overview.png" data-desc-position="bottom"><img alt="22-workspace-overview" loading="lazy" src="../../img/22-workspace-overview.png"></a></p>
+<p><em>Your workspace: (1) <code>tools.py</code>, your server's code, (2) Save &amp; restart runs your edits, (3) Load finished version fills in the answer, (4) running or stopped, (5) Test a tool calls a tool the way an agent would, (6) Server log shows errors.</em></p>
 </li>
 <li>
-<p><strong>Find TODO 1.</strong> In the <code>tools.py</code> editor, scroll down to <code>def get_business_services():</code>. It has two
-   placeholders: a description that starts with <code>"TODO:</code> and a line that says
-   <code>raise NotImplementedError(...)</code>. Each TODO below is the same move: <strong>replace one line</strong> with a
-   line that calls the Lab Tools API. <code>get_recent_changes</code>, just above it, is a finished example.</p>
+<p><strong>Read the finished <code>clear_issue</code>, then find your TODO.</strong> Scroll down to the <code>action OUT</code> section.
+   <code>@tool(...)</code> registers a tool: its name, its description and its input schema. The function under
+   it is what runs. <code>clear_issue</code> is complete: <code>broker.post("/v1/clear")</code> sends an HTTPS POST to Lab
+   Tools with your seat token already attached, and whatever it returns goes back to the agent.
+   <code>signal_issue</code>, just above it, is the same idea with a body, and still says
+   <code>raise NotImplementedError(...)</code>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/22a-workspace-todo.png" data-desc-position="bottom"><img alt="22a-workspace-todo" loading="lazy" src="../../img/22a-workspace-todo.png"></a></p>
-<p><em>TODO 1 in the editor: (1) the placeholder description (step 5), (2) the line to replace.</em></p>
+<p><em><code>signal_issue</code>: (1) the description the agent reads, (2) the input schema: severity and summary, (3) your TODO: the line to replace, (4) <code>clear_issue</code>, finished, as your example.</em></p>
 </li>
 <li>
-<p><strong>Replace the three <code>raise NotImplementedError</code> lines.</strong> Select the whole line, including its four
-   leading spaces, and paste the replacement (it keeps the four spaces, so it stays inside the function):</p>
-<p><strong>TODO 1</strong>, in <code>get_business_services</code>: replace <code>raise NotImplementedError("get_business_services")</code> with</p>
-<div class="highlight"><pre><span></span><code>    <span class="k">return</span> <span class="n">broker</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"/v1/context/services"</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>TODO 2</strong>, in <code>signal_issue</code>: replace <code>raise NotImplementedError("signal_issue")</code> with (it sends the severity and summary the agent passes in)</p>
+<p><strong>Finish <code>signal_issue</code>.</strong> Select the whole <code>raise NotImplementedError("signal_issue")</code> line,
+   including its four leading spaces, and paste this in its place:</p>
 <div class="highlight"><pre><span></span><code>    <span class="k">return</span> <span class="n">broker</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"/v1/signal"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"severity"</span><span class="p">:</span> <span class="n">severity</span><span class="p">,</span> <span class="s2">"summary"</span><span class="p">:</span> <span class="n">summary</span><span class="p">})</span>
 </code></pre></div>
-<p><strong>TODO 3</strong>, in <code>clear_issue</code>: replace <code>raise NotImplementedError("clear_issue")</code> with</p>
-<div class="highlight"><pre><span></span><code>    <span class="k">return</span> <span class="n">broker</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">"/v1/clear"</span><span class="p">)</span>
-</code></pre></div>
-<p><code>broker.get</code> and <code>broker.post</code> already add your seat token, so you never type it in the code.
-Leave TODO 4 (<code>stop_my_lane</code>) as it is: the shared Lab Tools already has it, and it is a stretch goal.</p>
+<p>What it does: <code>severity</code> and <code>summary</code> are the arguments the agent passes in (they match the
+input schema). <code>broker.post</code> sends them as JSON to the Lab Tools <code>/v1/signal</code> endpoint, which turns
+your tile red on the room wall. You never put your token in the code: the server adds it.</p>
 </li>
 <li>
-<p><strong>Write the description for <code>get_business_services</code>.</strong> The description is what the agent reads to
-   decide <em>when</em> to call a tool. In the <code>@tool(</code> block above <code>def get_business_services():</code>, replace the
-   two lines that start with <code>"TODO: write a description</code> and <code>"(hint:</code> with your own words, or with:</p>
-<div class="highlight"><pre><span></span><code>    <span class="s2">"PseudoCo business services: criticality, business hours, owner, cost of downtime and "</span>
-    <span class="s2">"what each depends on. Call it to turn a network finding into business impact and severity."</span><span class="p">,</span>
-</code></pre></div>
-<p>Keep the quotes and the comma at the end.</p>
-</li>
-<li>
-<p><strong>Save and test.</strong> Select <strong>Save &amp; restart</strong>. A syntax error is refused, with its line number, and
-   your running server keeps the last good version. When it works, the message says your server
-   restarted and the status pill shows <strong>running</strong>.</p>
+<p><strong>Save &amp; restart.</strong> Your server restarts with the new code and the pill shows <strong>running</strong>. A syntax
+   error is refused with its line number, and your server keeps the last good version.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/22b-workspace-saved.png" data-desc-position="bottom"><img alt="22b-workspace-saved" loading="lazy" src="../../img/22b-workspace-saved.png"></a></p>
-<p><em>After the edits: (1) the new description, (2) TODO 1 done, (3) Save &amp; restart, (4) the confirmation.</em></p>
-<p>Then, in <strong>Test a tool</strong>: pick <code>signal_issue</code>. The example arguments fill in for you (or paste
-them), select <strong>Call</strong>, and your tile turns red on the room wall. Pick <code>clear_issue</code> and <strong>Call</strong> to
-turn it green.</p>
+<p><em>(1) Your new line, (2) Save &amp; restart, (3) the confirmation.</em></p>
+</li>
+<li>
+<p><strong>Test it like an agent would.</strong> In <strong>Test a tool</strong>, pick <code>signal_issue</code>. The example arguments fill
+   in for you (or paste them), then select <strong>Call</strong>. Your tile turns red on the room wall. Pick
+   <code>clear_issue</code> and <strong>Call</strong> to turn it green.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minor"</span><span class="p">,</span><span class="w"> </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MCP test"</span><span class="p">}</span>
 </code></pre></div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/22c-workspace-test.png" data-desc-position="bottom"><img alt="22c-workspace-test" loading="lazy" src="../../img/22c-workspace-test.png"></a></p>
 <p><em>Test a tool: (1) the tool, (2) its arguments, (3) Call, (4) the result: your light is on, (5) your server is running.</em></p>
 </li>
 <li>
-<p>Register it in Studio as in step A, but with <strong>your</strong> workspace's URL (also shown at the top of
-   the workspace):</p>
+<p><strong>Connect it to Studio</strong>, as in step A but with <strong>your</strong> workspace's URL (also shown at the top of
+   the workspace). Studio then discovers your tools, including the one you just finished.</p>
 <div class="sc-copytable" markdown="">
 <table>
 <thead>
@@ -1552,12 +1589,15 @@ turn it green.</p>
 </li>
 </ol>
 <p><strong>Done when:</strong> your own <code>signal_issue</code> turns your tile red, and Studio discovers your tools.</p>
+<p><strong>Stretch:</strong> finish <code>stop_my_lane</code> the same way (<code>broker.post("/v1/lane/stop")</code>), write its
+description so the agent knows it needs a human's approval, then in Studio make the tool require
+approval.</p>
 <div class="admonition info">
 <p class="admonition-title">What runs where</p>
 <p>Your code runs in its own locked-down process on the lab server: it can call the Lab Tools
 API and the internet, but nothing else in the lab network, and it cannot see anyone else's
-workspace. Stuck? <strong>Reset to starter</strong> restores the original file; the answers are in the
-take-home kit (<code>tools_solution.py</code>).</p>
+workspace. <strong>Reset to starter</strong> puts the original file back; <strong>Load finished version</strong> shows the
+answers (the take-home kit has them as <code>tools_solution.py</code>).</p>
 </div>
 </div>
 </div>
