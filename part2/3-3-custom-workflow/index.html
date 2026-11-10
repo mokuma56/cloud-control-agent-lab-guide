@@ -1232,6 +1232,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 </li>
 <li>
 <p><strong>Connect</strong></p>
+<div class="sc-copytable" markdown="">
 <table>
 <thead>
 <tr>
@@ -1242,7 +1243,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 <tbody>
 <tr>
 <td>MCP server URL</td>
-<td>the <strong>Lab Tools MCP URL</strong> on your seat card (screenshots use the placeholder <code>lab.example.com</code>)</td>
+<td><code>&lt;your Lab Tools MCP URL&gt;</code></td>
 </tr>
 <tr>
 <td>Display name</td>
@@ -1250,26 +1251,42 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 </tr>
 <tr>
 <td>Advanced settings → Transport</td>
-<td>Streamable HTTP</td>
+<td><code>Streamable HTTP</code></td>
 </tr>
 <tr>
-<td>Advanced settings → Header name / Scheme</td>
-<td><code>Authorization</code> / <code>Bearer</code></td>
+<td>Advanced settings → Header name</td>
+<td><code>Authorization</code></td>
+</tr>
+<tr>
+<td>Advanced settings → Scheme</td>
+<td><code>Bearer</code></td>
 </tr>
 <tr>
 <td>Canvas visibility</td>
-<td>Canvas Direct on</td>
+<td>leave <strong>Canvas Direct</strong> and <strong>Canvas Planner</strong> both off</td>
 </tr>
 </tbody>
 </table>
+</div>
+<p>Each value has a <strong>Copy</strong> button. The MCP URL is filled in from your seat card (get it on
+<a href="../../setup/#your-seat-card">Before you start</a> if it still shows a placeholder). The screenshots use
+the placeholder host <code>lab.example.com</code>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/09a-mcp-connect.png" data-desc-position="bottom"><img alt="09a-mcp-connect" loading="lazy" src="../../img/09a-mcp-connect.png"></a></p>
 <p><em>Connect: (1) the Lab Tools MCP URL from your seat card (the example host here is a placeholder), (2) the display name (the screenshot shows an older seat-based name; use PseudoCo Lab Tools), (3) open Advanced settings.</em></p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/09b-mcp-advanced.png" data-desc-position="bottom"><img alt="09b-mcp-advanced" loading="lazy" src="../../img/09b-mcp-advanced.png"></a></p>
-<p><em>Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas Direct on.</em></p>
+<p><em>Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas visibility: leave both boxes off (this screenshot is from an older build with Canvas Direct ticked).</em></p>
+<div class="admonition question">
+<p class="admonition-title">Why not Canvas Direct or Canvas Planner?</p>
+<p>Studio says it on this screen: the connector is always available in Studio, and the two boxes only
+expose it to Canvas as well. Your agent runs in Studio, so it does not need them. Canvas already
+reaches Lab Tools through the integration you set up in 1.1 (see
+<a href="../../part1/1-1-orientation/#two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in</a>), and a
+second copy of the same tools in Canvas only invites it to mix the two.</p>
+</div>
 </li>
 <li>
 <p><strong>Authenticate and discover</strong>: authentication <strong>API key / bearer token</strong>, paste your <strong>seat
-   token</strong>, then <strong>Discover tools</strong>. You should see <strong>10 tools</strong>:
+   token</strong> <span class="sc-tokenbtn"></span>, then <strong>Discover tools</strong>. You should see <strong>10 tools</strong>:
    <code>get_my_watch_scope</code>, <code>get_my_security_events</code>, <code>get_recent_changes</code>, <code>get_business_services</code>,
    <code>get_oncall</code>, <code>get_saas_status</code>, <code>signal_issue</code>, <code>clear_issue</code>, <code>get_light_status</code>, <code>stop_my_lane</code>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/09c-mcp-auth.png" data-desc-position="bottom"><img alt="09c-mcp-auth" loading="lazy" src="../../img/09c-mcp-auth.png"></a></p>
