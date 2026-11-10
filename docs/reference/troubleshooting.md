@@ -40,3 +40,14 @@ Events reach Splunk a minute or two late. Wait two minutes and check again with 
 
 The chat reconnects by itself. If the answer seems to disappear, reload the page; finished answers
 are kept on the board.
+
+## A caution sign next to my agent ("stale skills")
+
+In **Studio → Manage → Applications**, a caution sign next to your agent opens *Products with stale
+skills* and names an integration (for example PseudoCo Lab Tools, or your own Path B server). Studio's
+cached copy of that integration's tools is out of date, which happens after the server behind it changed.
+
+**Fix:** Studio → Manage → **Integrations** → the named integration → **⋯ → Rediscover**, paste your seat
+token, **Rediscover tools**. The caution sign clears for every agent that uses it. Asking the agent's
+Studio chat to "refresh skills" does not help: the skills belong to the integration, not the agent.
+Your agent kept working the whole time; run its test again afterwards anyway.
