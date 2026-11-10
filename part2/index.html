@@ -981,7 +981,7 @@
 <p>In Part 2 you hand the night shift to an agent. You build it in Cloud Control Studio from the prompt
 you saved, test it, give it a custom workflow of your own, and then go hands-off while 30 attack
 lanes hit the lab network: one lane per seat, each from its own source IP. Your agent has to find
-<strong>its own</strong> lane in Cisco telemetry, light <strong>your</strong> bulb, and stop <strong>only your</strong> lane once you approve.</p>
+<strong>its own</strong> lane in Cisco telemetry, turn <strong>your</strong> tile red on the room wall, and stop <strong>only your</strong> lane once you approve.</p>
 <table>
 <thead>
 <tr>
@@ -1004,7 +1004,7 @@ lanes hit the lab network: one lane per seat, each from its own source IP. Your 
 <tr>
 <td><a href="3-3-custom-workflow/">3.3 Build your custom workflow</a></td>
 <td>35</td>
-<td>Your integration lights your bulb</td>
+<td>Your integration turns your seat red on the wall</td>
 </tr>
 <tr>
 <td><a href="3-4-wire-schedule/">3.4 Wire it in and choose how it runs</a></td>
@@ -1041,13 +1041,13 @@ lanes hit the lab network: one lane per seat, each from its own source IP. Your 
   F--&gt;&gt;A: IPS signatures, ports, URLs, files
   A-&gt;&gt;L: get_business_services / get_oncall
   A-&gt;&gt;L: signal_issue (severity)
-  Note over L: your bulb lights in your color
+  Note over L: your tile turns red on the room wall
   A-&gt;&gt;Y: "Approve stop_my_lane for 10.106.10.1xx?"
   Y--&gt;&gt;A: yes
   A-&gt;&gt;L: stop_my_lane
   A-&gt;&gt;L: get_my_security_events (last few minutes)
   A-&gt;&gt;L: clear_issue
-  Note over L: green flash, then dark</code></pre>
+  Note over L: your tile turns green</code></pre>
 
 
 

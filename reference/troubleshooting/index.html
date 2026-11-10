@@ -1016,10 +1016,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#my-light-will-not-turn-off" class="md-nav__link">
+  <a href="#my-tile-will-not-turn-green" class="md-nav__link">
     <span class="md-ellipsis">
       
-        My light will not turn off
+        My tile will not turn green
       
     </span>
   </a>
@@ -1146,10 +1146,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#my-light-will-not-turn-off" class="md-nav__link">
+  <a href="#my-tile-will-not-turn-green" class="md-nav__link">
     <span class="md-ellipsis">
       
-        My light will not turn off
+        My tile will not turn green
       
     </span>
   </a>
@@ -1228,9 +1228,10 @@ check the agent's instructions for a step it repeats.</p>
 <h2 id="studio-discovers-fewer-than-10-tools">Studio discovers fewer than 10 tools<a class="headerlink" href="#studio-discovers-fewer-than-10-tools" title="Permanent link">&para;</a></h2>
 <p>Use <strong>⋯ → Rediscover</strong> on the integration (it asks for your token again). If the URL is not the one
 on your seat card, edit the integration.</p>
-<h2 id="my-light-will-not-turn-off">My light will not turn off<a class="headerlink" href="#my-light-will-not-turn-off" title="Permanent link">&para;</a></h2>
-<p><code>clear_issue</code> only clears <strong>your</strong> seat. If another seat at your table still has an open issue, the
-bulb keeps cycling their color. Check <code>get_light_status</code>: it lists the other open seats at your table.</p>
+<h2 id="my-tile-will-not-turn-green">My tile will not turn green<a class="headerlink" href="#my-tile-will-not-turn-green" title="Permanent link">&para;</a></h2>
+<p><code>clear_issue</code> only clears <strong>your</strong> seat, and your agent calls it only when the last 5 minutes of your
+source are quiet and your lane is stopped. Events reach Splunk a minute or two late, so wait two minutes
+after the stop and run the check again. <code>get_light_status</code> shows whether your alert is still open.</p>
 <h2 id="the-agent-says-my-lane-is-stopped-but-events-continue">The agent says my lane is stopped, but events continue<a class="headerlink" href="#the-agent-says-my-lane-is-stopped-but-events-continue" title="Permanent link">&para;</a></h2>
 <p>Events reach Splunk a minute or two late. Wait two minutes and check again with a short window
 (<code>minutes=5</code>). If events still arrive, call <code>stop_my_lane</code> again (it is safe to repeat) and tell a proctor.</p>

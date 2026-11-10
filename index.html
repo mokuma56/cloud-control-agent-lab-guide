@@ -314,10 +314,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#your-table-and-your-color" class="md-nav__link">
+  <a href="#the-room-wall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Your table and your color
+        The room wall
       
     </span>
   </a>
@@ -1067,10 +1067,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#your-table-and-your-color" class="md-nav__link">
+  <a href="#the-room-wall" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Your table and your color
+        The room wall
       
     </span>
   </a>
@@ -1105,7 +1105,7 @@ matters, and take one safe action you approve.</p>
 <li><strong>Save the combined result</strong> so it becomes a known-good example.</li>
 <li><strong>Build an agent in Cloud Control Studio</strong> that runs it however you choose, with a custom
    workflow of your own: an integration that brings in non-Cisco information and lights your
-   table's bulb when your agent finds a problem.</li>
+   your seat on the room wall when your agent finds a problem.</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">What you leave with</p>
@@ -1135,13 +1135,13 @@ point at any system your business depends on, and the take-home kit to rebuild i
   FTD --&gt; Splunk
   Gen -- "attack lane" --&gt; FTD
   Broker -- "stop_my_lane" --&gt; Gen
-  Broker -- "signal / clear" --&gt; Bulb["Table bulb&lt;br/&gt;(your seat color)"]</code></pre>
+  Broker -- "signal / clear" --&gt; Wall["Room wall&lt;br/&gt;(your seat tile)"]</code></pre>
 <ul>
 <li><strong>AI Canvas</strong> does the Cisco multi-domain work with its built-in integrations (Meraki, Secure
   Firewall, Secure Access, Catalyst Center, Intersight, Nexus Dashboard).</li>
 <li><strong>Lab Tools</strong> is the custom integration. It brings in what Cisco cannot know: PseudoCo's change
   calendar, business services, on-call policy and SaaS status. It also gives your agent its watch
-  scope, the firewall events from your own lane, and two actions: light your bulb, and stop your lane.</li>
+  scope, the firewall events from your own lane, and two actions: raise your seat's alert on the room wall, and stop your lane.</li>
 <li><strong>Your seat token</strong> is the key. Everyone uses the same URLs; the token decides which seat, which
   lane and which light you can see and touch. You can never act on another seat.</li>
 </ul>
@@ -1218,7 +1218,7 @@ point at any system your business depends on, and the take-home kit to rebuild i
 <td>35</td>
 <td>3</td>
 <td><a href="part2/3-3-custom-workflow/">3.3 Build your custom workflow</a></td>
-<td>Your integration lights your bulb</td>
+<td>Your integration turns your seat red on the wall</td>
 </tr>
 <tr>
 <td>2:55</td>
@@ -1251,38 +1251,50 @@ point at any system your business depends on, and the take-home kit to rebuild i
 </tbody>
 </table>
 <p>Finished early? The <a href="reference/stretch/">stretch challenges</a> have another hour of work.</p>
-<h2 id="your-table-and-your-color">Your table and your color<a class="headerlink" href="#your-table-and-your-color" title="Permanent link">&para;</a></h2>
-<p>Six tables of five seats. Your seat ID is <code>T&lt;table&gt;-&lt;letter&gt;</code>, for example <strong>T3-C</strong> is table 3,
-seat C. Each table has one bulb; each seat letter has a color.</p>
+<h2 id="the-room-wall">The room wall<a class="headerlink" href="#the-room-wall" title="Permanent link">&para;</a></h2>
+<p>There are no lights on the tables. Instead, the room screen shows the <strong>Night Watch wall</strong>: all 30 seats,
+one column per table, headed by the service that table protects. Your seat ID is <code>T&lt;table&gt;-&lt;letter&gt;</code>,
+for example <strong>T3-C</strong> is table 3, seat C. The small colored dot on your tile matches your seat card.</p>
+<p><img alt="20-wall" loading="lazy" src="img/20-wall.png" /></p>
+<p><em>(1) Live counts, (2) the Lights Out clock, (3) a threat nobody has detected yet, (4) an agent's alert with its summary, (5) a lane stopped after approval and being verified, (6) resolved, (7) what the agents said, (8) the leaderboard.</em></p>
 <table>
 <thead>
 <tr>
-<th>Seat</th>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>D</th>
-<th>E</th>
+<th>Your tile</th>
+<th>Means</th>
+<th>Who changes it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Color</td>
-<td>red</td>
-<td>blue</td>
-<td>purple</td>
-<td>amber</td>
-<td>cyan</td>
+<td>Grey, <strong>Quiet</strong></td>
+<td>Nothing is happening at your seat</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Amber, <strong>Threat active · undetected 2:31</strong></td>
+<td>Your attack lane is running and no agent has reported it yet; the clock counts up</td>
+<td>the proctor starts lanes</td>
+</tr>
+<tr>
+<td>Red, <strong>Alert</strong> + your agent's summary</td>
+<td>Your agent called <code>signal_issue</code>. Minor is steady, major pulses, critical pulses fast</td>
+<td>your agent</td>
+</tr>
+<tr>
+<td>Red stripes, <strong>Stopped · verifying</strong></td>
+<td>You approved <code>stop_my_lane</code>; the agent has not confirmed it is quiet yet</td>
+<td>you, then your agent</td>
+</tr>
+<tr>
+<td>Green, <strong>Resolved ✓</strong></td>
+<td>Your agent verified the source is quiet and called <code>clear_issue</code></td>
+<td>your agent</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>One open issue at a table: the bulb shows that seat's color. Severity sets brightness (minor
-  40%, major 70%, critical 100% and pulsing).</li>
-<li>Two or more open issues: the bulb cycles through the open seats' colors, 2 seconds each.</li>
-<li>The last issue at a table clears: a 3-second green flash, then dark.</li>
-<li>The projector board shows all 30 seats, time to detect and time to clear.</li>
-</ul>
+<p>When every attack is resolved, the wall shows <strong>ALL CLEAR</strong>. The leaderboard ranks the fastest detect,
+stop and clear.</p>
 
 
 

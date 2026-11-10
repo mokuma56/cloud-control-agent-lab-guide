@@ -1151,7 +1151,7 @@ no call can read or change another seat. Rate limit: 30 requests per minute per 
 <tr>
 <td><code>get_light_status</code></td>
 <td><code>GET /v1/status</code></td>
-<td>Your light: on or off, severity, summary, other open seats at your table</td>
+<td>Your alert: open or not, severity, summary, other open seats at your table</td>
 <td>Before <code>clear_issue</code></td>
 </tr>
 </tbody>
@@ -1170,13 +1170,13 @@ no call can read or change another seat. Rate limit: 30 requests per minute per 
 <tr>
 <td><code>signal_issue</code></td>
 <td><code>POST /v1/signal</code> <code>{"severity","summary"}</code></td>
-<td>Lights your table's bulb in your color. Severity sets brightness; critical pulses</td>
+<td>Turns your seat red on the room wall with your summary. Minor is steady, major pulses, critical pulses fast</td>
 <td>Call when STATUS is issue. Calling again updates severity and summary</td>
 </tr>
 <tr>
 <td><code>clear_issue</code></td>
 <td><code>POST /v1/clear</code></td>
-<td>Turns your light off</td>
+<td>Turns your seat green (resolved)</td>
 <td>Only after verifying the fix, and only if your light is on</td>
 </tr>
 <tr>
@@ -1205,8 +1205,8 @@ no call can read or change another seat. Rate limit: 30 requests per minute per 
 <td><code>/openapi-light.json</code> (Lab Actions, 6 operations), <code>/openapi-context.json</code> (Lab Context, 4 operations)</td>
 </tr>
 <tr>
-<td>Board</td>
-<td><code>/board</code></td>
+<td>Room wall</td>
+<td><code>/</code> (or <code>/wall</code>)</td>
 </tr>
 </tbody>
 </table>

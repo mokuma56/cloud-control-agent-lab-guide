@@ -1079,7 +1079,7 @@
 <h1 id="33-build-your-custom-workflow-220-35-min">3.3 Build your custom workflow (2:20, 35 min)<a class="headerlink" href="#33-build-your-custom-workflow-220-35-min" title="Permanent link">&para;</a></h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Your own integration in Studio that your agent can call, proven by lighting your table's bulb.
+<p>Your own integration in Studio that your agent can call, proven by turning your seat red on the room wall.
 This is the "custom workflow that does anything you want" part of the lab.</p>
 </div>
 <p>Everyone does <strong>step A</strong> (10 min). Then pick <strong>one</strong> path for step B (25 min).</p>
@@ -1169,14 +1169,14 @@ agent should use each operation.</p>
    the agent: when to call it, what to send, and when <strong>not</strong> to call it.</li>
 <li>Save.</li>
 </ol>
-<p><strong>Done when:</strong> you light your own bulb with a direct call. From a terminal on your laptop
+<p><strong>Done when:</strong> you turn your own tile red with a direct call. From a terminal on your laptop
 (type the token from your seat card; it stays in this terminal only):</p>
 <div class="highlight"><pre><span></span><code><span class="nb">read</span><span class="w"> </span>-rs<span class="w"> </span>SEAT_TOKEN<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">export</span><span class="w"> </span>SEAT_TOKEN
 curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;lab host&gt;:8443/v1/signal"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$SEAT_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"severity":"minor","summary":"T3-C test from my REST integration"}'</span>
 </code></pre></div>
-<p>Watch your table's bulb and the board, then clear it:</p>
+<p>Watch your tile on the room wall turn red, then clear it:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;lab host&gt;:8443/v1/clear"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$SEAT_TOKEN</span><span class="s2">"</span>
 </code></pre></div>
 </div>
@@ -1197,13 +1197,13 @@ server. Nothing to install: it runs in your browser.</p>
 <li>Select <strong>Save &amp; restart</strong>. A syntax error is refused (with its line number) and your running
    server keeps the last good version. The status pill turns green when your server is up.</li>
 <li>Test it: pick <code>signal_issue</code> in <strong>Test a tool</strong>, arguments
-   <code>{"severity":"minor","summary":"MCP test"}</code>, then <strong>Call</strong>. Your bulb lights. Call
-   <code>clear_issue</code> to turn it off.</li>
+   <code>{"severity":"minor","summary":"MCP test"}</code>, then <strong>Call</strong>. Your tile turns red. Call
+   <code>clear_issue</code> to turn it green.</li>
 <li>Register it in Studio as in step A, but with <strong>your</strong> URL, shown at the top of the
    workspace: <code>https://&lt;lab host&gt;:9443/seat/&lt;your seat&gt;/mcp</code>. Display name <code>My Lab Tools</code>,
    bearer token = your seat token.</li>
 </ol>
-<p><strong>Done when:</strong> your own <code>signal_issue</code> lights your bulb, and Studio discovers your tools.</p>
+<p><strong>Done when:</strong> your own <code>signal_issue</code> turns your tile red, and Studio discovers your tools.</p>
 <div class="admonition info">
 <p class="admonition-title">What runs where</p>
 <p>Your code runs in its own locked-down process on the lab server: it can call the Lab Tools
@@ -1220,7 +1220,7 @@ take-home kit (<code>tools_solution.py</code>).</p>
 <a href="../../reference/stretch/">Stretch challenges</a>.</p>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> My bulb lit in my seat color, and I cleared it.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> My tile turned red on the wall, and I cleared it (green).</li>
 </ul>
 
 
