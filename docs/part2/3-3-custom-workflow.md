@@ -46,6 +46,27 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
     *Authenticate and discover: (1) API key / bearer token, (2) paste your seat token, (3) Discover tools.*
 
+    What you just connected: ten tools the lab team built for PseudoCo, all scoped to **your seat** by
+    your seat token. Seven only read, two change your seat's alert on the room wall, and one stops your
+    own lane.
+
+    | Tool | What it does | Reads or changes |
+    | --- | --- | --- |
+    | `get_my_watch_scope` | Tells the agent who it is: your seat, the service your table protects, your watch source IP, segment and SGT, and whether your lane is running. Agents call it first. | Reads |
+    | `get_my_security_events` | Secure Firewall events for **your** source IP only, read from Splunk: IPS signatures and their action, connections, destinations and ports, access rules, sample URLs, file events. Pick 1 to 240 minutes. | Reads |
+    | `get_recent_changes` | PseudoCo's change calendar: ticket ID, system, what changed, who asked, when, implemented or scheduled. | Reads |
+    | `get_business_services` | Business services: criticality, business hours, owner, cost of downtime and what each depends on. Turns a network finding into business impact and severity. | Reads |
+    | `get_oncall` | Who is on call now and the wake-up policy. | Reads |
+    | `get_saas_status` | Status of Webex, Microsoft 365, the payments gateway and Salesforce, to rule a provider outage in or out. | Reads |
+    | `get_light_status` | Whether your seat's alert is open, with its severity and summary, and other open alerts at your table. | Reads |
+    | `signal_issue` | Raises your alert: your tile turns red on the room wall with a severity and a one-line summary. Calling it again updates them. | Changes your tile |
+    | `clear_issue` | Resolves your alert: your tile turns green. Only after the fix is verified. | Changes your tile |
+    | `stop_my_lane` | Stops the attack traffic from your own watch source IP. Changes no shared configuration. **Only after a human approves.** | Stops your lane |
+
+    The same ten operations are what Canvas uses through the Lab Tools OpenAPI integration (see
+    [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents)). Full
+    details: [Lab Tools reference](../reference/tools.md).
+
 4. **Capabilities and access**: keep all 10 selected, then **Save draft**.
 
 !!! warning "Keep it Personal"
