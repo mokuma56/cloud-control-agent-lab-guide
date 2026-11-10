@@ -6,7 +6,7 @@
 ## Pin the answer
 
 1. In the Canvas board with your best 1.3 answer, rename the board: open the board title and call
-   it **`<your seat> Branch wired triage`** (for example `T3-C Branch wired triage`).
+   it **`Branch wired triage`**.
 2. Use the board's card tools to keep the final answer on the board (pin or stack it), so the
    known-good example survives when you start new chats.
 

@@ -16,6 +16,7 @@ Everything personal to you is on the printed seat card, not in this guide. Keep 
 | Lab Tools MCP URL | `https://<lab host>:9443/mcp` | 3.3 |
 | Lab Actions spec URL | `https://<lab host>:8443/openapi-light.json` | 3.3 (REST path) |
 | Lab Context spec URL | `https://<lab host>:8443/openapi-context.json` | 3.3 (REST path) |
+| Your MCP workspace | `https://<lab host>:9443/seat/<your seat>/` | 3.3 (Path B) |
 | Board | `https://<lab host>:8443/board` | 3.5 |
 
 !!! warning "Your seat token is a password"

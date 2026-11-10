@@ -12,9 +12,27 @@
 
     *Shape the agent: (1) paste your description here. (2) The suggestion chips are examples; you do not need them.*
 
-2. Paste this description. Replace the bracketed parts with your own choices, and keep the rules.
+2. Name the agent after **what it protects**, not after your seat. Your table decides the service
+   (`get_my_watch_scope` returns it too):
+
+    | Table | Protects | Agent name |
+    | --- | --- | --- |
+    | 1 | Employee Intranet (PROD) | Intranet Night Watch |
+    | 2 | Partner User Lookup Tool (DMZ) | Partner Portal Night Watch |
+    | 3 | Core directory services, AD-1 | Directory Services Night Watch |
+    | 4 | Customer 360 (DMZ) | Customer 360 Night Watch |
+    | 5 | Data center gateway | DC Gateway Night Watch |
+    | 6 | DMZ web tier | DMZ Web Night Watch |
+
+    Your agent is Personal, so everyone at your table can use the same name.
+
+3. Paste this description. Put your agent's name and service in the first line, replace the other
+   bracketed parts with your own choices, and keep the rules.
 
 ```text
+Name: [Directory Services Night Watch]. It protects [PseudoCo's core directory services (AD-1)].
+Use my integration "PseudoCo Lab Tools".
+
 Build a security troubleshooting agent for PseudoCo that keeps watch while I sleep.
 
 Each run:
@@ -62,8 +80,8 @@ Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid 
 
 - [ ] **Instructions** include "propose, don't change" and "only after a human approves".
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
-- [ ] **MCP servers** lists your Lab Tools integration, or nothing yet (you connect it in 3.3).
-- [ ] **API integrations** is empty unless you build Path A in 3.3.
+- [ ] **MCP servers** or **API integrations** list Lab Tools. Studio can use the Canvas Lab Tools
+      integration (shown as an API integration) and your MCP connector from 3.3; either works.
 - [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 3.4.
 - [ ] Save the draft.
 

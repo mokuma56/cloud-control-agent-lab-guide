@@ -22,14 +22,14 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     | Field | Value |
     | --- | --- |
     | MCP server URL | the **Lab Tools MCP URL** on your seat card (screenshots use the placeholder `lab.example.com`) |
-    | Display name | `<your seat> Lab Tools`, for example `T3-C Lab Tools` |
+    | Display name | `PseudoCo Lab Tools` |
     | Advanced settings → Transport | Streamable HTTP |
     | Advanced settings → Header name / Scheme | `Authorization` / `Bearer` |
     | Canvas visibility | Canvas Direct on |
 
     ![09a-mcp-connect](../img/09a-mcp-connect.png){ loading=lazy }
 
-    *Connect: (1) the Lab Tools MCP URL from your seat card (the example host here is a placeholder), (2) your display name, (3) open Advanced settings.*
+    *Connect: (1) the Lab Tools MCP URL from your seat card (the example host here is a placeholder), (2) the display name (the screenshot shows an older seat-based name; use PseudoCo Lab Tools), (3) open Advanced settings.*
 
     ![09b-mcp-advanced](../img/09b-mcp-advanced.png){ loading=lazy }
 
@@ -52,7 +52,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     The integration is saved **Personal**. Do not use *Make available to tenant*: everyone in the
     tenant would then act as your seat.
 
-- [ ] Studio → Manage → Integrations shows `<your seat> Lab Tools`, Personal, **Configured**.
+- [ ] Studio → Manage → Integrations shows `PseudoCo Lab Tools`, Personal, **Configured**.
 
     ![09d-studio-manage](../img/09d-studio-manage.png){ loading=lazy }
 
@@ -69,7 +69,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     1. **Studio → Build → Integrations → Add → REST API**.
     2. Use the **Lab Actions spec URL** from your seat card (or download it and upload the file).
     3. **Review API**: Studio finds 6 operations on one HTTPS server.
-    4. **Configure**: name it `<your seat> My Light`, bearer token = your seat token.
+    4. **Configure**: name it `My Table Light`, bearer token = your seat token.
     5. Rewrite the **descriptions** of `signal_issue` and `clear_issue` in your own words. The
        description is what the agent reads to decide *when* to call an operation, so write it for
        the agent: when to call it, what to send, and when **not** to call it.
@@ -93,31 +93,33 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
 === "Path B: MCP server (code)"
 
-    You finish a small MCP server in Python and register it in Studio. Use this path if your seat
-    has a dev container (ask a proctor) or you can run Python 3.10+ and a tunnel on your laptop.
+    You finish a small MCP server in Python and run it in your own **MCP workspace** on the lab
+    server. Nothing to install: it runs in your browser.
 
-    1. Get the starter: `mcp_server/` from the take-home kit. Open `tools.py`.
-    2. Finish the three TODOs:
+    1. Open **Your MCP workspace** from your seat card (`https://<lab host>:9443/seat/<your seat>/`)
+       and paste your seat token. You see your own copy of `tools.py`, a test panel and your
+       server's log.
+    2. Finish the three TODOs in `tools.py`:
         - `get_business_services`: return `GET /v1/context/services`.
         - `signal_issue`: `POST /v1/signal` with `{"severity", "summary"}`.
         - `clear_issue`: `POST /v1/clear`.
     3. Write a **description** for `get_business_services` that tells the agent when to use it.
-    4. Run it and test it the way Studio will:
+    4. Select **Save & restart**. A syntax error is refused (with its line number) and your running
+       server keeps the last good version. The status pill turns green when your server is up.
+    5. Test it: pick `signal_issue` in **Test a tool**, arguments
+       `{"severity":"minor","summary":"MCP test"}`, then **Call**. Your bulb lights. Call
+       `clear_issue` to turn it off.
+    6. Register it in Studio as in step A, but with **your** URL, shown at the top of the
+       workspace: `https://<lab host>:9443/seat/<your seat>/mcp`. Display name `My Lab Tools`,
+       bearer token = your seat token.
 
-        ```bash
-        cd mcp_server
-        BROKER_URL=https://<lab host>:8443 SEAT_TOKEN=$SEAT_TOKEN MCP_TOKEN=pick-a-secret \
-          python3 server.py
-        # in another terminal
-        cd tests && MCP_TOKEN=pick-a-secret python3 try_tools.py signal_issue severity=minor "summary=MCP test"
-        ```
+    **Done when:** your own `signal_issue` lights your bulb, and Studio discovers your tools.
 
-    5. Publish it with a tunnel (for example `cloudflared tunnel --url http://localhost:9000`) and
-       register it in Studio as in step A, with your tunnel URL + `/mcp` and your `MCP_TOKEN`.
-
-    **Done when:** `try_tools.py signal_issue ...` lights your bulb, and Studio discovers your tools.
-
-    Stuck? `tools_solution.py` has the answers (run with `TOOLS=tools_solution`).
+    !!! info "What runs where"
+        Your code runs in its own locked-down process on the lab server: it can call the Lab Tools
+        API and the internet, but nothing else in the lab network, and it cannot see anyone else's
+        workspace. Stuck? **Reset to starter** restores the original file; the answers are in the
+        take-home kit (`tools_solution.py`).
 
 !!! tip "Fast finishers"
     Add a tool of your own: a weather lookup for the branch, a Webex message, a ticket. See

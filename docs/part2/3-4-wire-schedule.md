@@ -9,7 +9,7 @@
 Open your agent in Studio and tell it:
 
 ```text
-Add my integration <your seat> Lab Tools. Always call get_my_watch_scope first, then
+Add my integration PseudoCo Lab Tools. Always call get_my_watch_scope first, then
 get_my_security_events. If STATUS is issue, call signal_issue with the severity and summary.
 Propose stop_my_lane and wait for my approval. If STATUS is healthy and get_light_status says my
 light is on, call clear_issue.
@@ -29,10 +29,18 @@ Check the manifest's **Integrations** now lists your Lab Tools (and My Light, if
 
 === "Scheduled"
 
-    Select **Schedule** (top right of the builder). It unlocks only after a test on your latest
-    saved draft passes; until then it says *Run a test on the latest saved changes first*. Set
-    **Hourly** at the run time the proctor announces, max runs 10. The proctor starts Lights Out
-    just before that time. If Schedule is not offered in your release, use the Canvas tab.
+    Studio needs three things before **Schedule** (top right of the builder) unlocks:
+
+    1. A **schedule time** with your **timezone**. Tell Studio in the chat, for example:
+       *"Run every 15 minutes between 03:00 and 04:00 Europe/London."* Use the window the
+       proctor announces.
+    2. A **schedule owner**: your lab login.
+    3. A **passing test of the exact saved revision**. Any change you make creates a new revision,
+       so test again after the last change. Until then Schedule says *Run a test on the latest
+       saved changes first*.
+
+    Saving and testing never create a schedule by themselves. If Schedule is not offered in your
+    release, use the Canvas tab.
 
 === "On demand from Canvas"
 
