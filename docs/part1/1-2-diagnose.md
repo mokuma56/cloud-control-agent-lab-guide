@@ -20,7 +20,8 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
     starting a few minutes ago. What could cause this?
     ```
 
-    You get a list of possibilities. Useful, but generic.
+    Canvas picks the right system (Meraki Cloud Fabric, SITE-105) and often already reads the change
+    log. Open its plan and note which data it chose. The next rungs make it show and source that data.
 
 === "Rung 2: correlate"
 
@@ -49,6 +50,8 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
     (the change log shows the edit), while Leaf2's matching ports still use the normal access VLAN
     and policy. Clients on those ports never reach the DHCP server, so they get no address. The fix
     it proposes is to restore the ports to match Leaf2, then confirm clients get an address again.
+    Canvas may already quote the matching change ticket from Lab Tools. In 1.3 you make that, plus
+    business impact, severity and on-call, part of a fixed answer format.
 
     ![04b-fault-cause](../img/04b-fault-cause.png){ loading=lazy }
 
@@ -56,7 +59,7 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
 
     ![06-fault-nextstep](../img/06-fault-nextstep.png){ loading=lazy }
 
-    *A good rung 4 answer: (1) a concrete fix and how to verify it, (2) no change made. Names from the change log are blurred.*
+    *A good rung 4 answer: (1) a concrete fix that makes Leaf1 match Leaf2, then how to verify it, (2) no change made.*
 
 
 

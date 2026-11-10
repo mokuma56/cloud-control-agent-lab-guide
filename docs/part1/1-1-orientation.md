@@ -51,6 +51,10 @@ On the Canvas **Integrations** page:
    (**Replace my bearer token**). Paste your **seat token** from the seat card and save.
 4. Make sure **Enabled for me** is ticked.
 
+Lab Tools also carries a short **PseudoCo environment** reference: which product owns the "Cloud Fabric"
+(Meraki, site SITE-105, not Hyperfabric), how DHCP reaches AD-1, and the read-only rules. It is what a new
+engineer would get on day one, and Canvas reads it whenever Lab Tools is enabled for you.
+
     ![03-canvas-custom-integrations](../img/03-canvas-custom-integrations.png){ loading=lazy }
 
     *(1) Custom Integrations, (2) Lab Tools. When you are done, (3) Your credential shows Saved and (4) Enabled for me is ticked.*

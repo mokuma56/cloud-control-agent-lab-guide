@@ -8,6 +8,12 @@
 - A Studio MCP integration with *Canvas Direct* does not make tools appear in Canvas chat. Canvas
   uses its own **Custom Integrations** (OpenAPI). Use Lab Tools there.
 
+## Canvas looks at Hyperfabric (USC-HF-LEAF1/2) instead of the Meraki Cloud Fabric
+
+Canvas did not get the PseudoCo environment reference, which comes with Lab Tools. Check that Lab Tools
+is **Enabled for me** with your credential saved (above), start a **new** board, and ask again. You can
+also say it outright: "the Meraki Cloud Fabric, org USC-Engineering, network SITE-105".
+
 ## "missing or invalid bearer token" (401)
 
 Your seat token was mistyped, has a trailing space, or belongs to an earlier session (tokens change
