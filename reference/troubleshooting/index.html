@@ -1048,6 +1048,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#a-caution-sign-next-to-my-agent-stale-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A caution sign next to my agent ("stale skills")
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1167,6 +1178,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#a-caution-sign-next-to-my-agent-stale-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A caution sign next to my agent ("stale skills")
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1215,6 +1237,14 @@ bulb keeps cycling their color. Check <code>get_light_status</code>: it lists th
 <h2 id="canvas-shows-there-is-an-issue-connecting-to-this-canvas">Canvas shows "There is an issue connecting to this canvas"<a class="headerlink" href="#canvas-shows-there-is-an-issue-connecting-to-this-canvas" title="Permanent link">&para;</a></h2>
 <p>The chat reconnects by itself. If the answer seems to disappear, reload the page; finished answers
 are kept on the board.</p>
+<h2 id="a-caution-sign-next-to-my-agent-stale-skills">A caution sign next to my agent ("stale skills")<a class="headerlink" href="#a-caution-sign-next-to-my-agent-stale-skills" title="Permanent link">&para;</a></h2>
+<p>In <strong>Studio → Manage → Applications</strong>, a caution sign next to your agent opens <em>Products with stale
+skills</em> and names an integration (for example PseudoCo Lab Tools, or your own Path B server). Studio's
+cached copy of that integration's tools is out of date, which happens after the server behind it changed.</p>
+<p><strong>Fix:</strong> Studio → Manage → <strong>Integrations</strong> → the named integration → <strong>⋯ → Rediscover</strong>, paste your seat
+token, <strong>Rediscover tools</strong>. The caution sign clears for every agent that uses it. Asking the agent's
+Studio chat to "refresh skills" does not help: the skills belong to the integration, not the agent.
+Your agent kept working the whole time; run its test again afterwards anyway.</p>
 
 
 
