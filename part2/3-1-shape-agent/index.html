@@ -1169,17 +1169,28 @@ Build a security troubleshooting agent for PseudoCo that keeps watch while I sle
 
 Each run:
 1. Call get_my_watch_scope to learn my seat, my watch source IP and the service it is near.
-2. Call get_my_security_events for that source IP over the last [60] minutes, and use any other
-   Cisco data I can see (Secure Firewall, Secure Access, Meraki).
+2. Call get_my_security_events for that source IP twice: minutes=5 decides what is happening NOW,
+   minutes=60 is context for the report. Use any other Cisco data I can see (Secure Firewall,
+   Secure Access, Meraki).
 3. Use Lab Tools business context: which service is at risk, how critical it is, whether a recent
    change explains it, and whether on-call should be woken.
 4. Report: STATUS, SEVERITY, SUMMARY, ATTACK (what the source is doing), EVIDENCE (each bullet
    names its source), NEXT STEP.
 5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane, but
    only call it after a human approves.
-6. If STATUS is healthy and get_light_status says my light is on: call clear_issue.
-7. Never change shared network or security configuration. Only act on my own watch source.
+6. If my lane is not running and the last 5 minutes show no events from my source, STATUS is
+   healthy: describe the earlier activity as resolved, do not call signal_issue, and call
+   clear_issue if get_light_status says my light is on. Mixed evidence: STATUS inconclusive, no
+   signal and no clear.
+7. Only link a change to the activity if it touches the same source, destination or segment.
+8. Never change shared network or security configuration. Only act on my own watch source.
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Why two time windows</p>
+<p>Firewall events stay in the last hour after you stop your lane. An agent that decides from the
+60-minute window alone sees the old attack, calls it an issue again, and relights your bulb on
+the run after your approved stop. Deciding from the last 5 minutes avoids that.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">Why the agent is not told the attack type</p>
 <p><code>get_my_watch_scope</code> gives your source IP and the service it is near, never the attack. Your
