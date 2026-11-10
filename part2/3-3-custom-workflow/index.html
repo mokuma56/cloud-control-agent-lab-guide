@@ -1274,6 +1274,73 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
    <code>get_oncall</code>, <code>get_saas_status</code>, <code>signal_issue</code>, <code>clear_issue</code>, <code>get_light_status</code>, <code>stop_my_lane</code>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/09c-mcp-auth.png" data-desc-position="bottom"><img alt="09c-mcp-auth" loading="lazy" src="../../img/09c-mcp-auth.png"></a></p>
 <p><em>Authenticate and discover: (1) API key / bearer token, (2) paste your seat token, (3) Discover tools.</em></p>
+<p>What you just connected: ten tools the lab team built for PseudoCo, all scoped to <strong>your seat</strong> by
+your seat token. Seven only read, two change your seat's alert on the room wall, and one stops your
+own lane.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Reads or changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_my_watch_scope</code></td>
+<td>Tells the agent who it is: your seat, the service your table protects, your watch source IP, segment and SGT, and whether your lane is running. Agents call it first.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>get_my_security_events</code></td>
+<td>Secure Firewall events for <strong>your</strong> source IP only, read from Splunk: IPS signatures and their action, connections, destinations and ports, access rules, sample URLs, file events. Pick 1 to 240 minutes.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>get_recent_changes</code></td>
+<td>PseudoCo's change calendar: ticket ID, system, what changed, who asked, when, implemented or scheduled.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>get_business_services</code></td>
+<td>Business services: criticality, business hours, owner, cost of downtime and what each depends on. Turns a network finding into business impact and severity.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>get_oncall</code></td>
+<td>Who is on call now and the wake-up policy.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>get_saas_status</code></td>
+<td>Status of Webex, Microsoft 365, the payments gateway and Salesforce, to rule a provider outage in or out.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>get_light_status</code></td>
+<td>Whether your seat's alert is open, with its severity and summary, and other open alerts at your table.</td>
+<td>Reads</td>
+</tr>
+<tr>
+<td><code>signal_issue</code></td>
+<td>Raises your alert: your tile turns red on the room wall with a severity and a one-line summary. Calling it again updates them.</td>
+<td>Changes your tile</td>
+</tr>
+<tr>
+<td><code>clear_issue</code></td>
+<td>Resolves your alert: your tile turns green. Only after the fix is verified.</td>
+<td>Changes your tile</td>
+</tr>
+<tr>
+<td><code>stop_my_lane</code></td>
+<td>Stops the attack traffic from your own watch source IP. Changes no shared configuration. <strong>Only after a human approves.</strong></td>
+<td>Stops your lane</td>
+</tr>
+</tbody>
+</table>
+<p>The same ten operations are what Canvas uses through the Lab Tools OpenAPI integration (see
+<a href="../../part1/1-1-orientation/#two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in</a>). Full
+details: <a href="../../reference/tools/">Lab Tools reference</a>.</p>
 </li>
 <li>
 <p><strong>Capabilities and access</strong>: keep all 10 selected, then <strong>Save draft</strong>.</p>
