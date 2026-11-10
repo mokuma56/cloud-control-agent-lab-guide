@@ -50,6 +50,16 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
     and policy. Clients on those ports never reach the DHCP server, so they get no address. The fix
     it proposes is to restore the ports to match Leaf2, then confirm clients get an address again.
 
+    ![04b-fault-cause](../img/04b-fault-cause.png){ loading=lazy }
+
+    *A good rung 3 answer: (1) the CAUSE ties the Leaf1 port change to a time, (2) the Meraki change log shows VLAN 1 changed to 999 on ports 1, 3 and 4.*
+
+    ![06-fault-nextstep](../img/06-fault-nextstep.png){ loading=lazy }
+
+    *A good rung 4 answer: (1) a concrete fix and how to verify it, (2) no change made. Names from the change log are blurred.*
+
+
+
 ## Debrief (5 min, with your table)
 
 Canvas found *what* changed. Discuss what it **cannot** tell you from Cisco data:

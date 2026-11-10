@@ -7,6 +7,11 @@
 ## Describe the agent
 
 1. Open **Studio → Build → Agent**.
+
+    ![14-agent-shape](../img/14-agent-shape.png){ loading=lazy }
+
+    *Shape the agent: (1) paste your description here. (2) The suggestion chips are examples; you do not need them.*
+
 2. Paste this description. Replace the bracketed parts with your own choices, and keep the rules.
 
 ```text
@@ -34,6 +39,11 @@ Each run:
 
 Studio drafts a **manifest** and asks follow-up questions. Suggested answers:
 
+![15-agent-builder](../img/15-agent-builder.png){ loading=lazy }
+
+*The agent builder: (1) chat with Studio to change the agent, (2) Review Agent shows the manifest and Test runs sandbox scenarios, (3) Schedule unlocks after a passing test.*
+
+
 | Studio asks | Answer |
 | --- | --- |
 | How often should it run? | Hourly (you may change this in 3.4) |
@@ -45,10 +55,16 @@ Studio drafts a **manifest** and asks follow-up questions. Suggested answers:
 
 Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid editing blindly.
 
+![16-agent-manifest](../img/16-agent-manifest.png){ loading=lazy }
+
+*The manifest: (1) Instructions, (2) MCP servers and API integrations, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
+
+
 - [ ] **Instructions** include "propose, don't change" and "only after a human approves".
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
-- [ ] **Integrations** list Lab Tools (or a placeholder for it).
-- [ ] **Schedule** is hourly or empty; you will set it in 3.4.
+- [ ] **MCP servers** lists your Lab Tools integration, or nothing yet (you connect it in 3.3).
+- [ ] **API integrations** is empty unless you build Path A in 3.3.
+- [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 3.4.
 - [ ] Save the draft.
 
 !!! tip "Read it like a code review"

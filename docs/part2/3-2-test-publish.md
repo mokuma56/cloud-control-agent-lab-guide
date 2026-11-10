@@ -6,7 +6,12 @@
 
 ## Write three tests
 
-In the agent's **Test** tab, add each scenario and its expected outcome, then run it.
+In the builder's **Test** tab, type the **Scenario**, add the **Expected outcome**, then select **Run scenario**. The suggested scenario links (Typical task, Missing information, Approval guardrail) prefill the same three tests.
+
+![17-agent-test](../img/17-agent-test.png){ loading=lazy }
+
+*The Test tab: (1) Scenario, (2) Expected outcome, (3) suggested scenarios that match the three tests below, (4) Run scenario.*
+
 
 | Scenario | Expected outcome |
 | --- | --- |
@@ -23,5 +28,10 @@ In the agent's **Test** tab, add each scenario and its expected outcome, then ru
 
 - [ ] All three tests pass. If one fails, fix the instructions by chatting with Studio and rerun.
 - [ ] Publish **v1**.
+
+    ![18-agent-schedule-gate](../img/18-agent-schedule-gate.png){ loading=lazy }
+
+    *(1) Until a test on the latest saved draft passes, Schedule only says: Run a test on the latest saved changes first.*
+
 
 A fourth test you will add in 3.4: *"fault present, expect the light on."*

@@ -49,6 +49,11 @@ Good enough when **all four** are true:
       "Lab Tools: get_recent_changes").
 - [ ] **NEXT STEP** proposes a fix, makes no change, and says whether the on-call policy is met.
 
+    ![05-fault-evidence](../img/05-fault-evidence.png){ loading=lazy }
+
+    *Lab Tools in the evidence: (1) the change calendar, (2) business services and their criticality, (3) SaaS status ruled out.*
+
+
 !!! question "The judgment call"
     Those ports are at **Branch-1**, where the business service is **Branch payments and Webex**
     (critical, 08:00 to 21:00). The policy says *wake the primary only for critical services or

@@ -15,6 +15,11 @@
 Watch the projector board: bulbs light table by table, and the board records each seat's
 **time to detect**.
 
+![19-board](../img/19-board.png){ loading=lazy }
+
+*The projector board: (1) a table's bulb in the color of the seat it is showing, (2) the five seats at that table, (3) what each agent said when it signaled.*
+
+
 ## 2. Wake up and read the finding (about 10 min)
 
 Open your agent's latest run (or your Canvas answer). A good finding looks like this:
@@ -39,6 +44,11 @@ Check it before you approve:
 - [ ] The ATTACK is supported by evidence, not assumed. See the [evidence guide](../reference/evidence.md).
 - [ ] Your bulb is on in your color.
 
+    ![11-lights-evidence](../img/11-lights-evidence.png){ loading=lazy }
+
+    *A real finding for seat T3-C: (1) Secure Firewall events and IPS signatures from get_my_security_events, (2) NEXT STEP waits for approval.*
+
+
 ## 3. Approve the remediation (about 5 min)
 
 Reply to your agent or Canvas with an explicit approval:
@@ -48,6 +58,11 @@ Yes, approved: stop_my_lane for my watch source.
 ```
 
 The agent calls `stop_my_lane`. Only your lane stops; your neighbors' bulbs stay on until they act.
+
+![12-lights-approve](../img/12-lights-approve.png){ loading=lazy }
+
+*(1) signal_issue lit the purple bulb, (2) the agent asks before stop_my_lane, (3) the human approval.*
+
 
 ## 4. Verify and clear (about 5 min)
 
@@ -60,6 +75,11 @@ call clear_issue and report STATUS: healthy.
 
 - [ ] Your bulb flashes green and goes dark (if you were the last open issue at your table).
 - [ ] The board shows your **time to clear**.
+
+    ![13-lights-healthy](../img/13-lights-healthy.png){ loading=lazy }
+
+    *After the stop: (1) STATUS healthy, (2) the light is cleared and only this seat's source was affected.*
+
 
 !!! success "Prizes"
     Fastest detect, fastest clear, and best custom workflow (judged by the proctors from your

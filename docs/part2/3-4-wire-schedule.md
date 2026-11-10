@@ -29,8 +29,10 @@ Check the manifest's **Integrations** now lists your Lab Tools (and My Light, if
 
 === "Scheduled"
 
-    Set the schedule to **Hourly**, at the run time the proctor announces, max runs 10. The
-    proctor starts Lights Out just before that time.
+    Select **Schedule** (top right of the builder). It unlocks only after a test on your latest
+    saved draft passes; until then it says *Run a test on the latest saved changes first*. Set
+    **Hourly** at the run time the proctor announces, max runs 10. The proctor starts Lights Out
+    just before that time. If Schedule is not offered in your release, use the Canvas tab.
 
 === "On demand from Canvas"
 
@@ -44,5 +46,10 @@ Check the manifest's **Integrations** now lists your Lab Tools (and My Light, if
     for impact and severity, give the STATUS report, and call signal_issue if it is an issue.
     Then ask me before stop_my_lane.
     ```
+
+    ![10-lights-plan](../img/10-lights-plan.png){ loading=lazy }
+
+    *Running it from Canvas: (1) your saved prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.*
+
 
 - [ ] My agent is published as v2, and I know whether it runs on a schedule or from Canvas.

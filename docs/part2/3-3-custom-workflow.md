@@ -12,20 +12,40 @@ Studio agents use MCP or REST integrations registered in Studio. Lab Tools offer
 server: one URL for all 30 seats, and your seat token decides which seat you are.
 
 1. **Studio → Build → Integrations → Add → MCP**.
+
+    ![08-studio-add-integration](../img/08-studio-add-integration.png){ loading=lazy }
+
+    *(1) Choose MCP. Path A in step B uses REST API instead.*
+
 2. **Connect**
 
     | Field | Value |
     | --- | --- |
-    | MCP server URL | the **Lab Tools MCP URL** on your seat card |
+    | MCP server URL | the **Lab Tools MCP URL** on your seat card (screenshots use the placeholder `lab.example.com`) |
     | Display name | `<your seat> Lab Tools`, for example `T3-C Lab Tools` |
     | Advanced settings → Transport | Streamable HTTP |
     | Advanced settings → Header name / Scheme | `Authorization` / `Bearer` |
     | Canvas visibility | Canvas Direct on |
 
+    ![09a-mcp-connect](../img/09a-mcp-connect.png){ loading=lazy }
+
+    *Connect: (1) the Lab Tools MCP URL from your seat card (the example host here is a placeholder), (2) your display name, (3) open Advanced settings.*
+
+    ![09b-mcp-advanced](../img/09b-mcp-advanced.png){ loading=lazy }
+
+    *Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas Direct on.*
+
+
+
 3. **Authenticate and discover**: authentication **API key / bearer token**, paste your **seat
    token**, then **Discover tools**. You should see **10 tools**:
    `get_my_watch_scope`, `get_my_security_events`, `get_recent_changes`, `get_business_services`,
    `get_oncall`, `get_saas_status`, `signal_issue`, `clear_issue`, `get_light_status`, `stop_my_lane`.
+
+    ![09c-mcp-auth](../img/09c-mcp-auth.png){ loading=lazy }
+
+    *Authenticate and discover: (1) API key / bearer token, (2) paste your seat token, (3) Discover tools.*
+
 4. **Capabilities and access**: keep all 10 selected, then **Save draft**.
 
 !!! warning "Keep it Personal"
@@ -33,6 +53,11 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     tenant would then act as your seat.
 
 - [ ] Studio → Manage → Integrations shows `<your seat> Lab Tools`, Personal, **Configured**.
+
+    ![09d-studio-manage](../img/09d-studio-manage.png){ loading=lazy }
+
+    *Done: (1) your integration card, (2) in the Personal group, (3) Configured. The URL is blurred in this guide.*
+
 
 ## B. Your own workflow (pick one, 25 min)
 

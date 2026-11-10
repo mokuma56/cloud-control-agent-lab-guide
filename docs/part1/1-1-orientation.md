@@ -20,8 +20,18 @@ POD-45 is a fully built PseudoCo network. You do not configure anything in this 
 
 1. **AI Canvas**: on the Cloud Control home page, select **Canvas** (top left), then **+ New**.
    You get a new board with a chat panel. Leave it open.
+
+    ![01-canvas-boards](../img/01-canvas-boards.png){ loading=lazy }
+
+    *(1) Canvas, (2) Integrations, (3) + New creates a board. Board names and owners are blurred in this guide.*
+
 2. **Studio**: open the app launcher (the grid icon), then **Studio**. You will see three builders:
    **Agent**, **App** and **Integrations**. You will use Agent and Integrations in Part 2.
+
+    ![07-studio-build](../img/07-studio-build.png){ loading=lazy }
+
+    *Studio: (1) Agent builder, (2) add an Integration, (3) Manage lists what you have built.*
+
 3. **Canvas integrations**: go back to **Canvas**, then select **Integrations** above the board list.
 
 ## Connect Lab Tools to your seat
@@ -30,11 +40,26 @@ On the Canvas **Integrations** page:
 
 1. **Default Integrations** lists what Canvas can already use: Cisco Meraki, Cisco Firewall Manager,
    Cisco Secure Access and others. Leave them all on.
+
+    ![02-canvas-integrations-default](../img/02-canvas-integrations-default.png){ loading=lazy }
+
+    *(1) Default Integrations: (2) the Cisco integrations Canvas uses for multi-domain troubleshooting. Leave them ticked.*
+
 2. Select **Custom Integrations**. You will see **Lab Tools** (`lab-tools`). It is shared with the
    organization, so everyone sees the same card, but each person's credential is private.
 3. On the **Lab Tools** card, open the **⋯** menu and add your credential
    (**Replace my bearer token**). Paste your **seat token** from the seat card and save.
 4. Make sure **Enabled for me** is ticked.
+
+    ![03-canvas-custom-integrations](../img/03-canvas-custom-integrations.png){ loading=lazy }
+
+    *(1) Custom Integrations, (2) Lab Tools. When you are done, (3) Your credential shows Saved and (4) Enabled for me is ticked.*
+
+    ![04-lab-tools-menu](../img/04-lab-tools-menu.png){ loading=lazy }
+
+    *(1) The Lab Tools actions menu, (2) Replace my bearer token: paste your seat token here. The dimmed items exist only for proctors.*
+
+
 
 !!! info "Why a token and not a login"
     Lab Tools runs outside Cisco Cloud Control, like any system your business depends on. The token

@@ -35,6 +35,11 @@ stops traffic from *your* source IP and nothing else, and only after you approve
 
 1. Open **https://cloud.cisco.com** and sign in with the login on your seat card.
 2. Check the organization picker at the top shows **USC-Engineering**.
+
+    ![01-canvas-boards](img/01-canvas-boards.png){ loading=lazy }
+
+    *Cloud Control: (4) the organization picker must show USC-Engineering. (1) Canvas, (2) Integrations and (3) + New are used in 1.1.*
+
 3. Keep this guide open in a second window or on your second screen.
 
 - [ ] I can see the Cloud Control home page with **USC-Engineering** selected.
