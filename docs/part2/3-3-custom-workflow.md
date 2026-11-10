@@ -91,7 +91,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     details: [Lab Tools reference](../reference/tools.md){target="_blank" rel="noopener"}.
 
 4. **Capabilities and access**: keep all 10 selected, then **Save draft**. When the confirmation
-   pop-up opens, click **Done**.
+   pop-up opens, click **Manage**. It takes you to **Studio → Manage**, where you check the integration below.
 
 !!! warning "Keep it Personal"
     The integration is saved **Personal**. Do not use *Make available to tenant*: everyone in the
