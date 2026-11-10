@@ -92,8 +92,12 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 ```
 
-It should come back `STATUS: healthy`, and may mention that the Leaf1 change was reverted. A method that
-finds the fault and then reports healthy after the fix is one you can trust.
+It should come back `STATUS: healthy` and name the change ticket that backed out the Leaf1 change.
+A method that finds the fault and then reports healthy after the fix is one you can trust.
+
+![21d-healthy](../img/21d-healthy.png){ loading=lazy }
+
+*(1) STATUS healthy after the fix, (2) CAUSE names both tickets: the change that broke the ports and the one that restored them.*
 
 - [ ] Your board is named **Night shift triage**, pinned, and has the **Known-good answer** card.
 - [ ] Your general triage method is saved in a note.
