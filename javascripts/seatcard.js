@@ -91,7 +91,56 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
     w.focus();
   }
 
-  const init = () => { const root = document.getElementById("seat-card"); if (root) render(root); };
+  /* Personalize the copy-paste blocks on every page from the card saved in this browser. */
+  function personalize() {
+    const saved = load(), c = saved && saved.card;
+    document.querySelectorAll(".sc-autofill").forEach(el => {
+      el.className = "admonition " + (c ? "info" : "note") + " sc-autofill";
+      el.innerHTML = c
+        ? `<p class="admonition-title">Filled in from your seat card</p><p>You are seat <b>${esc(c.seat)}</b>, and your
+           table protects <b>${esc(c.protects)}</b>. The highlighted parts of the prompt below were filled in
+           automatically from that assignment, so you can copy it as it is.</p>`
+        : `<p class="admonition-title">This prompt can fill itself in</p><p>Get your card on
+           <a href="${esc(el.dataset.setup || "../../setup/")}#your-seat-card">Before you start</a> and reload
+           this page: the parts in brackets are then filled in with the service your table protects.</p>`;
+    });
+    if (!c) return;
+    const fills = [
+      ["[the service I protect]", c.protects],
+      ["[Directory Services Night Watch]", c.agent_name],
+      ["[PseudoCo's core directory services (AD-1)]", c.protects],
+      ["<your seat>", c.seat],
+      ["T3-C test", c.seat + " test"],
+    ].filter(([, v]) => v);
+    const inline = fills.filter(([k]) => k === "<your seat>");     // in running text only the seat is safe to fill
+    document.querySelectorAll(".md-content pre code, .md-content :not(pre) > code").forEach(code => {
+      const list = code.parentElement.tagName === "PRE" ? fills : inline;
+      const walk = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
+      const nodes = []; while (walk.nextNode()) nodes.push(walk.currentNode);
+      nodes.forEach(n => {
+        let t = n.nodeValue, hit = false;
+        list.forEach(([k, v]) => { if (t.includes(k)) { t = t.split(k).join("\u0000" + v + "\u0001"); hit = true; } });
+        if (!hit) return;
+        const frag = document.createDocumentFragment();
+        t.split(/(\u0000[^\u0001]*\u0001)/).forEach(part => {
+          if (part.startsWith("\u0000")) {
+            const m = document.createElement("mark"); m.className = "sc-fill"; m.textContent = part.slice(1, -1);
+            m.title = "Filled in from your seat card"; frag.appendChild(m);
+          } else if (part) frag.appendChild(document.createTextNode(part));
+        });
+        n.parentNode.replaceChild(frag, n);
+      });
+    });
+    document.querySelectorAll(".md-content table").forEach(tbl => {      // 3.1: highlight my table's row
+      const head = [...tbl.querySelectorAll("thead th")].map(th => th.textContent.trim());
+      if (head[0] !== "Table" || !head.includes("Protects")) return;
+      tbl.querySelectorAll("tbody tr").forEach(tr => {
+        if (tr.cells[0] && tr.cells[0].textContent.trim() === String(c.table)) tr.classList.add("sc-mine");
+      });
+    });
+  }
+
+  const init = () => { const root = document.getElementById("seat-card"); if (root) render(root); personalize(); };
   if (window.document$ && window.document$.subscribe) window.document$.subscribe(init);   // Material instant navigation
   else document.addEventListener("DOMContentLoaded", init);
 })();
