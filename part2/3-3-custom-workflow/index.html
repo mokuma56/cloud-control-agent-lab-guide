@@ -1388,16 +1388,45 @@ tenant would then act as your seat.</p>
 agent should use each operation.</p>
 <ol>
 <li><strong>Studio → Build → Integrations → Add → REST API</strong>.</li>
-<li>Use the <strong>Lab Actions spec URL</strong> from your seat card (or download it and upload the file).</li>
+<li><strong>Spec URL</strong>: paste your <strong>Lab Actions spec URL</strong> (or download it and upload the file).</li>
 <li><strong>Review API</strong>: Studio finds 6 operations on one HTTPS server.</li>
-<li><strong>Configure</strong>: name it <code>My Table Light</code>, bearer token = your seat token.</li>
-<li>Rewrite the <strong>descriptions</strong> of <code>signal_issue</code> and <code>clear_issue</code> in your own words. The
+<li>
+<p><strong>Configure</strong>: name it and give it your seat token as the bearer token.</p>
+<div class="sc-copytable" markdown="">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spec URL (step 2)</td>
+<td><code>&lt;your Lab Actions spec URL&gt;</code></td>
+</tr>
+<tr>
+<td>Name (step 4)</td>
+<td><code>My Table Light</code></td>
+</tr>
+<tr>
+<td>Bearer token (step 4)</td>
+<td><span class="sc-tokenbtn"></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>Rewrite the <strong>descriptions</strong> of <code>signal_issue</code> and <code>clear_issue</code> in your own words. The
    description is what the agent reads to decide <em>when</em> to call an operation, so write it for
-   the agent: when to call it, what to send, and when <strong>not</strong> to call it.</li>
+   the agent: when to call it, what to send, and when <strong>not</strong> to call it.</p>
+</li>
 <li>Save.</li>
 </ol>
-<p><strong>Done when:</strong> you turn your own tile red with a direct call. From a terminal on your laptop
-(type the token from your seat card; it stays in this terminal only):</p>
+<p><strong>Done when:</strong> you turn your own tile red with a direct call. From a terminal on your laptop, run
+the first line, then paste your seat token (<strong>Copy</strong> in the table above) and press Return. It is not
+shown and stays in this terminal only:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">read</span><span class="w"> </span>-rs<span class="w"> </span>SEAT_TOKEN<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">export</span><span class="w"> </span>SEAT_TOKEN
 curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;lab host&gt;:8443/v1/signal"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$SEAT_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
@@ -1411,10 +1440,33 @@ curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>
 <p>You finish a small MCP server in Python and run it in your own <strong>MCP workspace</strong> on the lab
 server. Nothing to install: it runs in your browser.</p>
 <ol>
-<li>Open <strong>Your MCP workspace</strong> from your seat card (<code>https://&lt;lab host&gt;:9443/seat/&lt;your seat&gt;/</code>)
-   and paste your seat token. You see your own copy of <code>tools.py</code>, a test panel and your
-   server's log.</li>
-<li>Finish the three TODOs in <code>tools.py</code>:<ul>
+<li>
+<p>Open <strong>Your MCP workspace</strong> and paste your seat token. You see your own copy of <code>tools.py</code>, a
+   test panel and your server's log.</p>
+<div class="sc-copytable" markdown="">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Your MCP workspace</td>
+<td><code>&lt;your MCP workspace URL&gt;</code></td>
+</tr>
+<tr>
+<td>Seat token</td>
+<td><span class="sc-tokenbtn"></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>Finish the three TODOs in <code>tools.py</code>:</p>
+<ul>
 <li><code>get_business_services</code>: return <code>GET /v1/context/services</code>.</li>
 <li><code>signal_issue</code>: <code>POST /v1/signal</code> with <code>{"severity", "summary"}</code>.</li>
 <li><code>clear_issue</code>: <code>POST /v1/clear</code>.</li>
@@ -1423,12 +1475,52 @@ server. Nothing to install: it runs in your browser.</p>
 <li>Write a <strong>description</strong> for <code>get_business_services</code> that tells the agent when to use it.</li>
 <li>Select <strong>Save &amp; restart</strong>. A syntax error is refused (with its line number) and your running
    server keeps the last good version. The status pill turns green when your server is up.</li>
-<li>Test it: pick <code>signal_issue</code> in <strong>Test a tool</strong>, arguments
-   <code>{"severity":"minor","summary":"MCP test"}</code>, then <strong>Call</strong>. Your tile turns red. Call
-   <code>clear_issue</code> to turn it green.</li>
-<li>Register it in Studio as in step A, but with <strong>your</strong> URL, shown at the top of the
-   workspace: <code>https://&lt;lab host&gt;:9443/seat/&lt;your seat&gt;/mcp</code>. Display name <code>My Lab Tools</code>,
-   bearer token = your seat token.</li>
+<li>
+<p>Test it: pick <code>signal_issue</code> in <strong>Test a tool</strong>, paste these arguments, then <strong>Call</strong>. Your tile
+   turns red. Call <code>clear_issue</code> to turn it green.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minor"</span><span class="p">,</span><span class="w"> </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MCP test"</span><span class="p">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Register it in Studio as in step A, but with <strong>your</strong> workspace's URL (also shown at the top of
+   the workspace):</p>
+<div class="sc-copytable" markdown="">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MCP server URL</td>
+<td><code>&lt;your workspace MCP URL&gt;</code></td>
+</tr>
+<tr>
+<td>Display name</td>
+<td><code>My Lab Tools</code></td>
+</tr>
+<tr>
+<td>Advanced settings → Transport</td>
+<td><code>Streamable HTTP</code></td>
+</tr>
+<tr>
+<td>Advanced settings → Header name</td>
+<td><code>Authorization</code></td>
+</tr>
+<tr>
+<td>Advanced settings → Scheme</td>
+<td><code>Bearer</code></td>
+</tr>
+<tr>
+<td>Bearer token</td>
+<td><span class="sc-tokenbtn"></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
 </ol>
 <p><strong>Done when:</strong> your own <code>signal_issue</code> turns your tile red, and Studio discovers your tools.</p>
 <div class="admonition info">
