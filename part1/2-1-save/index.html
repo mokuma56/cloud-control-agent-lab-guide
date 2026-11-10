@@ -690,10 +690,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#pin-the-answer" class="md-nav__link">
+  <a href="#keep-the-answer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pin the answer
+        Keep the answer
       
     </span>
   </a>
@@ -1231,13 +1231,33 @@
 <p>Keep the answer you trust, and turn the prompt that produced it into a <strong>general triage method</strong>
 that works for any problem. Your agent is built from that method in Part 2.</p>
 </div>
-<h2 id="pin-the-answer">Pin the answer<a class="headerlink" href="#pin-the-answer" title="Permanent link">¶</a></h2>
+<h2 id="keep-the-answer">Keep the answer<a class="headerlink" href="#keep-the-answer" title="Permanent link">¶</a></h2>
+<p>Work in the Canvas board that has your best 1.3 answer.</p>
 <ol>
-<li>In the Canvas board with your best 1.3 answer, rename the board: open the board title and call
-   it <strong><code>Night shift triage</code></strong>.</li>
-<li>Use the board's card tools to keep the final answer on the board (pin or stack it). It is your
-   known-good example: proof that the method finds a real root cause, cites the change ID and sets a
-   severity you can defend.</li>
+<li>
+<p><strong>Name and pin the board.</strong> Open the board's <strong>⋯</strong> menu (top right). Choose <strong>Rename</strong> and call it
+   <strong><code>Night shift triage</code></strong>, then open <strong>⋯</strong> again and choose <strong>Pin canvas</strong> so it stays at the top of your
+   Canvas list.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/21a-board-menu.png" data-desc-position="bottom"><img alt="21a-board-menu" loading="lazy" src="../../img/21a-board-menu.png"></a></p>
+<p><em>(1) The board menu, (2) Rename: call it Night shift triage, (3) Pin canvas: keeps it at the top of your list.</em></p>
+</li>
+<li>
+<p><strong>Put the answer on the board as a card.</strong> Canvas answers live in the chat; a card keeps one on the
+   board where you and your table can see it. In the chat, send:</p>
+<div class="highlight"><pre><span></span><code>Put your last answer (the STATUS / SEVERITY / CAUSE / EVIDENCE / NEXT STEP answer) on this board
+as a card titled "Known-good answer". Do not call any integrations.
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/21b-keep-answer.png" data-desc-position="bottom"><img alt="21b-keep-answer" loading="lazy" src="../../img/21b-keep-answer.png"></a></p>
+<p><em>(1) The request, (2) Canvas confirms the card, (3) the card appears on the board behind the chat.</em></p>
+</li>
+<li>
+<p><strong>Look at the card.</strong> Collapse the chat (the panel menu next to <strong>Sandbox Connected</strong> →
+   <strong>Collapsed</strong>), then <strong>Auto layout → Fit to view</strong> in the right-hand toolbar.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/21c-answer-card.png" data-desc-position="bottom"><img alt="21c-answer-card" loading="lazy" src="../../img/21c-answer-card.png"></a></p>
+<p><em>(1) Your known-good answer as a card, (2) the CAUSE with the change ID: proof the method finds a real root cause.</em></p>
+<p>It is your known-good example: proof that the method finds a real root cause, cites the change ID
+and sets a severity you can defend. Open the chat again from the left-hand toolbar when you are done.</p>
+</li>
 </ol>
 <h2 id="turn-your-prompt-into-a-method">Turn your prompt into a method<a class="headerlink" href="#turn-your-prompt-into-a-method" title="Permanent link">¶</a></h2>
 <p>Your 1.3 prompt starts with <em>this</em> incident: wired users on Leaf1 get no IP address. An agent
@@ -1307,7 +1327,7 @@ Each run, answer one question: is anything hurting it, and what should happen ne
 <p>It should come back <code>STATUS: healthy</code>, and may mention that the Leaf1 change was reverted. A method that
 finds the fault and then reports healthy after the fix is one you can trust.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your board is renamed and the final answer is kept on it.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your board is named <strong>Night shift triage</strong>, pinned, and has the <strong>Known-good answer</strong> card.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your general triage method is saved in a note.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (Optional) After the fault is cleared, your method returns <code>STATUS: healthy</code>.</li>
 </ul>
