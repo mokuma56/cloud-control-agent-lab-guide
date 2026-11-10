@@ -1,7 +1,7 @@
 # 3.5 Lights Out (3:10, 25 min)
 
 !!! abstract "Goal"
-    Hands off. Attacks start, your agent finds yours, your bulb lights. Then you wake up, approve the
+    Hands off. Attacks start, your agent finds yours, your tile turns red. Then you wake up, approve the
     remediation, and your agent verifies and turns your light off.
 
 ## 1. Hands off (about 5 min)
@@ -12,12 +12,12 @@
 - Scheduled agents run at the announced time. If you run from Canvas, wait for the proctor's
   **"go"**, then send your saved prompt.
 
-Watch the projector board: bulbs light table by table, and the board records each seat's
-**time to detect**.
+Watch the room wall: amber tiles show attacks nobody has found yet, with a clock counting up. They turn red
+as agents report, seat by seat, and the wall records each seat's **time to detect**.
 
-![19-board](../img/19-board.png){ loading=lazy }
+![20-wall](../img/20-wall.png){ loading=lazy }
 
-*The projector board: (1) a table's bulb in the color of the seat it is showing, (2) the five seats at that table, (3) what each agent said when it signaled.*
+*The room wall during Lights Out: (3) amber = attack not found yet, (4) red = an agent's alert, (5) stopped and verifying, (6) resolved; (7) the agents' messages and (8) the leaderboard.*
 
 
 ## 2. Wake up and read the finding (about 10 min)
@@ -42,7 +42,7 @@ Check it before you approve:
 
 - [ ] The source IP is **yours** (compare with `get_my_watch_scope`).
 - [ ] The ATTACK is supported by evidence, not assumed. See the [evidence guide](../reference/evidence.md).
-- [ ] Your bulb is on in your color.
+- [ ] Your tile on the room wall is red.
 
     ![11-lights-evidence](../img/11-lights-evidence.png){ loading=lazy }
 
@@ -57,11 +57,11 @@ Reply to your agent or Canvas with an explicit approval:
 Yes, approved: stop_my_lane for my watch source.
 ```
 
-The agent calls `stop_my_lane`. Only your lane stops; your neighbors' bulbs stay on until they act.
+The agent calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · verifying**, and your neighbors stay red until they act.
 
 ![12-lights-approve](../img/12-lights-approve.png){ loading=lazy }
 
-*(1) signal_issue lit the purple bulb, (2) the agent asks before stop_my_lane, (3) the human approval.*
+*(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.*
 
 
 ## 4. Verify and clear (about 5 min)
@@ -73,7 +73,7 @@ Re-check my security events for the last 5 minutes. If my source is quiet and my
 call clear_issue and report STATUS: healthy.
 ```
 
-- [ ] Your bulb flashes green and goes dark (if you were the last open issue at your table).
+- [ ] Your tile turns green: **Resolved ✓**.
 - [ ] The board shows your **time to clear**.
 
     ![13-lights-healthy](../img/13-lights-healthy.png){ loading=lazy }

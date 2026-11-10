@@ -11,7 +11,7 @@ The lab follows three steps:
 2. **Save the combined result** so it becomes a known-good example.
 3. **Build an agent in Cloud Control Studio** that runs it however you choose, with a custom
    workflow of your own: an integration that brings in non-Cisco information and lights your
-   table's bulb when your agent finds a problem.
+   your seat on the room wall when your agent finds a problem.
 
 !!! tip "What you leave with"
     A working Studio agent, a Canvas prompt you trust, an integration pattern (MCP or REST) you can
@@ -42,14 +42,14 @@ flowchart TB
   FTD --> Splunk
   Gen -- "attack lane" --> FTD
   Broker -- "stop_my_lane" --> Gen
-  Broker -- "signal / clear" --> Bulb["Table bulb<br/>(your seat color)"]
+  Broker -- "signal / clear" --> Wall["Room wall<br/>(your seat tile)"]
 ```
 
 - **AI Canvas** does the Cisco multi-domain work with its built-in integrations (Meraki, Secure
   Firewall, Secure Access, Catalyst Center, Intersight, Nexus Dashboard).
 - **Lab Tools** is the custom integration. It brings in what Cisco cannot know: PseudoCo's change
   calendar, business services, on-call policy and SaaS status. It also gives your agent its watch
-  scope, the firewall events from your own lane, and two actions: light your bulb, and stop your lane.
+  scope, the firewall events from your own lane, and two actions: raise your seat's alert on the room wall, and stop your lane.
 - **Your seat token** is the key. Everyone uses the same URLs; the token decides which seat, which
   lane and which light you can see and touch. You can never act on another seat.
 
@@ -65,7 +65,7 @@ flowchart TB
 | 1:30 | 10 | - | Break | |
 | 1:40 | 25 | 3 | [3.1 Shape the agent](part2/3-1-shape-agent.md) | Draft agent, manifest reviewed |
 | 2:05 | 15 | 3 | [3.2 Sandbox test and publish](part2/3-2-test-publish.md) | Three tests passed, v1 published |
-| 2:20 | 35 | 3 | [3.3 Build your custom workflow](part2/3-3-custom-workflow.md) | Your integration lights your bulb |
+| 2:20 | 35 | 3 | [3.3 Build your custom workflow](part2/3-3-custom-workflow.md) | Your integration turns your seat red on the wall |
 | 2:55 | 15 | 3 | [3.4 Wire it in and choose how it runs](part2/3-4-wire-schedule.md) | v2 published, run mode chosen |
 | 3:10 | 25 | 3 | [3.5 Lights Out](part2/3-5-lights-out.md) | Light on at detection, off when fixed |
 | 3:35 | 15 | - | [3.6 Your business](part2/3-6-your-business.md) | One agent idea for your own company |
@@ -73,17 +73,23 @@ flowchart TB
 
 Finished early? The [stretch challenges](reference/stretch.md) have another hour of work.
 
-## Your table and your color
+## The room wall
 
-Six tables of five seats. Your seat ID is `T<table>-<letter>`, for example **T3-C** is table 3,
-seat C. Each table has one bulb; each seat letter has a color.
+There are no lights on the tables. Instead, the room screen shows the **Night Watch wall**: all 30 seats,
+one column per table, headed by the service that table protects. Your seat ID is `T<table>-<letter>`,
+for example **T3-C** is table 3, seat C. The small colored dot on your tile matches your seat card.
 
-| Seat | A | B | C | D | E |
-| --- | --- | --- | --- | --- | --- |
-| Color | red | blue | purple | amber | cyan |
+![20-wall](img/20-wall.png){ loading=lazy }
 
-- One open issue at a table: the bulb shows that seat's color. Severity sets brightness (minor
-  40%, major 70%, critical 100% and pulsing).
-- Two or more open issues: the bulb cycles through the open seats' colors, 2 seconds each.
-- The last issue at a table clears: a 3-second green flash, then dark.
-- The projector board shows all 30 seats, time to detect and time to clear.
+*(1) Live counts, (2) the Lights Out clock, (3) a threat nobody has detected yet, (4) an agent's alert with its summary, (5) a lane stopped after approval and being verified, (6) resolved, (7) what the agents said, (8) the leaderboard.*
+
+| Your tile | Means | Who changes it |
+| --- | --- | --- |
+| Grey, **Quiet** | Nothing is happening at your seat | - |
+| Amber, **Threat active · undetected 2:31** | Your attack lane is running and no agent has reported it yet; the clock counts up | the proctor starts lanes |
+| Red, **Alert** + your agent's summary | Your agent called `signal_issue`. Minor is steady, major pulses, critical pulses fast | your agent |
+| Red stripes, **Stopped · verifying** | You approved `stop_my_lane`; the agent has not confirmed it is quiet yet | you, then your agent |
+| Green, **Resolved ✓** | Your agent verified the source is quiet and called `clear_issue` | your agent |
+
+When every attack is resolved, the wall shows **ALL CLEAR**. The leaderboard ranks the fastest detect,
+stop and clear.

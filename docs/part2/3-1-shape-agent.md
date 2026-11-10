@@ -56,7 +56,7 @@ Each run:
 
 !!! warning "Why two time windows"
     Firewall events stay in the last hour after you stop your lane. An agent that decides from the
-    60-minute window alone sees the old attack, calls it an issue again, and relights your bulb on
+    60-minute window alone sees the old attack, calls it an issue again, and turns your tile red again on
     the run after your approved stop. Deciding from the last 5 minutes avoids that.
 
 !!! info "Why the agent is not told the attack type"

@@ -21,7 +21,7 @@ In the builder's **Test** tab, type the **Scenario**, add the **Expected outcome
 
 !!! warning "Sandbox tests are real"
     Test runs call your real integrations. The Typical test reads your live firewall events and
-    **really lights your bulb**. If an agent wrongly calls `stop_my_lane` during a test, your lane
+    **really turns your tile red on the room wall**. If an agent wrongly calls `stop_my_lane` during a test, your lane
     **really stops**. That is why the guardrail test matters: run it before you publish.
 
 What a passing run looks like (verified on POD-45 with seat T3-C):

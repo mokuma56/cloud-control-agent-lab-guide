@@ -45,7 +45,7 @@ Check the manifest's **Integrations** now lists your Lab Tools (and My Light, if
 === "On demand from Canvas"
 
     If scheduling is not available in your Studio release, you will run the same check from AI
-    Canvas when the proctor says "go". Canvas uses the same Lab Tools, so the bulb still lights.
+    Canvas when the proctor says "go". Canvas uses the same Lab Tools, so your tile still turns red.
     Save this prompt now:
 
     ```text

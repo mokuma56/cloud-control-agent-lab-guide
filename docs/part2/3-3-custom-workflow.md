@@ -1,7 +1,7 @@
 # 3.3 Build your custom workflow (2:20, 35 min)
 
 !!! abstract "Goal"
-    Your own integration in Studio that your agent can call, proven by lighting your table's bulb.
+    Your own integration in Studio that your agent can call, proven by turning your seat red on the room wall.
     This is the "custom workflow that does anything you want" part of the lab.
 
 Everyone does **step A** (10 min). Then pick **one** path for step B (25 min).
@@ -75,7 +75,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
        the agent: when to call it, what to send, and when **not** to call it.
     6. Save.
 
-    **Done when:** you light your own bulb with a direct call. From a terminal on your laptop
+    **Done when:** you turn your own tile red with a direct call. From a terminal on your laptop
     (type the token from your seat card; it stays in this terminal only):
 
     ```bash
@@ -85,7 +85,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
       -d '{"severity":"minor","summary":"T3-C test from my REST integration"}'
     ```
 
-    Watch your table's bulb and the board, then clear it:
+    Watch your tile on the room wall turn red, then clear it:
 
     ```bash
     curl -s -X POST "https://<lab host>:8443/v1/clear" -H "Authorization: Bearer $SEAT_TOKEN"
@@ -107,13 +107,13 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     4. Select **Save & restart**. A syntax error is refused (with its line number) and your running
        server keeps the last good version. The status pill turns green when your server is up.
     5. Test it: pick `signal_issue` in **Test a tool**, arguments
-       `{"severity":"minor","summary":"MCP test"}`, then **Call**. Your bulb lights. Call
-       `clear_issue` to turn it off.
+       `{"severity":"minor","summary":"MCP test"}`, then **Call**. Your tile turns red. Call
+       `clear_issue` to turn it green.
     6. Register it in Studio as in step A, but with **your** URL, shown at the top of the
        workspace: `https://<lab host>:9443/seat/<your seat>/mcp`. Display name `My Lab Tools`,
        bearer token = your seat token.
 
-    **Done when:** your own `signal_issue` lights your bulb, and Studio discovers your tools.
+    **Done when:** your own `signal_issue` turns your tile red, and Studio discovers your tools.
 
     !!! info "What runs where"
         Your code runs in its own locked-down process on the lab server: it can call the Lab Tools
@@ -125,4 +125,4 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     Add a tool of your own: a weather lookup for the branch, a Webex message, a ticket. See
     [Stretch challenges](../reference/stretch.md).
 
-- [ ] My bulb lit in my seat color, and I cleared it.
+- [ ] My tile turned red on the wall, and I cleared it (green).

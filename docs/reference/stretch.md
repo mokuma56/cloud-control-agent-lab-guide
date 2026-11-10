@@ -27,7 +27,7 @@ Write its description for the agent: when to call it and when not to.
 
 ## 4. A second action (15 min)
 
-Give your agent a second way to tell you, alongside the bulb: a Webex message to a space, or a
+Give your agent a second way to tell you, alongside the room wall: a Webex message to a space, or a
 ticket in a test ServiceNow instance. Keep the rule: it tells, it never changes the network.
 
 ## 5. Your own lane, end to end (10 min)

@@ -26,10 +26,11 @@ check the agent's instructions for a step it repeats.
 Use **⋯ → Rediscover** on the integration (it asks for your token again). If the URL is not the one
 on your seat card, edit the integration.
 
-## My light will not turn off
+## My tile will not turn green
 
-`clear_issue` only clears **your** seat. If another seat at your table still has an open issue, the
-bulb keeps cycling their color. Check `get_light_status`: it lists the other open seats at your table.
+`clear_issue` only clears **your** seat, and your agent calls it only when the last 5 minutes of your
+source are quiet and your lane is stopped. Events reach Splunk a minute or two late, so wait two minutes
+after the stop and run the check again. `get_light_status` shows whether your alert is still open.
 
 ## The agent says my lane is stopped, but events continue
 
