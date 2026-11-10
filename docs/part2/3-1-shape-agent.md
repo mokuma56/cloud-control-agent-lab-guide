@@ -93,7 +93,11 @@ Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid 
 
 ![16-agent-manifest](../img/16-agent-manifest.png){ loading=lazy }
 
-*The manifest: (1) Instructions, (2) MCP servers and API integrations, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
+*The manifest's Instructions: (1) the Lab Tools operations the agent may call, (2) it starts every run by learning its own seat and watch scope.*
+
+![16b-agent-integrations](../img/16b-agent-integrations.png){ loading=lazy }
+
+*Further down: (1) the safety rules (a scheduled run never stops a lane on its own), (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
 
 
 - [ ] **Instructions** include "propose, don't change" and "only after a human approves".
