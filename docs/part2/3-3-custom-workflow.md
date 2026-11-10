@@ -106,10 +106,19 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
 ## B. Your own workflow (pick one, 25 min)
 
+!!! info "Step B is practice, not setup"
+    Your agent already has everything it needs for Lights Out from step A. Step B is where you learn how
+    a custom integration is built, so you can do the same with your own company's systems later. Pick
+    **one** path. **Path A** needs no code. **Path B** shows the code behind a tool: one small edit, and
+    a button that fills in the answer if you would rather just see it work.
+
 === "Path A: REST API (no code)"
 
-    You import the Lab Actions API from its OpenAPI spec and make it *yours* by rewriting how the
-    agent should use each operation.
+    **What you are building.** Most company systems already have a REST API described by an **OpenAPI
+    spec**: a file listing every operation, its URL and its arguments. Studio can turn that spec straight
+    into tools for your agent, with no code. Here you import the Lab Actions spec and make it *yours* by
+    rewriting the **descriptions**: the sentences the agent reads to decide when to call each operation.
+    A spec says *what* an operation does; your description says *when* your agent should use it.
 
     1. **Studio → Build → Integrations → Add → REST API**.
     2. **Spec URL**: paste your **Lab Actions spec URL** (or download it and upload the file).
@@ -150,11 +159,26 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
 === "Path B: MCP server (code)"
 
-    You finish a small MCP server in Python and run it in your own **MCP workspace** on the lab
-    server. Nothing to install: it runs in your browser.
+    **What you are building.** An **MCP server** is a small program that offers *tools* to an AI agent.
+    Lab Tools from step A is one, written by the lab team. Here you run your own copy, finish one tool
+    in it, and connect it to Studio: exactly what you would do to give an agent your own company's
+    ticketing system, CMDB or any other API.
 
-    1. Open **Your MCP workspace** and paste your seat token. You see your own copy of `tools.py`, a
-       test panel and your server's log.
+    Every tool has four parts. You will see them in the code:
+
+    | Part | What it is | Who reads it |
+    | --- | --- | --- |
+    | **Name** | for example `signal_issue` | the agent, to call it |
+    | **Description** | one or two sentences on what it does and *when* to use it | the agent, to decide whether to call it |
+    | **Input schema** | the arguments it takes, for example `severity` and `summary` | the agent, to fill in the call |
+    | **Function** | the Python that does the work, here one call to the Lab Tools API | your server, when the agent calls |
+
+    Already done in your starter file: `get_recent_changes` and `get_business_services` (information *in*),
+    and `clear_issue` (action *out*). **Your one TODO is `signal_issue`.** No time or no interest in code?
+    Select **Load finished version** and skip to step 4.
+
+    1. **Open your MCP workspace** and paste your seat token. It is your own copy of the server, running
+       on the lab server. Nothing to install.
 
         <div class="sc-copytable" markdown>
 
@@ -165,61 +189,42 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         </div>
 
-    2. **Find TODO 1.** In the `tools.py` editor, scroll down to `def get_business_services():`. It has two
-       placeholders: a description that starts with `"TODO:` and a line that says
-       `raise NotImplementedError(...)`. Each TODO below is the same move: **replace one line** with a
-       line that calls the Lab Tools API. `get_recent_changes`, just above it, is a finished example.
+        ![22-workspace-overview](../img/22-workspace-overview.png){ loading=lazy }
+
+        *Your workspace: (1) `tools.py`, your server's code, (2) Save & restart runs your edits, (3) Load finished version fills in the answer, (4) running or stopped, (5) Test a tool calls a tool the way an agent would, (6) Server log shows errors.*
+
+    2. **Read the finished `clear_issue`, then find your TODO.** Scroll down to the `action OUT` section.
+       `@tool(...)` registers a tool: its name, its description and its input schema. The function under
+       it is what runs. `clear_issue` is complete: `broker.post("/v1/clear")` sends an HTTPS POST to Lab
+       Tools with your seat token already attached, and whatever it returns goes back to the agent.
+       `signal_issue`, just above it, is the same idea with a body, and still says
+       `raise NotImplementedError(...)`.
 
         ![22a-workspace-todo](../img/22a-workspace-todo.png){ loading=lazy }
 
-        *TODO 1 in the editor: (1) the placeholder description (step 5), (2) the line to replace.*
+        *`signal_issue`: (1) the description the agent reads, (2) the input schema: severity and summary, (3) your TODO: the line to replace, (4) `clear_issue`, finished, as your example.*
 
-    3. **Replace the three `raise NotImplementedError` lines.** Select the whole line, including its four
-       leading spaces, and paste the replacement (it keeps the four spaces, so it stays inside the function):
-
-        **TODO 1**, in `get_business_services`: replace `raise NotImplementedError("get_business_services")` with
-
-        ```python
-            return broker.get("/v1/context/services")
-        ```
-
-        **TODO 2**, in `signal_issue`: replace `raise NotImplementedError("signal_issue")` with (it sends the severity and summary the agent passes in)
+    3. **Finish `signal_issue`.** Select the whole `raise NotImplementedError("signal_issue")` line,
+       including its four leading spaces, and paste this in its place:
 
         ```python
             return broker.post("/v1/signal", {"severity": severity, "summary": summary})
         ```
 
-        **TODO 3**, in `clear_issue`: replace `raise NotImplementedError("clear_issue")` with
+        What it does: `severity` and `summary` are the arguments the agent passes in (they match the
+        input schema). `broker.post` sends them as JSON to the Lab Tools `/v1/signal` endpoint, which turns
+        your tile red on the room wall. You never put your token in the code: the server adds it.
 
-        ```python
-            return broker.post("/v1/clear")
-        ```
-
-        `broker.get` and `broker.post` already add your seat token, so you never type it in the code.
-        Leave TODO 4 (`stop_my_lane`) as it is: the shared Lab Tools already has it, and it is a stretch goal.
-
-    4. **Write the description for `get_business_services`.** The description is what the agent reads to
-       decide *when* to call a tool. In the `@tool(` block above `def get_business_services():`, replace the
-       two lines that start with `"TODO: write a description` and `"(hint:` with your own words, or with:
-
-        ```python
-            "PseudoCo business services: criticality, business hours, owner, cost of downtime and "
-            "what each depends on. Call it to turn a network finding into business impact and severity.",
-        ```
-
-        Keep the quotes and the comma at the end.
-
-    5. **Save and test.** Select **Save & restart**. A syntax error is refused, with its line number, and
-       your running server keeps the last good version. When it works, the message says your server
-       restarted and the status pill shows **running**.
+    4. **Save & restart.** Your server restarts with the new code and the pill shows **running**. A syntax
+       error is refused with its line number, and your server keeps the last good version.
 
         ![22b-workspace-saved](../img/22b-workspace-saved.png){ loading=lazy }
 
-        *After the edits: (1) the new description, (2) TODO 1 done, (3) Save & restart, (4) the confirmation.*
+        *(1) Your new line, (2) Save & restart, (3) the confirmation.*
 
-        Then, in **Test a tool**: pick `signal_issue`. The example arguments fill in for you (or paste
-        them), select **Call**, and your tile turns red on the room wall. Pick `clear_issue` and **Call** to
-        turn it green.
+    5. **Test it like an agent would.** In **Test a tool**, pick `signal_issue`. The example arguments fill
+       in for you (or paste them), then select **Call**. Your tile turns red on the room wall. Pick
+       `clear_issue` and **Call** to turn it green.
 
         ```json
         {"severity": "minor", "summary": "MCP test"}
@@ -229,8 +234,8 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         *Test a tool: (1) the tool, (2) its arguments, (3) Call, (4) the result: your light is on, (5) your server is running.*
 
-    6. Register it in Studio as in step A, but with **your** workspace's URL (also shown at the top of
-       the workspace):
+    6. **Connect it to Studio**, as in step A but with **your** workspace's URL (also shown at the top of
+       the workspace). Studio then discovers your tools, including the one you just finished.
 
         <div class="sc-copytable" markdown>
 
@@ -247,11 +252,15 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
     **Done when:** your own `signal_issue` turns your tile red, and Studio discovers your tools.
 
+    **Stretch:** finish `stop_my_lane` the same way (`broker.post("/v1/lane/stop")`), write its
+    description so the agent knows it needs a human's approval, then in Studio make the tool require
+    approval.
+
     !!! info "What runs where"
         Your code runs in its own locked-down process on the lab server: it can call the Lab Tools
         API and the internet, but nothing else in the lab network, and it cannot see anyone else's
-        workspace. Stuck? **Reset to starter** restores the original file; the answers are in the
-        take-home kit (`tools_solution.py`).
+        workspace. **Reset to starter** puts the original file back; **Load finished version** shows the
+        answers (the take-home kit has them as `tools_solution.py`).
 
 !!! tip "Fast finishers"
     Add a tool of your own: a weather lookup for the branch, a Webex message, a ticket. See
