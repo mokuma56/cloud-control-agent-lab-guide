@@ -4,13 +4,39 @@
     Keep the answer you trust, and turn the prompt that produced it into a **general triage method**
     that works for any problem. Your agent is built from that method in Part 2.
 
-## Pin the answer
+## Keep the answer
 
-1. In the Canvas board with your best 1.3 answer, rename the board: open the board title and call
-   it **`Night shift triage`**.
-2. Use the board's card tools to keep the final answer on the board (pin or stack it). It is your
-   known-good example: proof that the method finds a real root cause, cites the change ID and sets a
-   severity you can defend.
+Work in the Canvas board that has your best 1.3 answer.
+
+1. **Name and pin the board.** Open the board's **⋯** menu (top right). Choose **Rename** and call it
+   **`Night shift triage`**, then open **⋯** again and choose **Pin canvas** so it stays at the top of your
+   Canvas list.
+
+    ![21a-board-menu](../img/21a-board-menu.png){ loading=lazy }
+
+    *(1) The board menu, (2) Rename: call it Night shift triage, (3) Pin canvas: keeps it at the top of your list.*
+
+2. **Put the answer on the board as a card.** Canvas answers live in the chat; a card keeps one on the
+   board where you and your table can see it. In the chat, send:
+
+    ```text
+    Put your last answer (the STATUS / SEVERITY / CAUSE / EVIDENCE / NEXT STEP answer) on this board
+    as a card titled "Known-good answer". Do not call any integrations.
+    ```
+
+    ![21b-keep-answer](../img/21b-keep-answer.png){ loading=lazy }
+
+    *(1) The request, (2) Canvas confirms the card, (3) the card appears on the board behind the chat.*
+
+3. **Look at the card.** Collapse the chat (the panel menu next to **Sandbox Connected** →
+   **Collapsed**), then **Auto layout → Fit to view** in the right-hand toolbar.
+
+    ![21c-answer-card](../img/21c-answer-card.png){ loading=lazy }
+
+    *(1) Your known-good answer as a card, (2) the CAUSE with the change ID: proof the method finds a real root cause.*
+
+    It is your known-good example: proof that the method finds a real root cause, cites the change ID
+    and sets a severity you can defend. Open the chat again from the left-hand toolbar when you are done.
 
 ## Turn your prompt into a method
 
@@ -69,7 +95,7 @@ Each run, answer one question: is anything hurting it, and what should happen ne
 It should come back `STATUS: healthy`, and may mention that the Leaf1 change was reverted. A method that
 finds the fault and then reports healthy after the fix is one you can trust.
 
-- [ ] Your board is renamed and the final answer is kept on it.
+- [ ] Your board is named **Night shift triage**, pinned, and has the **Known-good answer** card.
 - [ ] Your general triage method is saved in a note.
 - [ ] (Optional) After the fault is cleared, your method returns `STATUS: healthy`.
 
