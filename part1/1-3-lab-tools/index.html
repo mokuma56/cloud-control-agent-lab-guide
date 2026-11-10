@@ -1259,6 +1259,19 @@ defend, and a decision on whether to wake someone. Then make Canvas answer in a 
 </tbody>
 </table>
 <h2 id="run-the-combined-prompt">Run the combined prompt<a class="headerlink" href="#run-the-combined-prompt" title="Permanent link">¶</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Nobody types a prompt this long at 3 a.m.</p>
+<p>It is long on purpose, because it is a <strong>checklist written out once</strong>:</p>
+<ul>
+<li><strong>Step 1</strong> is your normal Cisco triage from 1.2.</li>
+<li><strong>Step 2</strong> names each PseudoCo source, so you can see what each one adds to the answer.</li>
+<li><strong>Step 3</strong> fixes the answer format. A person can scan it quickly, and in Part 2 your agent
+  uses the same STATUS and SEVERITY lines to decide whether to raise an alert.</li>
+</ul>
+<p>In real work you write a prompt like this once and reuse it, just as you would a runbook. That is
+exactly what you do next. In 2.1 you strip tonight's details out of it and save it as a general
+triage method. In Part 2 that method becomes your agent's instructions, so a run needs no prompt at all.</p>
+</div>
 <p>Paste this into your Canvas board. Keep the bracketed parts or adapt them.</p>
 <div class="highlight"><pre><span></span><code>Symptom: [wired users on the USC-Engineering Cloud Fabric Leaf1 access ports get link but no IP
 address, starting a few minutes ago]
