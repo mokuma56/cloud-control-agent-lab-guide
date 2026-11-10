@@ -107,7 +107,13 @@ What each server in (2) is, and why there are two ways to reach Lab Tools: see [
 - [ ] **MCP servers** or **API integrations** list Lab Tools. Studio can use the Canvas Lab Tools
       integration (shown as an API integration) and your MCP connector from 3.3; either works.
 - [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 3.4.
-- [ ] Save the draft.
+- [ ] The draft is saved. There is no Save button: Studio saves the agent automatically after every
+      change. Check that the card in the Studio panel says **Agent version v1 saved** (the number goes
+      up as you change it) and that the title shows **Draft**.
+
+    ![15b-agent-saved](../img/15b-agent-saved.png){ loading=lazy }
+
+    *(1) Draft: saved but not scheduled yet, (2) the saved version, (3) Studio confirms it saves automatically. To come back later: **Studio → Manage → Applications**, then your agent's name.*
 
 !!! tip "Read it like a code review"
     A manifest is the agent's whole personality. The most common bug is an instruction that sounds
