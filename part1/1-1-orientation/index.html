@@ -1372,6 +1372,76 @@ set Lab Tools up with these files; you only add your credential:</p>
 <p>The two OpenAPI files are the <em>what</em> (which calls exist). The two notes are the <em>how</em> (when to use
 them, and what the words mean at PseudoCo). Neither note contains the answer to any exercise. Every
 operation is listed in <a href="../../reference/tools/">Lab Tools reference</a>.</p>
+<h3 id="two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in: OpenAPI for Canvas, MCP for agents<a class="headerlink" href="#two-ways-in-openapi-for-canvas-mcp-for-agents" title="Permanent link">¶</a></h3>
+<p>Lab Tools is one lab server that offers the same ten operations two ways, because the two Cloud Control
+tools you use connect differently:</p>
+<table>
+<thead>
+<tr>
+<th>Way in</th>
+<th>Who uses it</th>
+<th>Set up in</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OpenAPI</strong> (the custom integration above)</td>
+<td>Canvas, and Studio agents as an <em>API integration</em></td>
+<td>1.1 (now)</td>
+<td>The two API descriptions plus your seat token</td>
+</tr>
+<tr>
+<td><strong>MCP</strong> (Model Context Protocol)</td>
+<td>Studio agents</td>
+<td>3.3 step A</td>
+<td>One shared MCP server URL; your seat token tells it which seat you are</td>
+</tr>
+</tbody>
+</table>
+<p>MCP is an open standard for giving an AI assistant tools: the server lists its tools and their
+inputs, and the assistant calls them. Both ways reach the same lab server with <strong>your seat token</strong>, so
+both act as your seat and only your seat.</p>
+<p>When you build your agent in Part 2, its manifest lists the servers it may use:</p>
+<table>
+<thead>
+<tr>
+<th>In the agent manifest</th>
+<th>What it is</th>
+<th>Capabilities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>meraki-server</code></td>
+<td>Cisco-provided MCP server for <strong>Cisco Meraki</strong></td>
+<td>Read the org: networks, switches and ports, clients, events, configuration change log</td>
+</tr>
+<tr>
+<td><code>secure-access</code></td>
+<td>Cisco-provided MCP server for <strong>Cisco Secure Access</strong></td>
+<td>Read access and DNS activity, alerts and policy for the users and sites it protects</td>
+</tr>
+<tr>
+<td><code>firewall-server</code> (if listed)</td>
+<td>Cisco-provided MCP server for <strong>Cisco Secure Firewall</strong></td>
+<td>Read firewall policy and objects</td>
+</tr>
+<tr>
+<td><code>byo-…</code> (a random ID)</td>
+<td><strong>"Bring your own"</strong> MCP: the Lab Tools MCP integration you add in 3.3</td>
+<td>The ten Lab Tools operations, as your seat</td>
+</tr>
+<tr>
+<td>API integration <em>PseudoCo Business Context</em></td>
+<td>The Lab Tools OpenAPI integration from 1.1</td>
+<td>The same Lab Tools operations, over REST</td>
+</tr>
+</tbody>
+</table>
+<p>The Cisco ones come with Cloud Control: nothing to install. The <code>byo-</code> one is the point of 3.3: it is
+how you would give an agent your own company's tools (in Path B you even write one). Its ID differs for
+everyone. If your agent has no <code>byo-</code> entry yet, that is normal before 3.3.</p>
 <div class="admonition info">
 <p class="admonition-title">Why a token and not a login</p>
 <p>Lab Tools runs outside Cisco Cloud Control, like any system your business depends on. The token

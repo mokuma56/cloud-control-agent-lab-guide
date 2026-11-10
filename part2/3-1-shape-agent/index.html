@@ -1367,6 +1367,7 @@ switch changes, it is not a night shift.</p>
 <p><em>The manifest's Instructions: (1) the Lab Tools operations the agent may call, (2) it starts every run by learning its own seat and watch scope.</em></p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/16b-agent-integrations.png" data-desc-position="bottom"><img alt="16b-agent-integrations" loading="lazy" src="../../img/16b-agent-integrations.png"></a></p>
 <p><em>Further down: (1) the safety rules (a scheduled run never stops a lane on its own), (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.</em></p>
+<p>What each server in (2) is, and why there are two ways to reach Lab Tools: see <a href="../../part1/1-1-orientation/#two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in</a>.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Instructions</strong> include "propose, don't change" and "only after a human approves".</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Instructions</strong> tell it to call <code>get_my_watch_scope</code> first and ignore other seats' IPs.</li>
