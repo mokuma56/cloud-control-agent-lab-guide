@@ -90,7 +90,8 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}). Full
     details: [Lab Tools reference](../reference/tools.md){target="_blank" rel="noopener"}.
 
-4. **Capabilities and access**: keep all 10 selected, then **Save draft**.
+4. **Capabilities and access**: keep all 10 selected, then **Save draft**. When the confirmation
+   pop-up opens, click **Done**.
 
 !!! warning "Keep it Personal"
     The integration is saved **Personal**. Do not use *Make available to tenant*: everyone in the
