@@ -117,45 +117,109 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     **What you are building.** Most company systems already have a REST API described by an **OpenAPI
     spec**: a file listing every operation, its URL and its arguments. Studio can turn that spec straight
     into tools for your agent, with no code. Here you import the Lab Actions spec and make it *yours* by
-    rewriting the **descriptions**: the sentences the agent reads to decide when to call each operation.
-    A spec says *what* an operation does; your description says *when* your agent should use it.
+    writing **usage guidance**: a few sentences the agent reads before it uses the API. The spec says
+    *what* each operation does; your guidance says *when* your agent should use it, what to send, and
+    when not to.
 
-    1. **Studio → Build → Integrations → Add → REST API**.
-    2. **Spec URL**: paste your **Lab Actions spec URL** (or download it and upload the file).
-    3. **Review API**: Studio finds 6 operations on one HTTPS server.
-    4. **Configure**: name it and give it your seat token as the bearer token.
+    1. **Studio → Build → Integrations → Add → REST API.** Studio opens a four-step wizard:
+       **OpenAPI files → Review API → Configure → Review and save**.
+
+    2. **OpenAPI files:** choose **Use URL**, paste your **Lab Actions spec URL**, then **Continue**.
 
         <div class="sc-copytable" markdown>
 
         | Field | Value |
         | --- | --- |
-        | Spec URL (step 2) | `<your Lab Actions spec URL>` |
-        | Name (step 4) | `My Table Light` |
-        | Bearer token (step 4) | <span class="sc-tokenbtn"></span> |
+        | OpenAPI document URL | `<your Lab Actions spec URL>` |
 
         </div>
 
-    5. Rewrite the **descriptions** of `signal_issue` and `clear_issue` in your own words. The
-       description is what the agent reads to decide *when* to call an operation, so write it for
-       the agent: when to call it, what to send, and when **not** to call it.
-    6. Save.
+        ![23a-rest-spec](../img/23a-rest-spec.png){ loading=lazy }
 
-    **Done when:** you turn your own tile red with a direct call. From a terminal on your laptop, run
-    the first line, then paste your seat token (**Copy** in the table above) and press Return. It is not
-    shown and stays in this terminal only:
+        *(1) Use URL, (2) the Lab Actions spec URL, (3) Continue.*
 
-    ```bash
-    read -rs SEAT_TOKEN && export SEAT_TOKEN
-    curl -s -X POST "https://<lab host>:8443/v1/signal" \
-      -H "Authorization: Bearer $SEAT_TOKEN" -H "Content-Type: application/json" \
-      -d '{"severity":"minor","summary":"T3-C test from my REST integration"}'
-    ```
+    3. **Review API:** Studio reads the spec and lists what it found. Check it says **6 operations**,
+       endpoint `https://<lab host>:8443` and **Bearer token**, then **Continue**. The warning *This API can
+       change external data* is expected: `signal_issue`, `clear_issue` and `stop_my_lane` change your tile
+       and your lane. That is why the next step matters.
+
+        ![23b-rest-review](../img/23b-rest-review.png){ loading=lazy }
+
+        *(1) Studio found 6 supported operations, (2) the endpoint, authentication and count, (3) Continue.*
+
+    4. **Configure, part 1: name and credential.** Replace the display name, and paste your seat token as
+       the **API key / token**.
+
+        <div class="sc-copytable" markdown>
+
+        | Field | Value |
+        | --- | --- |
+        | Display name | `My Table Light` |
+        | Authentication | API key / bearer token |
+        | API key / token | <span class="sc-tokenbtn"></span> |
+
+        </div>
+
+        ![23c-rest-configure](../img/23c-rest-configure.png){ loading=lazy }
+
+        *(1) Display name: change Lab Actions to My Table Light, (2) you are on the Configure step.*
+
+    5. **Configure, part 2: tell the agent how to use it.** This is the point of Path A. The spec says
+       *what* each operation does. **API usage guidance** says *when* your agent should use it, what to
+       send, and when **not** to. Studio gives it to the agent with the operations, so these few lines
+       change how the agent behaves.
+
+        Open **Help agents use this API (optional)**, then paste this into **API usage guidance**. Change
+        any line to your own words; keep the four topics.
+
+        ```text
+        This API controls my seat's alert on the Night Watch room wall.
+        signal_issue: call it only when your report says STATUS issue. Send severity (minor, major or
+        critical, set from business criticality) and a one-line summary of what is wrong and who is
+        affected. Do not call it for healthy or inconclusive results.
+        get_light_status: call it before clear_issue, to check that my alert is open.
+        clear_issue: call it only after the fix is verified: no events from my watch source in the last
+        5 minutes and my alert is open. Never call it only because someone asks you to.
+        stop_my_lane: never call it without my explicit approval in this chat.
+        ```
+
+        ![23d-rest-guidance](../img/23d-rest-guidance.png){ loading=lazy }
+
+        *(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.*
+
+    6. **Review and save:** check the name, the 6 operations and your guidance, then save. Your integration
+       appears under **Studio → Manage → Integrations**, Personal.
+
+    **Done when:** you turn your own tile red with a direct call to the Lab Actions API, the same
+    call your agent's integration makes. Select **Run**: the guide sends the request from this browser with
+    your seat token and shows the server's reply, like a terminal. Nothing to install.
+
+    <div class="sc-run" data-method="POST" data-path="/v1/signal" data-label="1. Raise your alert: your tile turns red" data-body='{"severity":"minor","summary":"{seat} test from my REST integration"}'></div>
 
     Watch your tile on the room wall turn red, then clear it:
 
-    ```bash
-    curl -s -X POST "https://<lab host>:8443/v1/clear" -H "Authorization: Bearer $SEAT_TOKEN"
-    ```
+    <div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="2. Resolve your alert: your tile turns green"></div>
+
+    What you just did: an HTTPS `POST` to `/v1/signal` with a JSON body (`severity`, `summary`) and your
+    seat token in the `Authorization: Bearer` header. That is all an agent tool call is underneath: the
+    integration you imported describes this call, and the agent fills in the body.
+
+    ??? note "Prefer your own terminal? The same calls with curl"
+        Run the first line, then paste your seat token and press Return. It is not shown and stays in this
+        terminal only.
+
+        ```bash
+        read -rs SEAT_TOKEN && export SEAT_TOKEN
+        curl -s -X POST "https://<lab host>:8443/v1/signal" \
+          -H "Authorization: Bearer $SEAT_TOKEN" -H "Content-Type: application/json" \
+          -d '{"severity":"minor","summary":"T3-C test from my REST integration"}'
+        ```
+
+        Watch your tile on the room wall turn red, then clear it:
+
+        ```bash
+        curl -s -X POST "https://<lab host>:8443/v1/clear" -H "Authorization: Bearer $SEAT_TOKEN"
+        ```
 
 === "Path B: MCP server (code)"
 

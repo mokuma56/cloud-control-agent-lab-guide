@@ -127,6 +127,40 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
     });
   }
 
+  /* "Run" boxes (3.3 Path A): send a Lab Actions call from the browser with the seat token from the card,
+     and show the request and reply like a terminal. Nothing to install on the workstation. */
+  function runners(c) {
+    document.querySelectorAll(".sc-run").forEach(box => {
+      if (box.dataset.ready) return;
+      box.dataset.ready = "1";
+      const method = box.dataset.method || "POST", path = box.dataset.path;
+      const base = (() => { try { return new URL(c && c.spec_light).origin; } catch { return LAB; } })();
+      const body = box.dataset.body ? box.dataset.body.replace(/\{seat\}/g, (c && c.seat) || "my seat") : "";
+      box.innerHTML = `<div class="sc-term-bar"><button type="button" class="md-button md-button--primary sc-run-btn">Run</button>
+          <span>${esc(box.dataset.label || "")}</span></div><pre class="sc-term"></pre>`;
+      const out = box.querySelector("pre"), btn = box.querySelector("button");
+      const cmd = `$ ${method} ${base}${path}` + (body ? `\n  ${body}` : "");
+      out.textContent = c ? cmd + "\n\nSelect Run to send it with your seat token." : cmd + "\n\nGet your seat card on Before you start first.";
+      if (!c || !c.token) { btn.disabled = true; return; }
+      btn.addEventListener("click", async () => {
+        btn.disabled = true; out.textContent = cmd + "\n\nSending...";
+        try {
+          const r = await fetch(base + path, { method, headers: { "Authorization": "Bearer " + c.token, "Content-Type": "application/json" },
+                                               body: method === "GET" ? undefined : (body || "{}") });
+          const txt = await r.text(); let pretty = txt;
+          try { pretty = JSON.stringify(JSON.parse(txt), null, 2); } catch {}
+          let note = "";
+          try { const j = JSON.parse(txt); if (r.ok && j.light === "on") note = "\n\nYour tile is now RED on the room wall.";
+                else if (r.ok && j.light === "off") note = "\n\nYour alert is resolved: your tile is GREEN on the room wall."; } catch {}
+          out.textContent = `${cmd}\n\nHTTP ${r.status}\n${pretty}${note}`;
+        } catch (e) {
+          out.textContent = cmd + "\n\nCould not reach the lab server (" + e.message + "). Check you are on the lab network, or ask a proctor.";
+        }
+        btn.disabled = false;
+      });
+    });
+  }
+
   function personalize() {
     const saved = load(), c = saved && saved.card;
     document.querySelectorAll(".sc-autofill").forEach(el => {
@@ -139,7 +173,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
            <a href="${esc(el.dataset.setup || "../../setup/")}#your-seat-card">Before you start</a> and reload
            this page: the parts in brackets are then filled in with the service your table protects.</p>`;
     });
-    if (!c) { copyables(null); return; }
+    if (!c) { copyables(null); runners(null); return; }
     const fills = [
       ["[the service I protect]", c.protects],
       ["[Directory Services Night Watch]", c.agent_name],
@@ -173,6 +207,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
       });
     });
     copyables(c);
+    runners(c);
     document.querySelectorAll(".md-content table").forEach(tbl => {      // 3.1: highlight my table's row
       const head = [...tbl.querySelectorAll("thead th")].map(th => th.textContent.trim());
       if (head[0] !== "Table" || !head.includes("Protects")) return;
