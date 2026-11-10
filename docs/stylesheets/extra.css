@@ -78,3 +78,4 @@
 /* Copy buttons next to values in a table (3.3 A) and the seat token button */
 .sc-copy-inline.md-button { margin-left: .5em; padding: .05em .6em; font-size: .68rem; vertical-align: middle; }
 .sc-copytable td { white-space: normal; }
+.md-typeset code.sc-tokval { font-weight: 700; margin-left: .3em; }

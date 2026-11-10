@@ -54,9 +54,16 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
 
 3. **Authenticate and discover**: authentication **API key / bearer token**, paste your **seat
-   token** <span class="sc-tokenbtn"></span>, then **Discover tools**. You should see **10 tools**:
-   `get_my_watch_scope`, `get_my_security_events`, `get_recent_changes`, `get_business_services`,
-   `get_oncall`, `get_saas_status`, `signal_issue`, `clear_issue`, `get_light_status`, `stop_my_lane`.
+   token**, then **Discover tools**.
+
+    Your seat token: <span class="sc-tokenbtn"></span>
+
+    It is filled in from your seat card and hidden until you select **Show**. **Copy** copies the whole
+    token either way. It is a password: paste it only into this field.
+
+    After **Discover tools** you should see **10 tools**:
+    `get_my_watch_scope`, `get_my_security_events`, `get_recent_changes`, `get_business_services`,
+    `get_oncall`, `get_saas_status`, `signal_issue`, `clear_issue`, `get_light_status`, `stop_my_lane`.
 
     ![09c-mcp-auth](../img/09c-mcp-auth.png){ loading=lazy }
 
