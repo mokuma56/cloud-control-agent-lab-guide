@@ -39,6 +39,8 @@ extra:
   generator: false
 extra_css:
   - stylesheets/extra.css
+extra_javascript:
+  - javascripts/seatcard.js
 
 plugins:
   - search

@@ -6,7 +6,18 @@
 
 ## Your seat card
 
-Everything personal to you is on the printed seat card, not in this guide. Keep it private.
+Everything personal to you is on your seat card, not in this guide. Keep it private.
+Your proctor either hands you a printed card or opens card pickup. Then type your seat ID below
+(it is on your table, for example `T3-C`) and click **Get my card**. Each **Copy** button puts one value
+on your clipboard, ready to paste.
+
+<div id="seat-card" class="seat-card"><p><em>Loading the card form…</em></p></div>
+
+!!! note "Got the wrong card, or changed laptop?"
+    Each seat can be picked up once, and this browser keeps your card for the whole lab. If you see
+    "already picked up" or you move to another browser, ask a proctor to release your seat.
+
+What the card holds:
 
 | Field | Example | Used in |
 | --- | --- | --- |
