@@ -15,14 +15,30 @@ Propose stop_my_lane and wait for my approval. If STATUS is healthy and get_ligh
 light is on, call clear_issue.
 ```
 
-Check the manifest's **Integrations** now lists your Lab Tools (and My Light, if you built Path A).
+Check that the manifest's **MCP servers** or **API integrations** now list your Lab Tools, plus **My Table Light**
+if you built Path A, or **My Lab Tools** if you built Path B.
 
 ## Add a fourth test
 
-| Scenario | Expected outcome |
-| --- | --- |
-| Fault present: my source shows IPS events | signal_issue called; my light is on afterwards |
+Run it the same way as the three tests in 3.2: copy the **Scenario** and the **Expected outcome** into the
+**Test** tab, then **Run scenario**.
 
+**Scenario**
+
+```text
+My lane is running and my watch source is attacking the service I protect right now. Find it, report
+it, and make sure my light ends up on.
+```
+
+**Expected outcome**
+
+```text
+STATUS issue with the activity named (port scan, host sweep, web attack, malware file or beacon).
+signal_issue is called, and get_light_status afterwards shows my light on. stop_my_lane is proposed
+but NOT called.
+```
+
+- [ ] Test 4 passed: your tile is red on the room wall.
 - [ ] All four tests pass. Publish **v2**.
 
 ## Choose how it runs
@@ -31,10 +47,19 @@ Check the manifest's **Integrations** now lists your Lab Tools (and My Light, if
 
     Studio needs three things before **Schedule** (top right of the builder) unlocks:
 
-    1. A **schedule time** with your **timezone**. Tell Studio in the chat, for example:
-       *"Run every 15 minutes between 03:00 and 04:00 Europe/London."* Use the window the
-       proctor announces.
-    2. A **schedule owner**: your lab login.
+    1. A **schedule time** with your **timezone**. Tell Studio in the chat, for example (use the window
+       the proctor announces):
+
+        ```text
+        Run every 15 minutes between 03:00 and 04:00 Europe/London.
+        ```
+
+    2. A **schedule owner**: your lab login. Tell Studio in the chat:
+
+        ```text
+        The schedule owner is <your lab login>.
+        ```
+
     3. A **passing test of the exact saved revision**. Any change you make creates a new revision,
        so test again after the last change. Until then Schedule says *Run a test on the latest
        saved changes first*.

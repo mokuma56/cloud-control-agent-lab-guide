@@ -148,11 +148,12 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
       ["T3-C test", c.seat + " test"],
       ["<your Lab Tools MCP URL>", c.mcp_url],
       ["<your Lab Actions spec URL>", c.spec_light],
+      ["<your lab login>", c.login],
       ["<your MCP workspace URL>", c.workspace],
       ["<your workspace MCP URL>", c.workspace ? c.workspace.replace(/\/?$/, "/") + "mcp" : ""],
       ["<lab host>", (() => { try { return new URL(c.spec_light).hostname; } catch { return ""; } })()],
     ].filter(([, v]) => v);
-    const inline = fills.filter(([k]) => /^<(your seat|your Lab Tools MCP URL|your Lab Actions spec URL|your MCP workspace URL|your workspace MCP URL|lab host)>$/.test(k));   // safe in running text
+    const inline = fills.filter(([k]) => /^<(your seat|your Lab Tools MCP URL|your Lab Actions spec URL|your MCP workspace URL|your workspace MCP URL|lab host|your lab login)>$/.test(k));   // safe in running text
     document.querySelectorAll(".md-content pre code, .md-content :not(pre) > code").forEach(code => {
       const list = code.parentElement.tagName === "PRE" ? fills : inline;
       const walk = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);

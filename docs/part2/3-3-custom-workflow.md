@@ -165,19 +165,69 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         </div>
 
-    2. Finish the three TODOs in `tools.py`:
-        - `get_business_services`: return `GET /v1/context/services`.
-        - `signal_issue`: `POST /v1/signal` with `{"severity", "summary"}`.
-        - `clear_issue`: `POST /v1/clear`.
-    3. Write a **description** for `get_business_services` that tells the agent when to use it.
-    4. Select **Save & restart**. A syntax error is refused (with its line number) and your running
-       server keeps the last good version. The status pill turns green when your server is up.
-    5. Test it: pick `signal_issue` in **Test a tool**, paste these arguments, then **Call**. Your tile
-       turns red. Call `clear_issue` to turn it green.
+    2. **Find TODO 1.** In the `tools.py` editor, scroll down to `def get_business_services():`. It has two
+       placeholders: a description that starts with `"TODO:` and a line that says
+       `raise NotImplementedError(...)`. Each TODO below is the same move: **replace one line** with a
+       line that calls the Lab Tools API. `get_recent_changes`, just above it, is a finished example.
+
+        ![22a-workspace-todo](../img/22a-workspace-todo.png){ loading=lazy }
+
+        *TODO 1 in the editor: (1) the placeholder description (step 5), (2) the line to replace.*
+
+    3. **Replace the three `raise NotImplementedError` lines.** Select the whole line, including its four
+       leading spaces, and paste the replacement (it keeps the four spaces, so it stays inside the function):
+
+        **TODO 1**, in `get_business_services`: replace `raise NotImplementedError("get_business_services")` with
+
+        ```python
+            return broker.get("/v1/context/services")
+        ```
+
+        **TODO 2**, in `signal_issue`: replace `raise NotImplementedError("signal_issue")` with (it sends the severity and summary the agent passes in)
+
+        ```python
+            return broker.post("/v1/signal", {"severity": severity, "summary": summary})
+        ```
+
+        **TODO 3**, in `clear_issue`: replace `raise NotImplementedError("clear_issue")` with
+
+        ```python
+            return broker.post("/v1/clear")
+        ```
+
+        `broker.get` and `broker.post` already add your seat token, so you never type it in the code.
+        Leave TODO 4 (`stop_my_lane`) as it is: the shared Lab Tools already has it, and it is a stretch goal.
+
+    4. **Write the description for `get_business_services`.** The description is what the agent reads to
+       decide *when* to call a tool. In the `@tool(` block above `def get_business_services():`, replace the
+       two lines that start with `"TODO: write a description` and `"(hint:` with your own words, or with:
+
+        ```python
+            "PseudoCo business services: criticality, business hours, owner, cost of downtime and "
+            "what each depends on. Call it to turn a network finding into business impact and severity.",
+        ```
+
+        Keep the quotes and the comma at the end.
+
+    5. **Save and test.** Select **Save & restart**. A syntax error is refused, with its line number, and
+       your running server keeps the last good version. When it works, the message says your server
+       restarted and the status pill shows **running**.
+
+        ![22b-workspace-saved](../img/22b-workspace-saved.png){ loading=lazy }
+
+        *After the edits: (1) the new description, (2) TODO 1 done, (3) Save & restart, (4) the confirmation.*
+
+        Then, in **Test a tool**: pick `signal_issue`. The example arguments fill in for you (or paste
+        them), select **Call**, and your tile turns red on the room wall. Pick `clear_issue` and **Call** to
+        turn it green.
 
         ```json
         {"severity": "minor", "summary": "MCP test"}
         ```
+
+        ![22c-workspace-test](../img/22c-workspace-test.png){ loading=lazy }
+
+        *Test a tool: (1) the tool, (2) its arguments, (3) Call, (4) the result: your light is on, (5) your server is running.*
 
     6. Register it in Studio as in step A, but with **your** workspace's URL (also shown at the top of
        the workspace):
