@@ -1106,7 +1106,7 @@ mode for Lights Out.</p>
 </div>
 <h2 id="wire-the-integration-into-the-agent">Wire the integration into the agent<a class="headerlink" href="#wire-the-integration-into-the-agent" title="Permanent link">&para;</a></h2>
 <p>Open your agent in Studio and tell it:</p>
-<div class="highlight"><pre><span></span><code>Add my integration &lt;your seat&gt; Lab Tools. Always call get_my_watch_scope first, then
+<div class="highlight"><pre><span></span><code>Add my integration PseudoCo Lab Tools. Always call get_my_watch_scope first, then
 get_my_security_events. If STATUS is issue, call signal_issue with the severity and summary.
 Propose stop_my_lane and wait for my approval. If STATUS is healthy and get_light_status says my
 light is on, call clear_issue.
@@ -1134,10 +1134,18 @@ light is on, call clear_issue.
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Scheduled</label><label for="__tabbed_1_2">On demand from Canvas</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Select <strong>Schedule</strong> (top right of the builder). It unlocks only after a test on your latest
-saved draft passes; until then it says <em>Run a test on the latest saved changes first</em>. Set
-<strong>Hourly</strong> at the run time the proctor announces, max runs 10. The proctor starts Lights Out
-just before that time. If Schedule is not offered in your release, use the Canvas tab.</p>
+<p>Studio needs three things before <strong>Schedule</strong> (top right of the builder) unlocks:</p>
+<ol>
+<li>A <strong>schedule time</strong> with your <strong>timezone</strong>. Tell Studio in the chat, for example:
+   <em>"Run every 15 minutes between 03:00 and 04:00 Europe/London."</em> Use the window the
+   proctor announces.</li>
+<li>A <strong>schedule owner</strong>: your lab login.</li>
+<li>A <strong>passing test of the exact saved revision</strong>. Any change you make creates a new revision,
+   so test again after the last change. Until then Schedule says <em>Run a test on the latest
+   saved changes first</em>.</li>
+</ol>
+<p>Saving and testing never create a schedule by themselves. If Schedule is not offered in your
+release, use the Canvas tab.</p>
 </div>
 <div class="tabbed-block">
 <p>If scheduling is not available in your Studio release, you will run the same check from AI

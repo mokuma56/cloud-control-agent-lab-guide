@@ -1112,10 +1112,60 @@ integrations it uses, what it may and may not do.</p>
 <p><em>Shape the agent: (1) paste your description here. (2) The suggestion chips are examples; you do not need them.</em></p>
 </li>
 <li>
-<p>Paste this description. Replace the bracketed parts with your own choices, and keep the rules.</p>
+<p>Name the agent after <strong>what it protects</strong>, not after your seat. Your table decides the service
+   (<code>get_my_watch_scope</code> returns it too):</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Protects</th>
+<th>Agent name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Employee Intranet (PROD)</td>
+<td>Intranet Night Watch</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Partner User Lookup Tool (DMZ)</td>
+<td>Partner Portal Night Watch</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Core directory services, AD-1</td>
+<td>Directory Services Night Watch</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Customer 360 (DMZ)</td>
+<td>Customer 360 Night Watch</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Data center gateway</td>
+<td>DC Gateway Night Watch</td>
+</tr>
+<tr>
+<td>6</td>
+<td>DMZ web tier</td>
+<td>DMZ Web Night Watch</td>
+</tr>
+</tbody>
+</table>
+<p>Your agent is Personal, so everyone at your table can use the same name.</p>
+</li>
+<li>
+<p>Paste this description. Put your agent's name and service in the first line, replace the other
+   bracketed parts with your own choices, and keep the rules.</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span><code>Build a security troubleshooting agent for PseudoCo that keeps watch while I sleep.
+<div class="highlight"><pre><span></span><code>Name: [Directory Services Night Watch]. It protects [PseudoCo's core directory services (AD-1)].
+Use my integration "PseudoCo Lab Tools".
+
+Build a security troubleshooting agent for PseudoCo that keeps watch while I sleep.
 
 Each run:
 1. Call get_my_watch_scope to learn my seat, my watch source IP and the service it is near.
@@ -1172,8 +1222,8 @@ agent has to work it out from Cisco telemetry. That is the multi-domain troubles
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Instructions</strong> include "propose, don't change" and "only after a human approves".</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Instructions</strong> tell it to call <code>get_my_watch_scope</code> first and ignore other seats' IPs.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>MCP servers</strong> lists your Lab Tools integration, or nothing yet (you connect it in 3.3).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>API integrations</strong> is empty unless you build Path A in 3.3.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>MCP servers</strong> or <strong>API integrations</strong> list Lab Tools. Studio can use the Canvas Lab Tools
+      integration (shown as an API integration) and your MCP connector from 3.3; either works.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Trigger and schedule</strong> shows a scheduled run prompt and a run limit; the time is set in 3.4.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Save the draft.</li>
 </ul>
