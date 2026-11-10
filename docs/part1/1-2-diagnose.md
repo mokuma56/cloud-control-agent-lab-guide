@@ -63,14 +63,21 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
 
 
 
-## Debrief (5 min, with your table)
+## What you did and learned
 
-Canvas found *what* changed. Discuss what it **cannot** tell you from Cisco data:
+**What you did:** you started from a user complaint with no device names and climbed four prompts.
+Canvas picked the right system (the Meraki Cloud Fabric at SITE-105), read the configuration change
+log, compared Leaf1 with Leaf2, named the three ports moved to VLAN 999, and proposed a fix without
+changing anything.
 
-- Was the change planned? Who asked for it, and which ticket?
-- Which business service sits on those ports? Does it matter at this hour?
-- Should someone be woken up?
+**What you learned:**
 
-That gap is what you close in 1.3.
+- **Specific prompts get specific evidence.** Each rung asked for one more thing (real data, a
+  comparison, sources, a fix), and the answer moved from possibilities to a cause you can check.
+- **Ask for sources and say "do not change".** You can verify an answer with named sources, and an
+  assistant that only proposes is safe to use on production.
+- **Cisco data tells you *what* changed, not whether it mattered.** Whether the change was planned,
+  which business service it hurt, and whether to wake someone all come from your company's own
+  systems. That is what 1.3 adds, in a fixed answer format.
 
 - [ ] My Canvas answer names Leaf1, the affected ports and the VLAN change, with sources.

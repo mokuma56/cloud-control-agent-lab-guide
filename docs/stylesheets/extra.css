@@ -27,7 +27,7 @@
 }
 
 /* screenshot captions directly under an image */
-.md-typeset p > em:only-child {
+.md-typeset p:has(img) + p > em:only-child {
     display: block;
     margin-top: -.4rem;
     font-size: .72rem;
@@ -49,5 +49,9 @@
 .sc-card th { white-space: nowrap; }
 .sc-card td code { word-break: break-all; font-size: .95rem; }
 .sc-card code.sc-token { font-size: 1.05rem; font-weight: 700; }
-.sc-copy.md-button { padding: .15em .8em; font-size: .75rem; margin: 0; }
+.sc-copy.md-button { padding: .15em .8em; font-size: .75rem; margin: 0;
+  color: var(--md-default-fg-color); border-color: var(--md-default-fg-color--light); }
+.sc-copy.md-button:hover, .sc-copy.md-button:focus { color: var(--md-accent-bg-color, #fff);
+  background-color: var(--md-accent-fg-color); border-color: var(--md-accent-fg-color); }
+.sc-actions { margin: .6em 0 .2em; }
 .sc-note { font-size: .75rem; }
