@@ -31,6 +31,8 @@
    needs that you did not: its own seat, two actions and the safety rules. Put your agent's name and service in
    the first line, and keep the rules.
 
+<div class="sc-autofill" data-setup="../../setup/"></div>
+
 ```text
 Name: [Directory Services Night Watch]. It protects [PseudoCo's core directory services (AD-1)].
 Use my integration "PseudoCo Lab Tools".

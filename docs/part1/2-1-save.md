@@ -27,6 +27,8 @@ that is specific to tonight's branch fault, and keep the method:
 
 Copy this into a note on your laptop and adjust it to your own words from 1.3:
 
+<div class="sc-autofill" data-setup="../../setup/"></div>
+
 ```text
 You are the night-shift engineer for [the service I protect].
 Each run, answer one question: is anything hurting it, and what should happen next?
