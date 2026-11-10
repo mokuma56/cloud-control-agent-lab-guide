@@ -92,6 +92,30 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
   }
 
   /* Personalize the copy-paste blocks on every page from the card saved in this browser. */
+  /* Copy buttons on the values in a .sc-copytable (3.3 A), and a no-display "Copy my seat token" button. */
+  function copyButton(getText, label) {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "md-button sc-copy sc-copy-inline"; b.textContent = label || "Copy";
+    b.addEventListener("click", async () => {
+      const t = getText(), old = b.textContent;
+      try { await navigator.clipboard.writeText(t); b.textContent = "Copied"; }
+      catch { b.textContent = "Select and copy"; }
+      setTimeout(() => (b.textContent = old), 1500);
+    });
+    return b;
+  }
+  function copyables(c) {
+    document.querySelectorAll(".sc-copytable td code").forEach(code => {
+      if (code.nextElementSibling && code.nextElementSibling.classList.contains("sc-copy-inline")) return;
+      code.after(copyButton(() => code.textContent));
+    });
+    document.querySelectorAll(".sc-tokenbtn").forEach(el => {
+      el.innerHTML = "";
+      if (c && c.token) el.appendChild(copyButton(() => c.token, "Copy my seat token"));
+      else el.innerHTML = '(from your <a href="../../setup/#your-seat-card">seat card</a>)';
+    });
+  }
+
   function personalize() {
     const saved = load(), c = saved && saved.card;
     document.querySelectorAll(".sc-autofill").forEach(el => {
@@ -104,15 +128,16 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
            <a href="${esc(el.dataset.setup || "../../setup/")}#your-seat-card">Before you start</a> and reload
            this page: the parts in brackets are then filled in with the service your table protects.</p>`;
     });
-    if (!c) return;
+    if (!c) { copyables(null); return; }
     const fills = [
       ["[the service I protect]", c.protects],
       ["[Directory Services Night Watch]", c.agent_name],
       ["[PseudoCo's core directory services (AD-1)]", c.protects],
       ["<your seat>", c.seat],
       ["T3-C test", c.seat + " test"],
+      ["<your Lab Tools MCP URL>", c.mcp_url],
     ].filter(([, v]) => v);
-    const inline = fills.filter(([k]) => k === "<your seat>");     // in running text only the seat is safe to fill
+    const inline = fills.filter(([k]) => k === "<your seat>" || k === "<your Lab Tools MCP URL>");   // safe in running text
     document.querySelectorAll(".md-content pre code, .md-content :not(pre) > code").forEach(code => {
       const list = code.parentElement.tagName === "PRE" ? fills : inline;
       const walk = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
@@ -131,6 +156,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
         n.parentNode.replaceChild(frag, n);
       });
     });
+    copyables(c);
     document.querySelectorAll(".md-content table").forEach(tbl => {      // 3.1: highlight my table's row
       const head = [...tbl.querySelectorAll("thead th")].map(th => th.textContent.trim());
       if (head[0] !== "Table" || !head.includes("Protects")) return;

@@ -19,13 +19,22 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
 2. **Connect**
 
+    <div class="sc-copytable" markdown>
+
     | Field | Value |
     | --- | --- |
-    | MCP server URL | the **Lab Tools MCP URL** on your seat card (screenshots use the placeholder `lab.example.com`) |
+    | MCP server URL | `<your Lab Tools MCP URL>` |
     | Display name | `PseudoCo Lab Tools` |
-    | Advanced settings → Transport | Streamable HTTP |
-    | Advanced settings → Header name / Scheme | `Authorization` / `Bearer` |
-    | Canvas visibility | Canvas Direct on |
+    | Advanced settings → Transport | `Streamable HTTP` |
+    | Advanced settings → Header name | `Authorization` |
+    | Advanced settings → Scheme | `Bearer` |
+    | Canvas visibility | leave **Canvas Direct** and **Canvas Planner** both off |
+
+    </div>
+
+    Each value has a **Copy** button. The MCP URL is filled in from your seat card (get it on
+    [Before you start](../setup.md#your-seat-card) if it still shows a placeholder). The screenshots use
+    the placeholder host `lab.example.com`.
 
     ![09a-mcp-connect](../img/09a-mcp-connect.png){ loading=lazy }
 
@@ -33,12 +42,19 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
     ![09b-mcp-advanced](../img/09b-mcp-advanced.png){ loading=lazy }
 
-    *Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas Direct on.*
+    *Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas visibility: leave both boxes off (this screenshot is from an older build with Canvas Direct ticked).*
+
+    !!! question "Why not Canvas Direct or Canvas Planner?"
+        Studio says it on this screen: the connector is always available in Studio, and the two boxes only
+        expose it to Canvas as well. Your agent runs in Studio, so it does not need them. Canvas already
+        reaches Lab Tools through the integration you set up in 1.1 (see
+        [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents)), and a
+        second copy of the same tools in Canvas only invites it to mix the two.
 
 
 
 3. **Authenticate and discover**: authentication **API key / bearer token**, paste your **seat
-   token**, then **Discover tools**. You should see **10 tools**:
+   token** <span class="sc-tokenbtn"></span>, then **Discover tools**. You should see **10 tools**:
    `get_my_watch_scope`, `get_my_security_events`, `get_recent_changes`, `get_business_services`,
    `get_oncall`, `get_saas_status`, `signal_issue`, `clear_issue`, `get_light_status`, `stop_my_lane`.
 
