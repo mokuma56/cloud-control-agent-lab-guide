@@ -111,7 +111,18 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
     });
     document.querySelectorAll(".sc-tokenbtn").forEach(el => {
       el.innerHTML = "";
-      if (c && c.token) el.appendChild(copyButton(() => c.token, "Copy my seat token"));
+      if (c && c.token) {
+        const mask = t => t.slice(0, 5) + "•".repeat(Math.max(4, t.length - 9)) + t.slice(-4);
+        const val = document.createElement("code"); val.className = "sc-tokval"; val.textContent = mask(c.token);
+        val.title = "Your seat token, from your seat card";
+        const show = document.createElement("button");
+        show.type = "button"; show.className = "md-button sc-copy sc-copy-inline"; show.textContent = "Show";
+        show.addEventListener("click", () => {
+          const shown = show.textContent === "Hide";
+          val.textContent = shown ? mask(c.token) : c.token; show.textContent = shown ? "Show" : "Hide";
+        });
+        el.append(val, show, copyButton(() => c.token, "Copy"));
+      }
       else el.innerHTML = '(from your <a href="../../setup/#your-seat-card">seat card</a>)';
     });
   }
