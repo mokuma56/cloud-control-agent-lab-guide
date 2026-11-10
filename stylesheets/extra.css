@@ -33,3 +33,21 @@
     font-size: .72rem;
     color: var(--md-default-fg-color--light);
 }
+
+/* Seat card pickup (Before you start) */
+.seat-card { margin: 1em 0 1.4em; }
+.sc-form { display: flex; flex-wrap: wrap; align-items: center; gap: .6em; }
+.sc-form label { font-weight: 700; }
+.sc-form input { font: 700 1.1rem var(--md-code-font-family); width: 7em; padding: .35em .5em; text-transform: uppercase;
+  border: 1px solid var(--md-default-fg-color--lighter); border-radius: 4px; background: var(--md-default-bg-color); color: var(--md-default-fg-color); }
+.sc-msg { min-height: 1.4em; font-weight: 600; }
+.sc-card { border: 2px solid var(--md-default-fg-color--lighter); border-radius: 8px; padding: .8em 1em; }
+.sc-head { display: flex; flex-wrap: wrap; align-items: center; gap: .6em; margin-bottom: .4em; }
+.sc-head b { font-size: 1.8em; }
+.sc-dot { width: 1.1em; height: 1.1em; border-radius: 50%; display: inline-block; }
+.sc-card table { display: table; width: 100%; font-size: .8rem; }
+.sc-card th { white-space: nowrap; }
+.sc-card td code { word-break: break-all; font-size: .95rem; }
+.sc-card code.sc-token { font-size: 1.05rem; font-weight: 700; }
+.sc-copy.md-button { padding: .15em .8em; font-size: .75rem; margin: 0; }
+.sc-note { font-size: .75rem; }
