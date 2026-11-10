@@ -2,18 +2,35 @@
 
 **LTROPS-2623** &middot; Cisco Live EMEA 2027 &middot; 4-hour instructor-led lab &middot; 30 seats
 
-You are on call for **PseudoCo**, and you would like to sleep tonight. In the next four hours you
-will teach Cisco Cloud Control to do your night shift: find what is broken across every Cisco
-domain, add the business context only you know, decide how bad it is, wake you only when it
-matters, and take one safe action you approve.
+You are the night-shift engineer at **PseudoCo**, and you would like to sleep tonight. Your table
+looks after one PseudoCo service: the Employee Intranet, the directory servers, the partner portal and so on.
+Its column on the room wall is headed with that service. In the next four hours you teach Cisco Cloud Control
+to do your night shift. It has to find what is hurting the business across every Cisco domain, add the
+business context only you know, decide how bad it is, wake you only when it matters, and take one safe
+action you approve.
+
+## Tonight: two incidents, one method
+
+| | Incident 1: a change breaks the branch | Incident 2: something hits your service |
+| --- | --- | --- |
+| When | Part 1, AI Canvas | Part 2, Lights Out |
+| Who | The whole room, one shared fault | Every seat its own, at the same time |
+| Who drives | **You**: you troubleshoot in Canvas and refine the prompt | **Your agent**: you are "asleep" until it asks you to approve the fix |
+| What it really is | A port change on a branch switch (users get no IP address) | Hostile traffic against your table's service |
+
+The two incidents have nothing in common, on purpose. In Part 1 you do not write a "Leaf1 prompt".
+You write a **general triage method**: look across every Cisco domain, check what changed, add the
+business context, then report in a fixed format. In 2.1 you save that method, and in Part 2 it becomes your agent's instructions.
+At Lights Out nobody tells your agent that tonight's problem is an attack. The same method that
+found a bad switch change has to find it on its own. That is what *troubleshoots anything* means.
 
 The lab follows three steps:
 
-1. **Test a multi-domain troubleshooting prompt in AI Canvas.**
-2. **Save the combined result** so it becomes a known-good example.
-3. **Build an agent in Cloud Control Studio** that runs it however you choose, with a custom
-   workflow of your own: an integration that brings in non-Cisco information and lights up
-   your seat on the room wall when your agent finds a problem.
+1. **Test a multi-domain troubleshooting prompt in AI Canvas** on incident 1.
+2. **Save it as a general triage method**, together with the answer that proves it works.
+3. **Build an agent in Cloud Control Studio** from that method, with a custom workflow of your own:
+   an integration that brings in non-Cisco information and lights up your seat on the room wall. Then
+   let it handle incident 2 while you sleep.
 
 !!! tip "What you leave with"
     A working Studio agent, a Canvas prompt you trust, an integration pattern (MCP or REST) you can
@@ -51,7 +68,10 @@ flowchart TB
   Firewall, Secure Access, Catalyst Center, Intersight, Nexus Dashboard).
 - **Lab Tools** is the custom integration. It brings in what Cisco cannot know: PseudoCo's change
   calendar, business services, on-call policy and SaaS status. It also gives your agent its watch
-  scope, the firewall events from your own lane, and two actions: raise your seat's alert on the room wall, and stop your lane.
+  scope, the firewall events for your seat, and two actions: raise your seat's alert on the room wall, and stop
+  your seat's attack traffic.
+- **Lanes:** in Part 2 the traffic generator sends one stream of simulated attack traffic per seat, called
+  a *lane*. Each lane comes from that seat's own source IP and goes through the firewall to the service its table protects.
 - **Your seat token** is the key. Everyone uses the same URLs; the token decides which seat, which
   lane and which light you can see and touch. You can never act on another seat.
 
@@ -63,7 +83,7 @@ flowchart TB
 | 0:10 | 15 | 1 | [1.1 Orientation](part1/1-1-orientation.md) | Canvas, Studio and Lab Tools open |
 | 0:25 | 25 | 1 | [1.2 Multi-domain diagnosis](part1/1-2-diagnose.md) | Root cause from Cisco data alone |
 | 0:50 | 25 | 1 | [1.3 Make it yours: Lab Tools](part1/1-3-lab-tools.md) | Same answer plus change ID, business impact, severity |
-| 1:15 | 15 | 2 | [2.1 Save the combined result](part1/2-1-save.md) | Pinned Canvas and your final prompt |
+| 1:15 | 15 | 2 | [2.1 Save the triage method](part1/2-1-save.md) | Pinned Canvas and your general triage prompt |
 | 1:30 | 10 | - | Break | |
 | 1:40 | 25 | 3 | [3.1 Shape the agent](part2/3-1-shape-agent.md) | Draft agent, manifest reviewed |
 | 2:05 | 15 | 3 | [3.2 Sandbox test and publish](part2/3-2-test-publish.md) | Three tests passed, v1 published |

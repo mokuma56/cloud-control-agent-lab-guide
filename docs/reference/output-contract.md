@@ -1,14 +1,13 @@
 # Output contract
 
-Every answer your prompt or agent gives uses the same fields, so a human can read it in ten seconds
+Every answer your prompt or agent gives uses the same fields in Part 1 and Part 2, whatever went wrong, so a human can read it in ten seconds
 and an agent can act on it without guessing.
 
 ```text
 STATUS:    healthy | issue
 SEVERITY:  minor | major | critical
 SUMMARY:   one line - what is broken and who is affected
-CAUSE:     the most likely cause, with the change ID if one matches      (Part 1)
-ATTACK:    what my watch source is doing                                  (Part 2)
+CAUSE:     the most likely cause: a change (with its ID), what a source is doing, a provider outage ...
 EVIDENCE:  bullets, each starting with its source
 NEXT STEP: the proposed fix or remediation; never a change made without approval
 ```

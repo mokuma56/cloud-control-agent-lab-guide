@@ -1,9 +1,13 @@
 # Part 2: Build an agent that runs it (1:40 to 4:00)
 
-In Part 2 you hand the night shift to an agent. You build it in Cloud Control Studio from the prompt
-you saved, test it, give it a custom workflow of your own, and then go hands-off while 30 attack
-lanes hit the lab network: one lane per seat, each from its own source IP. Your agent has to find
-**its own** lane in Cisco telemetry, turn **your** tile red on the room wall, and stop **only your** lane once you approve.
+**Incident 2: something hits your service.** You hand the night shift to an agent. You build it in
+Cloud Control Studio from the triage method you saved in 2.1, test it, give it a custom workflow of your
+own, and then go hands-off.
+
+At Lights Out a different kind of problem arrives: hostile traffic against your table's service.
+The traffic generator sends 30 streams of simulated attack traffic (*lanes*), one per seat, each from that seat's
+own source IP. Nobody tells your agent it is an attack. Its general method has to work that out from Cisco
+telemetry, turn **your** tile red on the room wall, and stop **only your** seat's traffic once you approve.
 
 | Module | Min | You finish with |
 | --- | --- | --- |
@@ -23,7 +27,7 @@ sequenceDiagram
   participant F as Secure Firewall (via Splunk)
   participant Y as You
   A->>L: get_my_watch_scope
-  L-->>A: seat, source IP, service nearby (not the attack)
+  L-->>A: seat, service I protect, my watch source IP (not what is wrong)
   A->>L: get_my_security_events
   L->>F: events for my source IP only
   F-->>A: IPS signatures, ports, URLs, files

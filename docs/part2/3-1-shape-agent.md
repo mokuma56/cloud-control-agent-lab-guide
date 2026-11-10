@@ -1,4 +1,4 @@
-# 3.1 Shape the agent from the saved result (1:40, 25 min)
+# 3.1 Shape the agent from your triage method (1:40, 25 min)
 
 !!! abstract "Goal"
     A draft Studio agent whose manifest you have read line by line: what it watches, which
@@ -26,24 +26,28 @@
 
     Your agent is Personal, so everyone at your table can use the same name.
 
-3. Paste this description. Put your agent's name and service in the first line, replace the other
-   bracketed parts with your own choices, and keep the rules.
+3. Paste this description. **The middle part is your 2.1 triage method**, so use your own wording from
+   your note if it is better. The top adds who the agent is, and the bottom adds what an unattended agent
+   needs that you did not: its own seat, two actions and the safety rules. Put your agent's name and service in
+   the first line, and keep the rules.
 
 ```text
 Name: [Directory Services Night Watch]. It protects [PseudoCo's core directory services (AD-1)].
 Use my integration "PseudoCo Lab Tools".
 
-Build a security troubleshooting agent for PseudoCo that keeps watch while I sleep.
+You are the night-shift engineer for that service, keeping watch while I sleep.
+Each run, answer one question: is anything hurting it right now, and what should happen next?
 
 Each run:
-1. Call get_my_watch_scope to learn my seat, my watch source IP and the service it is near.
-2. Call get_my_security_events for that source IP twice: minutes=5 decides what is happening NOW,
-   minutes=60 is context for the report. Use any other Cisco data I can see (Secure Firewall,
-   Secure Access, Meraki).
-3. Use Lab Tools business context: which service is at risk, how critical it is, whether a recent
-   change explains it, and whether on-call should be woken.
-4. Report: STATUS, SEVERITY, SUMMARY, ATTACK (what the source is doing), EVIDENCE (each bullet
-   names its source), NEXT STEP.
+1. Call get_my_watch_scope to learn my seat, the service I protect and my watch source IP.
+2. Look across every Cisco domain I can see. Do not assume the cause in advance:
+   - network health and recent configuration changes (Meraki)
+   - firewall, IPS and file events: call get_my_security_events for my watch source twice,
+     minutes=5 decides what is happening NOW, minutes=60 is context for the report
+   - access, DNS and anything else I can see (Secure Access, Catalyst Center)
+3. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
+4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
+   matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane, but
    only call it after a human approves.
 6. If my lane is not running and the last 5 minutes show no events from my source, STATUS is
@@ -59,9 +63,11 @@ Each run:
     60-minute window alone sees the old attack, calls it an issue again, and turns your tile red again on
     the run after your approved stop. Deciding from the last 5 minutes avoids that.
 
-!!! info "Why the agent is not told the attack type"
-    `get_my_watch_scope` gives your source IP and the service it is near, never the attack. Your
-    agent has to work it out from Cisco telemetry. That is the multi-domain troubleshooting.
+!!! info "Why the agent is not told what to look for"
+    Nothing in the description says "attack". `get_my_watch_scope` gives your seat, your service and a
+    source IP to watch, never what is wrong. The same general method that found a switch change in Part 1
+    has to work out tonight's problem from Cisco telemetry. If your agent can only find attacks, or only
+    switch changes, it is not a night shift.
 
 ## Answer Studio's questions
 

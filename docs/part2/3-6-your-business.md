@@ -24,7 +24,7 @@ Three or four tables share their card with the room in one minute each.
 ## Wrap
 
 - **Take-home kit:** the Lab Kit (broker, MCP server starter and solution, OpenAPI specs, prompts,
-  lane triage skill, tests). Everything is Python standard library; no packages to install.
+  night shift triage skill, tests). Everything is Python standard library; no packages to install.
 - **Your work in the tenant:** your Canvas boards, Studio agent and integrations stay until the
   proctors reset the tenant after the session. Copy your prompts and manifest text if you want them.
 - **Survey:** please fill it in before you leave. It decides what we build next.

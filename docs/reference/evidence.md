@@ -1,7 +1,7 @@
 # Reading the evidence
 
 `get_my_security_events` summarizes what Cisco Secure Firewall logged for your source IP. Use the
-patterns below to name the activity. Your agent has the same guide (the lane triage skill).
+patterns below to name the activity. Your agent has the same guide (the night shift triage skill).
 
 | What you see | Likely activity |
 | --- | --- |

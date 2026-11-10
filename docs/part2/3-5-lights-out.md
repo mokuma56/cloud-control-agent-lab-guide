@@ -8,7 +8,8 @@
 
 - The room lights dim. Hands off keyboards.
 - The proctor starts the board timer and **starts all 30 lanes**. From now on, a source IP that
-  belongs to your seat is attacking something in the data center or DMZ.
+  belongs to your seat is sending hostile traffic to your table's service. Your agent does not know that.
+  It runs the same triage method as always.
 - Scheduled agents run at the announced time. If you run from Canvas, wait for the proctor's
   **"go"**, then send your saved prompt.
 
@@ -28,20 +29,26 @@ Open your agent's latest run (or your Canvas answer). A good finding looks like 
 STATUS: issue
 SEVERITY: major
 SUMMARY: 10.106.10.1xx is sending web attack patterns to Core services (AD-1)
-ATTACK: SQL injection and path traversal requests with a Nikto scanner user agent
+CAUSE: my watch source is sending SQL injection and path traversal requests with a Nikto scanner user agent
 EVIDENCE:
 - Secure Firewall (get_my_security_events): 31 IPS events "SERVER-WEBAPP ... SQL injection
   attempt", Web Application Attack, priority 1, action Would block
 - Secure Firewall: 472 connections to 198.18.5.102:80 via rule Allow WAN-to-DC, URLs like
   /admin/config.php?file=../../../../etc/shadow
+- Cisco Meraki: no port or configuration changes in the last 2 hours, wired and wireless clients normal
 - Lab Tools: no change in the last 24 hours explains it; on-call policy: wake primary for critical
 NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting approval.
 ```
 
+!!! success "Same method, different incident"
+    Compare this with your pinned Part 1 answer. The format is the same and the method is the same. Your
+    agent checked the network and the change calendar first, the places where the answer was in Part 1, ruled them out, and
+    found the cause in the firewall instead. Nobody told it that tonight's problem was an attack.
+
 Check it before you approve:
 
 - [ ] The source IP is **yours** (compare with `get_my_watch_scope`).
-- [ ] The ATTACK is supported by evidence, not assumed. See the [evidence guide](../reference/evidence.md).
+- [ ] The CAUSE is supported by evidence, not assumed. See the [evidence guide](../reference/evidence.md).
 - [ ] Your tile on the room wall is red.
 
     ![11-lights-evidence](../img/11-lights-evidence.png){ loading=lazy }
