@@ -1296,12 +1296,12 @@ NEXT STEP: the fix to propose, and whether to wake the on-call engineer. Do not 
 <h2 id="iterate-until-it-is-right">Iterate until it is right<a class="headerlink" href="#iterate-until-it-is-right" title="Permanent link">¶</a></h2>
 <p>Good enough when <strong>all four</strong> are true:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>CAUSE</strong> names the Leaf1 port change <strong>and</strong> the matching change ID from the change calendar.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>SEVERITY</strong> comes from the business service, not from "three ports are down".</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>Every EVIDENCE bullet names its source</strong> (for example "Cisco Meraki: change log" or
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>CAUSE</strong> names the Leaf1 port change <strong>and</strong> the matching change ID from the change calendar.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>SEVERITY</strong> comes from the business service, not from "three ports are down".</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Every EVIDENCE bullet names its source</strong> (for example "Cisco Meraki: change log" or
       "Lab Tools: get_recent_changes").</li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>NEXT STEP</strong> proposes a fix, makes no change, and says whether the on-call policy is met.</p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>NEXT STEP</strong> proposes a fix, makes no change, and says whether the on-call policy is met.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/05-fault-evidence.png" data-desc-position="bottom"><img alt="05-fault-evidence" loading="lazy" src="../../img/05-fault-evidence.png"></a></p>
 <p><em>Lab Tools in the evidence: (1) the change calendar, (2) business services and their criticality, (3) SaaS status ruled out.</em></p>
 </li>
@@ -1347,7 +1347,7 @@ tighten the prompt: <em>"If you cannot confirm the impact, say so and say what w
 you need, and answer in the same STATUS format.
 </code></pre></div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> The right answer blames the provider: <code>get_saas_status</code> shows <strong>Salesforce degraded</strong>, and
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The right answer blames the provider: <code>get_saas_status</code> shows <strong>Salesforce degraded</strong>, and
       Cisco data shows no network fault. STATUS can still be <code>issue</code>, but CAUSE is the provider.</li>
 </ul>
 <p>This is the habit you want in an agent that runs while you sleep: it must not wake you for
