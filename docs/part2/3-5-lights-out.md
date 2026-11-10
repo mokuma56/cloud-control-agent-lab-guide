@@ -7,8 +7,9 @@
 ## 1. Hands off (about 5 min)
 
 - The room lights dim. Hands off keyboards.
-- The proctor starts the board timer and **starts all 30 lanes**. From now on, a source IP that
-  belongs to your seat is sending hostile traffic to your table's service. Your agent does not know that.
+- The proctor clears the board, starts the timer and **restarts all 30 lanes**. The practice traffic from
+  Part 2 stops and the real attack begins: a source IP that belongs to your seat is sending hostile traffic
+  to your table's service. Your agent does not know that.
   It runs the same triage method as always.
 - Scheduled agents run at the announced time. If you run from Canvas, wait for the proctor's
   **"go"**, then send your saved prompt.
