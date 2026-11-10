@@ -475,6 +475,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#tonight-two-incidents-one-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tonight: two incidents, one method
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-the-lab-is-built" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -715,7 +726,7 @@
   <span class="md-ellipsis">
     
   
-    2.1 Save the combined result
+    2.1 Save the triage method
   
 
     
@@ -1225,17 +1236,56 @@
 
 <h1 id="build-a-network-agent-in-cisco-cloud-control-that-troubleshoots-anything-while-you-sleep">Build a Network Agent in Cisco Cloud Control That Troubleshoots Anything While You Sleep<a class="headerlink" href="#build-a-network-agent-in-cisco-cloud-control-that-troubleshoots-anything-while-you-sleep" title="Permanent link">¶</a></h1>
 <p><strong>LTROPS-2623</strong> · Cisco Live EMEA 2027 · 4-hour instructor-led lab · 30 seats</p>
-<p>You are on call for <strong>PseudoCo</strong>, and you would like to sleep tonight. In the next four hours you
-will teach Cisco Cloud Control to do your night shift: find what is broken across every Cisco
-domain, add the business context only you know, decide how bad it is, wake you only when it
-matters, and take one safe action you approve.</p>
+<p>You are the night-shift engineer at <strong>PseudoCo</strong>, and you would like to sleep tonight. Your table
+looks after one PseudoCo service: the Employee Intranet, the directory servers, the partner portal and so on.
+Its column on the room wall is headed with that service. In the next four hours you teach Cisco Cloud Control
+to do your night shift. It has to find what is hurting the business across every Cisco domain, add the
+business context only you know, decide how bad it is, wake you only when it matters, and take one safe
+action you approve.</p>
+<h2 id="tonight-two-incidents-one-method">Tonight: two incidents, one method<a class="headerlink" href="#tonight-two-incidents-one-method" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Incident 1: a change breaks the branch</th>
+<th>Incident 2: something hits your service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>When</td>
+<td>Part 1, AI Canvas</td>
+<td>Part 2, Lights Out</td>
+</tr>
+<tr>
+<td>Who</td>
+<td>The whole room, one shared fault</td>
+<td>Every seat its own, at the same time</td>
+</tr>
+<tr>
+<td>Who drives</td>
+<td><strong>You</strong>: you troubleshoot in Canvas and refine the prompt</td>
+<td><strong>Your agent</strong>: you are "asleep" until it asks you to approve the fix</td>
+</tr>
+<tr>
+<td>What it really is</td>
+<td>A port change on a branch switch (users get no IP address)</td>
+<td>Hostile traffic against your table's service</td>
+</tr>
+</tbody>
+</table>
+<p>The two incidents have nothing in common, on purpose. In Part 1 you do not write a "Leaf1 prompt".
+You write a <strong>general triage method</strong>: look across every Cisco domain, check what changed, add the
+business context, then report in a fixed format. In 2.1 you save that method, and in Part 2 it becomes your agent's instructions.
+At Lights Out nobody tells your agent that tonight's problem is an attack. The same method that
+found a bad switch change has to find it on its own. That is what <em>troubleshoots anything</em> means.</p>
 <p>The lab follows three steps:</p>
 <ol>
-<li><strong>Test a multi-domain troubleshooting prompt in AI Canvas.</strong></li>
-<li><strong>Save the combined result</strong> so it becomes a known-good example.</li>
-<li><strong>Build an agent in Cloud Control Studio</strong> that runs it however you choose, with a custom
-   workflow of your own: an integration that brings in non-Cisco information and lights up
-   your seat on the room wall when your agent finds a problem.</li>
+<li><strong>Test a multi-domain troubleshooting prompt in AI Canvas</strong> on incident 1.</li>
+<li><strong>Save it as a general triage method</strong>, together with the answer that proves it works.</li>
+<li><strong>Build an agent in Cloud Control Studio</strong> from that method, with a custom workflow of your own:
+   an integration that brings in non-Cisco information and lights up your seat on the room wall. Then
+   let it handle incident 2 while you sleep.</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">What you leave with</p>
@@ -1271,7 +1321,10 @@ point at any system your business depends on, and the take-home kit to rebuild i
   Firewall, Secure Access, Catalyst Center, Intersight, Nexus Dashboard).</li>
 <li><strong>Lab Tools</strong> is the custom integration. It brings in what Cisco cannot know: PseudoCo's change
   calendar, business services, on-call policy and SaaS status. It also gives your agent its watch
-  scope, the firewall events from your own lane, and two actions: raise your seat's alert on the room wall, and stop your lane.</li>
+  scope, the firewall events for your seat, and two actions: raise your seat's alert on the room wall, and stop
+  your seat's attack traffic.</li>
+<li><strong>Lanes:</strong> in Part 2 the traffic generator sends one stream of simulated attack traffic per seat, called
+  a <em>lane</em>. Each lane comes from that seat's own source IP and goes through the firewall to the service its table protects.</li>
 <li><strong>Your seat token</strong> is the key. Everyone uses the same URLs; the token decides which seat, which
   lane and which light you can see and touch. You can never act on another seat.</li>
 </ul>
@@ -1319,8 +1372,8 @@ point at any system your business depends on, and the take-home kit to rebuild i
 <td>1:15</td>
 <td>15</td>
 <td>2</td>
-<td><a href="../part1/2-1-save/">2.1 Save the combined result</a></td>
-<td>Pinned Canvas and your final prompt</td>
+<td><a href="../part1/2-1-save/">2.1 Save the triage method</a></td>
+<td>Pinned Canvas and your general triage prompt</td>
 </tr>
 <tr>
 <td>1:30</td>

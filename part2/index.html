@@ -635,7 +635,7 @@
   <span class="md-ellipsis">
     
   
-    2.1 Save the combined result
+    2.1 Save the triage method
   
 
     
@@ -1146,10 +1146,13 @@
 
 
 <h1 id="part-2-build-an-agent-that-runs-it-140-to-400">Part 2: Build an agent that runs it (1:40 to 4:00)<a class="headerlink" href="#part-2-build-an-agent-that-runs-it-140-to-400" title="Permanent link">¶</a></h1>
-<p>In Part 2 you hand the night shift to an agent. You build it in Cloud Control Studio from the prompt
-you saved, test it, give it a custom workflow of your own, and then go hands-off while 30 attack
-lanes hit the lab network: one lane per seat, each from its own source IP. Your agent has to find
-<strong>its own</strong> lane in Cisco telemetry, turn <strong>your</strong> tile red on the room wall, and stop <strong>only your</strong> lane once you approve.</p>
+<p><strong>Incident 2: something hits your service.</strong> You hand the night shift to an agent. You build it in
+Cloud Control Studio from the triage method you saved in 2.1, test it, give it a custom workflow of your
+own, and then go hands-off.</p>
+<p>At Lights Out a different kind of problem arrives: hostile traffic against your table's service.
+The traffic generator sends 30 streams of simulated attack traffic (<em>lanes</em>), one per seat, each from that seat's
+own source IP. Nobody tells your agent it is an attack. Its general method has to work that out from Cisco
+telemetry, turn <strong>your</strong> tile red on the room wall, and stop <strong>only your</strong> seat's traffic once you approve.</p>
 <table>
 <thead>
 <tr>
@@ -1203,7 +1206,7 @@ lanes hit the lab network: one lane per seat, each from its own source IP. Your 
   participant F as Secure Firewall (via Splunk)
   participant Y as You
   A-&gt;&gt;L: get_my_watch_scope
-  L--&gt;&gt;A: seat, source IP, service nearby (not the attack)
+  L--&gt;&gt;A: seat, service I protect, my watch source IP (not what is wrong)
   A-&gt;&gt;L: get_my_security_events
   L-&gt;&gt;F: events for my source IP only
   F--&gt;&gt;A: IPS signatures, ports, URLs, files
@@ -1253,7 +1256,7 @@ lanes hit the lab network: one lane per seat, each from its own source IP. Your 
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="../part1/2-1-save/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2.1 Save the combined result">
+          <a href="../part1/2-1-save/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2.1 Save the triage method">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
@@ -1263,7 +1266,7 @@ lanes hit the lab network: one lane per seat, each from its own source IP. Your 
                 Previous
               </span>
               <div class="md-ellipsis">
-                2.1 Save the combined result
+                2.1 Save the triage method
               </div>
             </div>
           </a>

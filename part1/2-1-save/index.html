@@ -24,7 +24,7 @@
     
     
       
-        <title>2.1 Save the combined result - LTROPS-2623 Build a Network Agent in Cisco Cloud Control That Troubleshoots Anything While You Sleep</title>
+        <title>2.1 Save the triage method - LTROPS-2623 Build a Network Agent in Cisco Cloud Control That Troubleshoots Anything While You Sleep</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#21-save-the-combined-result-115-15-min" class="md-skip">
+        <a href="#21-save-the-triage-method-115-15-min" class="md-skip">
           Skip to content
         </a>
       
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2.1 Save the combined result
+              2.1 Save the triage method
             
           </span>
         </div>
@@ -646,7 +646,7 @@
   <span class="md-ellipsis">
     
   
-    2.1 Save the combined result
+    2.1 Save the triage method
   
 
     
@@ -664,7 +664,7 @@
   <span class="md-ellipsis">
     
   
-    2.1 Save the combined result
+    2.1 Save the triage method
   
 
     
@@ -701,10 +701,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#save-the-prompt" class="md-nav__link">
+  <a href="#turn-your-prompt-into-a-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Save the prompt
+        Turn your prompt into a method
       
     </span>
   </a>
@@ -1225,34 +1225,76 @@
 
 
 
-<h1 id="21-save-the-combined-result-115-15-min">2.1 Save the combined result (1:15, 15 min)<a class="headerlink" href="#21-save-the-combined-result-115-15-min" title="Permanent link">¶</a></h1>
+<h1 id="21-save-the-triage-method-115-15-min">2.1 Save the triage method (1:15, 15 min)<a class="headerlink" href="#21-save-the-triage-method-115-15-min" title="Permanent link">¶</a></h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Keep the answer you trust and the exact prompt that produced it. Your agent is built from both.</p>
+<p>Keep the answer you trust, and turn the prompt that produced it into a <strong>general triage method</strong>
+that works for any problem. Your agent is built from that method in Part 2.</p>
 </div>
 <h2 id="pin-the-answer">Pin the answer<a class="headerlink" href="#pin-the-answer" title="Permanent link">¶</a></h2>
 <ol>
 <li>In the Canvas board with your best 1.3 answer, rename the board: open the board title and call
-   it <strong><code>Branch wired triage</code></strong>.</li>
-<li>Use the board's card tools to keep the final answer on the board (pin or stack it), so the
-   known-good example survives when you start new chats.</li>
+   it <strong><code>Night shift triage</code></strong>.</li>
+<li>Use the board's card tools to keep the final answer on the board (pin or stack it). It is your
+   known-good example: proof that the method finds a real root cause, cites the change ID and sets a
+   severity you can defend.</li>
 </ol>
-<h2 id="save-the-prompt">Save the prompt<a class="headerlink" href="#save-the-prompt" title="Permanent link">¶</a></h2>
-<p>Copy your final prompt text into a note on your laptop. In Part 2 it becomes the heart of your
-agent's description. Strip the bracketed, incident-specific parts so it works for <em>any</em> complaint:</p>
-<div class="highlight"><pre><span></span><code>Each run:
-1. Correlate across every Cisco domain I can see and find the root cause of anything affecting
-   [the services I watch].
+<h2 id="turn-your-prompt-into-a-method">Turn your prompt into a method<a class="headerlink" href="#turn-your-prompt-into-a-method" title="Permanent link">¶</a></h2>
+<p>Your 1.3 prompt starts with <em>this</em> incident: wired users on Leaf1 get no IP address. An agent
+that watches overnight cannot start from a symptom, because nobody has complained yet. So remove everything
+that is specific to tonight's branch fault, and keep the method:</p>
+<table>
+<thead>
+<tr>
+<th>Keep (the method)</th>
+<th>Remove (this incident)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Look across <strong>every</strong> Cisco domain, not only the one you suspect</td>
+<td>"Leaf1 access ports", "no IP address", "Meraki only"</td>
+</tr>
+<tr>
+<td>Check what changed recently and cite the change ID</td>
+<td>"in the 2 hours before the symptom started"</td>
+</tr>
+<tr>
+<td>Business impact, SaaS rule-out, on-call policy (Lab Tools)</td>
+<td>The branch office and the payments service</td>
+</tr>
+<tr>
+<td>The fixed answer format, and "propose, never change"</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Copy this into a note on your laptop and adjust it to your own words from 1.3:</p>
+<div class="highlight"><pre><span></span><code>You are the night-shift engineer for [the service I protect].
+Each run, answer one question: is anything hurting it, and what should happen next?
+
+1. Look across every Cisco domain I can see. Do not assume the cause in advance:
+   - network health and recent configuration changes (Meraki)
+   - firewall, IPS and file events (Secure Firewall)
+   - access, DNS and anything else I can see (Secure Access, Catalyst Center)
 2. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
-3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID),
-   EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
+3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
+   matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Why firewall events are in the list</p>
+<p>Incident 1 was a switch change, so you never needed the firewall. Leave it in anyway. A method
+that only checks where the last problem was will miss the next one, and in Part 2 the next one is
+not a switch change.</p>
+</div>
 <h2 id="before-the-break">Before the break<a class="headerlink" href="#before-the-break" title="Permanent link">¶</a></h2>
-<p>The proctors now clear the standing fault. Optional, if you have two minutes: rerun your prompt.</p>
+<p>The proctors now clear the standing fault. Optional, if you have two minutes: paste your general
+method into Canvas with <code>[the service I protect]</code> set to <strong>PseudoCo's branch wired users</strong>. It should
+come back <code>STATUS: healthy</code>. A method that finds the fault and then reports healthy after the fix is one you can trust.</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Your board is renamed and the final answer is kept on it.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Your generalized prompt is saved in a note.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> (Optional) After the fault is cleared, your prompt returns <code>STATUS: healthy</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Your general triage method is saved in a note.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> (Optional) After the fault is cleared, your method returns <code>STATUS: healthy</code>.</li>
 </ul>
 <p><strong>Break: 10 minutes.</strong></p>
 

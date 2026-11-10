@@ -635,7 +635,7 @@
   <span class="md-ellipsis">
     
   
-    2.1 Save the combined result
+    2.1 Save the triage method
   
 
     
@@ -1246,7 +1246,8 @@ remediation, and your agent verifies and turns your light off.</p>
 <ul>
 <li>The room lights dim. Hands off keyboards.</li>
 <li>The proctor starts the board timer and <strong>starts all 30 lanes</strong>. From now on, a source IP that
-  belongs to your seat is attacking something in the data center or DMZ.</li>
+  belongs to your seat is sending hostile traffic to your table's service. Your agent does not know that.
+  It runs the same triage method as always.</li>
 <li>Scheduled agents run at the announced time. If you run from Canvas, wait for the proctor's
   <strong>"go"</strong>, then send your saved prompt.</li>
 </ul>
@@ -1259,19 +1260,26 @@ as agents report, seat by seat, and the wall records each seat's <strong>time to
 <div class="highlight"><pre><span></span><code>STATUS: issue
 SEVERITY: major
 SUMMARY: 10.106.10.1xx is sending web attack patterns to Core services (AD-1)
-ATTACK: SQL injection and path traversal requests with a Nikto scanner user agent
+CAUSE: my watch source is sending SQL injection and path traversal requests with a Nikto scanner user agent
 EVIDENCE:
 - Secure Firewall (get_my_security_events): 31 IPS events "SERVER-WEBAPP ... SQL injection
   attempt", Web Application Attack, priority 1, action Would block
 - Secure Firewall: 472 connections to 198.18.5.102:80 via rule Allow WAN-to-DC, URLs like
   /admin/config.php?file=../../../../etc/shadow
+- Cisco Meraki: no port or configuration changes in the last 2 hours, wired and wireless clients normal
 - Lab Tools: no change in the last 24 hours explains it; on-call policy: wake primary for critical
 NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting approval.
 </code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Same method, different incident</p>
+<p>Compare this with your pinned Part 1 answer. The format is the same and the method is the same. Your
+agent checked the network and the change calendar first, the places where the answer was in Part 1, ruled them out, and
+found the cause in the firewall instead. Nobody told it that tonight's problem was an attack.</p>
+</div>
 <p>Check it before you approve:</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> The source IP is <strong>yours</strong> (compare with <code>get_my_watch_scope</code>).</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> The ATTACK is supported by evidence, not assumed. See the <a href="../../reference/evidence/">evidence guide</a>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> The CAUSE is supported by evidence, not assumed. See the <a href="../../reference/evidence/">evidence guide</a>.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Your tile on the room wall is red.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/11-lights-evidence.png" data-desc-position="bottom"><img alt="11-lights-evidence" loading="lazy" src="../../img/11-lights-evidence.png"></a></p>
