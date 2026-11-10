@@ -33,7 +33,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     </div>
 
     Each value has a **Copy** button. The MCP URL is filled in from your seat card (get it on
-    [Before you start](../setup.md#your-seat-card) if it still shows a placeholder). The screenshots use
+    [Before you start](../setup.md#your-seat-card){target="_blank" rel="noopener"} if it still shows a placeholder). The screenshots use
     the placeholder host `lab.example.com`.
 
     ![09a-mcp-connect](../img/09a-mcp-connect.png){ loading=lazy }
@@ -48,7 +48,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
         Studio says it on this screen: the connector is always available in Studio, and the two boxes only
         expose it to Canvas as well. Your agent runs in Studio, so it does not need them. Canvas already
         reaches Lab Tools through the integration you set up in 1.1 (see
-        [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents)), and a
+        [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}), and a
         second copy of the same tools in Canvas only invites it to mix the two.
 
 
@@ -87,8 +87,8 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     | `stop_my_lane` | Stops the attack traffic from your own watch source IP. Changes no shared configuration. **Only after a human approves.** | Stops your lane |
 
     The same ten operations are what Canvas uses through the Lab Tools OpenAPI integration (see
-    [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents)). Full
-    details: [Lab Tools reference](../reference/tools.md).
+    [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}). Full
+    details: [Lab Tools reference](../reference/tools.md){target="_blank" rel="noopener"}.
 
 4. **Capabilities and access**: keep all 10 selected, then **Save draft**.
 

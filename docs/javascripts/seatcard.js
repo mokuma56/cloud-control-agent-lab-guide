@@ -123,7 +123,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
         });
         el.append(val, show, copyButton(() => c.token, "Copy"));
       }
-      else el.innerHTML = '(from your <a href="../../setup/#your-seat-card">seat card</a>)';
+      else el.innerHTML = '(from your <a href="../../setup/#your-seat-card" target="_blank" rel="noopener">seat card</a>)';
     });
   }
 
