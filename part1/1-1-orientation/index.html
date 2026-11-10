@@ -1317,14 +1317,19 @@
 </li>
 <li>On the <strong>Lab Tools</strong> card, open the <strong>⋯</strong> menu and add your credential
    (<strong>Replace my bearer token</strong>). Paste your <strong>seat token</strong> from the seat card and save.</li>
-<li>
-<p>Make sure <strong>Enabled for me</strong> is ticked.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/03-canvas-custom-integrations.png" data-desc-position="bottom"><img alt="03-canvas-custom-integrations" loading="lazy" src="../../img/03-canvas-custom-integrations.png"></a></p>
-<p><em>(1) Custom Integrations, (2) Lab Tools. When you are done, (3) Your credential shows Saved and (4) Enabled for me is ticked.</em></p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/04-lab-tools-menu.png" data-desc-position="bottom"><img alt="04-lab-tools-menu" loading="lazy" src="../../img/04-lab-tools-menu.png"></a></p>
-<p><em>(1) The Lab Tools actions menu, (2) Replace my bearer token: paste your seat token here. The dimmed items exist only for proctors.</em></p>
-</li>
+<li>Make sure <strong>Enabled for me</strong> is ticked.</li>
 </ol>
+<p>Lab Tools also carries a short <strong>PseudoCo environment</strong> reference: which product owns the "Cloud Fabric"
+(Meraki, site SITE-105, not Hyperfabric), how DHCP reaches AD-1, and the read-only rules. It is what a new
+engineer would get on day one, and Canvas reads it whenever Lab Tools is enabled for you.</p>
+<div class="highlight"><pre><span></span><code>![03-canvas-custom-integrations](../img/03-canvas-custom-integrations.png){ loading=lazy }
+
+*(1) Custom Integrations, (2) Lab Tools. When you are done, (3) Your credential shows Saved and (4) Enabled for me is ticked.*
+
+![04-lab-tools-menu](../img/04-lab-tools-menu.png){ loading=lazy }
+
+*(1) The Lab Tools actions menu, (2) Replace my bearer token: paste your seat token here. The dimmed items exist only for proctors.*
+</code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Why a token and not a login</p>
 <p>Lab Tools runs outside Cisco Cloud Control, like any system your business depends on. The token
