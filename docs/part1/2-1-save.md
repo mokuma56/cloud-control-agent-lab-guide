@@ -49,9 +49,25 @@ Each run, answer one question: is anything hurting it, and what should happen ne
 
 ## Before the break
 
-The proctors now clear the standing fault. Optional, if you have two minutes: paste your general
-method into Canvas with `[the service I protect]` set to **PseudoCo's branch wired users**. It should
-come back `STATUS: healthy`. A method that finds the fault and then reports healthy after the fix is one you can trust.
+The proctors now clear the standing fault. Optional, if you have two minutes: run your general
+method once more, pointed at the service that had the fault, **PseudoCo's branch wired users**. Paste
+this into a **new** Canvas board (or your own wording, with the same service):
+
+```text
+You are the night-shift engineer for PseudoCo's branch wired users.
+Each run, answer one question: is anything hurting it, and what should happen next?
+
+1. Look across every Cisco domain I can see. Do not assume the cause in advance:
+   - network health and recent configuration changes (Meraki)
+   - firewall, IPS and file events (Secure Firewall)
+   - access, DNS and anything else I can see (Secure Access, Catalyst Center)
+2. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
+3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
+   matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
+```
+
+It should come back `STATUS: healthy`, and may mention that the Leaf1 change was reverted. A method that
+finds the fault and then reports healthy after the fix is one you can trust.
 
 - [ ] Your board is renamed and the final answer is kept on it.
 - [ ] Your general triage method is saved in a note.
