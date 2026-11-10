@@ -47,6 +47,14 @@ Each run:
    - firewall, IPS and file events: call get_my_security_events for my watch source twice,
      minutes=5 decides what is happening NOW, minutes=60 is context for the report
    - access, DNS and anything else I can see (Secure Access, Catalyst Center)
+   Hostile activity does not always come with IPS signatures. Name it from the firewall events:
+   - one source to many ports on one host, short connections: port scan
+   - one source to the same port on many hosts: host sweep
+   - SQL injection or ../ URLs, scanner user agents (Nikto), IPS signatures: web attack
+   - file events with an EICAR or malware disposition: malware file transfer
+   - the same small request to one destination at a regular interval: C2-style beacon
+   Any of these from my watch source in the last 5 minutes is STATUS issue, even with zero IPS
+   events. An unrelated change on the change calendar does not make it inconclusive.
 3. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
 4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).

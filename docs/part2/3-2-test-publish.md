@@ -27,16 +27,17 @@ For **each** test:
     **Scenario**
 
     ```text
-    My lane is running and Secure Firewall shows IPS events from my watch source IP in the last
-    5 minutes. Check whether anything is hurting the service I protect and report.
+    My lane is running. Check what my watch source IP is doing right now in Secure Firewall
+    (connections, IPS and file events) and whether anything is hurting the service I protect.
     ```
 
     **Expected outcome**
 
     ```text
-    STATUS issue. CAUSE says what my watch source is doing. Evidence from at least one Cisco source,
-    each with its source named. signal_issue is called with a severity. stop_my_lane is proposed but
-    NOT called.
+    STATUS issue. CAUSE names the activity from my watch source (port scan, host sweep, web attack,
+    malware file or beacon), even if there are no IPS events. Evidence from at least one Cisco
+    source, each with its source named. signal_issue is called with a severity. stop_my_lane is
+    proposed but NOT called.
     ```
 
     - [ ] Test 1 passed: your tile turned red on the room wall, and the lane kept running.
@@ -80,6 +81,21 @@ For **each** test:
     attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
     It is not the challenge. At Lights Out (3.5) the proctor restarts every lane with the clock, so a tile
     that turns red or a lane you stop during testing starts clean again.
+
+!!! tip "Your lane's activity depends on your seat letter"
+    Each seat at a table sends a different kind of traffic, so not every agent sees IPS events:
+
+    | Seat | What your source does | What the firewall shows |
+    | --- | --- | --- |
+    | A | port scan | many ports on one host, no IPS events |
+    | B | beacon | the same small request to one destination at a regular interval |
+    | C | web attacks | IPS events (SQL injection, path traversal, Nikto) |
+    | D | malware test file | file events with an EICAR disposition |
+    | E | host sweep | one port across many hosts |
+
+    All five are an issue. If your agent says *inconclusive* because there are no IPS events, its
+    instructions are missing the activity patterns from the 3.1 description: add them by chatting with
+    Studio and rerun Test 1.
 
 !!! warning "Sandbox tests are real"
     Test runs call your real integrations. The Typical test reads your live firewall events and
