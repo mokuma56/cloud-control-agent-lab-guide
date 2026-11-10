@@ -112,16 +112,28 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     agent should use each operation.
 
     1. **Studio → Build → Integrations → Add → REST API**.
-    2. Use the **Lab Actions spec URL** from your seat card (or download it and upload the file).
+    2. **Spec URL**: paste your **Lab Actions spec URL** (or download it and upload the file).
     3. **Review API**: Studio finds 6 operations on one HTTPS server.
-    4. **Configure**: name it `My Table Light`, bearer token = your seat token.
+    4. **Configure**: name it and give it your seat token as the bearer token.
+
+        <div class="sc-copytable" markdown>
+
+        | Field | Value |
+        | --- | --- |
+        | Spec URL (step 2) | `<your Lab Actions spec URL>` |
+        | Name (step 4) | `My Table Light` |
+        | Bearer token (step 4) | <span class="sc-tokenbtn"></span> |
+
+        </div>
+
     5. Rewrite the **descriptions** of `signal_issue` and `clear_issue` in your own words. The
        description is what the agent reads to decide *when* to call an operation, so write it for
        the agent: when to call it, what to send, and when **not** to call it.
     6. Save.
 
-    **Done when:** you turn your own tile red with a direct call. From a terminal on your laptop
-    (type the token from your seat card; it stays in this terminal only):
+    **Done when:** you turn your own tile red with a direct call. From a terminal on your laptop, run
+    the first line, then paste your seat token (**Copy** in the table above) and press Return. It is not
+    shown and stays in this terminal only:
 
     ```bash
     read -rs SEAT_TOKEN && export SEAT_TOKEN
@@ -141,9 +153,18 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     You finish a small MCP server in Python and run it in your own **MCP workspace** on the lab
     server. Nothing to install: it runs in your browser.
 
-    1. Open **Your MCP workspace** from your seat card (`https://<lab host>:9443/seat/<your seat>/`)
-       and paste your seat token. You see your own copy of `tools.py`, a test panel and your
-       server's log.
+    1. Open **Your MCP workspace** and paste your seat token. You see your own copy of `tools.py`, a
+       test panel and your server's log.
+
+        <div class="sc-copytable" markdown>
+
+        | Field | Value |
+        | --- | --- |
+        | Your MCP workspace | `<your MCP workspace URL>` |
+        | Seat token | <span class="sc-tokenbtn"></span> |
+
+        </div>
+
     2. Finish the three TODOs in `tools.py`:
         - `get_business_services`: return `GET /v1/context/services`.
         - `signal_issue`: `POST /v1/signal` with `{"severity", "summary"}`.
@@ -151,12 +172,28 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     3. Write a **description** for `get_business_services` that tells the agent when to use it.
     4. Select **Save & restart**. A syntax error is refused (with its line number) and your running
        server keeps the last good version. The status pill turns green when your server is up.
-    5. Test it: pick `signal_issue` in **Test a tool**, arguments
-       `{"severity":"minor","summary":"MCP test"}`, then **Call**. Your tile turns red. Call
-       `clear_issue` to turn it green.
-    6. Register it in Studio as in step A, but with **your** URL, shown at the top of the
-       workspace: `https://<lab host>:9443/seat/<your seat>/mcp`. Display name `My Lab Tools`,
-       bearer token = your seat token.
+    5. Test it: pick `signal_issue` in **Test a tool**, paste these arguments, then **Call**. Your tile
+       turns red. Call `clear_issue` to turn it green.
+
+        ```json
+        {"severity": "minor", "summary": "MCP test"}
+        ```
+
+    6. Register it in Studio as in step A, but with **your** workspace's URL (also shown at the top of
+       the workspace):
+
+        <div class="sc-copytable" markdown>
+
+        | Field | Value |
+        | --- | --- |
+        | MCP server URL | `<your workspace MCP URL>` |
+        | Display name | `My Lab Tools` |
+        | Advanced settings → Transport | `Streamable HTTP` |
+        | Advanced settings → Header name | `Authorization` |
+        | Advanced settings → Scheme | `Bearer` |
+        | Bearer token | <span class="sc-tokenbtn"></span> |
+
+        </div>
 
     **Done when:** your own `signal_issue` turns your tile red, and Studio discovers your tools.
 
