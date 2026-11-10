@@ -1238,13 +1238,14 @@ a test passes, so testing is part of building, not an extra.</p>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><strong>Scenario</strong></p>
-<div class="highlight"><pre><span></span><code>My lane is running and Secure Firewall shows IPS events from my watch source IP in the last
-5 minutes. Check whether anything is hurting the service I protect and report.
+<div class="highlight"><pre><span></span><code>My lane is running. Check what my watch source IP is doing right now in Secure Firewall
+(connections, IPS and file events) and whether anything is hurting the service I protect.
 </code></pre></div>
 <p><strong>Expected outcome</strong></p>
-<div class="highlight"><pre><span></span><code>STATUS issue. CAUSE says what my watch source is doing. Evidence from at least one Cisco source,
-each with its source named. signal_issue is called with a severity. stop_my_lane is proposed but
-NOT called.
+<div class="highlight"><pre><span></span><code>STATUS issue. CAUSE names the activity from my watch source (port scan, host sweep, web attack,
+malware file or beacon), even if there are no IPS events. Evidence from at least one Cisco
+source, each with its source named. signal_issue is called with a severity. stop_my_lane is
+proposed but NOT called.
 </code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 1 passed: your tile turned red on the room wall, and the lane kept running.</li>
@@ -1282,6 +1283,49 @@ shows. Does not guess or invent values for the missing source.
 attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
 It is not the challenge. At Lights Out (3.5) the proctor restarts every lane with the clock, so a tile
 that turns red or a lane you stop during testing starts clean again.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Your lane's activity depends on your seat letter</p>
+<p>Each seat at a table sends a different kind of traffic, so not every agent sees IPS events:</p>
+<table>
+<thead>
+<tr>
+<th>Seat</th>
+<th>What your source does</th>
+<th>What the firewall shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>port scan</td>
+<td>many ports on one host, no IPS events</td>
+</tr>
+<tr>
+<td>B</td>
+<td>beacon</td>
+<td>the same small request to one destination at a regular interval</td>
+</tr>
+<tr>
+<td>C</td>
+<td>web attacks</td>
+<td>IPS events (SQL injection, path traversal, Nikto)</td>
+</tr>
+<tr>
+<td>D</td>
+<td>malware test file</td>
+<td>file events with an EICAR disposition</td>
+</tr>
+<tr>
+<td>E</td>
+<td>host sweep</td>
+<td>one port across many hosts</td>
+</tr>
+</tbody>
+</table>
+<p>All five are an issue. If your agent says <em>inconclusive</em> because there are no IPS events, its
+instructions are missing the activity patterns from the 3.1 description: add them by chatting with
+Studio and rerun Test 1.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Sandbox tests are real</p>
