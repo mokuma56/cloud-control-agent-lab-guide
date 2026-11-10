@@ -79,3 +79,11 @@
 .sc-copy-inline.md-button { margin-left: .5em; padding: .05em .6em; font-size: .68rem; vertical-align: middle; }
 .sc-copytable td { white-space: normal; }
 .md-typeset code.sc-tokval { font-weight: 700; margin-left: .3em; }
+
+/* Run boxes (3.3 Path A): a terminal-style request and reply */
+.sc-run { margin: .6em 0 1em; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 8px; overflow: hidden; }
+.sc-term-bar { display: flex; align-items: center; gap: .7em; padding: .45em .6em; background: var(--md-code-bg-color); }
+.sc-term-bar .md-button { margin: 0; padding: .2em 1.1em; font-size: .72rem; }
+.sc-term-bar span { font-size: .72rem; color: var(--md-default-fg-color--light); }
+.md-typeset pre.sc-term { margin: 0; padding: .7em .9em; background: #0b0e13; color: #d7dde8; font-size: .7rem;
+  line-height: 1.45; white-space: pre-wrap; word-break: break-word; max-height: 22em; overflow: auto; border-radius: 0; }

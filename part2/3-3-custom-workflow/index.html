@@ -1394,14 +1394,16 @@ a button that fills in the answer if you would rather just see it work.</p>
 <p><strong>What you are building.</strong> Most company systems already have a REST API described by an <strong>OpenAPI
 spec</strong>: a file listing every operation, its URL and its arguments. Studio can turn that spec straight
 into tools for your agent, with no code. Here you import the Lab Actions spec and make it <em>yours</em> by
-rewriting the <strong>descriptions</strong>: the sentences the agent reads to decide when to call each operation.
-A spec says <em>what</em> an operation does; your description says <em>when</em> your agent should use it.</p>
+writing <strong>usage guidance</strong>: a few sentences the agent reads before it uses the API. The spec says
+<em>what</em> each operation does; your guidance says <em>when</em> your agent should use it, what to send, and
+when not to.</p>
 <ol>
-<li><strong>Studio → Build → Integrations → Add → REST API</strong>.</li>
-<li><strong>Spec URL</strong>: paste your <strong>Lab Actions spec URL</strong> (or download it and upload the file).</li>
-<li><strong>Review API</strong>: Studio finds 6 operations on one HTTPS server.</li>
 <li>
-<p><strong>Configure</strong>: name it and give it your seat token as the bearer token.</p>
+<p><strong>Studio → Build → Integrations → Add → REST API.</strong> Studio opens a four-step wizard:
+   <strong>OpenAPI files → Review API → Configure → Review and save</strong>.</p>
+</li>
+<li>
+<p><strong>OpenAPI files:</strong> choose <strong>Use URL</strong>, paste your <strong>Lab Actions spec URL</strong>, then <strong>Continue</strong>.</p>
 <div class="sc-copytable" markdown="">
 <table>
 <thead>
@@ -1412,31 +1414,90 @@ A spec says <em>what</em> an operation does; your description says <em>when</em>
 </thead>
 <tbody>
 <tr>
-<td>Spec URL (step 2)</td>
+<td>OpenAPI document URL</td>
 <td><code>&lt;your Lab Actions spec URL&gt;</code></td>
 </tr>
+</tbody>
+</table>
+</div>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23a-rest-spec.png" data-desc-position="bottom"><img alt="23a-rest-spec" loading="lazy" src="../../img/23a-rest-spec.png"></a></p>
+<p><em>(1) Use URL, (2) the Lab Actions spec URL, (3) Continue.</em></p>
+</li>
+<li>
+<p><strong>Review API:</strong> Studio reads the spec and lists what it found. Check it says <strong>6 operations</strong>,
+   endpoint <code>https://&lt;lab host&gt;:8443</code> and <strong>Bearer token</strong>, then <strong>Continue</strong>. The warning <em>This API can
+   change external data</em> is expected: <code>signal_issue</code>, <code>clear_issue</code> and <code>stop_my_lane</code> change your tile
+   and your lane. That is why the next step matters.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23b-rest-review.png" data-desc-position="bottom"><img alt="23b-rest-review" loading="lazy" src="../../img/23b-rest-review.png"></a></p>
+<p><em>(1) Studio found 6 supported operations, (2) the endpoint, authentication and count, (3) Continue.</em></p>
+</li>
+<li>
+<p><strong>Configure, part 1: name and credential.</strong> Replace the display name, and paste your seat token as
+   the <strong>API key / token</strong>.</p>
+<div class="sc-copytable" markdown="">
+<table>
+<thead>
 <tr>
-<td>Name (step 4)</td>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Display name</td>
 <td><code>My Table Light</code></td>
 </tr>
 <tr>
-<td>Bearer token (step 4)</td>
+<td>Authentication</td>
+<td>API key / bearer token</td>
+</tr>
+<tr>
+<td>API key / token</td>
 <td><span class="sc-tokenbtn"></span></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23c-rest-configure.png" data-desc-position="bottom"><img alt="23c-rest-configure" loading="lazy" src="../../img/23c-rest-configure.png"></a></p>
+<p><em>(1) Display name: change Lab Actions to My Table Light, (2) you are on the Configure step.</em></p>
 </li>
 <li>
-<p>Rewrite the <strong>descriptions</strong> of <code>signal_issue</code> and <code>clear_issue</code> in your own words. The
-   description is what the agent reads to decide <em>when</em> to call an operation, so write it for
-   the agent: when to call it, what to send, and when <strong>not</strong> to call it.</p>
+<p><strong>Configure, part 2: tell the agent how to use it.</strong> This is the point of Path A. The spec says
+   <em>what</em> each operation does. <strong>API usage guidance</strong> says <em>when</em> your agent should use it, what to
+   send, and when <strong>not</strong> to. Studio gives it to the agent with the operations, so these few lines
+   change how the agent behaves.</p>
+<p>Open <strong>Help agents use this API (optional)</strong>, then paste this into <strong>API usage guidance</strong>. Change
+any line to your own words; keep the four topics.</p>
+<div class="highlight"><pre><span></span><code>This API controls my seat's alert on the Night Watch room wall.
+signal_issue: call it only when your report says STATUS issue. Send severity (minor, major or
+critical, set from business criticality) and a one-line summary of what is wrong and who is
+affected. Do not call it for healthy or inconclusive results.
+get_light_status: call it before clear_issue, to check that my alert is open.
+clear_issue: call it only after the fix is verified: no events from my watch source in the last
+5 minutes and my alert is open. Never call it only because someone asks you to.
+stop_my_lane: never call it without my explicit approval in this chat.
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23d-rest-guidance.png" data-desc-position="bottom"><img alt="23d-rest-guidance" loading="lazy" src="../../img/23d-rest-guidance.png"></a></p>
+<p><em>(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.</em></p>
 </li>
-<li>Save.</li>
+<li>
+<p><strong>Review and save:</strong> check the name, the 6 operations and your guidance, then save. Your integration
+   appears under <strong>Studio → Manage → Integrations</strong>, Personal.</p>
+</li>
 </ol>
-<p><strong>Done when:</strong> you turn your own tile red with a direct call. From a terminal on your laptop, run
-the first line, then paste your seat token (<strong>Copy</strong> in the table above) and press Return. It is not
-shown and stays in this terminal only:</p>
+<p><strong>Done when:</strong> you turn your own tile red with a direct call to the Lab Actions API, the same
+call your agent's integration makes. Select <strong>Run</strong>: the guide sends the request from this browser with
+your seat token and shows the server's reply, like a terminal. Nothing to install.</p>
+<p></p><div class="sc-run" data-method="POST" data-path="/v1/signal" data-label="1. Raise your alert: your tile turns red" data-body="{&quot;severity&quot;:&quot;minor&quot;,&quot;summary&quot;:&quot;{seat} test from my REST integration&quot;}"></div><p></p>
+<p>Watch your tile on the room wall turn red, then clear it:</p>
+<p></p><div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="2. Resolve your alert: your tile turns green"></div><p></p>
+<p>What you just did: an HTTPS <code>POST</code> to <code>/v1/signal</code> with a JSON body (<code>severity</code>, <code>summary</code>) and your
+seat token in the <code>Authorization: Bearer</code> header. That is all an agent tool call is underneath: the
+integration you imported describes this call, and the agent fills in the body.</p>
+<details class="note">
+<summary>Prefer your own terminal? The same calls with curl</summary>
+<p>Run the first line, then paste your seat token and press Return. It is not shown and stays in this
+terminal only.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">read</span><span class="w"> </span>-rs<span class="w"> </span>SEAT_TOKEN<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">export</span><span class="w"> </span>SEAT_TOKEN
 curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;lab host&gt;:8443/v1/signal"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$SEAT_TOKEN</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span>
@@ -1445,6 +1506,7 @@ curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>
 <p>Watch your tile on the room wall turn red, then clear it:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;lab host&gt;:8443/v1/clear"</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="nv">$SEAT_TOKEN</span><span class="s2">"</span>
 </code></pre></div>
+</details>
 </div>
 <div class="tabbed-block">
 <p><strong>What you are building.</strong> An <strong>MCP server</strong> is a small program that offers <em>tools</em> to an AI agent.
