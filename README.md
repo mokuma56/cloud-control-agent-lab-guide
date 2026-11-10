@@ -1,4 +1,4 @@
-# Build a Network Agent in Cisco Cloud Control - lab guide
+# LTROPS-2623 Build a Network Agent in Cisco Cloud Control That Troubleshoots Anything While You Sleep
 
 Student guide for the Cisco Live EMEA 2027 lab *Build a Network Agent in Cisco Cloud Control That
 Troubleshoots Anything While You Sleep* (4 hours, 30 seats).
