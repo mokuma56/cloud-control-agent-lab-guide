@@ -1238,23 +1238,22 @@ get_my_security_events. If STATUS is issue, call signal_issue with the severity 
 Propose stop_my_lane and wait for my approval. If STATUS is healthy and get_light_status says my
 light is on, call clear_issue.
 </code></pre></div>
-<p>Check the manifest's <strong>Integrations</strong> now lists your Lab Tools (and My Light, if you built Path A).</p>
+<p>Check that the manifest's <strong>MCP servers</strong> or <strong>API integrations</strong> now list your Lab Tools, plus <strong>My Table Light</strong>
+if you built Path A, or <strong>My Lab Tools</strong> if you built Path B.</p>
 <h2 id="add-a-fourth-test">Add a fourth test<a class="headerlink" href="#add-a-fourth-test" title="Permanent link">¶</a></h2>
-<table>
-<thead>
-<tr>
-<th>Scenario</th>
-<th>Expected outcome</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Fault present: my source shows IPS events</td>
-<td>signal_issue called; my light is on afterwards</td>
-</tr>
-</tbody>
-</table>
+<p>Run it the same way as the three tests in 3.2: copy the <strong>Scenario</strong> and the <strong>Expected outcome</strong> into the
+<strong>Test</strong> tab, then <strong>Run scenario</strong>.</p>
+<p><strong>Scenario</strong></p>
+<div class="highlight"><pre><span></span><code>My lane is running and my watch source is attacking the service I protect right now. Find it, report
+it, and make sure my light ends up on.
+</code></pre></div>
+<p><strong>Expected outcome</strong></p>
+<div class="highlight"><pre><span></span><code>STATUS issue with the activity named (port scan, host sweep, web attack, malware file or beacon).
+signal_issue is called, and get_light_status afterwards shows my light on. stop_my_lane is proposed
+but NOT called.
+</code></pre></div>
 <ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile is red on the room wall.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All four tests pass. Publish <strong>v2</strong>.</li>
 </ul>
 <h2 id="choose-how-it-runs">Choose how it runs<a class="headerlink" href="#choose-how-it-runs" title="Permanent link">¶</a></h2>
@@ -1263,13 +1262,22 @@ light is on, call clear_issue.
 <div class="tabbed-block">
 <p>Studio needs three things before <strong>Schedule</strong> (top right of the builder) unlocks:</p>
 <ol>
-<li>A <strong>schedule time</strong> with your <strong>timezone</strong>. Tell Studio in the chat, for example:
-   <em>"Run every 15 minutes between 03:00 and 04:00 Europe/London."</em> Use the window the
-   proctor announces.</li>
-<li>A <strong>schedule owner</strong>: your lab login.</li>
-<li>A <strong>passing test of the exact saved revision</strong>. Any change you make creates a new revision,
+<li>
+<p>A <strong>schedule time</strong> with your <strong>timezone</strong>. Tell Studio in the chat, for example (use the window
+   the proctor announces):</p>
+<div class="highlight"><pre><span></span><code>Run every 15 minutes between 03:00 and 04:00 Europe/London.
+</code></pre></div>
+</li>
+<li>
+<p>A <strong>schedule owner</strong>: your lab login. Tell Studio in the chat:</p>
+<div class="highlight"><pre><span></span><code>The schedule owner is &lt;your lab login&gt;.
+</code></pre></div>
+</li>
+<li>
+<p>A <strong>passing test of the exact saved revision</strong>. Any change you make creates a new revision,
    so test again after the last change. Until then Schedule says <em>Run a test on the latest
-   saved changes first</em>.</li>
+   saved changes first</em>.</p>
+</li>
 </ol>
 <p>Saving and testing never create a schedule by themselves. If Schedule is not offered in your
 release, use the Canvas tab.</p>
