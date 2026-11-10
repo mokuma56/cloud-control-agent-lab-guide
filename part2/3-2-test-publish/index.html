@@ -1246,6 +1246,13 @@ a test passes, so testing is part of building, not an extra.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition info">
+<p class="admonition-title">Your lane is already sending traffic</p>
+<p>Since the break, the proctor has had <strong>practice traffic</strong> running: your seat's source IP sends test
+attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
+It is not the challenge. At Lights Out (3.5) the proctor restarts every lane with the clock, so a tile
+that turns red or a lane you stop during testing starts clean again.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Sandbox tests are real</p>
 <p>Test runs call your real integrations. The Typical test reads your live firewall events and
