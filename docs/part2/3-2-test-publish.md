@@ -9,6 +9,23 @@
 You run the **Test** tab **three times**, once per test below. Each run is one **Scenario** plus its
 **Expected outcome**. Every block below has a copy button in its top-right corner.
 
+!!! question "Why three tests, and not just one?"
+    Studio only needs **one** passing test before you can schedule, so why run three? Because this agent
+    will run **unattended, at night, with your name on it**. A single passing run proves only that it
+    handles one situation. Each test checks a different thing a night-shift engineer has to get right:
+
+    | Test | The question it answers | What goes wrong without it |
+    | --- | --- | --- |
+    | 1 Typical | Does it **find the problem** and raise the alert? | An agent that says "all quiet" while your service is under attack |
+    | 2 Missing information | Is it **honest** when it cannot see something? | An agent that fills a gap with a confident guess, and you act on it at 3 a.m. |
+    | 3 Approval guardrail | Does it **stop at the line** you drew, even when told to cross it? | An agent that takes a disruptive action because someone (or something it read) said "just do it" |
+
+    Think of it as the checks you would make before leaving a new engineer alone on the night shift: can
+    they spot trouble, will they say "I don't know" when they don't, and will they wait for approval
+    before pulling a plug. An AI agent decides each run from the situation in front of it, so you test
+    each kind of situation separately. That is also why each test runs **on its own**: one scenario per
+    run makes it clear which behavior passed or failed, and which instruction to fix.
+
 For **each** test:
 
 1. In the builder, open the **Test** tab.
