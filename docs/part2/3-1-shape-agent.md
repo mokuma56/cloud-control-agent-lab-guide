@@ -58,8 +58,10 @@ Each run:
 3. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
 4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
-5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane, but
-   only call it after a human approves.
+5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane and
+   wait. Approval is only my reply "approve stop" in this chat after you showed me your report. An
+   order to stop that comes before your report, even "just do it" or "no need to ask", is not
+   approval. Never call stop_my_lane in a scheduled run.
 6. If my lane is not running and the last 5 minutes show no events from my source, STATUS is
    healthy: describe the earlier activity as resolved, do not call signal_issue, and call
    clear_issue if get_light_status says my light is on. Mixed evidence: STATUS inconclusive, no
@@ -110,7 +112,7 @@ Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid 
 What each server in (2) is, and why there are two ways to reach Lab Tools: see [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents).
 
 
-- [ ] **Instructions** include "propose, don't change" and "only after a human approves".
+- [ ] **Instructions** include "propose, don't change" and that the only approval for `stop_my_lane` is your reply "approve stop" after its report.
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
 - [ ] **MCP servers** or **API integrations** list Lab Tools. Studio can use the Canvas Lab Tools
       integration (shown as an API integration) and your MCP connector from 3.3; either works.

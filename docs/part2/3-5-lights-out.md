@@ -59,10 +59,10 @@ Check it before you approve:
 
 ## 3. Approve the remediation (about 5 min)
 
-Reply to your agent or Canvas with an explicit approval:
+Reply to your agent with the exact approval phrase from its instructions (Canvas accepts it too):
 
 ```text
-Yes, approved: stop_my_lane for my watch source.
+approve stop
 ```
 
 The agent calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · verifying**, and your neighbors stay red until they act.
