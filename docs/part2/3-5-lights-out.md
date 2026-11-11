@@ -33,8 +33,25 @@ Watch your tile on the room wall. It turns **red** with your agent's summary whe
 
 ## 2. Wake up and read the finding (about 10 min)
 
-**Option A:** open **Studio → Manage → Applications**, select your agent, then **View runs** and the
-latest run. **Option B:** read Canvas's answer. A good finding looks like this:
+=== "Option A: Scheduled"
+
+    Open **Studio → Manage → Applications**, select your agent, then **View runs**. The top row is your
+    scheduled run: Trigger **Schedule**, Version **production**. Select **View**. (Select **Refresh runs**
+    if it is not there yet; a run takes about a minute.)
+
+    ![26b-view-runs](../img/26b-view-runs.png){ loading=lazy }
+
+    *(1) View runs, (2) the scheduled run at the time you chose, (3) Trigger Schedule. The rows below are your sandbox tests. With Max runs 1 the badge now reads Completed.*
+
+    ![26c-run-detail](../img/26c-run-detail.png){ loading=lazy }
+
+    *A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS issue and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE and NEXT STEP.*
+
+=== "Option B: On demand from Canvas"
+
+    Read Canvas's answer in your board.
+
+A good finding looks like this (this one is from a web attack seat; yours names your own seat's activity):
 
 ```text
 STATUS: issue

@@ -161,8 +161,11 @@ yours whenever it runs.
 
         *Schedule Agent: (1) Daily, (2) the next 5-minute slot at least 5 minutes away, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.*
 
-    4. Check **Review Agent → Current schedule**: it shows your run time instead of *This Agent is not
-       scheduled*.
+    4. Studio confirms **Agent scheduled**. Check it in **Studio → Manage → Applications → your agent**:
+
+        ![26a-scheduled](../img/26a-scheduled.png){ loading=lazy }
+
+        *(1) the badge reads Scheduled, (2) Schedule became Edit schedule (use it to pick another slot), (3) the Schedule card shows your run time, (4) View runs is where the result appears in 3.5.*
 
     Then go to [3.5](3-5-lights-out.md) and keep your hands off until your run time. A scheduled run
     reports and raises your alert; it never stops your lane. You approve the stop yourself, in Canvas.
