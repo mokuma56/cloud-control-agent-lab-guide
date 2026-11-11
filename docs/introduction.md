@@ -86,9 +86,9 @@ flowchart TB
 | 1:15 | 15 | 2 | [2.1 Save the triage method](part1/2-1-save.md) | Pinned Canvas and your general triage prompt |
 | 1:30 | 10 | - | Break | |
 | 1:40 | 25 | 3 | [3.1 Shape the agent](part2/3-1-shape-agent.md) | Draft agent, manifest reviewed |
-| 2:05 | 15 | 3 | [3.2 Sandbox test and publish](part2/3-2-test-publish.md) | Three tests passed, v1 published |
+| 2:05 | 15 | 3 | [3.2 Sandbox test](part2/3-2-test-publish.md) | Three tests passed, Schedule unlocked |
 | 2:20 | 35 | 3 | [3.3 Build your custom workflow](part2/3-3-custom-workflow.md) | Your integration turns your seat red on the wall |
-| 2:55 | 15 | 3 | [3.4 Wire it in and choose how it runs](part2/3-4-wire-schedule.md) | v2 published, run mode chosen |
+| 2:55 | 15 | 3 | [3.4 Wire it in and choose how it runs](part2/3-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
 | 3:10 | 25 | 3 | [3.5 Lights Out](part2/3-5-lights-out.md) | Light on at detection, off when fixed |
 | 3:35 | 15 | - | [3.6 Your business](part2/3-6-your-business.md) | One agent idea for your own company |
 | 3:50 | 10 | - | Wrap | Take-home kit, survey |

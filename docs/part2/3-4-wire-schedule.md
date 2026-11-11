@@ -1,8 +1,8 @@
 # 3.4 Wire it in and choose how it runs (2:55, 15 min)
 
 !!! abstract "Goal"
-    Your agent uses your integration, passes a "light on" test, is published as v2, and has a run
-    mode for Lights Out.
+    Your agent uses your integration, passes a "light on" test, and is scheduled for Lights Out (or
+    ready to run from Canvas).
 
 ## Wire the integration into the agent
 
@@ -39,33 +39,33 @@ but NOT called.
 ```
 
 - [ ] Test 4 passed: your tile is red on the room wall.
-- [ ] All four tests pass. Publish **v2**.
+- [ ] All four tests pass on your latest saved version, so **Schedule** is blue.
 
 ## Choose how it runs
 
 === "Scheduled"
 
-    Studio needs three things before **Schedule** (top right of the builder) unlocks:
+    Select **Schedule** (top right of the builder). It is blue only after a passing test of your latest
+    saved version; otherwise it says *Run a test on the latest saved changes first*: rerun Test 4.
 
-    1. A **schedule time** with your **timezone**. Tell Studio in the chat, for example (use the window
-       the proctor announces):
+    In **Schedule Agent**:
 
-        ```text
-        Run every 15 minutes between 03:00 and 04:00 Europe/London.
-        ```
+    1. **Activation cadence**: **Daily** (the choices are Hourly, Daily and Weekly; there is no "every
+       15 minutes").
+    2. **Local run time**: the Lights Out time the proctor announces, in 5-minute steps. It is your
+       browser's time zone; Studio converts it to UTC.
+    3. **Max runs**: `1`. One run at Lights Out is all you need, and the schedule stops by itself.
+    4. **Trigger prompt**: keep Studio's text (for example *Run the ... night-watch review.*). It is the
+       message your agent receives when the schedule fires.
+    5. Select **Schedule**.
 
-    2. A **schedule owner**: your lab login. Tell Studio in the chat:
+    ![18b-schedule-dialog](../img/18b-schedule-dialog.png){ loading=lazy }
 
-        ```text
-        The schedule owner is <your lab login>.
-        ```
+    *Schedule Agent: (1) Daily, (2) the announced Lights Out time, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.*
 
-    3. A **passing test of the exact saved revision**. Any change you make creates a new revision,
-       so test again after the last change. Until then Schedule says *Run a test on the latest
-       saved changes first*.
-
-    Saving and testing never create a schedule by themselves. If Schedule is not offered in your
-    release, use the Canvas tab.
+    Back in the builder, **Review Agent → Current schedule** shows the time instead of *This Agent is
+    not scheduled*. A scheduled run reports and raises your alert; it never stops your lane. You approve
+    the stop yourself in 3.5. If Schedule is not offered in your release, use the Canvas tab.
 
 === "On demand from Canvas"
 
@@ -85,4 +85,4 @@ but NOT called.
     *Running it from Canvas: (1) your saved prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.*
 
 
-- [ ] My agent is published as v2, and I know whether it runs on a schedule or from Canvas.
+- [ ] My agent is scheduled for the Lights Out time, or my Canvas prompt is saved.

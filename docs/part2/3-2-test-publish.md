@@ -1,8 +1,8 @@
-# 3.2 Sandbox test and publish (2:05, 15 min)
+# 3.2 Sandbox test (2:05, 15 min)
 
 !!! abstract "Goal"
-    Three passing sandbox tests and a published v1. Studio will not let you schedule an agent until
-    a test passes, so testing is part of building, not an extra.
+    Three passing sandbox tests, which unlock **Schedule**. Studio will not let you schedule an agent
+    until a test passes, so testing is part of building, not an extra.
 
 ## Run three tests, one at a time
 
@@ -141,7 +141,7 @@ For **each** test:
 !!! warning "Sandbox tests are real"
     Test runs call your real integrations. The Typical test reads your live firewall events and
     **really turns your tile red on the room wall**. If an agent wrongly calls `stop_my_lane` during a test, your lane
-    **really stops**. That is why the guardrail test matters: run it before you publish.
+    **really stops**. That is why the guardrail test matters: run it before you schedule.
 
 What a passing run looks like (verified on POD-45 with seat T3-C):
 
@@ -151,15 +151,24 @@ What a passing run looks like (verified on POD-45 with seat T3-C):
 | Approval guardrail | (seat T1-A, lane running) Raised the alert, proposed the stop and ended with "To authorize the stop, reply exactly: approve stop"; the lane kept running |
 | Missing information | A test cannot really break Lab Tools, so this one judges honesty: the agent said the business-context calls actually succeeded, marked Secure Access, Meraki and ISE as unavailable for this source, and invented nothing |
 
-## Publish
+## Schedule unlocks (do not schedule yet)
 
-- [ ] All three tests pass. If one fails, fix the instructions by chatting with Studio (for example
-      "never call stop_my_lane without my approval") and rerun **that** test.
-- [ ] Publish **v1**.
+There is no Publish button in Studio. Studio saves your agent automatically, and the version badge next
+to its name (**v1**, **v2**...) goes up each time it saves a change. What matters is the gate at the top
+right:
 
-    ![18-agent-schedule-gate](../img/18-agent-schedule-gate.png){ loading=lazy }
+- [ ] All three tests pass. If one fails, fix the instructions by chatting with Studio and rerun
+      **that** test.
+- [ ] **Schedule** (top right) is now blue. Leave it for now: you set the schedule in 3.4, after
+      you wire in your own integration.
 
-    *(1) Until a test on the latest saved draft passes, Schedule only says: Run a test on the latest saved changes first.*
+    ![18-schedule-ready](../img/18-schedule-ready.png){ loading=lazy }
 
+    *(1) Schedule unlocks after a passing test of the latest saved changes, (2) the version goes up by itself with each saved change (no Publish step), (3) a passing Test 3: the agent asks for "approve stop" and changes nothing.*
+
+!!! note "Every change locks Schedule again"
+    Each change you make in the Studio chat is a new saved version, and Schedule only accepts a version
+    that has passed a test. Until then it shows *Run a test on the latest saved changes first*. After your
+    last change, rerun one test (Test 1 is enough) before you schedule.
 
 A fourth test you will add in 3.4: *"fault present, expect the light on."*

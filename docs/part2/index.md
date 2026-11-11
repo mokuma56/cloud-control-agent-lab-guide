@@ -12,9 +12,9 @@ telemetry, turn **your** tile red on the room wall, and stop **only your** seat'
 | Module | Min | You finish with |
 | --- | --- | --- |
 | [3.1 Shape the agent](3-1-shape-agent.md) | 25 | Draft agent, manifest reviewed |
-| [3.2 Sandbox test and publish](3-2-test-publish.md) | 15 | Three tests passed, v1 published |
+| [3.2 Sandbox test](3-2-test-publish.md) | 15 | Three tests passed, Schedule unlocked |
 | [3.3 Build your custom workflow](3-3-custom-workflow.md) | 35 | Your integration turns your seat red on the wall |
-| [3.4 Wire it in and choose how it runs](3-4-wire-schedule.md) | 15 | v2 published, run mode chosen |
+| [3.4 Wire it in and choose how it runs](3-4-wire-schedule.md) | 15 | Four tests passed, scheduled or Canvas chosen |
 | [3.5 Lights Out](3-5-lights-out.md) | 25 | Light on at detection, off when fixed |
 | [3.6 Your business](3-6-your-business.md) | 15 | One agent idea for your own company |
 | Wrap | 10 | Take-home kit, survey |
