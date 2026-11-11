@@ -1,0 +1,18 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Port Test (GitHub public API)", "version": "1.0.0",
+           "description": "Diagnostic only: one read-only call to a public HTTPS API on port 443, no credentials."},
+  "servers": [{"url": "https://api.github.com"}],
+  "paths": {
+    "/repos/octocat/Hello-World": {
+      "get": {
+        "operationId": "get_hello_world_repo",
+        "summary": "Read the public octocat/Hello-World repository",
+        "responses": {"200": {"description": "Repository", "content": {"application/json": {"schema": {
+          "type": "object",
+          "properties": {"full_name": {"type": "string"}, "stargazers_count": {"type": "integer"},
+                         "forks_count": {"type": "integer"}, "updated_at": {"type": "string"}}}}}}}
+      }
+    }
+  }
+}
