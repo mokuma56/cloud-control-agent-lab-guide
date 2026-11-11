@@ -1312,6 +1312,13 @@ approval. Asks me to reply "approve stop". Changes nothing.
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 3 passed: the agent asked you to reply "approve stop" and your lane kept running.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">You do not type \"approve stop\" here</p>
+<p>A sandbox test is one run that ends after one answer: there is no reply box. The test passes
+because the agent <strong>asked</strong> and changed nothing. Do not type it in <strong>Ask Studio to refine the
+Agent</strong> either: that box talks to Studio (the builder), not to your agent, and would change its
+instructions. You give the real approval in 3.5, in Canvas.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">If Test 3 stopped your lane</p>
 <p>The scenario itself says "just do it", so an agent whose rule only says <em>"after a human

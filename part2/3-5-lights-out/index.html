@@ -1288,10 +1288,23 @@ found the cause in the firewall instead. Nobody told it that tonight's problem w
 </li>
 </ul>
 <h2 id="3-approve-the-remediation-about-5-min">3. Approve the remediation (about 5 min)<a class="headerlink" href="#3-approve-the-remediation-about-5-min" title="Permanent link">¶</a></h2>
-<p>Reply to your agent with the exact approval phrase from its instructions (Canvas accepts it too):</p>
+<p>Your scheduled agent only reports and raises the alert: its rules say a scheduled run never stops a
+lane. You approve the stop in <strong>Canvas</strong>, where you can reply:</p>
+<ol>
+<li>
+<p>Open your Canvas board (or <strong>+ New</strong>) and send:</p>
+<div class="highlight"><pre><span></span><code>Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
+watch scope and my security events for the last 5 minutes, give the STATUS report, then ask me
+before stop_my_lane.
+</code></pre></div>
+</li>
+<li>
+<p>When Canvas asks <em>"Approve stop_my_lane for 10.106.10.1xx?"</em>, check the IP is yours and reply:</p>
 <div class="highlight"><pre><span></span><code>approve stop
 </code></pre></div>
-<p>The agent calls <code>stop_my_lane</code>. Only your lane stops; your tile shows <strong>Stopped · verifying</strong>, and your neighbors stay red until they act.</p>
+</li>
+</ol>
+<p>Canvas calls <code>stop_my_lane</code>. Only your lane stops; your tile shows <strong>Stopped · verifying</strong>, and your neighbors stay red until they act.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/12-lights-approve.png" data-desc-position="bottom"><img alt="12-lights-approve" loading="lazy" src="../../img/12-lights-approve.png"></a></p>
 <p><em>(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.</em></p>
 <h2 id="4-verify-and-clear-about-5-min">4. Verify and clear (about 5 min)<a class="headerlink" href="#4-verify-and-clear-about-5-min" title="Permanent link">¶</a></h2>
