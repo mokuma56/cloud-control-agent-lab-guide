@@ -140,10 +140,8 @@ The file is the source code: share it and anyone gets the same app.
 
 ## E. App add-ons
 
-After the core Mission Control app (3.1), add one section of the design file per message:
+The 3.1 build includes sections A to C (your night, the evidence, business impact). One add-on remains:
 
 | Add-on | Prompt | Adds |
 | --- | --- | --- |
-| B. Evidence | `Add section B of the design.` | Connections chart, IPS and file counts, Quiet since badge |
-| C. Business impact | `Add section C of the design.` | Criticality, on-call verdict, last day's changes |
 | D. Handover notes | `Add section D of the design.` | Shared notes for your group |

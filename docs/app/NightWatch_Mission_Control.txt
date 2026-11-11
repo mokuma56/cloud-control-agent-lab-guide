@@ -1,95 +1,79 @@
 # App design: Night Watch Mission Control
 
-Build a single-page Studio app from this design. Build only section A (the core app) now. Sections B to D
-are add-ons I will ask for later, one at a time.
+**Build now, without asking questions.** This design is complete: build sections A, B and C in one go.
+Section D is an add-on I may ask for later. Where the design is silent, choose the simplest option and
+list your choices in the summary.
 
-## Purpose
+## Purpose and rules
 
-The morning after. My Studio agent watched my service overnight: it found my attack, raised my card on
-the room wall, stopped my own attack, checked it was quiet and cleared my card. This app shows what
-happened and how fast, shows my group, and lets me replay the night and watch my agent do it again.
-The app never stops an attack and never changes configuration. Containment is the agent's job.
+The morning after: my Studio agent found my attack, raised my card, stopped my own attack and cleared my
+card. This single-page app shows what happened and how fast, my group, and the evidence, and lets me
+replay the night. It never stops an attack and never changes configuration.
 
-## Rules
+- Use only the integration **Night Watch Console**. Every operation already acts as my own seat, so never
+  ask me to type a token, seat ID or IP address, and never show the token. Do show the seat and watch
+  source the responses return.
+- Always dark, whatever the host's light or dark theme; large numbers readable on a projector. Each panel
+  has loading, empty and error states; on error keep the last data and mark it "stale". Load on open,
+  refresh every 60 s while visible.
 
-- Use only the integration **Night Watch Console**, for every section.
-- Every operation already acts as my own seat. Never ask for, show or store a token, a seat ID or an IP
-  address typed by the user.
+## Data contract (exact responses: use these field names)
 
-## Data contract (exact responses; parse these, do not guess field names)
+Any field may be null or missing: show "-" and keep rendering. Ignore unlisted fields. Lists may be empty.
+Times are ISO 8601 UTC; show local time. Only a non-2xx status is an error; on 429 wait 60 s and retry.
+Never reject a whole 200 response: check each field on its own and show "-" for any value of an
+unexpected type. Types: `group`, metrics, `connections` and the totals are numbers; `is_me`, `open` and
+`running` are booleans; `dst_port`, ids and times are strings; everything else is a string or null.
 
-Parsing rules for every operation: any field may be null or missing, so show "-" and keep rendering.
-Ignore fields not listed here. Lists may be empty. Times are ISO 8601 strings in UTC; show local time.
-Only a non-2xx status is an error for a block. HTTP 429 means "too many requests": wait 60 s and retry.
+- `get_my_timeline` and `replay_my_attack`: `{seat, group, protects, service, watch_source_ip, card_state,
+  attack: {running, started_at, stopped_at, stopped_by}, alert: {open, severity, summary, opened_at},
+  cleared_at, metrics_seconds: {time_to_detect, time_to_contain, time_to_resolve},
+  events: [{time, event, severity?, summary?, by?}]}`.
+  `event` is attack_started, alert_raised, contained, attack_stopped_by_proctor or resolved (skip others;
+  attack_started may be missing). Each metric is seconds or null.
+- `get_my_group_board`: `{group, seats: [{seat, card_state, severity, agent_summary, updated_at, is_me}]}`.
+- `get_my_security_events` (query `minutes`): `{totals: {connections, intrusion_events, file_events},
+  connections: [{destination, dst_port, protocol, connections}], since_stop?: {totals: {connections,
+  intrusion_events, file_events}, stopped_at}}`. `dst_port` is a string.
+- My business service comes with the timeline: `service: {service, criticality, depends_on: {segment,
+  apps[]}, impact_if_down}` or null (then say "No business context for this service"). Do not match
+  services yourself.
+- `get_oncall`: `{oncall: {primary: {name, team}, secondary: {name, team}, policy}}`.
+- `get_recent_changes` (query `hours`): `{changes: [{id, system, change, state, time}]}`.
 
-- `get_my_timeline` and `replay_my_attack` (same shape):
-  `{seat, group, protects, watch_source_ip, card_state,
-    attack: {running, started_at, stopped_at, stopped_by},
-    alert: {open, severity, summary, opened_at}, cleared_at,
-    metrics_seconds: {time_to_detect, time_to_contain, time_to_resolve},
-    events: [{time, event, severity?, summary?, by?}], note}`
-  `card_state` is exactly one of: quiet, attack_active, alert, stopped_verifying, resolved.
-  `event` is one of: attack_started, alert_raised, contained, attack_stopped_by_proctor, resolved; skip
-  any other value. attack_started can be missing (show the list anyway). The alert text is `summary`.
-  Each metric is a number of seconds or null on its own.
-- `get_my_group_board`: `{group, protects, seats: [{seat, color, color_hex, card_state, severity,
-  agent_summary, updated_at, is_me}]}` with the same five card_state values.
-- `get_my_security_events` (query `minutes`): `{source_ip, window_minutes, totals: {connections,
-  intrusion_events, file_events}, connections: [{destination, dst_port, protocol, connections, rules[],
-  actions[], applications[]?}], intrusion: [{signature, destination, dst_port, count, classification,
-  priority, action}], files: [{file, type, action, disposition, threat, destination, time}], first_seen,
-  last_seen, lane_running, since_stop?: {totals: {connections, intrusion_events, file_events},
-  last_seen, stopped_at}}`. `dst_port` is a string. `since_stop` is present only after my attack stopped.
-- `get_business_services`: `{services: [{service, criticality, business_hours, owner,
-  depends_on: {segment, sgt, site, apps[]}, impact_if_down}]}`. My service is the one whose `service`
-  appears in my `protects` text.
-- `get_oncall`: `{oncall: {primary: {name, team, until}, secondary: {name, team}, escalation[], policy}}`.
-- `get_recent_changes` (query `hours`): `{hours, changes: [{id, system, change, requested_by, ticket, time,
-  state}]}`.
+`card_state` is exactly one of: quiet = grey "Quiet"; attack_active = amber "Attack running, not reported
+yet"; alert = red "Alert" + severity; stopped_verifying = amber "Verifying"; resolved = green "Resolved".
 
-## A. Core app (build this now)
+## A. Core app
 
-Operations: `get_my_timeline`, `get_my_group_board`, `replay_my_attack`.
+1. **Header**: "Night Watch Mission Control", seat, protects, watch_source_ip, a large `card_state` pill,
+   "Last updated" and a Refresh button.
+2. **Response times**: three tiles from `metrics_seconds` (Time to detect, contain, resolve) as m:ss, or
+   "not yet" when null.
+3. **Timeline**: `events` oldest first (time, name; for alert_raised the severity and quoted summary), then
+   the steps not reached yet, greyed: attack_started, alert_raised, contained, resolved.
+4. **My group**: five cards from `get_my_group_board` (seat, `card_state` color, first 80 characters of
+   `agent_summary`); outline the card where `is_me` is true.
+5. **Replay the night** (header button). Confirm first: "This resets your card and restarts the attack
+   from your own watch source only. Your agent acts on its next run, so schedule it for the next 5-minute
+   slot." (The slot is advice only.) On confirm, call `replay_my_attack` at once and enter live mode: only
+   the timeline polls every 10 s, a "Live" badge and stopwatch show, and at `resolved` show "Your agent
+   handled it in m:ss". Leave live mode at resolved, after 30 minutes or on Stop watching.
 
-1. **Header**: title "Night Watch Mission Control". From `get_my_timeline`: seat, protects,
-   watch_source_ip. A large status pill from `card_state`: quiet grey "Quiet"; attack_active amber
-   "Attack running, not reported yet"; alert red "Alert" plus `alert.severity`; stopped_verifying red
-   "Stopped, verifying"; resolved green "Resolved". "Last updated" time and a Refresh button.
-2. **Response times**: three large tiles from `metrics_seconds`: Time to detect, Time to contain, Time to
-   resolve, shown as m:ss, or "not yet" when null.
-3. **Timeline**: the `events` list, oldest first, as a vertical list of steps (time, event name, and for
-   alert_raised the severity and the agent's summary in quotes). Then show the steps that have not
-   happened yet, greyed, in this order: attack_started, alert_raised, contained, resolved.
-4. **My group**: from `get_my_group_board`, five small cards (seat, colored by `card_state` as in the
-   header, first 80 characters of `agent_summary`). Outline the card where `is_me` is true.
-5. **Replay the night** button in the header. Ask for confirmation: "This resets your card and restarts
-   the attack from your own watch source only. Your agent acts on its next run, so schedule it for the
-   next 5-minute slot." On confirm, call `replay_my_attack`, then enter live mode: refresh
-   `get_my_timeline` every 10 seconds, show a "Live" badge and a stopwatch from the replay time, and when
-   `card_state` is resolved show "Your agent handled it in m:ss" and leave live mode. Leave live mode
-   after 30 minutes or on a Stop watching button.
-6. **Refresh**: load on open; outside live mode refresh every 60 seconds while visible.
-7. **States**: loading, empty and error state in each block; on error keep the last data and mark it
-   "stale".
-8. **Look**: dark theme, large readable numbers for a projector.
+## B. Evidence my agent saw
 
-## B. Add-on: the evidence my agent saw
+`get_my_security_events`: a bar chart of the top 8 `connections[]` from minutes=60 (label
+"destination:port", value `connections`), and counters for connections, IPS events and file events from
+minutes=5. If `since_stop` is present and all its totals are 0, show a green badge "Quiet since
+<stopped_at>". Caption: "Cisco Secure Firewall events: the same data your agent used."
 
-Add a panel using `get_my_security_events` with minutes=60: a bar chart of the top 8 entries of
-`connections[]` (label "destination:port", value `connections`), plus counters for connections, IPS
-events and file events from a minutes=5 call. If the result has `since_stop` and all its totals are 0,
-show a green badge "Quiet since" `since_stop.stopped_at`. Caption: "Cisco Secure Firewall events: the same
-data your agent used."
+## C. Business impact
 
-## C. Add-on: business impact
+My service from the timeline's `service` (criticality, segment, apps, impact if down); on call from
+`get_oncall` (primary and secondary as first name + last initial, team, policy); `get_recent_changes`
+hours=24 (id, system, change, state), marked "same segment" when `change` mentions my segment.
 
-Add a panel using `get_business_services` (my service: `criticality`, `depends_on.segment` and
-`depends_on.apps`, `impact_if_down`), `get_oncall` (primary and secondary: first name and last initial,
-team; `policy`) and `get_recent_changes` with hours=24 (`id`, `system`, `change`, `state`; mark "same
-segment" when `change` mentions my `depends_on.segment`).
+## D. Add-on (only when I ask): shift handover notes
 
-## D. Add-on: shift handover notes (shared app state)
-
-Add a shared collection `handover_notes` (group, seat, note up to 500 characters, posted_at). Under My
-group, a text area and a Post note button, and the notes for my group (group from
-`get_my_group_board.group`), newest first. A user may delete only their own notes.
+A shared collection `handover_notes` (group, seat, note up to 500 characters, posted_at). Under My group:
+a text area, a Post note button and my group's notes, newest first. A user may delete only their own notes.

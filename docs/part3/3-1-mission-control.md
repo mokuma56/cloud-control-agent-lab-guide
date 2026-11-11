@@ -46,75 +46,124 @@ The app reads your seat's timeline from a small API made for it. Add it the same
 
 [Download NightWatch_Mission_Control.md](../app/NightWatch_Mission_Control.txt){ download="NightWatch_Mission_Control.md" .md-button }
 
-It is plain Markdown: what the app is for, the rules it must follow, and four sections. **Section A** is the
-core app you build now: header and card status, response times, timeline, your group, and Replay the night.
-**Sections B to D** are add-ons you can ask for afterwards, one at a time. A design file is how you make an
-app **repeatable**: the next person gets the same app from the same file.
+It is plain Markdown: what the app is for, the rules it must follow, the **data contract** (the exact
+fields each operation returns, so Studio does not have to guess), and four sections. Studio builds
+**A** (your night: status, response times, timeline, your group, Replay the night), **B** (the evidence
+your agent saw) and **C** (business impact) in one go. **D** is an add-on you can ask for afterwards. A
+design file is how you make an app **repeatable**: the next person gets the same app from the same file.
 
-## 3. Build the app from the file (5 min)
+## 3. Build the app from the file (6 min)
 
 1. **Studio → Build → App → Build**.
 2. Click **+** in the box, attach `NightWatch_Mission_Control.md`, and type:
 
     ```text
-    Build section A (the core app) of the attached design. Use my integration Night Watch Console.
+    Build the attached design now, without asking questions. Use my integration Night Watch Console.
     ```
 
-3. Send it and wait. Studio checks the integration and every operation the design names, builds the app,
-   then runs its own checks (styling, types, tests) and fixes what fails. This takes several minutes; do
-   not send another message while it works.
+3. Send it and wait. Studio checks the integration and all seven operations the design names, builds the
+   app, then runs its own checks (styling, types, tests) and fixes what fails. This takes about 5 minutes;
+   do not send another message while it works.
 
-!!! warning "Build in small steps"
-    Ask for section A first, then one add-on per message. A single request for everything at once is too
-    big for one build turn: Studio reports *This change didn't complete* and restores the last good version.
+
+4. **Name it yours.** Studio names the app after your prompt, so every app in the room starts with the same
+   name. Select the **pencil** next to the title at the top. In **Edit App details**:
+
+    <div class="sc-copytable" markdown>
+
+    | Field | Value |
+    | --- | --- |
+    | (1) App name | `<your seat> Mission Control` |
+    | (2) Description | `Night Watch Mission Control for seat <your seat>` |
+
+    </div>
+
+    (3) Select **Save changes**. The title at the top now shows your seat.
+
+    ![Rename the app with your seat](../img/28f-app-rename.png)
+
+!!! tip "Studio asks one question first"
+    Before it builds, Studio's planner usually stops to confirm one detail (replay timing, the theme, a
+    refresh rate). That is normal. Reply `Use your recommendation and build it.` and wait again. The one
+    exception: if it offers to hide your seat or watch source, answer `Show them exactly as returned.`
+
+!!! warning "If you see *This change didn't complete*"
+    Studio restores the last good version. Send the same prompt again; if it fails twice, ask for
+    `Build section A of the attached design.` first, then `Add sections B and C of the design.`
 
 ## 4. Open it and read your night (3 min)
 
-<!-- screenshots: preview, timeline, evidence, group -->
+When the build finishes, the app opens in **Preview** on the right.
 
-- [ ] The header shows your seat, your service and your card state.
-- [ ] **Overnight timeline** shows when your attack started, your agent's alert (in its own words), the
-      stop and the clear, with **Time to detect**, **Time to contain** and **Time to resolve**.
-- [ ] **My group** shows your five seats' cards, yours outlined.
+![The finished app: header, card state and response times](../img/28b-app-built.png)
+
+1. Your app's name, with your seat.
+2. **Header**: your seat, the service you protect, your watch source, your card state and when it last
+   refreshed.
+3. **Replay the night** (step 5).
+4. **Response times**: Time to detect, Time to contain and Time to resolve, or *not yet*.
+5. **Install** would add the app to your **Apps** menu. Skip it for this lab: use the app here in **Preview**.
+
+!!! warning "Use the app in Preview"
+    At the moment an **installed** Studio app cannot reach REST integrations in this tenant: its panels say
+    *unavailable* while the same app works in the builder Preview. Everything in this lab works in Preview.
+
+Scroll down:
+
+- [ ] **Timeline**: when your attack started, your agent's alert in its own words, the stop and the clear.
+      Steps that have not happened yet are greyed.
+- [ ] **My group**: the five seats in your group, yours marked **You**.
+
+![The evidence your agent saw](../img/28d-app-evidence.png)
+
+- [ ] **Evidence my agent saw**: (1) the top destinations your source talked to in the last hour, (2)
+      connections, IPS and file events in the last 5 minutes. After your agent stops your attack, a green
+      **Quiet since** badge appears.
+
+![Business impact](../img/28e-app-business.png)
+
+- [ ] **Business impact**: (1) your service: criticality, segment, apps and the impact if it goes down;
+      (2) who is on call and the wake policy.
+
+![Recent changes](../img/28g-app-changes.png)
+
+- [ ] (1) **Recent changes** in the last 24 hours. (2) **same segment** marks a change on your service's
+      segment: the first place to look when something breaks.
+
+!!! note "No business context?"
+    Only some lab services have a business-context record. If **My service** says *No business context
+    for this service*, the app is working; on call and recent changes still show.
 
 ## 5. Replay the night (3 min)
 
-1. In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → **Edit schedule**),
-   as in 2.4.
-2. In the app, select **Replay the night**, read the confirmation, and confirm. Your card resets and your
-   attack starts again.
-3. Hands off. When your agent's run starts, the app lights each step as it happens: **red**, **striped**,
-   **green**, and stops the clock.
+1. In the app, select **Replay the night**. (1) Read what it does, then (2) select **Replay the night**.
 
-- [ ] The app shows *"Your agent handled it in m:ss"*.
+    ![Replay the night: confirmation](../img/28h-replay-confirm.png)
 
-## 6. Add-ons (if you have time)
+2. The app goes (1) amber, *Attack running, not reported yet*, and (2) **Live**, with a stopwatch.
 
-Send one at a time, and wait for each to finish:
+    ![Live mode after the replay](../img/28i-replay-live.png)
 
-=== "B. Evidence"
+3. In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → **Edit schedule**),
+   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, contained,
+   resolved) and the card goes **red**, then **Verifying**, then **green**.
 
-    ```text
-    Add section B of the design.
-    ```
+    ![Your agent handled it](../img/28j-replay-resolved.png)
 
-    A chart of the connections your agent saw, and a green **Quiet since** badge after the stop.
+- [ ] (1) **Response times** fill in. In this run: 8:15 to detect (mostly waiting for the scheduled slot),
+      0:14 to contain, 8:44 to resolve.
+- [ ] (2) The **Timeline** shows each step, with your agent's alert in its own words.
+- [ ] (3) Your card in **My group** turns **Resolved**, with your agent's summary. In live mode the app
+      also shows *"Your agent handled it in m:ss"*.
 
-=== "C. Business impact"
+## 6. Add-on: shift handover notes (if you have time)
 
-    ```text
-    Add section C of the design.
-    ```
+```text
+Add section D of the design.
+```
 
-    Your service's criticality, who the on-call policy would wake, and the last day's changes.
-
-=== "D. Handover notes"
-
-    ```text
-    Add section D of the design.
-    ```
-
-    A note box your whole group sees: what your agent found, for the day shift.
+A note box your whole group shares: what your agent found, for the day shift. Notes are stored in the
+app, so everyone in your group sees them.
 
 !!! success "What you just did"
     You built a second kind of Studio application from a file, on top of the same integrations your agent
