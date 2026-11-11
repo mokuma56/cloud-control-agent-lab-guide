@@ -1,30 +1,40 @@
 # 3.5 Lights Out (3:10, 25 min)
 
 !!! abstract "Goal"
-    Hands off. Attacks start, your agent finds yours, your tile turns red. Then you wake up, approve the
-    remediation, and your agent verifies and turns your light off.
+    Hands off. Your agent runs on its own (or you start it from Canvas), finds your lane, and turns your
+    tile red. Then you wake up, approve the remediation, and verify that your light goes off.
+
+There is no race and no shared start time. Every seat's lane keeps sending traffic until the end of the
+lab, so you do this section at your own pace, whenever your agent runs.
 
 ## 1. Hands off (about 5 min)
 
-- The room lights dim. Hands off keyboards.
-- The proctor clears the board, starts the timer and **restarts all 30 lanes**. The practice traffic from
-  Part 2 stops and the real attack begins: a source IP that belongs to your seat is sending hostile traffic
-  to your table's service. Your agent does not know that.
-  It runs the same triage method as always.
-- Scheduled agents run at the announced time. If you run from Canvas, wait for the proctor's
-  **"go"**, then send your saved prompt.
+=== "Option A: Scheduled"
 
-Watch the room wall: amber tiles show attacks nobody has found yet, with a clock counting up. They turn red
-as agents report, seat by seat, and the wall records each seat's **time to detect**.
+    Take your hands off the keyboard and wait for the run time you chose in 3.4. Studio starts your agent
+    with its trigger prompt, exactly as it would at 3 a.m. Nobody types anything.
+
+=== "Option B: On demand from Canvas"
+
+    Send the prompt from 3.4 Option B in your Canvas board, then take your hands off while Canvas works.
+
+Watch your tile on the room wall. It turns **red** with your agent's summary when your agent calls
+`signal_issue`. Your neighbors' tiles change at their own times.
 
 ![20-wall](../img/20-wall.png){ loading=lazy }
 
-*The room wall during Lights Out: (3) amber = attack not found yet, (4) red = an agent's alert, (5) stopped and verifying, (6) resolved; (7) the agents' messages and (8) the leaderboard.*
+*The room wall: (3) amber = a lane running that no agent has reported yet, (4) red = an agent's alert, (5) stopped and verifying, (6) resolved; (7) the agents' messages.*
 
+!!! tip "Nothing after a few minutes?"
+    Check **Studio → Manage → Applications → your agent → View runs** for a run at your time. No run:
+    the schedule time had already passed when you saved it; schedule the next slot. A run that says
+    STATUS healthy: your lane was stopped; ask the proctor to restart your seat, then reset your tile and
+    run again.
 
 ## 2. Wake up and read the finding (about 10 min)
 
-Open your agent's latest run (or your Canvas answer). A good finding looks like this:
+**Option A:** open **Studio → Manage → Applications**, select your agent, then **View runs** and the
+latest run. **Option B:** read Canvas's answer. A good finding looks like this:
 
 ```text
 STATUS: issue
@@ -85,7 +95,7 @@ Canvas calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · 
 
 ## 4. Verify and clear (about 5 min)
 
-Ask your agent (or Canvas) to verify:
+In the same Canvas chat, ask it to verify:
 
 ```text
 Re-check my security events for the last 5 minutes. If my source is quiet and my light is on,
@@ -93,13 +103,12 @@ call clear_issue and report STATUS: healthy.
 ```
 
 - [ ] Your tile turns green: **Resolved ✓**.
-- [ ] The board shows your **time to clear**.
 
     ![13-lights-healthy](../img/13-lights-healthy.png){ loading=lazy }
 
     *After the stop: (1) STATUS healthy, (2) the light is cleared and only this seat's source was affected.*
 
-
-!!! success "Prizes"
-    Fastest detect, fastest clear, and best custom workflow (judged by the proctors from your
-    integration and your agent's descriptions).
+!!! success "What you just did"
+    An agent you described in plain words ran on its own, used Cisco telemetry and your own integration
+    to find a problem nobody told it about, raised the alert, and stopped at the line you drew until a
+    human approved. That is the night shift.

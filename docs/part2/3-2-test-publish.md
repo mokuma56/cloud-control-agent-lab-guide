@@ -120,8 +120,8 @@ For **each** test:
 !!! info "Your lane is already sending traffic"
     Since the break, the proctor has had **practice traffic** running: your seat's source IP sends test
     attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
-    It is not the challenge. At Lights Out (3.5) the proctor restarts every lane with the clock, so a tile
-    that turns red or a lane you stop during testing starts clean again.
+    It keeps running to the end of the lab, and it is the same traffic your agent finds in 3.5. If a test
+    stops your lane, ask the proctor to restart your seat; in 3.4 you reset your tile before the real run.
 
 !!! tip "Your lane's activity depends on your seat letter"
     Each seat at a table sends a different kind of traffic, so not every agent sees IPS events:

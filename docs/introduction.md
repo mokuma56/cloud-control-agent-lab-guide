@@ -103,15 +103,15 @@ for example **T3-C** is table 3, seat C. The small colored dot on your tile matc
 
 ![20-wall](img/20-wall.png){ loading=lazy }
 
-*(1) Live counts, (2) the Lights Out clock, (3) a threat nobody has detected yet, (4) an agent's alert with its summary, (5) a lane stopped after approval and being verified, (6) resolved, (7) what the agents said, (8) the leaderboard.*
+*(1) Live counts, (3) a lane running that no agent has reported yet, (4) an agent's alert with its summary, (5) a lane stopped after approval and being verified, (6) resolved, (7) what the agents said.*
 
 | Your tile | Means | Who changes it |
 | --- | --- | --- |
 | Grey, **Quiet** | Nothing is happening at your seat | - |
-| Amber, **Threat active · undetected 2:31** | Your attack lane is running and no agent has reported it yet; the clock counts up | the proctor starts lanes |
+| Amber, **Threat active · undetected** | Your lane is running and no agent has reported it yet | the proctor starts lanes |
 | Red, **Alert** + your agent's summary | Your agent called `signal_issue`. Minor is steady, major pulses, critical pulses fast | your agent |
 | Red stripes, **Stopped · verifying** | You approved `stop_my_lane`; the agent has not confirmed it is quiet yet | you, then your agent |
 | Green, **Resolved ✓** | Your agent verified the source is quiet and called `clear_issue` | your agent |
 
-When every attack is resolved, the wall shows **ALL CLEAR**. The leaderboard ranks the fastest detect,
-stop and clear.
+When every seat is resolved, the wall shows **ALL CLEAR**. It is not a race: agents run at different
+times, so tiles change at different times.

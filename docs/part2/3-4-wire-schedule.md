@@ -119,46 +119,78 @@ but NOT called.
 
 ## Choose how it runs
 
-=== "Scheduled"
+Your agent is ready. Now decide **how it starts** for Lights Out (3.5). There are two options, and both
+end the same way: your agent finds your lane, raises your alert, and waits for your approval.
 
-    Select **Schedule** (top right of the builder). It is blue only after a passing test of your latest
-    saved version; otherwise it says *Run a test on the latest saved changes first*: rerun Test 4.
+| | Option A: Scheduled (recommended) | Option B: On demand from Canvas |
+| --- | --- | --- |
+| Who starts it | Studio, at the time you set | You, by sending a prompt |
+| What it feels like | Real night shift: it runs while you are hands off | A colleague you ask to check now |
+| Uses | Your agent, its instructions and your integrations | Canvas, Lab Tools and the triage note |
+| Pick it when | You want the real-world experience | You want to start right away, or Schedule is still locked |
 
-    In **Schedule Agent**:
+There is no race. Every seat's lane keeps sending traffic until the end of the lab, so your agent finds
+yours whenever it runs.
 
-    1. **Activation cadence**: **Daily** (the choices are Hourly, Daily and Weekly; there is no "every
-       15 minutes").
-    2. **Local run time**: the Lights Out time the proctor announces, in 5-minute steps. It is your
-       browser's time zone; Studio converts it to UTC.
-    3. **Max runs**: `1`. One run at Lights Out is all you need, and the schedule stops by itself.
-    4. **Trigger prompt**: keep Studio's text (for example *Run the ... night-watch review.*). It is the
-       message your agent receives when the schedule fires.
-    5. Select **Schedule**.
+### Before you choose: get your seat ready
 
-    ![18b-schedule-dialog](../img/18b-schedule-dialog.png){ loading=lazy }
+1. **Your lane must be running.** If a test stopped it (for example a failed Test 3), ask the proctor to
+   restart your seat. A stopped lane gives a healthy report and nothing to find.
+2. **Reset your tile**, so you see your agent turn it red. Select **Run**: it clears your alert on the room
+   wall with your seat token.
 
-    *Schedule Agent: (1) Daily, (2) the announced Lights Out time, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.*
+    <div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset your tile: it goes back to quiet"></div>
 
-    Back in the builder, **Review Agent → Current schedule** shows the time instead of *This Agent is
-    not scheduled*. A scheduled run reports and raises your alert; it never stops your lane. You approve
-    the stop yourself in 3.5. If Schedule is not offered in your release, use the Canvas tab.
+=== "Option A: Scheduled"
 
-=== "On demand from Canvas"
+    1. **Note the time now** on your laptop clock. Pick the **next 5-minute slot that is at least 5
+       minutes away**, so the run starts after you finish here. For example: it is 9:07, choose 9:15.
+    2. Select **Schedule** (top right of the builder). It is blue only after a passing test of your
+       latest saved version; otherwise it says *Run a test on the latest saved changes first*: rerun
+       Test 4.
+    3. In **Schedule Agent**:
+        - **Activation cadence**: **Daily** (the choices are Hourly, Daily and Weekly).
+        - **Local run time**: the slot from step 1. The list is in 5-minute steps and in your laptop's
+          time zone; Studio converts it to UTC.
+        - **Max runs**: `1`. One run is all you need, and the schedule stops by itself.
+        - **Trigger prompt**: keep Studio's text (for example *Run the ... night-watch review.*). It is
+          the message your agent receives when the schedule fires.
+        - Select **Schedule**.
 
-    If scheduling is not available in your Studio release, you will run the same check from AI
-    Canvas when the proctor says "go". Canvas uses the same Lab Tools, so your tile still turns red.
-    Save this prompt now:
+        ![18b-schedule-dialog](../img/18b-schedule-dialog.png){ loading=lazy }
 
-    ```text
-    Using Lab Tools and the lane triage guidance: what is my watch source doing right now?
-    Get my watch scope, then my security events for the last 30 minutes, use the business context
-    for impact and severity, give the STATUS report, and call signal_issue if it is an issue.
-    Then ask me before stop_my_lane.
-    ```
+        *Schedule Agent: (1) Daily, (2) the next 5-minute slot at least 5 minutes away, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.*
+
+    4. Check **Review Agent → Current schedule**: it shows your run time instead of *This Agent is not
+       scheduled*.
+
+    Then go to [3.5](3-5-lights-out.md) and keep your hands off until your run time. A scheduled run
+    reports and raises your alert; it never stops your lane. You approve the stop yourself, in Canvas.
+
+    !!! tip "Missed your slot?"
+        If the time passed before you selected Schedule, open **Schedule** again and pick the next slot.
+        The run uses the version that passed its test, so you do not need to test again unless you changed
+        the agent.
+
+=== "Option B: On demand from Canvas"
+
+    You start the same check yourself, in AI Canvas. Canvas uses the same Lab Tools and your seat token,
+    so your tile turns red the same way. It is quicker to start, but nobody is asleep: you are the one
+    asking.
+
+    1. Open **Canvas** and your board from Part 1 (or **+ New**).
+    2. Go to [3.5](3-5-lights-out.md) and send this prompt there when you are ready:
+
+        ```text
+        Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
+        watch scope, then my security events for the last 5 minutes and the last 60 minutes, use the
+        business context for impact and severity, give the STATUS report, and call signal_issue if it
+        is an issue. Then propose stop_my_lane and wait for my reply "approve stop".
+        ```
 
     ![10-lights-plan](../img/10-lights-plan.png){ loading=lazy }
 
-    *Running it from Canvas: (1) your saved prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.*
+    *Running it from Canvas: (1) your prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.*
 
-
-- [ ] My agent is scheduled for the Lights Out time, or my Canvas prompt is saved.
+- [ ] My lane is running and my tile is quiet.
+- [ ] My agent is scheduled for the next slot (Option A), or I have the Canvas prompt ready (Option B).
