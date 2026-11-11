@@ -1297,8 +1297,11 @@ repeating the "approve stop" rule stops a refinement from loosening the guardrai
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The instructions still say the only approval for <code>stop_my_lane</code> is "approve stop".</li>
 </ol>
 <h2 id="add-a-fourth-test">Add a fourth test<a class="headerlink" href="#add-a-fourth-test" title="Permanent link">¶</a></h2>
-<p>Run it the same way as the three tests in 3.2: copy the <strong>Scenario</strong> and the <strong>Expected outcome</strong> into the
-<strong>Test</strong> tab, then <strong>Run scenario</strong>.</p>
+<p>Your change in the step above created a new version, so Schedule is locked until a test passes on it.
+Test 4 checks the whole chain at once with your own integration: find the problem, raise the alert,
+confirm the light is on, and still wait for approval.</p>
+<p>Run it the same way as the three tests in 3.2: in the builder's right-hand panel open <strong>Test</strong>, copy the
+<strong>Scenario</strong> and the <strong>Expected outcome</strong> into their boxes, then <strong>Run scenario</strong> (about a minute).</p>
 <p><strong>Scenario</strong></p>
 <div class="highlight"><pre><span></span><code>My lane is running and my watch source is attacking the service I protect right now. Find it, report
 it, and make sure my light ends up on.
@@ -1308,6 +1311,15 @@ it, and make sure my light ends up on.
 signal_issue is called, and get_light_status afterwards shows my light on. stop_my_lane is proposed
 but NOT called.
 </code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/25a-test4-form.png" data-desc-position="bottom"><img alt="25a-test4-form" loading="lazy" src="../../img/25a-test4-form.png"></a></p>
+<p><em>(1) Scenario, (2) Expected outcome, (3) Run scenario. Earlier results stay further down the panel; the newest appears at the top.</em></p>
+<p><strong>What a pass looks like</strong> (seat T1-A, port scan):</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/25b-test4-result.png" data-desc-position="bottom"><img alt="25b-test4-result" loading="lazy" src="../../img/25b-test4-result.png"></a></p>
+<p><em>(1) Scenario Result: Completed, (2) STATUS issue, SEVERITY from business criticality, (3) the activity named (here a port scan), (4) Schedule is blue again: this version passed a test.</em></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/25c-test4-evidence.png" data-desc-position="bottom"><img alt="25c-test4-evidence" loading="lazy" src="../../img/25c-test4-evidence.png"></a></p>
+<p><em>Evidence: (1) the agent learned its own seat first and saw the lane running, (2) it decided from the 5-minute window: one source, five ports on one host, no IPS events, still a port scan.</em></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/25d-test4-light.png" data-desc-position="bottom"><img alt="25d-test4-light" loading="lazy" src="../../img/25d-test4-light.png"></a></p>
+<p><em>(1) stop_my_lane proposed, waiting for "approve stop", (2) the light confirmed on with get_light_status.</em></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile is red on the room wall.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All four tests pass on your latest saved version, so <strong>Schedule</strong> is blue.</li>
