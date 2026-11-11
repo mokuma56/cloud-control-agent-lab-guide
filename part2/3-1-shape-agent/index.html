@@ -1309,7 +1309,7 @@ Each run:
    Hostile activity does not always come with IPS signatures. Name it from the firewall events:
    - one source to many ports on one host, short connections: port scan
    - one source to the same port on many hosts: host sweep
-   - SQL injection or ../ URLs, scanner user agents (Nikto), IPS signatures: web attack
+   - unusual web request paths, web scanner user agents or IPS signatures: web attack
    - file events with an EICAR or malware disposition: malware file transfer
    - the same small request to one destination at a regular interval: C2-style beacon
    Any of these from my watch source in the last 5 minutes is STATUS issue, even with zero IPS

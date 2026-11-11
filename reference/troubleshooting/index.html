@@ -1200,6 +1200,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#studio-says-agent-update-needs-attention-the-agent-could-not-be-prepared" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Studio says "Agent update needs attention: The Agent could not be prepared"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#studio-discovers-fewer-than-10-tools" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1310,6 +1321,13 @@ between sessions). Copy it again from your seat card, then update the credential
 <h2 id="rate-limit-429">"rate limit" (429)<a class="headerlink" href="#rate-limit-429" title="Permanent link">¶</a></h2>
 <p>Your token made more than 30 calls in a minute, usually an agent stuck in a loop. Wait a minute and
 check the agent's instructions for a step it repeats.</p>
+<h2 id="studio-says-agent-update-needs-attention-the-agent-could-not-be-prepared">Studio says "Agent update needs attention: The Agent could not be prepared"<a class="headerlink" href="#studio-says-agent-update-needs-attention-the-agent-could-not-be-prepared" title="Permanent link">¶</a></h2>
+<p>Studio's web firewall blocks any message that looks like a web attack, for example text with
+<code>../</code> paths, SQL injection strings or scanner names, so Studio never receives it. Length is not the
+problem. Describe attacks in plain words ("unusual web request paths, web scanner user agents")
+instead of quoting attack strings, then start the agent again from <strong>Build → Agent</strong>. Do not paste
+raw firewall events or sample URLs into Studio chat. Check <strong>Studio → Manage</strong> first: a failed
+attempt does not create an agent.</p>
 <h2 id="studio-discovers-fewer-than-10-tools">Studio discovers fewer than 10 tools<a class="headerlink" href="#studio-discovers-fewer-than-10-tools" title="Permanent link">¶</a></h2>
 <p>Use <strong>⋯ → Rediscover</strong> on the integration (it asks for your token again). If the URL is not the one
 on your seat card, edit the integration.</p>
