@@ -112,14 +112,19 @@ Canvas calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · 
 
 ## 4. Verify and clear (about 5 min)
 
-In the same Canvas chat, ask it to verify:
+**Wait 5 minutes after the stop.** Firewall events from before the stop stay in the 5-minute window
+until they age out, so a check right away still sees them and will not clear your light. Use the time to
+read your agent's evidence.
+
+Then, in the same Canvas chat, ask it to verify:
 
 ```text
 Re-check my security events for the last 5 minutes. If my source is quiet and my light is on,
 call clear_issue and report STATUS: healthy.
 ```
 
-- [ ] Your tile turns green: **Resolved ✓**.
+- [ ] Your tile turns green: **Resolved ✓**. If Canvas says events are still arriving, wait two more
+      minutes and send the same message again.
 
     ![13-lights-healthy](../img/13-lights-healthy.png){ loading=lazy }
 
