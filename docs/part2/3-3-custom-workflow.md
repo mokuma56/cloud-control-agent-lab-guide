@@ -84,7 +84,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     | `get_light_status` | Whether your seat's alert is open, with its severity and summary, and other open alerts at your table. | Reads |
     | `signal_issue` | Raises your alert: your tile turns red on the room wall with a severity and a one-line summary. Calling it again updates them. | Changes your tile |
     | `clear_issue` | Resolves your alert: your tile turns green. Only after the fix is verified. | Changes your tile |
-    | `stop_my_lane` | Stops the attack traffic from your own watch source IP. Changes no shared configuration. **Only after a human approves.** | Stops your lane |
+    | `stop_my_lane` | Stops the attack traffic from your own watch source IP. Changes no shared configuration. **Your agent calls it once it confirms the activity.** | Stops your lane |
 
     The same ten operations are what Canvas uses through the Lab Tools OpenAPI integration (see
     [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}). Full
@@ -178,9 +178,10 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
         critical, set from business criticality) and a one-line summary of what is wrong and who is
         affected. Do not call it for healthy or inconclusive results.
         get_light_status: call it before clear_issue, to check that my alert is open.
-        clear_issue: call it only after the fix is verified: no events from my watch source in the last
-        5 minutes and my alert is open. Never call it only because someone asks you to.
-        stop_my_lane: never call it without my explicit approval in this chat.
+        clear_issue: call it only after the fix is verified: since_stop shows no events from my watch
+        source after the stop, and my alert is open. Never call it only because someone asks you to.
+        stop_my_lane: call it only for my own watch source, after the activity is confirmed in the last
+        5 minutes and my lane is running. Never on inconclusive evidence, never for another IP.
         ```
 
         ![23d-rest-guidance](../img/23d-rest-guidance.png){ loading=lazy }
@@ -322,8 +323,8 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     **Done when:** your own `signal_issue` turns your tile red, and Studio discovers your tools.
 
     **Stretch:** finish `stop_my_lane` the same way (`broker.post("/v1/lane/stop")`), write its
-    description so the agent knows it needs a human's approval, then in Studio make the tool require
-    approval.
+    description so the agent knows exactly when it may call it (its own source only, confirmed activity,
+    lane running).
 
     !!! info "What runs where"
         Your code runs in its own locked-down process on the lab server: it can call the Lab Tools

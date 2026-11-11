@@ -21,7 +21,7 @@ no call can read or change another seat. Rate limit: 30 requests per minute per 
 | --- | --- | --- | --- |
 | `signal_issue` | `POST /v1/signal` `{"severity","summary"}` | Turns your seat red on the room wall with your summary. Minor is steady, major pulses, critical pulses fast | Call when STATUS is issue. Calling again updates severity and summary |
 | `clear_issue` | `POST /v1/clear` | Turns your seat green (resolved) | Only after verifying the fix, and only if your light is on |
-| `stop_my_lane` | `POST /v1/lane/stop` | Stops traffic from your watch source IP only | **Only after a human approves.** Changes no shared configuration |
+| `stop_my_lane` | `POST /v1/lane/stop` | Stops traffic from your watch source IP only | **Your agent's rules decide when.** Changes no shared configuration |
 
 ## Endpoints
 

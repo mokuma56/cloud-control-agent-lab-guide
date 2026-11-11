@@ -1,8 +1,9 @@
 # 3.5 Lights Out (3:10, 25 min)
 
 !!! abstract "Goal"
-    Hands off. Your agent runs on its own (or you start it from Canvas), finds your lane, and turns your
-    tile red. Then you wake up, approve the remediation, and verify that your light goes off.
+    Hands off. Your agent runs on its own, finds your lane, raises the alert, stops your source,
+    verifies it is quiet and turns your light off. Then you wake up and read what it did. (With
+    Option B, Canvas asks you before it stops anything.)
 
 There is no race and no shared start time. Every seat's lane keeps sending traffic until the end of the
 lab, so you do this section at your own pace, whenever your agent runs.
@@ -18,8 +19,14 @@ lab, so you do this section at your own pace, whenever your agent runs.
 
     Send the prompt from 3.4 Option B in your Canvas board, then take your hands off while Canvas works.
 
-Watch your tile on the room wall. It turns **red** with your agent's summary when your agent calls
-`signal_issue`. Your neighbors' tiles change at their own times.
+Watch your tile on the room wall:
+
+1. **Red** with your agent's summary: it called `signal_issue`.
+2. **Red stripes, Stopped · verifying**: it called `stop_my_lane` on your own source.
+3. **Green, Resolved ✓**: `since_stop` showed nothing after the stop, so it called `clear_issue`.
+
+With Option A this takes about 20 seconds once the run reaches the containment step. Your neighbors'
+tiles change at their own times.
 
 ![20-wall](../img/20-wall.png){ loading=lazy }
 
@@ -27,11 +34,12 @@ Watch your tile on the room wall. It turns **red** with your agent's summary whe
 
 !!! tip "Nothing after a few minutes?"
     Check **Studio → Manage → Applications → your agent → View runs** for a run at your time. No run:
-    the schedule time had already passed when you saved it; schedule the next slot. A run that says
-    STATUS healthy: your lane was stopped; ask the proctor to restart your seat, then reset your tile and
-    run again.
+    the schedule time had already passed when you saved it; use **Edit schedule** for the next slot. A
+    run that says STATUS healthy: your lane was stopped; restart it with the **Restart my lane** button in
+    3.4, then schedule the next slot. A tile that stays red: the run found events after the stop and kept
+    the alert open; read its EVIDENCE.
 
-## 2. Wake up and read the finding (about 10 min)
+## 2. Wake up and read what your agent did (about 10 min)
 
 === "Option A: Scheduled"
 
@@ -45,16 +53,16 @@ Watch your tile on the room wall. It turns **red** with your agent's summary whe
 
     ![26c-run-detail](../img/26c-run-detail.png){ loading=lazy }
 
-    *A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS issue and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE and NEXT STEP.*
+    *A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE: the signal_issue, stop_my_lane, since_stop and clear_issue steps, in that order, like Test 4 in 3.4.*
 
 === "Option B: On demand from Canvas"
 
-    Read Canvas's answer in your board.
+    Read Canvas's answer in your board, then go on to steps 3 and 4.
 
-A good finding looks like this (this one is from a web attack seat; yours names your own seat's activity):
+A good report looks like this (this one is from a web attack seat; yours names your own seat's activity):
 
 ```text
-STATUS: issue
+STATUS: resolved
 SEVERITY: major
 SUMMARY: 10.106.10.1xx is sending web attack patterns to Core services (AD-1)
 CAUSE: my watch source is sending SQL injection and path traversal requests with a Nikto scanner user agent
@@ -65,7 +73,8 @@ EVIDENCE:
   /admin/config.php?file=../../../../etc/shadow
 - Cisco Meraki: no port or configuration changes in the last 2 hours, wired and wireless clients normal
 - Lab Tools: no change in the last 24 hours explains it; on-call policy: wake primary for critical
-NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting approval.
+- Containment: signal_issue (major), stop_my_lane on 10.106.10.1xx only, since_stop 0/0/0, clear_issue
+NEXT STEP: SecOps to find out why 10.106.10.1xx started scanning before its lane is re-enabled.
 ```
 
 !!! success "Same method, different incident"
@@ -73,29 +82,23 @@ NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting app
     agent checked the network and the change calendar first, the places where the answer was in Part 1, ruled them out, and
     found the cause in the firewall instead. Nobody told it that tonight's problem was an attack.
 
-Check it before you approve:
+Check what it did:
 
-- [ ] The source IP is **yours** (compare with `get_my_watch_scope`).
+- [ ] The source IP it stopped is **yours** (compare with `get_my_watch_scope`), and nothing else was touched.
 - [ ] The CAUSE is supported by evidence, not assumed. See the [evidence guide](../reference/evidence.md).
-- [ ] Your tile on the room wall is red.
+- [ ] It cleared the alert only after `since_stop` showed nothing, and your tile is green.
 
     ![11-lights-evidence](../img/11-lights-evidence.png){ loading=lazy }
 
-    *A real finding for seat T3-C: (1) Secure Firewall events and IPS signatures from get_my_security_events, (2) NEXT STEP waits for approval.*
+    *Evidence for a web attack seat (T3-C): (1) Secure Firewall events and IPS signatures from get_my_security_events. This run is from Option B, so (2) NEXT STEP waits for approval.*
 
 
-## 3. Approve the remediation (about 5 min)
+## 3. Option B only: approve the stop in Canvas (about 5 min)
 
-Your scheduled agent only reports and raises the alert: its rules say a scheduled run never stops a
-lane. You approve the stop in **Canvas**, where you can reply:
+With Option A your agent already did steps 3 and 4 on its own: skip to the end. Canvas's triage note
+makes it ask before it stops anything, so with Option B you approve it:
 
-1. Open your Canvas board (or **+ New**) and send:
-
-    ```text
-    Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
-    watch scope and my security events for the last 5 minutes, give the STATUS report, then ask me
-    before stop_my_lane.
-    ```
+1. In the Canvas chat where you sent the 3.4 prompt, wait for its report.
 
 2. When Canvas asks *"Approve stop_my_lane for 10.106.10.1xx?"*, check the IP is yours and reply:
 
@@ -110,7 +113,7 @@ Canvas calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · 
 *(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.*
 
 
-## 4. Verify and clear (about 5 min)
+## 4. Option B only: verify and clear (about 5 min)
 
 **Wait 5 minutes after the stop.** Firewall events from before the stop stay in the 5-minute window
 until they age out, so a check right away still sees them and will not clear your light. Use the time to
@@ -132,5 +135,6 @@ call clear_issue and report STATUS: healthy.
 
 !!! success "What you just did"
     An agent you described in plain words ran on its own, used Cisco telemetry and your own integration
-    to find a problem nobody told it about, raised the alert, and stopped at the line you drew until a
-    human approved. That is the night shift.
+    to find a problem nobody told it about, raised the alert, contained it within the limits you set,
+    proved it was quiet and closed the alert. That is the night shift. Keeping a human in the loop for
+    riskier actions is a different pattern, and you will build it in a later section.

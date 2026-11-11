@@ -103,7 +103,7 @@ for example **T3-C** is table 3, seat C. The small colored dot on your tile matc
 
 ![20-wall](img/20-wall.png){ loading=lazy }
 
-*(1) Live counts, (3) a lane running that no agent has reported yet, (4) an agent's alert with its summary, (5) a lane stopped after approval and being verified, (6) resolved, (7) what the agents said.*
+*(1) Live counts, (3) a lane running that no agent has reported yet, (4) an agent's alert with its summary, (5) a lane its agent stopped and is verifying, (6) resolved, (7) what the agents said.*
 
 | Your tile | Means | Who changes it |
 | --- | --- | --- |

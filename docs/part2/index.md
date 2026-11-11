@@ -25,7 +25,7 @@ sequenceDiagram
   participant A as Your agent
   participant L as Lab Tools
   participant F as Secure Firewall (via Splunk)
-  participant Y as You
+  participant Y as You (asleep)
   A->>L: get_my_watch_scope
   L-->>A: seat, service I protect, my watch source IP (not what is wrong)
   A->>L: get_my_security_events
@@ -34,10 +34,10 @@ sequenceDiagram
   A->>L: get_business_services / get_oncall
   A->>L: signal_issue (severity)
   Note over L: your tile turns red on the room wall
-  A->>Y: "Approve stop_my_lane for 10.106.10.1xx?"
-  Y-->>A: yes
-  A->>L: stop_my_lane
-  A->>L: get_my_security_events (last few minutes)
-  A->>L: clear_issue
+  A->>L: stop_my_lane (my own source only)
+  Note over L: your tile shows Stopped, verifying
+  A->>L: get_my_security_events (since_stop)
+  A->>L: clear_issue (only if nothing since the stop)
   Note over L: your tile turns green
+  A-->>Y: report: STATUS resolved, with evidence
 ```

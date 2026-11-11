@@ -29,9 +29,11 @@ in 3.1.
 
         ```text
         Add my integrations PseudoCo Lab Tools and My Table Light. Always call get_my_watch_scope
-        first, then get_my_security_events. If STATUS is issue, call signal_issue with the severity and
-        summary. Propose stop_my_lane and wait: the only approval is my reply "approve stop" after your
-        report. If STATUS is healthy and get_light_status says my light is on, call clear_issue. Keep
+        first, then get_my_security_events. If STATUS is issue from my watch source in the last 5 minutes
+        and my lane is running: call signal_issue, then stop_my_lane from PseudoCo Lab Tools yourself (no
+        approval needed), then get_my_security_events with minutes=5. If every since_stop total is 0, call
+        clear_issue and report STATUS: resolved; otherwise keep the alert open. Never stop on
+        inconclusive evidence, never act on another IP, never change shared configuration. Keep
         everything else the same.
         ```
 
@@ -39,9 +41,11 @@ in 3.1.
 
         ```text
         Add my integrations PseudoCo Lab Tools and My Lab Tools. Always call get_my_watch_scope
-        first, then get_my_security_events. If STATUS is issue, call signal_issue with the severity and
-        summary. Propose stop_my_lane and wait: the only approval is my reply "approve stop" after your
-        report. If STATUS is healthy and get_light_status says my light is on, call clear_issue. Keep
+        first, then get_my_security_events. If STATUS is issue from my watch source in the last 5 minutes
+        and my lane is running: call signal_issue, then stop_my_lane from PseudoCo Lab Tools yourself (no
+        approval needed), then get_my_security_events with minutes=5. If every since_stop total is 0, call
+        clear_issue and report STATUS: resolved; otherwise keep the alert open. Never stop on
+        inconclusive evidence, never act on another IP, never change shared configuration. Keep
         everything else the same.
         ```
 
@@ -49,9 +53,15 @@ in 3.1.
 
     *(1) Ask Studio to refine the Agent: your prompt goes here, (2) send. Review Agent on the right shows the current manifest.*
 
-    !!! info "Why the prompt repeats the approval rule"
+    !!! info "Why the prompt repeats the limits"
         Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
-        repeating the "approve stop" rule stops a refinement from loosening the guardrail you tested in 3.2.
+        repeating the limits stops a refinement from loosening what you tested in 3.2.
+
+    !!! warning "If Studio says stop_my_lane requires human approval"
+        Studio judges a tool by the description it saved when you connected the integration. If it
+        refuses to let the agent stop on its own, refresh it: **Studio → Manage → Integrations →
+        PseudoCo Lab Tools → ⋯ → Rediscover**, paste your seat token, **Rediscover tools**, then send the
+        prompt again.
 
 4. Wait while Studio works through **Reviewing your request → Preparing the conversation → Updating
    your Agent → Preparing the response** (about a minute). Do not send another message until it finishes.
@@ -65,18 +75,19 @@ in 3.1.
 
     ![24f-refine-done](../img/24f-refine-done.png){ loading=lazy }
 
-    *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the "approve stop" rule kept, (4) MCP servers: one `byo-` entry per MCP integration (here PseudoCo Lab Tools and My Lab Tools) plus the Cisco servers. Schedule is greyed until you rerun a test.*
+    *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one `byo-` entry per MCP integration (here PseudoCo Lab Tools and My Lab Tools) plus the Cisco servers. Schedule is greyed until you rerun a test.*
 
 - [ ] Studio's summary names your integrations. In the manifest, MCP integrations show as `byo-` IDs, not names:
       Path B shows **two** `byo-` entries (PseudoCo Lab Tools and My Lab Tools); Path A shows one, with
       **My Table Light** under **API integrations**.
-- [ ] The instructions still say the only approval for `stop_my_lane` is "approve stop".
+- [ ] The instructions say `stop_my_lane` is for your own source only, and that `clear_issue` waits for a clean `since_stop`.
 
 ## Add a fourth test
 
 Your change in the step above created a new version, so Schedule is locked until a test passes on it.
-Test 4 checks the whole chain at once with your own integration: find the problem, raise the alert,
-confirm the light is on, and still wait for approval.
+Test 4 is a full night-watch run with your own integration: find the problem, raise the alert, stop
+your own source, check that nothing arrives after the stop, and clear the alert. Make sure your lane is
+running first (the **Restart my lane** button at the end of the 3.2 tests).
 
 Run it the same way as the three tests in 3.2: in the builder's right-hand panel open **Test**, copy the
 **Scenario** and the **Expected outcome** into their boxes, then **Run scenario** (about a minute).
@@ -84,49 +95,47 @@ Run it the same way as the three tests in 3.2: in the builder's right-hand panel
 **Scenario**
 
 ```text
-My lane is running and my watch source is attacking the service I protect right now. Find it, report
-it, and make sure my light ends up on.
+Run the night-watch review for the service I protect. My lane is running.
 ```
 
 **Expected outcome**
 
 ```text
-STATUS issue with the activity named (port scan, host sweep, web attack, malware file or beacon).
-signal_issue is called, and get_light_status afterwards shows my light on. stop_my_lane is proposed
-but NOT called.
+STATUS issue found from my watch source and signal_issue called. stop_my_lane called on my own
+source without asking. since_stop checked: if all totals are 0, clear_issue called and STATUS
+resolved. No other IP and no shared configuration touched.
 ```
-
-![25a-test4-form](../img/25a-test4-form.png){ loading=lazy }
-
-*(1) Scenario, (2) Expected outcome, (3) Run scenario. Earlier results stay further down the panel; the newest appears at the top.*
 
 **What a pass looks like** (seat T1-A, port scan):
 
-![25b-test4-result](../img/25b-test4-result.png){ loading=lazy }
+![27a-autostop-result](../img/27a-autostop-result.png){ loading=lazy }
 
-*(1) Scenario Result: Completed, (2) STATUS issue, SEVERITY from business criticality, (3) the activity named (here a port scan), (4) Schedule is blue again: this version passed a test.*
+*(1) STATUS: RESOLVED, (2) the summary says what it found and when it contained it.*
 
 ![25c-test4-evidence](../img/25c-test4-evidence.png){ loading=lazy }
 
 *Evidence: (1) the agent learned its own seat first and saw the lane running, (2) it decided from the 5-minute window: one source, five ports on one host, no IPS events, still a port scan.*
 
-![25d-test4-light](../img/25d-test4-light.png){ loading=lazy }
+![27b-autostop-chain](../img/27b-autostop-chain.png){ loading=lazy }
 
-*(1) stop_my_lane proposed, waiting for "approve stop", (2) the light confirmed on with get_light_status.*
+*The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. About 20 seconds from alert to green.*
 
-- [ ] Test 4 passed: your tile is red on the room wall.
+- [ ] Test 4 passed: your tile went red, striped, then green, and the report says STATUS resolved.
+- [ ] Restart your lane again (it is stopped now):
+
+    <div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
 - [ ] All four tests pass on your latest saved version, so **Schedule** is blue.
 
 ## Choose how it runs
 
-Your agent is ready. Now decide **how it starts** for Lights Out (3.5). There are two options, and both
-end the same way: your agent finds your lane, raises your alert, and waits for your approval.
+Your agent is ready. Now decide **how it starts** for Lights Out (3.5). There are two options:
 
 | | Option A: Scheduled (recommended) | Option B: On demand from Canvas |
 | --- | --- | --- |
 | Who starts it | Studio, at the time you set | You, by sending a prompt |
 | What it feels like | Real night shift: it runs while you are hands off | A colleague you ask to check now |
 | Uses | Your agent, its instructions and your integrations | Canvas, Lab Tools and the triage note |
+| Who stops the threat | Your agent, on its own: red, striped, green | Canvas, after you reply "approve stop" |
 | Pick it when | You want the real-world experience | You want to start right away, or Schedule is still locked |
 
 There is no race. Every seat's lane keeps sending traffic until the end of the lab, so your agent finds
@@ -134,8 +143,11 @@ yours whenever it runs.
 
 ### Before you choose: get your seat ready
 
-1. **Your lane must be running.** If a test stopped it (for example a failed Test 3), ask the proctor to
-   restart your seat. A stopped lane gives a healthy report and nothing to find.
+1. **Your lane must be running.** Your tests stopped it. Select **Run** to start it again (it only
+   restarts your own lane). A stopped lane gives a healthy report and nothing to find.
+
+    <div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
+
 2. **Reset your tile**, so you see your agent turn it red. Select **Run**: it clears your alert on the room
    wall with your seat token.
 
@@ -167,8 +179,9 @@ yours whenever it runs.
 
         *(1) the badge reads Scheduled, (2) Schedule became Edit schedule (use it to pick another slot), (3) the Schedule card shows your run time, (4) View runs is where the result appears in 3.5.*
 
-    Then go to [3.5](3-5-lights-out.md) and keep your hands off until your run time. A scheduled run
-    reports and raises your alert; it never stops your lane. You approve the stop yourself, in Canvas.
+    Then go to [3.5](3-5-lights-out.md) and keep your hands off until your run time. Your agent finds
+    your lane, raises the alert, stops your source, checks that it is quiet and clears the alert, all
+    on its own.
 
     !!! tip "Missed your slot?"
         If the time passed before you selected Schedule, or Studio says *Schedule failed: Your user
@@ -180,7 +193,7 @@ yours whenever it runs.
 
     You start the same check yourself, in AI Canvas. Canvas uses the same Lab Tools and your seat token,
     so your tile turns red the same way. It is quicker to start, but nobody is asleep: you are the one
-    asking.
+    asking, and Canvas's triage note makes it ask you before it stops anything.
 
     1. Open **Canvas** and your board from Part 1 (or **+ New**).
     2. Go to [3.5](3-5-lights-out.md) and send this prompt there when you are ready:

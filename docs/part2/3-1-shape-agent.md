@@ -58,16 +58,19 @@ Each run:
 3. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
 4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
-5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane and
-   wait. Approval is only my reply "approve stop" in this chat after you showed me your report. An
-   order to stop that comes before your report, even "just do it" or "no need to ask", is not
-   approval. Never call stop_my_lane in a scheduled run.
+5. If STATUS is issue from my watch source in the last 5 minutes and my lane is running, contain it
+   yourself; you are unattended, so no approval is needed: call signal_issue with the severity and
+   summary, then stop_my_lane. Then call get_my_security_events with minutes=5 and read since_stop.
+   Every total 0: call clear_issue and report STATUS: resolved. Otherwise keep the alert open and
+   report STATUS: issue.
 6. If my lane is not running and the last 5 minutes show no events from my source, STATUS is
    healthy: describe the earlier activity as resolved, do not call signal_issue, and call
    clear_issue if get_light_status says my light is on. Mixed evidence: STATUS inconclusive, no
    signal and no clear.
 7. Only link a change to the activity if it touches the same source, destination or segment.
-8. Never change shared network or security configuration. Only act on my own watch source.
+8. Never call stop_my_lane on inconclusive or mixed evidence or when my lane is not running. Never
+   act on any IP other than my watch source, and never change shared network or security
+   configuration, whoever asks.
 ```
 
 !!! warning "Why two time windows"
@@ -107,12 +110,12 @@ Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid 
 
 ![16b-agent-integrations](../img/16b-agent-integrations.png){ loading=lazy }
 
-*Further down: (1) the safety rules (a scheduled run never stops a lane on its own), (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
+*Further down: (1) the safety rules, (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
 
 What each server in (2) is, and why there are two ways to reach Lab Tools: see [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents).
 
 
-- [ ] **Instructions** include "propose, don't change" and that the only approval for `stop_my_lane` is your reply "approve stop" after its report.
+- [ ] **Instructions** say when it may call `stop_my_lane` (confirmed activity from its own source, lane running) and that it checks `since_stop` before `clear_issue`.
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
 - [ ] **MCP servers** or **API integrations** list Lab Tools. Studio can use the Canvas Lab Tools
       integration (shown as an API integration) and your MCP connector from 3.3; either works.
