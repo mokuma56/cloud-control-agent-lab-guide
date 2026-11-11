@@ -104,9 +104,14 @@ When the build finishes, the app opens in **Preview** on the right.
 4. **Response times**: Time to detect, Time to contain and Time to resolve, or *not yet*.
 5. **Install** would add the app to your **Apps** menu. Skip it for this lab: use the app here in **Preview**.
 
-!!! warning "Use the app in Preview"
-    At the moment an **installed** Studio app cannot reach REST integrations in this tenant: its panels say
-    *unavailable* while the same app works in the builder Preview. Everything in this lab works in Preview.
+!!! warning "Use the app in the Preview pane"
+    Work in the **Preview** pane on the right of the builder. Two other views are not reliable yet:
+
+    - **Open full preview** (and the pop-out icon) can show *Try again later* for several minutes before
+      any data loads.
+    - An **installed** app cannot reach REST integrations in this tenant yet: every panel says *unavailable*.
+
+    Everything in this lab works in the Preview pane.
 
 Scroll down:
 
@@ -129,10 +134,6 @@ Scroll down:
 
 - [ ] (1) **Recent changes** in the last 24 hours. (2) **same segment** marks a change on your service's
       segment: the first place to look when something breaks.
-
-!!! note "No business context?"
-    Only some lab services have a business-context record. If **My service** says *No business context
-    for this service*, the app is working; on call and recent changes still show.
 
 ## 5. Replay the night (3 min)
 
