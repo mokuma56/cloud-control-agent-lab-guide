@@ -1335,13 +1335,17 @@ before stop_my_lane.
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/12-lights-approve.png" data-desc-position="bottom"><img alt="12-lights-approve" loading="lazy" src="../../img/12-lights-approve.png"></a></p>
 <p><em>(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.</em></p>
 <h2 id="4-verify-and-clear-about-5-min">4. Verify and clear (about 5 min)<a class="headerlink" href="#4-verify-and-clear-about-5-min" title="Permanent link">¶</a></h2>
-<p>In the same Canvas chat, ask it to verify:</p>
+<p><strong>Wait 5 minutes after the stop.</strong> Firewall events from before the stop stay in the 5-minute window
+until they age out, so a check right away still sees them and will not clear your light. Use the time to
+read your agent's evidence.</p>
+<p>Then, in the same Canvas chat, ask it to verify:</p>
 <div class="highlight"><pre><span></span><code>Re-check my security events for the last 5 minutes. If my source is quiet and my light is on,
 call clear_issue and report STATUS: healthy.
 </code></pre></div>
 <ul class="task-list">
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your tile turns green: <strong>Resolved ✓</strong>.</p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your tile turns green: <strong>Resolved ✓</strong>. If Canvas says events are still arriving, wait two more
+      minutes and send the same message again.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/13-lights-healthy.png" data-desc-position="bottom"><img alt="13-lights-healthy" loading="lazy" src="../../img/13-lights-healthy.png"></a></p>
 <p><em>After the stop: (1) STATUS healthy, (2) the light is cleared and only this seat's source was affected.</em></p>
 </li>
