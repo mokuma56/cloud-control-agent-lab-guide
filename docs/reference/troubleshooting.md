@@ -27,6 +27,15 @@ between sessions). Copy it again from your seat card, then update the credential
 Your token made more than 30 calls in a minute, usually an agent stuck in a loop. Wait a minute and
 check the agent's instructions for a step it repeats.
 
+## Studio says "Agent update needs attention: The Agent could not be prepared"
+
+Studio's web firewall blocks any message that looks like a web attack, for example text with
+`../` paths, SQL injection strings or scanner names, so Studio never receives it. Length is not the
+problem. Describe attacks in plain words ("unusual web request paths, web scanner user agents")
+instead of quoting attack strings, then start the agent again from **Build → Agent**. Do not paste
+raw firewall events or sample URLs into Studio chat. Check **Studio → Manage** first: a failed
+attempt does not create an agent.
+
 ## Studio discovers fewer than 10 tools
 
 Use **⋯ → Rediscover** on the integration (it asks for your token again). If the URL is not the one
