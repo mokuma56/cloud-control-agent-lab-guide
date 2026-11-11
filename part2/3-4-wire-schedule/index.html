@@ -778,7 +778,7 @@
   <span class="md-ellipsis">
     
   
-    3.2 Sandbox test and publish
+    3.2 Sandbox test
   
 
     
@@ -1228,8 +1228,8 @@
 <h1 id="34-wire-it-in-and-choose-how-it-runs-255-15-min">3.4 Wire it in and choose how it runs (2:55, 15 min)<a class="headerlink" href="#34-wire-it-in-and-choose-how-it-runs-255-15-min" title="Permanent link">¶</a></h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Your agent uses your integration, passes a "light on" test, is published as v2, and has a run
-mode for Lights Out.</p>
+<p>Your agent uses your integration, passes a "light on" test, and is scheduled for Lights Out (or
+ready to run from Canvas).</p>
 </div>
 <h2 id="wire-the-integration-into-the-agent">Wire the integration into the agent<a class="headerlink" href="#wire-the-integration-into-the-agent" title="Permanent link">¶</a></h2>
 <p>Open your agent in Studio and tell it:</p>
@@ -1254,33 +1254,30 @@ but NOT called.
 </code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile is red on the room wall.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All four tests pass. Publish <strong>v2</strong>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All four tests pass on your latest saved version, so <strong>Schedule</strong> is blue.</li>
 </ul>
 <h2 id="choose-how-it-runs">Choose how it runs<a class="headerlink" href="#choose-how-it-runs" title="Permanent link">¶</a></h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Scheduled</label><label for="__tabbed_1_2">On demand from Canvas</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Studio needs three things before <strong>Schedule</strong> (top right of the builder) unlocks:</p>
+<p>Select <strong>Schedule</strong> (top right of the builder). It is blue only after a passing test of your latest
+saved version; otherwise it says <em>Run a test on the latest saved changes first</em>: rerun Test 4.</p>
+<p>In <strong>Schedule Agent</strong>:</p>
 <ol>
-<li>
-<p>A <strong>schedule time</strong> with your <strong>timezone</strong>. Tell Studio in the chat, for example (use the window
-   the proctor announces):</p>
-<div class="highlight"><pre><span></span><code>Run every 15 minutes between 03:00 and 04:00 Europe/London.
-</code></pre></div>
-</li>
-<li>
-<p>A <strong>schedule owner</strong>: your lab login. Tell Studio in the chat:</p>
-<div class="highlight"><pre><span></span><code>The schedule owner is &lt;your lab login&gt;.
-</code></pre></div>
-</li>
-<li>
-<p>A <strong>passing test of the exact saved revision</strong>. Any change you make creates a new revision,
-   so test again after the last change. Until then Schedule says <em>Run a test on the latest
-   saved changes first</em>.</p>
-</li>
+<li><strong>Activation cadence</strong>: <strong>Daily</strong> (the choices are Hourly, Daily and Weekly; there is no "every
+   15 minutes").</li>
+<li><strong>Local run time</strong>: the Lights Out time the proctor announces, in 5-minute steps. It is your
+   browser's time zone; Studio converts it to UTC.</li>
+<li><strong>Max runs</strong>: <code>1</code>. One run at Lights Out is all you need, and the schedule stops by itself.</li>
+<li><strong>Trigger prompt</strong>: keep Studio's text (for example <em>Run the ... night-watch review.</em>). It is the
+   message your agent receives when the schedule fires.</li>
+<li>Select <strong>Schedule</strong>.</li>
 </ol>
-<p>Saving and testing never create a schedule by themselves. If Schedule is not offered in your
-release, use the Canvas tab.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/18b-schedule-dialog.png" data-desc-position="bottom"><img alt="18b-schedule-dialog" loading="lazy" src="../../img/18b-schedule-dialog.png"></a></p>
+<p><em>Schedule Agent: (1) Daily, (2) the announced Lights Out time, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.</em></p>
+<p>Back in the builder, <strong>Review Agent → Current schedule</strong> shows the time instead of <em>This Agent is
+not scheduled</em>. A scheduled run reports and raises your alert; it never stops your lane. You approve
+the stop yourself in 3.5. If Schedule is not offered in your release, use the Canvas tab.</p>
 </div>
 <div class="tabbed-block">
 <p>If scheduling is not available in your Studio release, you will run the same check from AI
@@ -1297,7 +1294,7 @@ Then ask me before stop_my_lane.
 </div>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My agent is published as v2, and I know whether it runs on a schedule or from Canvas.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My agent is scheduled for the Lights Out time, or my Canvas prompt is saved.</li>
 </ul>
 
 

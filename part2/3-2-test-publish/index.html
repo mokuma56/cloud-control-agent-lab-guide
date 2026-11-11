@@ -24,7 +24,7 @@
     
     
       
-        <title>3.2 Sandbox test and publish - LTROPS-2623 Build a Network Agent in Cisco Cloud Control That Troubleshoots Anything While You Sleep</title>
+        <title>3.2 Sandbox test - LTROPS-2623 Build a Network Agent in Cisco Cloud Control That Troubleshoots Anything While You Sleep</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#32-sandbox-test-and-publish-205-15-min" class="md-skip">
+        <a href="#32-sandbox-test-205-15-min" class="md-skip">
           Skip to content
         </a>
       
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3.2 Sandbox test and publish
+              3.2 Sandbox test
             
           </span>
         </div>
@@ -787,7 +787,7 @@
   <span class="md-ellipsis">
     
   
-    3.2 Sandbox test and publish
+    3.2 Sandbox test
   
 
     
@@ -805,7 +805,7 @@
   <span class="md-ellipsis">
     
   
-    3.2 Sandbox test and publish
+    3.2 Sandbox test
   
 
     
@@ -842,10 +842,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#publish" class="md-nav__link">
+  <a href="#schedule-unlocks-do-not-schedule-yet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Publish
+        Schedule unlocks (do not schedule yet)
       
     </span>
   </a>
@@ -1214,11 +1214,11 @@
 
 
 
-<h1 id="32-sandbox-test-and-publish-205-15-min">3.2 Sandbox test and publish (2:05, 15 min)<a class="headerlink" href="#32-sandbox-test-and-publish-205-15-min" title="Permanent link">¶</a></h1>
+<h1 id="32-sandbox-test-205-15-min">3.2 Sandbox test (2:05, 15 min)<a class="headerlink" href="#32-sandbox-test-205-15-min" title="Permanent link">¶</a></h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Three passing sandbox tests and a published v1. Studio will not let you schedule an agent until
-a test passes, so testing is part of building, not an extra.</p>
+<p>Three passing sandbox tests, which unlock <strong>Schedule</strong>. Studio will not let you schedule an agent
+until a test passes, so testing is part of building, not an extra.</p>
 </div>
 <h2 id="run-three-tests-one-at-a-time">Run three tests, one at a time<a class="headerlink" href="#run-three-tests-one-at-a-time" title="Permanent link">¶</a></h2>
 <p>You run the <strong>Test</strong> tab <strong>three times</strong>, once per test below. Each run is one <strong>Scenario</strong> plus its
@@ -1391,7 +1391,7 @@ Studio and rerun Test 1.</p>
 <p class="admonition-title">Sandbox tests are real</p>
 <p>Test runs call your real integrations. The Typical test reads your live firewall events and
 <strong>really turns your tile red on the room wall</strong>. If an agent wrongly calls <code>stop_my_lane</code> during a test, your lane
-<strong>really stops</strong>. That is why the guardrail test matters: run it before you publish.</p>
+<strong>really stops</strong>. That is why the guardrail test matters: run it before you schedule.</p>
 </div>
 <p>What a passing run looks like (verified on POD-45 with seat T3-C):</p>
 <table>
@@ -1416,16 +1416,26 @@ Studio and rerun Test 1.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="publish">Publish<a class="headerlink" href="#publish" title="Permanent link">¶</a></h2>
+<h2 id="schedule-unlocks-do-not-schedule-yet">Schedule unlocks (do not schedule yet)<a class="headerlink" href="#schedule-unlocks-do-not-schedule-yet" title="Permanent link">¶</a></h2>
+<p>There is no Publish button in Studio. Studio saves your agent automatically, and the version badge next
+to its name (<strong>v1</strong>, <strong>v2</strong>...) goes up each time it saves a change. What matters is the gate at the top
+right:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All three tests pass. If one fails, fix the instructions by chatting with Studio (for example
-      "never call stop_my_lane without my approval") and rerun <strong>that</strong> test.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All three tests pass. If one fails, fix the instructions by chatting with Studio and rerun
+      <strong>that</strong> test.</li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Publish <strong>v1</strong>.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/18-agent-schedule-gate.png" data-desc-position="bottom"><img alt="18-agent-schedule-gate" loading="lazy" src="../../img/18-agent-schedule-gate.png"></a></p>
-<p><em>(1) Until a test on the latest saved draft passes, Schedule only says: Run a test on the latest saved changes first.</em></p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Schedule</strong> (top right) is now blue. Leave it for now: you set the schedule in 3.4, after
+      you wire in your own integration.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/18-schedule-ready.png" data-desc-position="bottom"><img alt="18-schedule-ready" loading="lazy" src="../../img/18-schedule-ready.png"></a></p>
+<p><em>(1) Schedule unlocks after a passing test of the latest saved changes, (2) the version goes up by itself with each saved change (no Publish step), (3) a passing Test 3: the agent asks for "approve stop" and changes nothing.</em></p>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Every change locks Schedule again</p>
+<p>Each change you make in the Studio chat is a new saved version, and Schedule only accepts a version
+that has passed a test. Until then it shows <em>Run a test on the latest saved changes first</em>. After your
+last change, rerun one test (Test 1 is enough) before you schedule.</p>
+</div>
 <p>A fourth test you will add in 3.4: <em>"fault present, expect the light on."</em></p>
 
 
