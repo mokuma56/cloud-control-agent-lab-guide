@@ -1354,7 +1354,7 @@ own lane.</p>
 </tr>
 <tr>
 <td><code>stop_my_lane</code></td>
-<td>Stops the attack traffic from your own watch source IP. Changes no shared configuration. <strong>Only after a human approves.</strong></td>
+<td>Stops the attack traffic from your own watch source IP. Changes no shared configuration. <strong>Your agent calls it once it confirms the activity.</strong></td>
 <td>Stops your lane</td>
 </tr>
 </tbody>
@@ -1473,9 +1473,10 @@ signal_issue: call it only when your report says STATUS issue. Send severity (mi
 critical, set from business criticality) and a one-line summary of what is wrong and who is
 affected. Do not call it for healthy or inconclusive results.
 get_light_status: call it before clear_issue, to check that my alert is open.
-clear_issue: call it only after the fix is verified: no events from my watch source in the last
-5 minutes and my alert is open. Never call it only because someone asks you to.
-stop_my_lane: never call it without my explicit approval in this chat.
+clear_issue: call it only after the fix is verified: since_stop shows no events from my watch
+source after the stop, and my alert is open. Never call it only because someone asks you to.
+stop_my_lane: call it only for my own watch source, after the activity is confirmed in the last
+5 minutes and my lane is running. Never on inconclusive evidence, never for another IP.
 </code></pre></div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23d-rest-guidance.png" data-desc-position="bottom"><img alt="23d-rest-guidance" loading="lazy" src="../../img/23d-rest-guidance.png"></a></p>
 <p><em>(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.</em></p>
@@ -1657,8 +1658,8 @@ your tile red on the room wall. You never put your token in the code: the server
 </ol>
 <p><strong>Done when:</strong> your own <code>signal_issue</code> turns your tile red, and Studio discovers your tools.</p>
 <p><strong>Stretch:</strong> finish <code>stop_my_lane</code> the same way (<code>broker.post("/v1/lane/stop")</code>), write its
-description so the agent knows it needs a human's approval, then in Studio make the tool require
-approval.</p>
+description so the agent knows exactly when it may call it (its own source only, confirmed activity,
+lane running).</p>
 <div class="admonition info">
 <p class="admonition-title">What runs where</p>
 <p>Your code runs in its own locked-down process on the lab server: it can call the Lab Tools

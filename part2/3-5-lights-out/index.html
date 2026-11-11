@@ -926,10 +926,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-wake-up-and-read-the-finding-about-10-min" class="md-nav__link">
+  <a href="#2-wake-up-and-read-what-your-agent-did-about-10-min" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Wake up and read the finding (about 10 min)
+        2. Wake up and read what your agent did (about 10 min)
       
     </span>
   </a>
@@ -937,10 +937,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-approve-the-remediation-about-5-min" class="md-nav__link">
+  <a href="#3-option-b-only-approve-the-stop-in-canvas-about-5-min" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Approve the remediation (about 5 min)
+        3. Option B only: approve the stop in Canvas (about 5 min)
       
     </span>
   </a>
@@ -948,10 +948,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-verify-and-clear-about-5-min" class="md-nav__link">
+  <a href="#4-option-b-only-verify-and-clear-about-5-min" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Verify and clear (about 5 min)
+        4. Option B only: verify and clear (about 5 min)
       
     </span>
   </a>
@@ -1239,8 +1239,9 @@
 <h1 id="35-lights-out-310-25-min">3.5 Lights Out (3:10, 25 min)<a class="headerlink" href="#35-lights-out-310-25-min" title="Permanent link">¶</a></h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Hands off. Your agent runs on its own (or you start it from Canvas), finds your lane, and turns your
-tile red. Then you wake up, approve the remediation, and verify that your light goes off.</p>
+<p>Hands off. Your agent runs on its own, finds your lane, raises the alert, stops your source,
+verifies it is quiet and turns your light off. Then you wake up and read what it did. (With
+Option B, Canvas asks you before it stops anything.)</p>
 </div>
 <p>There is no race and no shared start time. Every seat's lane keeps sending traffic until the end of the
 lab, so you do this section at your own pace, whenever your agent runs.</p>
@@ -1256,18 +1257,25 @@ with its trigger prompt, exactly as it would at 3 a.m. Nobody types anything.</p
 </div>
 </div>
 </div>
-<p>Watch your tile on the room wall. It turns <strong>red</strong> with your agent's summary when your agent calls
-<code>signal_issue</code>. Your neighbors' tiles change at their own times.</p>
+<p>Watch your tile on the room wall:</p>
+<ol>
+<li><strong>Red</strong> with your agent's summary: it called <code>signal_issue</code>.</li>
+<li><strong>Red stripes, Stopped · verifying</strong>: it called <code>stop_my_lane</code> on your own source.</li>
+<li><strong>Green, Resolved ✓</strong>: <code>since_stop</code> showed nothing after the stop, so it called <code>clear_issue</code>.</li>
+</ol>
+<p>With Option A this takes about 20 seconds once the run reaches the containment step. Your neighbors'
+tiles change at their own times.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/20-wall.png" data-desc-position="bottom"><img alt="20-wall" loading="lazy" src="../../img/20-wall.png"></a></p>
 <p><em>The room wall: (3) amber = a lane running that no agent has reported yet, (4) red = an agent's alert, (5) stopped and verifying, (6) resolved; (7) the agents' messages.</em></p>
 <div class="admonition tip">
 <p class="admonition-title">Nothing after a few minutes?</p>
 <p>Check <strong>Studio → Manage → Applications → your agent → View runs</strong> for a run at your time. No run:
-the schedule time had already passed when you saved it; schedule the next slot. A run that says
-STATUS healthy: your lane was stopped; ask the proctor to restart your seat, then reset your tile and
-run again.</p>
+the schedule time had already passed when you saved it; use <strong>Edit schedule</strong> for the next slot. A
+run that says STATUS healthy: your lane was stopped; restart it with the <strong>Restart my lane</strong> button in
+3.4, then schedule the next slot. A tile that stays red: the run found events after the stop and kept
+the alert open; read its EVIDENCE.</p>
 </div>
-<h2 id="2-wake-up-and-read-the-finding-about-10-min">2. Wake up and read the finding (about 10 min)<a class="headerlink" href="#2-wake-up-and-read-the-finding-about-10-min" title="Permanent link">¶</a></h2>
+<h2 id="2-wake-up-and-read-what-your-agent-did-about-10-min">2. Wake up and read what your agent did (about 10 min)<a class="headerlink" href="#2-wake-up-and-read-what-your-agent-did-about-10-min" title="Permanent link">¶</a></h2>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Option A: Scheduled</label><label for="__tabbed_2_2">Option B: On demand from Canvas</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1277,15 +1285,15 @@ if it is not there yet; a run takes about a minute.)</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/26b-view-runs.png" data-desc-position="bottom"><img alt="26b-view-runs" loading="lazy" src="../../img/26b-view-runs.png"></a></p>
 <p><em>(1) View runs, (2) the scheduled run at the time you chose, (3) Trigger Schedule. The rows below are your sandbox tests. With Max runs 1 the badge now reads Completed.</em></p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/26c-run-detail.png" data-desc-position="bottom"><img alt="26c-run-detail" loading="lazy" src="../../img/26c-run-detail.png"></a></p>
-<p><em>A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS issue and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE and NEXT STEP.</em></p>
+<p><em>A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE: the signal_issue, stop_my_lane, since_stop and clear_issue steps, in that order, like Test 4 in 3.4.</em></p>
 </div>
 <div class="tabbed-block">
-<p>Read Canvas's answer in your board.</p>
+<p>Read Canvas's answer in your board, then go on to steps 3 and 4.</p>
 </div>
 </div>
 </div>
-<p>A good finding looks like this (this one is from a web attack seat; yours names your own seat's activity):</p>
-<div class="highlight"><pre><span></span><code>STATUS: issue
+<p>A good report looks like this (this one is from a web attack seat; yours names your own seat's activity):</p>
+<div class="highlight"><pre><span></span><code>STATUS: resolved
 SEVERITY: major
 SUMMARY: 10.106.10.1xx is sending web attack patterns to Core services (AD-1)
 CAUSE: my watch source is sending SQL injection and path traversal requests with a Nikto scanner user agent
@@ -1296,7 +1304,8 @@ EVIDENCE:
   /admin/config.php?file=../../../../etc/shadow
 - Cisco Meraki: no port or configuration changes in the last 2 hours, wired and wireless clients normal
 - Lab Tools: no change in the last 24 hours explains it; on-call policy: wake primary for critical
-NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting approval.
+- Containment: signal_issue (major), stop_my_lane on 10.106.10.1xx only, since_stop 0/0/0, clear_issue
+NEXT STEP: SecOps to find out why 10.106.10.1xx started scanning before its lane is re-enabled.
 </code></pre></div>
 <div class="admonition success">
 <p class="admonition-title">Same method, different incident</p>
@@ -1304,26 +1313,22 @@ NEXT STEP: stop_my_lane for 10.106.10.1xx (affects only my source). Awaiting app
 agent checked the network and the change calendar first, the places where the answer was in Part 1, ruled them out, and
 found the cause in the firewall instead. Nobody told it that tonight's problem was an attack.</p>
 </div>
-<p>Check it before you approve:</p>
+<p>Check what it did:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The source IP is <strong>yours</strong> (compare with <code>get_my_watch_scope</code>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The source IP it stopped is <strong>yours</strong> (compare with <code>get_my_watch_scope</code>), and nothing else was touched.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The CAUSE is supported by evidence, not assumed. See the <a href="../../reference/evidence/">evidence guide</a>.</li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your tile on the room wall is red.</p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> It cleared the alert only after <code>since_stop</code> showed nothing, and your tile is green.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/11-lights-evidence.png" data-desc-position="bottom"><img alt="11-lights-evidence" loading="lazy" src="../../img/11-lights-evidence.png"></a></p>
-<p><em>A real finding for seat T3-C: (1) Secure Firewall events and IPS signatures from get_my_security_events, (2) NEXT STEP waits for approval.</em></p>
+<p><em>Evidence for a web attack seat (T3-C): (1) Secure Firewall events and IPS signatures from get_my_security_events. This run is from Option B, so (2) NEXT STEP waits for approval.</em></p>
 </li>
 </ul>
-<h2 id="3-approve-the-remediation-about-5-min">3. Approve the remediation (about 5 min)<a class="headerlink" href="#3-approve-the-remediation-about-5-min" title="Permanent link">¶</a></h2>
-<p>Your scheduled agent only reports and raises the alert: its rules say a scheduled run never stops a
-lane. You approve the stop in <strong>Canvas</strong>, where you can reply:</p>
+<h2 id="3-option-b-only-approve-the-stop-in-canvas-about-5-min">3. Option B only: approve the stop in Canvas (about 5 min)<a class="headerlink" href="#3-option-b-only-approve-the-stop-in-canvas-about-5-min" title="Permanent link">¶</a></h2>
+<p>With Option A your agent already did steps 3 and 4 on its own: skip to the end. Canvas's triage note
+makes it ask before it stops anything, so with Option B you approve it:</p>
 <ol>
 <li>
-<p>Open your Canvas board (or <strong>+ New</strong>) and send:</p>
-<div class="highlight"><pre><span></span><code>Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
-watch scope and my security events for the last 5 minutes, give the STATUS report, then ask me
-before stop_my_lane.
-</code></pre></div>
+<p>In the Canvas chat where you sent the 3.4 prompt, wait for its report.</p>
 </li>
 <li>
 <p>When Canvas asks <em>"Approve stop_my_lane for 10.106.10.1xx?"</em>, check the IP is yours and reply:</p>
@@ -1334,7 +1339,7 @@ before stop_my_lane.
 <p>Canvas calls <code>stop_my_lane</code>. Only your lane stops; your tile shows <strong>Stopped · verifying</strong>, and your neighbors stay red until they act.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/12-lights-approve.png" data-desc-position="bottom"><img alt="12-lights-approve" loading="lazy" src="../../img/12-lights-approve.png"></a></p>
 <p><em>(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.</em></p>
-<h2 id="4-verify-and-clear-about-5-min">4. Verify and clear (about 5 min)<a class="headerlink" href="#4-verify-and-clear-about-5-min" title="Permanent link">¶</a></h2>
+<h2 id="4-option-b-only-verify-and-clear-about-5-min">4. Option B only: verify and clear (about 5 min)<a class="headerlink" href="#4-option-b-only-verify-and-clear-about-5-min" title="Permanent link">¶</a></h2>
 <p><strong>Wait 5 minutes after the stop.</strong> Firewall events from before the stop stay in the 5-minute window
 until they age out, so a check right away still sees them and will not clear your light. Use the time to
 read your agent's evidence.</p>
@@ -1353,8 +1358,9 @@ call clear_issue and report STATUS: healthy.
 <div class="admonition success">
 <p class="admonition-title">What you just did</p>
 <p>An agent you described in plain words ran on its own, used Cisco telemetry and your own integration
-to find a problem nobody told it about, raised the alert, and stopped at the line you drew until a
-human approved. That is the night shift.</p>
+to find a problem nobody told it about, raised the alert, contained it within the limits you set,
+proved it was quiet and closed the alert. That is the night shift. Keeping a human in the loop for
+riskier actions is a different pattern, and you will build it in a later section.</p>
 </div>
 
 
