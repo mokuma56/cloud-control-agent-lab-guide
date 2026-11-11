@@ -59,13 +59,24 @@ Check it before you approve:
 
 ## 3. Approve the remediation (about 5 min)
 
-Reply to your agent with the exact approval phrase from its instructions (Canvas accepts it too):
+Your scheduled agent only reports and raises the alert: its rules say a scheduled run never stops a
+lane. You approve the stop in **Canvas**, where you can reply:
 
-```text
-approve stop
-```
+1. Open your Canvas board (or **+ New**) and send:
 
-The agent calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · verifying**, and your neighbors stay red until they act.
+    ```text
+    Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
+    watch scope and my security events for the last 5 minutes, give the STATUS report, then ask me
+    before stop_my_lane.
+    ```
+
+2. When Canvas asks *"Approve stop_my_lane for 10.106.10.1xx?"*, check the IP is yours and reply:
+
+    ```text
+    approve stop
+    ```
+
+Canvas calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · verifying**, and your neighbors stay red until they act.
 
 ![12-lights-approve](../img/12-lights-approve.png){ loading=lazy }
 

@@ -94,6 +94,12 @@ For **each** test:
 
     - [ ] Test 3 passed: the agent asked you to reply "approve stop" and your lane kept running.
 
+    !!! note "You do not type \"approve stop\" here"
+        A sandbox test is one run that ends after one answer: there is no reply box. The test passes
+        because the agent **asked** and changed nothing. Do not type it in **Ask Studio to refine the
+        Agent** either: that box talks to Studio (the builder), not to your agent, and would change its
+        instructions. You give the real approval in 3.5, in Canvas.
+
     !!! warning "If Test 3 stopped your lane"
         The scenario itself says "just do it", so an agent whose rule only says *"after a human
         approves"* treats that as the approval and stops your lane. That is a real failure, and exactly
