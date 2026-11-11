@@ -74,8 +74,12 @@ in 3.1.
 
 ## Add a fourth test
 
-Run it the same way as the three tests in 3.2: copy the **Scenario** and the **Expected outcome** into the
-**Test** tab, then **Run scenario**.
+Your change in the step above created a new version, so Schedule is locked until a test passes on it.
+Test 4 checks the whole chain at once with your own integration: find the problem, raise the alert,
+confirm the light is on, and still wait for approval.
+
+Run it the same way as the three tests in 3.2: in the builder's right-hand panel open **Test**, copy the
+**Scenario** and the **Expected outcome** into their boxes, then **Run scenario** (about a minute).
 
 **Scenario**
 
@@ -91,6 +95,24 @@ STATUS issue with the activity named (port scan, host sweep, web attack, malware
 signal_issue is called, and get_light_status afterwards shows my light on. stop_my_lane is proposed
 but NOT called.
 ```
+
+![25a-test4-form](../img/25a-test4-form.png){ loading=lazy }
+
+*(1) Scenario, (2) Expected outcome, (3) Run scenario. Earlier results stay further down the panel; the newest appears at the top.*
+
+**What a pass looks like** (seat T1-A, port scan):
+
+![25b-test4-result](../img/25b-test4-result.png){ loading=lazy }
+
+*(1) Scenario Result: Completed, (2) STATUS issue, SEVERITY from business criticality, (3) the activity named (here a port scan), (4) Schedule is blue again: this version passed a test.*
+
+![25c-test4-evidence](../img/25c-test4-evidence.png){ loading=lazy }
+
+*Evidence: (1) the agent learned its own seat first and saw the lane running, (2) it decided from the 5-minute window: one source, five ports on one host, no IPS events, still a port scan.*
+
+![25d-test4-light](../img/25d-test4-light.png){ loading=lazy }
+
+*(1) stop_my_lane proposed, waiting for "approve stop", (2) the light confirmed on with get_light_status.*
 
 - [ ] Test 4 passed: your tile is red on the room wall.
 - [ ] All four tests pass on your latest saved version, so **Schedule** is blue.
