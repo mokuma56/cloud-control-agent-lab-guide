@@ -87,3 +87,12 @@
 .sc-term-bar span { font-size: .72rem; color: var(--md-default-fg-color--light); }
 .md-typeset pre.sc-term { margin: 0; padding: .7em .9em; background: #0b0e13; color: #d7dde8; font-size: .7rem;
   line-height: 1.45; white-space: pre-wrap; word-break: break-word; max-height: 22em; overflow: auto; border-radius: 0; }
+
+/* Dark mode: outline buttons default to the primary (midnight) colour and vanish on slate; use Cisco cyan */
+[data-md-color-scheme="slate"] .md-typeset .md-button {
+  color: var(--md-accent-fg-color); border-color: var(--md-accent-fg-color); }
+[data-md-color-scheme="slate"] .md-typeset .md-button--primary {
+  color: #0b172c; background-color: var(--md-accent-fg-color); border-color: var(--md-accent-fg-color); }
+[data-md-color-scheme="slate"] .md-typeset .md-button:hover,
+[data-md-color-scheme="slate"] .md-typeset .md-button:focus {
+  color: #0b172c; background-color: #5fd6f5; border-color: #5fd6f5; }

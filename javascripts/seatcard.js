@@ -6,7 +6,7 @@
   const FIELDS = [
     ["Cloud Control login", "login"], ["Seat token", "token"], ["Lab Tools MCP URL", "mcp_url"],
     ["Lab Actions spec URL", "spec_light"], ["Lab Context spec URL", "spec_context"],
-    ["Your MCP workspace", "workspace"], ["Room wall", "wall"], ["Agent name (3.1)", "agent_name"],
+    ["Your MCP workspace", "workspace"], ["Room wall", "wall"], ["Agent name (2.1)", "agent_name"],
     ["Night Watch Console spec URL (Part 3)", "spec_console"],
   ];
   // Studio apps reach port 443 only: cards saved before 2026-11-11 have no spec_console, so derive it without :8443
@@ -101,7 +101,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
   }
 
   /* Personalize the copy-paste blocks on every page from the card saved in this browser. */
-  /* Copy buttons on the values in a .sc-copytable (3.3 A), and a no-display "Copy my seat token" button. */
+  /* Copy buttons on the values in a .sc-copytable (2.3 A), and a no-display "Copy my seat token" button. */
   function copyButton(getText, label) {
     const b = document.createElement("button");
     b.type = "button"; b.className = "md-button sc-copy sc-copy-inline"; b.textContent = label || "Copy";
@@ -136,7 +136,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
     });
   }
 
-  /* "Run" boxes (3.3 Path A): send a Lab Actions call from the browser with the seat token from the card,
+  /* "Run" boxes (2.3 Path A): send a Lab Actions call from the browser with the seat token from the card,
      and show the request and reply like a terminal. Nothing to install on the workstation. */
   function runners(c) {
     document.querySelectorAll(".sc-run").forEach(box => {
@@ -218,7 +218,7 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
     });
     copyables(c);
     runners(c);
-    document.querySelectorAll(".md-content table").forEach(tbl => {      // 3.1: highlight my table's row
+    document.querySelectorAll(".md-content table").forEach(tbl => {      // 2.1: highlight my table's row
       const head = [...tbl.querySelectorAll("thead th")].map(th => th.textContent.trim());
       if (head[0] !== "Table" || !head.includes("Protects")) return;
       tbl.querySelectorAll("tbody tr").forEach(tr => {
