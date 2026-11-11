@@ -168,7 +168,8 @@ yours whenever it runs.
     reports and raises your alert; it never stops your lane. You approve the stop yourself, in Canvas.
 
     !!! tip "Missed your slot?"
-        If the time passed before you selected Schedule, open **Schedule** again and pick the next slot.
+        If the time passed before you selected Schedule, or Studio says *Schedule failed: Your user
+        identity is unavailable* (reload the page first), open **Schedule** again and pick the next slot.
         The run uses the version that passed its test, so you do not need to test again unless you changed
         the agent.
 

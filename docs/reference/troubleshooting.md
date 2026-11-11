@@ -36,6 +36,12 @@ instead of quoting attack strings, then start the agent again from **Build → A
 raw firewall events or sample URLs into Studio chat. Check **Studio → Manage** first: a failed
 attempt does not create an agent.
 
+## "Schedule failed: Your user identity is unavailable. Sign in again."
+
+Your Cloud Control session expired while the builder was open, so Studio cannot say who owns the
+schedule. Nothing was scheduled. Reload the page (sign in again if asked), open **Schedule** again and
+choose the next 5-minute slot that is at least 5 minutes away: the dialog forgets your earlier choices.
+
 ## Studio discovers fewer than 10 tools
 
 Use **⋯ → Rediscover** on the integration (it asks for your token again). If the URL is not the one
