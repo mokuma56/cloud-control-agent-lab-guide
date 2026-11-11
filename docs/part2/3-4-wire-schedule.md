@@ -6,17 +6,71 @@
 
 ## Wire the integration into the agent
 
-Open your agent in Studio and tell it:
+You change an existing agent by reopening it in the builder and asking Studio, the same chat you used
+in 3.1.
 
-```text
-Add my integration PseudoCo Lab Tools. Always call get_my_watch_scope first, then
-get_my_security_events. If STATUS is issue, call signal_issue with the severity and summary.
-Propose stop_my_lane and wait for my approval. If STATUS is healthy and get_light_status says my
-light is on, call clear_issue.
-```
+1. Open **Studio → Manage → Applications** and select your agent's name (for example
+   **[Directory Services Night Watch]**).
 
-Check that the manifest's **MCP servers** or **API integrations** now list your Lab Tools, plus **My Table Light**
-if you built Path A, or **My Lab Tools** if you built Path B.
+    ![24a-manage-agent](../img/24a-manage-agent.png){ loading=lazy }
+
+    *(1) Manage, (2) Applications, (3) your agent (capability Agent). Your integrations from 3.3 are listed here too. Owners are blurred in this guide.*
+
+2. On the agent's **Details** page, select **Edit Agent** (top right).
+
+    ![24b-agent-details](../img/24b-agent-details.png){ loading=lazy }
+
+    *(1) Details shows the description you wrote in 3.1, (2) Edit Agent reopens the builder, (3) Schedule: Not scheduled yet.*
+
+3. The builder opens with the **Studio** chat on the left. Click in **Ask Studio to refine the Agent**,
+   paste the prompt for the path you built in 3.3, and send it (Enter or the arrow).
+
+    === "Path A: My Table Light"
+
+        ```text
+        Add my integrations PseudoCo Lab Tools and My Table Light. Always call get_my_watch_scope
+        first, then get_my_security_events. If STATUS is issue, call signal_issue with the severity and
+        summary. Propose stop_my_lane and wait: the only approval is my reply "approve stop" after your
+        report. If STATUS is healthy and get_light_status says my light is on, call clear_issue. Keep
+        everything else the same.
+        ```
+
+    === "Path B: My Lab Tools"
+
+        ```text
+        Add my integrations PseudoCo Lab Tools and My Lab Tools. Always call get_my_watch_scope
+        first, then get_my_security_events. If STATUS is issue, call signal_issue with the severity and
+        summary. Propose stop_my_lane and wait: the only approval is my reply "approve stop" after your
+        report. If STATUS is healthy and get_light_status says my light is on, call clear_issue. Keep
+        everything else the same.
+        ```
+
+    ![24d-refine-prompt](../img/24d-refine-prompt.png){ loading=lazy }
+
+    *(1) Ask Studio to refine the Agent: your prompt goes here, (2) send. Review Agent on the right shows the current manifest.*
+
+    !!! info "Why the prompt repeats the approval rule"
+        Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
+        repeating the "approve stop" rule stops a refinement from loosening the guardrail you tested in 3.2.
+
+4. Wait while Studio works through **Reviewing your request → Preparing the conversation → Updating
+   your Agent → Preparing the response** (about a minute). Do not send another message until it finishes.
+
+    ![24e-refine-building](../img/24e-refine-building.png){ loading=lazy }
+
+    *(1) Agent build in progress, (2) the right-hand panel rebuilds the draft. Schedule is greyed out again: every change needs a new passing test.*
+
+5. When it finishes (Studio shows **Ready to test**), stay on **Review Agent** and scroll down to
+   **MCP servers** and **API integrations**.
+
+    ![24f-refine-done](../img/24f-refine-done.png){ loading=lazy }
+
+    *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the "approve stop" rule kept, (4) MCP servers: one `byo-` entry per MCP integration (here PseudoCo Lab Tools and My Lab Tools) plus the Cisco servers. Schedule is greyed until you rerun a test.*
+
+- [ ] Studio's summary names your integrations. In the manifest, MCP integrations show as `byo-` IDs, not names:
+      Path B shows **two** `byo-` entries (PseudoCo Lab Tools and My Lab Tools); Path A shows one, with
+      **My Table Light** under **API integrations**.
+- [ ] The instructions still say the only approval for `stop_my_lane` is "approve stop".
 
 ## Add a fourth test
 
