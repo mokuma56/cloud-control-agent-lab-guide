@@ -187,8 +187,13 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         *(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.*
 
-    6. **Review and save:** check the name, the 6 operations and your guidance, then save. Your integration
-       appears under **Studio → Manage → Integrations**, Personal.
+    6. **Review and save:** check the name (`My Table Light`), the 6 operations and your guidance, then
+       **Save draft**. When the confirmation pop-up opens, click **Manage** (as in step A). It takes you to
+       **Studio → Manage**, where you check the integration:
+
+        - [ ] Studio → Manage → Integrations shows `My Table Light`, Personal, **Configured**.
+
+        Like step A, keep it **Personal**: do not use *Make available to tenant*.
 
     **Done when:** you turn your own tile red with a direct call to the Lab Actions API, the same
     call your agent's integration makes. Select **Run**: the guide sends the request from this browser with
