@@ -1044,10 +1044,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-build-the-app-from-the-file-5-min" class="md-nav__link">
+  <a href="#3-build-the-app-from-the-file-6-min" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Build the app from the file (5 min)
+        3. Build the app from the file (6 min)
       
     </span>
   </a>
@@ -1077,10 +1077,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-add-ons-if-you-have-time" class="md-nav__link">
+  <a href="#6-add-on-shift-handover-notes-if-you-have-time" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Add-ons (if you have time)
+        6. Add-on: shift handover notes (if you have time)
       
     </span>
   </a>
@@ -1443,73 +1443,134 @@ containment stays the agent's job.</p>
 </div>
 <h2 id="2-download-the-design-file-1-min">2. Download the design file (1 min)<a class="headerlink" href="#2-download-the-design-file-1-min" title="Permanent link">¶</a></h2>
 <p><a class="md-button" download="NightWatch_Mission_Control.md" href="../../app/NightWatch_Mission_Control.txt">Download NightWatch_Mission_Control.md</a></p>
-<p>It is plain Markdown: what the app is for, the rules it must follow, and four sections. <strong>Section A</strong> is the
-core app you build now: header and card status, response times, timeline, your group, and Replay the night.
-<strong>Sections B to D</strong> are add-ons you can ask for afterwards, one at a time. A design file is how you make an
-app <strong>repeatable</strong>: the next person gets the same app from the same file.</p>
-<h2 id="3-build-the-app-from-the-file-5-min">3. Build the app from the file (5 min)<a class="headerlink" href="#3-build-the-app-from-the-file-5-min" title="Permanent link">¶</a></h2>
+<p>It is plain Markdown: what the app is for, the rules it must follow, the <strong>data contract</strong> (the exact
+fields each operation returns, so Studio does not have to guess), and four sections. Studio builds
+<strong>A</strong> (your night: status, response times, timeline, your group, Replay the night), <strong>B</strong> (the evidence
+your agent saw) and <strong>C</strong> (business impact) in one go. <strong>D</strong> is an add-on you can ask for afterwards. A
+design file is how you make an app <strong>repeatable</strong>: the next person gets the same app from the same file.</p>
+<h2 id="3-build-the-app-from-the-file-6-min">3. Build the app from the file (6 min)<a class="headerlink" href="#3-build-the-app-from-the-file-6-min" title="Permanent link">¶</a></h2>
 <ol>
 <li><strong>Studio → Build → App → Build</strong>.</li>
 <li>
 <p>Click <strong>+</strong> in the box, attach <code>NightWatch_Mission_Control.md</code>, and type:</p>
-<div class="highlight"><pre><span></span><code>Build section A (the core app) of the attached design. Use my integration Night Watch Console.
+<div class="highlight"><pre><span></span><code>Build the attached design now, without asking questions. Use my integration Night Watch Console.
 </code></pre></div>
 </li>
 <li>
-<p>Send it and wait. Studio checks the integration and every operation the design names, builds the app,
-   then runs its own checks (styling, types, tests) and fixes what fails. This takes several minutes; do
-   not send another message while it works.</p>
+<p>Send it and wait. Studio checks the integration and all seven operations the design names, builds the
+   app, then runs its own checks (styling, types, tests) and fixes what fails. This takes about 5 minutes;
+   do not send another message while it works.</p>
+</li>
+<li>
+<p><strong>Name it yours.</strong> Studio names the app after your prompt, so every app in the room starts with the same
+   name. Select the <strong>pencil</strong> next to the title at the top. In <strong>Edit App details</strong>:</p>
+<div class="sc-copytable" markdown="">
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(1) App name</td>
+<td><code>&lt;your seat&gt; Mission Control</code></td>
+</tr>
+<tr>
+<td>(2) Description</td>
+<td><code>Night Watch Mission Control for seat &lt;your seat&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>(3) Select <strong>Save changes</strong>. The title at the top now shows your seat.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28f-app-rename.png" data-desc-position="bottom"><img alt="Rename the app with your seat" src="../../img/28f-app-rename.png"></a></p>
 </li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Studio asks one question first</p>
+<p>Before it builds, Studio's planner usually stops to confirm one detail (replay timing, the theme, a
+refresh rate). That is normal. Reply <code>Use your recommendation and build it.</code> and wait again. The one
+exception: if it offers to hide your seat or watch source, answer <code>Show them exactly as returned.</code></p>
+</div>
 <div class="admonition warning">
-<p class="admonition-title">Build in small steps</p>
-<p>Ask for section A first, then one add-on per message. A single request for everything at once is too
-big for one build turn: Studio reports <em>This change didn't complete</em> and restores the last good version.</p>
+<p class="admonition-title">If you see <em>This change didn't complete</em></p>
+<p>Studio restores the last good version. Send the same prompt again; if it fails twice, ask for
+<code>Build section A of the attached design.</code> first, then <code>Add sections B and C of the design.</code></p>
 </div>
 <h2 id="4-open-it-and-read-your-night-3-min">4. Open it and read your night (3 min)<a class="headerlink" href="#4-open-it-and-read-your-night-3-min" title="Permanent link">¶</a></h2>
-<!-- screenshots: preview, timeline, evidence, group -->
-
+<p>When the build finishes, the app opens in <strong>Preview</strong> on the right.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28b-app-built.png" data-desc-position="bottom"><img alt="The finished app: header, card state and response times" src="../../img/28b-app-built.png"></a></p>
+<ol>
+<li>Your app's name, with your seat.</li>
+<li><strong>Header</strong>: your seat, the service you protect, your watch source, your card state and when it last
+   refreshed.</li>
+<li><strong>Replay the night</strong> (step 5).</li>
+<li><strong>Response times</strong>: Time to detect, Time to contain and Time to resolve, or <em>not yet</em>.</li>
+<li><strong>Install</strong> would add the app to your <strong>Apps</strong> menu. Skip it for this lab: use the app here in <strong>Preview</strong>.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Use the app in Preview</p>
+<p>At the moment an <strong>installed</strong> Studio app cannot reach REST integrations in this tenant: its panels say
+<em>unavailable</em> while the same app works in the builder Preview. Everything in this lab works in Preview.</p>
+</div>
+<p>Scroll down:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The header shows your seat, your service and your card state.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Overnight timeline</strong> shows when your attack started, your agent's alert (in its own words), the
-      stop and the clear, with <strong>Time to detect</strong>, <strong>Time to contain</strong> and <strong>Time to resolve</strong>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>My group</strong> shows your five seats' cards, yours outlined.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Timeline</strong>: when your attack started, your agent's alert in its own words, the stop and the clear.
+      Steps that have not happened yet are greyed.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>My group</strong>: the five seats in your group, yours marked <strong>You</strong>.</li>
 </ul>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28d-app-evidence.png" data-desc-position="bottom"><img alt="The evidence your agent saw" src="../../img/28d-app-evidence.png"></a></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Evidence my agent saw</strong>: (1) the top destinations your source talked to in the last hour, (2)
+      connections, IPS and file events in the last 5 minutes. After your agent stops your attack, a green
+      <strong>Quiet since</strong> badge appears.</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28e-app-business.png" data-desc-position="bottom"><img alt="Business impact" src="../../img/28e-app-business.png"></a></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Business impact</strong>: (1) your service: criticality, segment, apps and the impact if it goes down;
+      (2) who is on call and the wake policy.</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28g-app-changes.png" data-desc-position="bottom"><img alt="Recent changes" src="../../img/28g-app-changes.png"></a></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (1) <strong>Recent changes</strong> in the last 24 hours. (2) <strong>same segment</strong> marks a change on your service's
+      segment: the first place to look when something breaks.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">No business context?</p>
+<p>Only some lab services have a business-context record. If <strong>My service</strong> says <em>No business context
+for this service</em>, the app is working; on call and recent changes still show.</p>
+</div>
 <h2 id="5-replay-the-night-3-min">5. Replay the night (3 min)<a class="headerlink" href="#5-replay-the-night-3-min" title="Permanent link">¶</a></h2>
 <ol class="task-list">
-<li>In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → <strong>Edit schedule</strong>),
-   as in 2.4.</li>
-<li>In the app, select <strong>Replay the night</strong>, read the confirmation, and confirm. Your card resets and your
-   attack starts again.</li>
 <li>
-<p>Hands off. When your agent's run starts, the app lights each step as it happens: <strong>red</strong>, <strong>striped</strong>,
-   <strong>green</strong>, and stops the clock.</p>
+<p>In the app, select <strong>Replay the night</strong>. (1) Read what it does, then (2) select <strong>Replay the night</strong>.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28h-replay-confirm.png" data-desc-position="bottom"><img alt="Replay the night: confirmation" src="../../img/28h-replay-confirm.png"></a></p>
+</li>
+<li>
+<p>The app goes (1) amber, <em>Attack running, not reported yet</em>, and (2) <strong>Live</strong>, with a stopwatch.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28i-replay-live.png" data-desc-position="bottom"><img alt="Live mode after the replay" src="../../img/28i-replay-live.png"></a></p>
+</li>
+<li>
+<p>In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → <strong>Edit schedule</strong>),
+   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, contained,
+   resolved) and the card goes <strong>red</strong>, then <strong>Verifying</strong>, then <strong>green</strong>.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28j-replay-resolved.png" data-desc-position="bottom"><img alt="Your agent handled it" src="../../img/28j-replay-resolved.png"></a></p>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The app shows <em>"Your agent handled it in m:ss"</em>.</p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (1) <strong>Response times</strong> fill in. In this run: 8:15 to detect (mostly waiting for the scheduled slot),
+      0:14 to contain, 8:44 to resolve.</p>
 </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (2) The <strong>Timeline</strong> shows each step, with your agent's alert in its own words.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (3) Your card in <strong>My group</strong> turns <strong>Resolved</strong>, with your agent's summary. In live mode the app
+      also shows <em>"Your agent handled it in m:ss"</em>.</li>
 </ol>
-<h2 id="6-add-ons-if-you-have-time">6. Add-ons (if you have time)<a class="headerlink" href="#6-add-ons-if-you-have-time" title="Permanent link">¶</a></h2>
-<p>Send one at a time, and wait for each to finish:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">B. Evidence</label><label for="__tabbed_1_2">C. Business impact</label><label for="__tabbed_1_3">D. Handover notes</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>Add section B of the design.
-</code></pre></div>
-<p>A chart of the connections your agent saw, and a green <strong>Quiet since</strong> badge after the stop.</p>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>Add section C of the design.
-</code></pre></div>
-<p>Your service's criticality, who the on-call policy would wake, and the last day's changes.</p>
-</div>
-<div class="tabbed-block">
+<h2 id="6-add-on-shift-handover-notes-if-you-have-time">6. Add-on: shift handover notes (if you have time)<a class="headerlink" href="#6-add-on-shift-handover-notes-if-you-have-time" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code>Add section D of the design.
 </code></pre></div>
-<p>A note box your whole group sees: what your agent found, for the day shift.</p>
-</div>
-</div>
-</div>
+<p>A note box your whole group shares: what your agent found, for the day shift. Notes are stored in the
+app, so everyone in your group sees them.</p>
 <div class="admonition success">
 <p class="admonition-title">What you just did</p>
 <p>You built a second kind of Studio application from a file, on top of the same integrations your agent
