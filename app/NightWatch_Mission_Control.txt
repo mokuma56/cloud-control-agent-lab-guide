@@ -1,0 +1,64 @@
+# App design: Night Watch Mission Control
+
+Build a single-page Studio app from this design. Build only section A (the core app) now. Sections B to D
+are add-ons I will ask for later, one at a time.
+
+## Purpose
+
+The morning after. My Studio agent watched my service overnight: it found my attack, raised my card on
+the room wall, stopped my own attack, checked it was quiet and cleared my card. This app shows what
+happened and how fast, shows my group, and lets me replay the night and watch my agent do it again.
+The app never stops an attack and never changes configuration. Containment is the agent's job.
+
+## Rules
+
+- Use only the integration **Night Watch Console**, for every section.
+- Every operation already acts as my own seat. Never ask for, show or store a token, a seat ID or an IP
+  address typed by the user.
+
+## A. Core app (build this now)
+
+Operations: `get_my_timeline`, `get_my_group_board`, `replay_my_attack`.
+
+1. **Header**: title "Night Watch Mission Control". From `get_my_timeline`: seat, protects,
+   watch_source_ip. A large status pill from `card_state`: quiet grey "Quiet"; attack_active amber
+   "Attack running, not reported yet"; alert red "Alert" plus `alert.severity`; stopped_verifying red
+   "Stopped, verifying"; resolved green "Resolved". "Last updated" time and a Refresh button.
+2. **Response times**: three large tiles from `metrics_seconds`: Time to detect, Time to contain, Time to
+   resolve, shown as m:ss, or "not yet" when null.
+3. **Timeline**: the `events` list, oldest first, as a vertical list of steps (time, event name, and for
+   alert_raised the severity and the agent's summary in quotes). Then show the steps that have not
+   happened yet, greyed, in this order: attack_started, alert_raised, contained, resolved.
+4. **My group**: from `get_my_group_board`, five small cards (seat, colored by `card_state` as in the
+   header, first 80 characters of `agent_summary`). Outline the card where `is_me` is true.
+5. **Replay the night** button in the header. Ask for confirmation: "This resets your card and restarts
+   the attack from your own watch source only. Your agent acts on its next run, so schedule it for the
+   next 5-minute slot." On confirm, call `replay_my_attack`, then enter live mode: refresh
+   `get_my_timeline` every 10 seconds, show a "Live" badge and a stopwatch from the replay time, and when
+   `card_state` is resolved show "Your agent handled it in m:ss" and leave live mode. Leave live mode
+   after 30 minutes or on a Stop watching button.
+6. **Refresh**: load on open; outside live mode refresh every 60 seconds while visible.
+7. **States**: loading, empty and error state in each block; on error keep the last data and mark it
+   "stale".
+8. **Look**: dark theme, large readable numbers for a projector.
+
+## B. Add-on: the evidence my agent saw
+
+Add a panel using `get_my_security_events` with minutes=60: a bar chart of the top 8 entries of
+`connections[]` (label "destination:port", value `connections`), plus counters for connections, IPS
+events and file events from a minutes=5 call. If the result has `since_stop` and all its totals are 0,
+show a green badge "Quiet since" `since_stop.stopped_at`. Caption: "Cisco Secure Firewall events: the same
+data your agent used."
+
+## C. Add-on: business impact
+
+Add a panel using `get_business_services` (the service matching my protects value: criticality, who
+depends on it, impact if down), `get_oncall` (primary and secondary first name and initial, wake policy)
+and `get_recent_changes` with hours=24 (change ID, system, summary; mark "same segment" when the text
+mentions my segment).
+
+## D. Add-on: shift handover notes (shared app state)
+
+Add a shared collection `handover_notes` (group, seat, note up to 500 characters, posted_at). Under My
+group, a text area and a Post note button, and the notes for my group (group from
+`get_my_group_board.group`), newest first. A user may delete only their own notes.

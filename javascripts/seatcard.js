@@ -7,9 +7,18 @@
     ["Cloud Control login", "login"], ["Seat token", "token"], ["Lab Tools MCP URL", "mcp_url"],
     ["Lab Actions spec URL", "spec_light"], ["Lab Context spec URL", "spec_context"],
     ["Your MCP workspace", "workspace"], ["Room wall", "wall"], ["Agent name (3.1)", "agent_name"],
+    ["Night Watch Console spec URL (Part 3)", "spec_console"],
   ];
+  // Studio apps reach port 443 only: cards saved before 2026-11-11 have no spec_console, so derive it without :8443
+  const consoleSpec = c => c.spec_console ||
+    (c.spec_light || "").replace(":8443/", "/").replace("openapi-light.json", "openapi-console.json");
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const load = () => { try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch { return null; } };
+  const load = () => {
+    let c = null;
+    try { c = JSON.parse(localStorage.getItem(KEY) || "null"); } catch { return null; }
+    if (c && !c.spec_console) c.spec_console = consoleSpec(c);
+    return c;
+  };
   const save = v => { try { v ? localStorage.setItem(KEY, JSON.stringify(v)) : localStorage.removeItem(KEY); } catch {} };
 
   function render(root) {
@@ -182,12 +191,13 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
       ["T3-C test", c.seat + " test"],
       ["<your Lab Tools MCP URL>", c.mcp_url],
       ["<your Lab Actions spec URL>", c.spec_light],
+      ["<your Night Watch Console spec URL>", consoleSpec(c)],
       ["<your lab login>", c.login],
       ["<your MCP workspace URL>", c.workspace],
       ["<your workspace MCP URL>", c.workspace ? c.workspace.replace(/\/?$/, "/") + "mcp" : ""],
       ["<lab host>", (() => { try { return new URL(c.spec_light).hostname; } catch { return ""; } })()],
     ].filter(([, v]) => v);
-    const inline = fills.filter(([k]) => /^<(your seat|your Lab Tools MCP URL|your Lab Actions spec URL|your MCP workspace URL|your workspace MCP URL|lab host|your lab login)>$/.test(k));   // safe in running text
+    const inline = fills.filter(([k]) => /^<(your seat|your Lab Tools MCP URL|your Lab Actions spec URL|your Night Watch Console spec URL|your MCP workspace URL|your workspace MCP URL|lab host|your lab login)>$/.test(k));   // safe in running text
     document.querySelectorAll(".md-content pre code, .md-content :not(pre) > code").forEach(code => {
       const list = code.parentElement.tagName === "PRE" ? fills : inline;
       const walk = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
