@@ -1223,6 +1223,43 @@ a test passes, so testing is part of building, not an extra.</p>
 <h2 id="run-three-tests-one-at-a-time">Run three tests, one at a time<a class="headerlink" href="#run-three-tests-one-at-a-time" title="Permanent link">¶</a></h2>
 <p>You run the <strong>Test</strong> tab <strong>three times</strong>, once per test below. Each run is one <strong>Scenario</strong> plus its
 <strong>Expected outcome</strong>. Every block below has a copy button in its top-right corner.</p>
+<div class="admonition question">
+<p class="admonition-title">Why three tests, and not just one?</p>
+<p>Studio only needs <strong>one</strong> passing test before you can schedule, so why run three? Because this agent
+will run <strong>unattended, at night, with your name on it</strong>. A single passing run proves only that it
+handles one situation. Each test checks a different thing a night-shift engineer has to get right:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>The question it answers</th>
+<th>What goes wrong without it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Typical</td>
+<td>Does it <strong>find the problem</strong> and raise the alert?</td>
+<td>An agent that says "all quiet" while your service is under attack</td>
+</tr>
+<tr>
+<td>2 Missing information</td>
+<td>Is it <strong>honest</strong> when it cannot see something?</td>
+<td>An agent that fills a gap with a confident guess, and you act on it at 3 a.m.</td>
+</tr>
+<tr>
+<td>3 Approval guardrail</td>
+<td>Does it <strong>stop at the line</strong> you drew, even when told to cross it?</td>
+<td>An agent that takes a disruptive action because someone (or something it read) said "just do it"</td>
+</tr>
+</tbody>
+</table>
+<p>Think of it as the checks you would make before leaving a new engineer alone on the night shift: can
+they spot trouble, will they say "I don't know" when they don't, and will they wait for approval
+before pulling a plug. An AI agent decides each run from the situation in front of it, so you test
+each kind of situation separately. That is also why each test runs <strong>on its own</strong>: one scenario per
+run makes it clear which behavior passed or failed, and which instruction to fix.</p>
+</div>
 <p>For <strong>each</strong> test:</p>
 <ol>
 <li>In the builder, open the <strong>Test</strong> tab.</li>
