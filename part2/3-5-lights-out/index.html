@@ -1268,8 +1268,23 @@ STATUS healthy: your lane was stopped; ask the proctor to restart your seat, the
 run again.</p>
 </div>
 <h2 id="2-wake-up-and-read-the-finding-about-10-min">2. Wake up and read the finding (about 10 min)<a class="headerlink" href="#2-wake-up-and-read-the-finding-about-10-min" title="Permanent link">¶</a></h2>
-<p><strong>Option A:</strong> open <strong>Studio → Manage → Applications</strong>, select your agent, then <strong>View runs</strong> and the
-latest run. <strong>Option B:</strong> read Canvas's answer. A good finding looks like this:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Option A: Scheduled</label><label for="__tabbed_2_2">Option B: On demand from Canvas</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Open <strong>Studio → Manage → Applications</strong>, select your agent, then <strong>View runs</strong>. The top row is your
+scheduled run: Trigger <strong>Schedule</strong>, Version <strong>production</strong>. Select <strong>View</strong>. (Select <strong>Refresh runs</strong>
+if it is not there yet; a run takes about a minute.)</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/26b-view-runs.png" data-desc-position="bottom"><img alt="26b-view-runs" loading="lazy" src="../../img/26b-view-runs.png"></a></p>
+<p><em>(1) View runs, (2) the scheduled run at the time you chose, (3) Trigger Schedule. The rows below are your sandbox tests. With Max runs 1 the badge now reads Completed.</em></p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/26c-run-detail.png" data-desc-position="bottom"><img alt="26c-run-detail" loading="lazy" src="../../img/26c-run-detail.png"></a></p>
+<p><em>A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS issue and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE and NEXT STEP.</em></p>
+</div>
+<div class="tabbed-block">
+<p>Read Canvas's answer in your board.</p>
+</div>
+</div>
+</div>
+<p>A good finding looks like this (this one is from a web attack seat; yours names your own seat's activity):</p>
 <div class="highlight"><pre><span></span><code>STATUS: issue
 SEVERITY: major
 SUMMARY: 10.106.10.1xx is sending web attack patterns to Core services (AD-1)
