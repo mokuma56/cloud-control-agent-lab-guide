@@ -90,7 +90,7 @@ tools you use connect differently:
 | Way in | Who uses it | Set up in | What it is |
 | --- | --- | --- | --- |
 | **OpenAPI** (the custom integration above) | Canvas, and Studio agents as an *API integration* | 1.1 (now) | The two API descriptions plus your seat token |
-| **MCP** (Model Context Protocol) | Studio agents | 3.3 step A | One shared MCP server URL; your seat token tells it which seat you are |
+| **MCP** (Model Context Protocol) | Studio agents | 2.3 step A | One shared MCP server URL; your seat token tells it which seat you are |
 
 MCP is an open standard for giving an AI assistant tools: the server lists its tools and their
 inputs, and the assistant calls them. Both ways reach the same lab server with **your seat token**, so
@@ -103,12 +103,12 @@ When you build your agent in Part 2, its manifest lists the servers it may use:
 | `meraki-server` | Cisco-provided MCP server for **Cisco Meraki** | Read the org: networks, switches and ports, clients, events, configuration change log |
 | `secure-access` | Cisco-provided MCP server for **Cisco Secure Access** | Read access and DNS activity, alerts and policy for the users and sites it protects |
 | `firewall-server` (if listed) | Cisco-provided MCP server for **Cisco Secure Firewall** | Read firewall policy and objects |
-| `byo-…` (a random ID) | **"Bring your own"** MCP: the Lab Tools MCP integration you add in 3.3 | The ten Lab Tools operations, as your seat |
+| `byo-…` (a random ID) | **"Bring your own"** MCP: the Lab Tools MCP integration you add in 2.3 | The ten Lab Tools operations, as your seat |
 | API integration *PseudoCo Business Context* | The Lab Tools OpenAPI integration from 1.1 | The same Lab Tools operations, over REST |
 
-The Cisco ones come with Cloud Control: nothing to install. The `byo-` one is the point of 3.3: it is
+The Cisco ones come with Cloud Control: nothing to install. The `byo-` one is the point of 2.3: it is
 how you would give an agent your own company's tools (in Path B you even write one). Its ID differs for
-everyone. If your agent has no `byo-` entry yet, that is normal before 3.3.
+everyone. If your agent has no `byo-` entry yet, that is normal before 2.3.
 
 
 

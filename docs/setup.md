@@ -23,12 +23,12 @@ What the card holds:
 | --- | --- | --- |
 | Seat | `T3-C` (table 3, seat C, purple) | everywhere |
 | Cloud Control login | `lab13` | 1.1 |
-| **Seat token** | a long random string | 1.3, 3.3 |
-| Lab Tools MCP URL | `https://<lab host>:9443/mcp` | 3.3 |
-| Lab Actions spec URL | `https://<lab host>:8443/openapi-light.json` | 3.3 (REST path) |
-| Lab Context spec URL | `https://<lab host>:8443/openapi-context.json` | 3.3 (REST path) |
-| Your MCP workspace | `https://<lab host>:9443/seat/<your seat>/` | 3.3 (Path B) |
-| Room wall | `https://<lab host>:8443/` (also on the room screen) | 3.3, 3.5 |
+| **Seat token** | a long random string | 1.3, 2.3 |
+| Lab Tools MCP URL | `https://<lab host>:9443/mcp` | 2.3 |
+| Lab Actions spec URL | `https://<lab host>:8443/openapi-light.json` | 2.3 (REST path) |
+| Lab Context spec URL | `https://<lab host>:8443/openapi-context.json` | 2.3 (REST path) |
+| Your MCP workspace | `https://<lab host>:9443/seat/<your seat>/` | 2.3 (Path B) |
+| Room wall | `https://<lab host>:8443/` (also on the room screen) | 2.3, 2.5 |
 
 !!! warning "Your seat token is a password"
     It identifies your seat to every Lab Tools call. Paste it only into the credential fields named

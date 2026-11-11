@@ -1,4 +1,4 @@
-# 3.2 Sandbox test (2:05, 15 min)
+# 2.2 Sandbox test (2:05, 15 min)
 
 !!! abstract "Goal"
     Three passing sandbox tests, which unlock **Schedule**. Studio will not let you schedule an agent
@@ -99,7 +99,7 @@ For **each** test:
 
 ### After the three tests: restart your lane
 
-Test 1 really stopped your lane. Start it again so Test 4 (3.4) and Lights Out (3.5) have something to
+Test 1 really stopped your lane. Start it again so Test 4 (2.4) and Lights Out (2.5) have something to
 find. Select **Run**:
 
 <div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
@@ -109,7 +109,7 @@ The reply should show `"lane_running": true`. This button only restarts **your**
 !!! info "Your lane is already sending traffic"
     Since the break, the proctor has had **practice traffic** running: your seat's source IP sends test
     attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
-    It keeps running to the end of the lab, and it is the same traffic your agent finds in 3.5. When a test
+    It keeps running to the end of the lab, and it is the same traffic your agent finds in 2.5. When a test
     stops your lane, restart it yourself with the **Restart my lane** button below the tests.
 
 !!! tip "Your lane's activity depends on your seat letter"
@@ -124,7 +124,7 @@ The reply should show `"lane_running": true`. This button only restarts **your**
     | E | host sweep | one port across many hosts |
 
     All five are an issue. If your agent says *inconclusive* because there are no IPS events, its
-    instructions are missing the activity patterns from the 3.1 description: add them by chatting with
+    instructions are missing the activity patterns from the 2.1 description: add them by chatting with
     Studio and rerun Test 1.
 
 !!! warning "Sandbox tests are real"
@@ -148,7 +148,7 @@ right:
 
 - [ ] All three tests pass. If one fails, fix the instructions by chatting with Studio and rerun
       **that** test.
-- [ ] **Schedule** (top right) is now blue. Leave it for now: you set the schedule in 3.4, after
+- [ ] **Schedule** (top right) is now blue. Leave it for now: you set the schedule in 2.4, after
       you wire in your own integration.
 
     ![18-schedule-ready](../img/18-schedule-ready.png){ loading=lazy }
@@ -160,4 +160,4 @@ right:
     that has passed a test. Until then it shows *Run a test on the latest saved changes first*. After your
     last change, rerun one test (Test 1 is enough) before you schedule.
 
-A fourth test you will add in 3.4: *"fault present, expect the light on."*
+A fourth test you will add in 2.4: *"fault present, expect the light on."*

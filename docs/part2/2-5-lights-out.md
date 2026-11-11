@@ -1,4 +1,4 @@
-# 3.5 Lights Out (3:10, 25 min)
+# 2.5 Lights Out (3:10, 25 min)
 
 !!! abstract "Goal"
     Hands off. Your agent runs on its own, finds your lane, raises the alert, stops your source,
@@ -12,12 +12,12 @@ lab, so you do this section at your own pace, whenever your agent runs.
 
 === "Option A: Scheduled"
 
-    Take your hands off the keyboard and wait for the run time you chose in 3.4. Studio starts your agent
+    Take your hands off the keyboard and wait for the run time you chose in 2.4. Studio starts your agent
     with its trigger prompt, exactly as it would at 3 a.m. Nobody types anything.
 
 === "Option B: On demand from Canvas"
 
-    Send the prompt from 3.4 Option B in your Canvas board, then take your hands off while Canvas works.
+    Send the prompt from 2.4 Option B in your Canvas board, then take your hands off while Canvas works.
 
 Watch your tile on the room wall:
 
@@ -36,7 +36,7 @@ tiles change at their own times.
     Check **Studio → Manage → Applications → your agent → View runs** for a run at your time. No run:
     the schedule time had already passed when you saved it; use **Edit schedule** for the next slot. A
     run that says STATUS healthy: your lane was stopped; restart it with the **Restart my lane** button in
-    3.4, then schedule the next slot. A tile that stays red: the run found events after the stop and kept
+    2.4, then schedule the next slot. A tile that stays red: the run found events after the stop and kept
     the alert open; read its EVIDENCE.
 
 ## 2. Wake up and read what your agent did (about 10 min)
@@ -53,7 +53,7 @@ tiles change at their own times.
 
     ![26c-run-detail](../img/26c-run-detail.png){ loading=lazy }
 
-    *A real scheduled run for seat T1-A, nobody at the keyboard: (1) started by the schedule, (2) STATUS: RESOLVED, (3) what it found and what it did: lane stopped, source quiet, alert cleared. Scroll down for EVIDENCE: signal_issue, stop_my_lane, since_stop 0/0/0 and clear_issue, like Test 4 in 3.4.*
+    *A real scheduled run for seat T1-A, nobody at the keyboard: (1) started by the schedule, (2) STATUS: RESOLVED, (3) what it found and what it did: lane stopped, source quiet, alert cleared. Scroll down for EVIDENCE: signal_issue, stop_my_lane, since_stop 0/0/0 and clear_issue, like Test 4 in 2.4.*
 
 === "Option B: On demand from Canvas"
 
@@ -98,7 +98,7 @@ Check what it did:
 With Option A your agent already did steps 3 and 4 on its own: skip to the end. Canvas's triage note
 makes it ask before it stops anything, so with Option B you approve it:
 
-1. In the Canvas chat where you sent the 3.4 prompt, wait for its report.
+1. In the Canvas chat where you sent the 2.4 prompt, wait for its report.
 
 2. When Canvas asks *"Approve stop_my_lane for 10.106.10.1xx?"*, check the IP is yours and reply:
 

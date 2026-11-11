@@ -128,7 +128,7 @@ ticket in a test ServiceNow instance. Keep the rule: it tells, it never changes 
 
 ### 5. Your own attack, end to end (10 min)
 
-Restart your attack (the **Restart my lane** button in 3.2, or **Replay the night** in the app) and run
+Restart your attack (the **Restart my lane** button in 2.2, or **Replay the night** in the app) and run
 your agent twice: once while the attack runs (expect STATUS resolved, after it stops and verifies), and
 once right after (expect STATUS healthy and nothing to stop). Compare the two runs' evidence.
 
@@ -140,7 +140,7 @@ The file is the source code: share it and anyone gets the same app.
 
 ## E. App add-ons
 
-After the core Mission Control app (4.1), add one section of the design file per message:
+After the core Mission Control app (3.1), add one section of the design file per message:
 
 | Add-on | Prompt | Adds |
 | --- | --- | --- |

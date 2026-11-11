@@ -1,4 +1,4 @@
-# 3.4 Wire it in and choose how it runs (2:55, 15 min)
+# 2.4 Wire it in and choose how it runs (2:55, 15 min)
 
 !!! abstract "Goal"
     Your agent uses your integration, passes a "light on" test, and is scheduled for Lights Out (or
@@ -7,23 +7,23 @@
 ## Wire the integration into the agent
 
 You change an existing agent by reopening it in the builder and asking Studio, the same chat you used
-in 3.1.
+in 2.1.
 
 1. Open **Studio → Manage → Applications** and select your agent's name (for example
    **[Directory Services Night Watch]**).
 
     ![24a-manage-agent](../img/24a-manage-agent.png){ loading=lazy }
 
-    *(1) Manage, (2) Applications, (3) your agent (capability Agent). Your integrations from 3.3 are listed here too. Owners are blurred in this guide.*
+    *(1) Manage, (2) Applications, (3) your agent (capability Agent). Your integrations from 2.3 are listed here too. Owners are blurred in this guide.*
 
 2. On the agent's **Details** page, select **Edit Agent** (top right).
 
     ![24b-agent-details](../img/24b-agent-details.png){ loading=lazy }
 
-    *(1) Details shows the description you wrote in 3.1, (2) Edit Agent reopens the builder, (3) Schedule: Not scheduled yet.*
+    *(1) Details shows the description you wrote in 2.1, (2) Edit Agent reopens the builder, (3) Schedule: Not scheduled yet.*
 
 3. The builder opens with the **Studio** chat on the left. Click in **Ask Studio to refine the Agent**,
-   paste the prompt for the path you built in 3.3, and send it (Enter or the arrow).
+   paste the prompt for the path you built in 2.3, and send it (Enter or the arrow).
 
     === "Path A: My Table Light"
 
@@ -55,7 +55,7 @@ in 3.1.
 
     !!! info "Why the prompt repeats the limits"
         Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
-        repeating the limits stops a refinement from loosening what you tested in 3.2.
+        repeating the limits stops a refinement from loosening what you tested in 2.2.
 
     !!! warning "If Studio says stop_my_lane requires human approval"
         Studio judges a tool by the description it saved when you connected the integration. If it
@@ -87,9 +87,9 @@ in 3.1.
 Your change in the step above created a new version, so Schedule is locked until a test passes on it.
 Test 4 is a full night-watch run with your own integration: find the problem, raise the alert, stop
 your own source, check that nothing arrives after the stop, and clear the alert. Make sure your lane is
-running first (the **Restart my lane** button at the end of the 3.2 tests).
+running first (the **Restart my lane** button at the end of the 2.2 tests).
 
-Run it the same way as the three tests in 3.2: in the builder's right-hand panel open **Test**, copy the
+Run it the same way as the three tests in 2.2: in the builder's right-hand panel open **Test**, copy the
 **Scenario** and the **Expected outcome** into their boxes, then **Run scenario** (about a minute).
 
 **Scenario**
@@ -128,7 +128,7 @@ resolved. No other IP and no shared configuration touched.
 
 ## Choose how it runs
 
-Your agent is ready. Now decide **how it starts** for Lights Out (3.5). There are two options:
+Your agent is ready. Now decide **how it starts** for Lights Out (2.5). There are two options:
 
 | | Option A: Scheduled (recommended) | Option B: On demand from Canvas |
 | --- | --- | --- |
@@ -177,9 +177,9 @@ yours whenever it runs.
 
         ![26a-scheduled](../img/26a-scheduled.png){ loading=lazy }
 
-        *(1) the badge reads Scheduled, (2) Schedule became Edit schedule (use it to pick another slot), (3) the Schedule card shows your run time, (4) View runs is where the result appears in 3.5.*
+        *(1) the badge reads Scheduled, (2) Schedule became Edit schedule (use it to pick another slot), (3) the Schedule card shows your run time, (4) View runs is where the result appears in 2.5.*
 
-    Then go to [3.5](3-5-lights-out.md) and keep your hands off until your run time. Your agent finds
+    Then go to [2.5](2-5-lights-out.md) and keep your hands off until your run time. Your agent finds
     your lane, raises the alert, stops your source, checks that it is quiet and clears the alert, all
     on its own.
 
@@ -196,7 +196,7 @@ yours whenever it runs.
     asking, and Canvas's triage note makes it ask you before it stops anything.
 
     1. Open **Canvas** and your board from Part 1 (or **+ New**).
-    2. Go to [3.5](3-5-lights-out.md) and send this prompt there when you are ready:
+    2. Go to [2.5](2-5-lights-out.md) and send this prompt there when you are ready:
 
         ```text
         Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my

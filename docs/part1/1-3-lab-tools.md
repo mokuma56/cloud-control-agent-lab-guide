@@ -24,7 +24,7 @@ Cisco data told you *what* changed. Lab Tools adds what only PseudoCo knows:
       uses the same STATUS and SEVERITY lines to decide whether to raise an alert.
 
     In real work you write a prompt like this once and reuse it, just as you would a runbook. That is
-    exactly what you do next. In 2.1 you strip tonight's details out of it and save it as a general
+    exactly what you do next. In 1.4 you strip tonight's details out of it and save it as a general
     triage method. In Part 2 that method becomes your agent's instructions, so a run needs no prompt at all.
 
 Paste this into your Canvas board. Keep the bracketed parts or adapt them.

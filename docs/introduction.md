@@ -20,7 +20,7 @@ action you approve.
 
 The two incidents have nothing in common, on purpose. In Part 1 you do not write a "Leaf1 prompt".
 You write a **general triage method**: look across every Cisco domain, check what changed, add the
-business context, then report in a fixed format. In 2.1 you save that method, and in Part 2 it becomes your agent's instructions.
+business context, then report in a fixed format. In 1.4 you save that method, and in Part 2 it becomes your agent's instructions.
 At Lights Out nobody tells your agent that tonight's problem is an attack. The same method that
 found a bad switch change has to find it on its own. That is what *troubleshoots anything* means.
 
@@ -83,14 +83,14 @@ flowchart TB
 | 0:10 | 15 | 1 | [1.1 Orientation](part1/1-1-orientation.md) | Canvas, Studio and Lab Tools open |
 | 0:25 | 25 | 1 | [1.2 Multi-domain diagnosis](part1/1-2-diagnose.md) | Root cause from Cisco data alone |
 | 0:50 | 25 | 1 | [1.3 Make it yours: Lab Tools](part1/1-3-lab-tools.md) | Same answer plus change ID, business impact, severity |
-| 1:15 | 15 | 2 | [2.1 Save the triage method](part1/2-1-save.md) | Pinned Canvas and your general triage prompt |
+| 1:15 | 15 | 2 | [1.4 Save the triage method](part1/1-4-save.md) | Pinned Canvas and your general triage prompt |
 | 1:30 | 10 | - | Break | |
-| 1:40 | 25 | 3 | [3.1 Shape the agent](part2/3-1-shape-agent.md) | Draft agent, manifest reviewed |
-| 2:05 | 15 | 3 | [3.2 Sandbox test](part2/3-2-test-publish.md) | Three tests passed, Schedule unlocked |
-| 2:20 | 35 | 3 | [3.3 Build your custom workflow](part2/3-3-custom-workflow.md) | Your integration turns your seat red on the wall |
-| 2:55 | 15 | 3 | [3.4 Wire it in and choose how it runs](part2/3-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
-| 3:10 | 25 | 3 | [3.5 Lights Out](part2/3-5-lights-out.md) | Light on at detection, off when fixed |
-| 3:35 | 15 | 4 | [4.1 Build Mission Control](part3/4-1-mission-control.md) | An app built from a design file; the night replayed live |
+| 1:40 | 25 | 3 | [2.1 Shape the agent](part2/2-1-shape-agent.md) | Draft agent, manifest reviewed |
+| 2:05 | 15 | 3 | [2.2 Sandbox test](part2/2-2-test-publish.md) | Three tests passed, Schedule unlocked |
+| 2:20 | 35 | 3 | [2.3 Build your custom workflow](part2/2-3-custom-workflow.md) | Your integration turns your seat red on the wall |
+| 2:55 | 15 | 3 | [2.4 Wire it in and choose how it runs](part2/2-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
+| 3:10 | 25 | 3 | [2.5 Lights Out](part2/2-5-lights-out.md) | Light on at detection, off when fixed |
+| 3:35 | 15 | 4 | [3.1 Build Mission Control](part3/3-1-mission-control.md) | An app built from a design file; the night replayed live |
 | 3:50 | 10 | - | [Conclusion](conclusion.md) | What you built; one agent idea for your own company; wrap |
 
 Finished early? The [challenge scenarios](appendix/challenges.md) have another hour of work.

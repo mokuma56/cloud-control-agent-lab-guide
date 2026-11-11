@@ -1,4 +1,4 @@
-# 4.1 Build Mission Control: an app for the morning after (3:35, 15 min)
+# 3.1 Build Mission Control: an app for the morning after (3:35, 15 min)
 
 !!! abstract "Goal"
     Build a Studio **app** from a design file, open it, and replay the night: restart your attack and watch
@@ -18,7 +18,7 @@ an app shows and lets people act.
 
 ## 1. Add the Night Watch Console integration (3 min)
 
-The app reads your seat's timeline from a small API made for it. Add it the same way as Path A in 3.3:
+The app reads your seat's timeline from a small API made for it. Add it the same way as Path A in 2.3:
 
 1. **Studio → Build → Integrations → Add → REST API → Use URL** and paste:
 
@@ -80,7 +80,7 @@ app **repeatable**: the next person gets the same app from the same file.
 ## 5. Replay the night (3 min)
 
 1. In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → **Edit schedule**),
-   as in 3.4.
+   as in 2.4.
 2. In the app, select **Replay the night**, read the confirmation, and confirm. Your card resets and your
    attack starts again.
 3. Hands off. When your agent's run starts, the app lights each step as it happens: **red**, **striped**,

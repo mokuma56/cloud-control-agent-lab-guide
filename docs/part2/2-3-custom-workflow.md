@@ -1,4 +1,4 @@
-# 3.3 Build your custom workflow (2:20, 35 min)
+# 2.3 Build your custom workflow (2:20, 35 min)
 
 !!! abstract "Goal"
     Your own integration in Studio that your agent can call, proven by turning your seat red on the room wall.

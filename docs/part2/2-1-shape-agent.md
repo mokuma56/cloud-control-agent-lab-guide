@@ -1,4 +1,4 @@
-# 3.1 Shape the agent from your triage method (1:40, 25 min)
+# 2.1 Shape the agent from your triage method (1:40, 25 min)
 
 !!! abstract "Goal"
     A draft Studio agent whose manifest you have read line by line: what it watches, which
@@ -26,7 +26,7 @@
 
     Your agent is Personal, so everyone at your table can use the same name.
 
-3. Paste this description. **The middle part is your 2.1 triage method**, so use your own wording from
+3. Paste this description. **The middle part is your 1.4 triage method**, so use your own wording from
    your note if it is better. The top adds who the agent is, and the bottom adds what an unattended agent
    needs that you did not: its own seat, two actions and the safety rules. Put your agent's name and service in
    the first line, and keep the rules.
@@ -95,10 +95,10 @@ Studio drafts a **manifest** and asks follow-up questions. Suggested answers:
 
 | Studio asks | Answer |
 | --- | --- |
-| How often should it run? | Hourly (you may change this in 3.4) |
+| How often should it run? | Hourly (you may change this in 2.4) |
 | Maximum runs | 10 |
 | Output | Markdown in the run output |
-| Which integrations? | Lab Tools. If Studio asks you to connect it now, skip; you do it in 3.3 |
+| Which integrations? | Lab Tools. If Studio asks you to connect it now, skip; you do it in 2.3 |
 
 ## Review the manifest
 
@@ -118,8 +118,8 @@ What each server in (2) is, and why there are two ways to reach Lab Tools: see [
 - [ ] **Instructions** say when it may call `stop_my_lane` (confirmed activity from its own source, lane running) and that it checks `since_stop` before `clear_issue`.
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
 - [ ] **MCP servers** or **API integrations** list Lab Tools. Studio can use the Canvas Lab Tools
-      integration (shown as an API integration) and your MCP connector from 3.3; either works.
-- [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 3.4.
+      integration (shown as an API integration) and your MCP connector from 2.3; either works.
+- [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 2.4.
 - [ ] The draft is saved. There is no Save button: Studio saves the agent automatically after every
       change. Check that the card in the Studio panel says **Agent version v1 saved** (the number goes
       up as you change it) and that the title shows **Draft**.

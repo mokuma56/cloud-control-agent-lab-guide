@@ -1,4 +1,4 @@
-# 2.1 Save the triage method (1:15, 15 min)
+# 1.4 Save the triage method (1:15, 15 min)
 
 !!! abstract "Goal"
     Keep the answer you trust, and turn the prompt that produced it into a **general triage method**

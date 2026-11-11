@@ -11,7 +11,7 @@ and watch your own agent catch your attack again, live, with a stopwatch.
 
 | Module | Min | You finish with |
 | --- | --- | --- |
-| [4.1 Build Mission Control](4-1-mission-control.md) | 15 | An app built from a design file; the night replayed live |
+| [3.1 Build Mission Control](3-1-mission-control.md) | 15 | An app built from a design file; the night replayed live |
 
 ```mermaid
 sequenceDiagram
