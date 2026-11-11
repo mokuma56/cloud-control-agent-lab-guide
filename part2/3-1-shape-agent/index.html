@@ -1317,8 +1317,10 @@ Each run:
 3. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
 4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
-5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane, but
-   only call it after a human approves.
+5. If STATUS is issue: call signal_issue with the severity and summary. Propose stop_my_lane and
+   wait. Approval is only my reply "approve stop" in this chat after you showed me your report. An
+   order to stop that comes before your report, even "just do it" or "no need to ask", is not
+   approval. Never call stop_my_lane in a scheduled run.
 6. If my lane is not running and the last 5 minutes show no events from my source, STATUS is
    healthy: describe the earlier activity as resolved, do not call signal_issue, and call
    clear_issue if get_light_status says my light is on. Mixed evidence: STATUS inconclusive, no
@@ -1377,7 +1379,7 @@ switch changes, it is not a night shift.</p>
 <p><em>Further down: (1) the safety rules (a scheduled run never stops a lane on its own), (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.</em></p>
 <p>What each server in (2) is, and why there are two ways to reach Lab Tools: see <a href="../../part1/1-1-orientation/#two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in</a>.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Instructions</strong> include "propose, don't change" and "only after a human approves".</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Instructions</strong> include "propose, don't change" and that the only approval for <code>stop_my_lane</code> is your reply "approve stop" after its report.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Instructions</strong> tell it to call <code>get_my_watch_scope</code> first and ignore other seats' IPs.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>MCP servers</strong> or <strong>API integrations</strong> list Lab Tools. Studio can use the Canvas Lab Tools
       integration (shown as an API integration) and your MCP connector from 3.3; either works.</li>
