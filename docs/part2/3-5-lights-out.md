@@ -49,11 +49,11 @@ tiles change at their own times.
 
     ![26b-view-runs](../img/26b-view-runs.png){ loading=lazy }
 
-    *(1) View runs, (2) the scheduled run at the time you chose, (3) Trigger Schedule. The rows below are your sandbox tests. With Max runs 1 the badge now reads Completed.*
+    *(1) View runs, (2) your scheduled run at the time you chose, (3) Trigger Schedule. The rows below are earlier runs and your sandbox tests (Trigger Test). With Max runs 1 the badge now reads Completed.*
 
     ![26c-run-detail](../img/26c-run-detail.png){ loading=lazy }
 
-    *A real scheduled run for seat T1-A: (1) started by the schedule, nobody typed anything, (2) STATUS and SEVERITY, (3) the activity it found. Scroll down for EVIDENCE: the signal_issue, stop_my_lane, since_stop and clear_issue steps, in that order, like Test 4 in 3.4.*
+    *A real scheduled run for seat T1-A, nobody at the keyboard: (1) started by the schedule, (2) STATUS: RESOLVED, (3) what it found and what it did: lane stopped, source quiet, alert cleared. Scroll down for EVIDENCE: signal_issue, stop_my_lane, since_stop 0/0/0 and clear_issue, like Test 4 in 3.4.*
 
 === "Option B: On demand from Canvas"
 
