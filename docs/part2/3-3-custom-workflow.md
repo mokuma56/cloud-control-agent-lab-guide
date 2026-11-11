@@ -334,6 +334,6 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
 !!! tip "Fast finishers"
     Add a tool of your own: a weather lookup for the branch, a Webex message, a ticket. See
-    [Stretch challenges](../reference/stretch.md).
+    [Challenge scenarios](../appendix/challenges.md#d-stretch-challenges).
 
 - [ ] My tile turned red on the wall, and I cleared it (green).

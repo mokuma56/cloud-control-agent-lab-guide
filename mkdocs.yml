@@ -102,10 +102,13 @@ nav:
           - "3.3 Build your custom workflow": part2/3-3-custom-workflow.md
           - "3.4 Wire it in and choose how it runs": part2/3-4-wire-schedule.md
           - "3.5 Lights Out": part2/3-5-lights-out.md
-          - "3.6 Your business": part2/3-6-your-business.md
+      - "Part 3 - Build an App":
+          - part3/index.md
+          - "4.1 Build Mission Control": part3/4-1-mission-control.md
+      - Conclusion: conclusion.md
+      - "Appendix: Challenge scenarios": appendix/challenges.md
   - Reference:
       - reference/tools.md
       - reference/output-contract.md
       - reference/evidence.md
-      - reference/stretch.md
       - reference/troubleshooting.md

@@ -1,4 +1,4 @@
-# Part 2: Build an agent that runs it (1:40 to 4:00)
+# Part 2: Build an agent that runs it (1:40 to 3:35)
 
 **Incident 2: something hits your service.** You hand the night shift to an agent. You build it in
 Cloud Control Studio from the triage method you saved in 2.1, test it, give it a custom workflow of your
@@ -16,8 +16,7 @@ telemetry, turn **your** tile red on the room wall, and stop **only your** seat'
 | [3.3 Build your custom workflow](3-3-custom-workflow.md) | 35 | Your integration turns your seat red on the wall |
 | [3.4 Wire it in and choose how it runs](3-4-wire-schedule.md) | 15 | Four tests passed, scheduled or Canvas chosen |
 | [3.5 Lights Out](3-5-lights-out.md) | 25 | Light on at detection, off when fixed |
-| [3.6 Your business](3-6-your-business.md) | 15 | One agent idea for your own company |
-| Wrap | 10 | Take-home kit, survey |
+
 
 ```mermaid
 sequenceDiagram

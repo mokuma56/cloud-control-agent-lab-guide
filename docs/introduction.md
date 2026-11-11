@@ -15,7 +15,7 @@ action you approve.
 | --- | --- | --- |
 | When | Part 1, AI Canvas | Part 2, Lights Out |
 | Who | The whole room, one shared fault | Every seat its own, at the same time |
-| Who drives | **You**: you troubleshoot in Canvas and refine the prompt | **Your agent**: you are "asleep" until it asks you to approve the fix |
+| Who drives | **You**: you troubleshoot in Canvas and refine the prompt | **Your agent**: you are "asleep" while it finds, stops and clears the attack |
 | What it really is | A port change on a branch switch (users get no IP address) | Hostile traffic against your table's service |
 
 The two incidents have nothing in common, on purpose. In Part 1 you do not write a "Leaf1 prompt".
@@ -90,10 +90,10 @@ flowchart TB
 | 2:20 | 35 | 3 | [3.3 Build your custom workflow](part2/3-3-custom-workflow.md) | Your integration turns your seat red on the wall |
 | 2:55 | 15 | 3 | [3.4 Wire it in and choose how it runs](part2/3-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
 | 3:10 | 25 | 3 | [3.5 Lights Out](part2/3-5-lights-out.md) | Light on at detection, off when fixed |
-| 3:35 | 15 | - | [3.6 Your business](part2/3-6-your-business.md) | One agent idea for your own company |
-| 3:50 | 10 | - | Wrap | Take-home kit, survey |
+| 3:35 | 15 | 4 | [4.1 Build Mission Control](part3/4-1-mission-control.md) | An app built from a design file; the night replayed live |
+| 3:50 | 10 | - | [Conclusion](conclusion.md) | What you built; one agent idea for your own company; wrap |
 
-Finished early? The [stretch challenges](reference/stretch.md) have another hour of work.
+Finished early? The [challenge scenarios](appendix/challenges.md) have another hour of work.
 
 ## The room wall
 
@@ -110,7 +110,7 @@ for example **T3-C** is table 3, seat C. The small colored dot on your tile matc
 | Grey, **Quiet** | Nothing is happening at your seat | - |
 | Amber, **Threat active · undetected** | Your lane is running and no agent has reported it yet | the proctor starts lanes |
 | Red, **Alert** + your agent's summary | Your agent called `signal_issue`. Minor is steady, major pulses, critical pulses fast | your agent |
-| Red stripes, **Stopped · verifying** | You approved `stop_my_lane`; the agent has not confirmed it is quiet yet | you, then your agent |
+| Red stripes, **Stopped · verifying** | Your agent called `stop_my_lane` on your own source and has not confirmed it is quiet yet | your agent |
 | Green, **Resolved ✓** | Your agent verified the source is quiet and called `clear_issue` | your agent |
 
 When every seat is resolved, the wall shows **ALL CLEAR**. It is not a race: agents run at different
