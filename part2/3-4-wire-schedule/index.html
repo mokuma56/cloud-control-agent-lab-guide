@@ -1325,44 +1325,111 @@ but NOT called.
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> All four tests pass on your latest saved version, so <strong>Schedule</strong> is blue.</li>
 </ul>
 <h2 id="choose-how-it-runs">Choose how it runs<a class="headerlink" href="#choose-how-it-runs" title="Permanent link">¶</a></h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Scheduled</label><label for="__tabbed_2_2">On demand from Canvas</label></div>
+<p>Your agent is ready. Now decide <strong>how it starts</strong> for Lights Out (3.5). There are two options, and both
+end the same way: your agent finds your lane, raises your alert, and waits for your approval.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Option A: Scheduled (recommended)</th>
+<th>Option B: On demand from Canvas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who starts it</td>
+<td>Studio, at the time you set</td>
+<td>You, by sending a prompt</td>
+</tr>
+<tr>
+<td>What it feels like</td>
+<td>Real night shift: it runs while you are hands off</td>
+<td>A colleague you ask to check now</td>
+</tr>
+<tr>
+<td>Uses</td>
+<td>Your agent, its instructions and your integrations</td>
+<td>Canvas, Lab Tools and the triage note</td>
+</tr>
+<tr>
+<td>Pick it when</td>
+<td>You want the real-world experience</td>
+<td>You want to start right away, or Schedule is still locked</td>
+</tr>
+</tbody>
+</table>
+<p>There is no race. Every seat's lane keeps sending traffic until the end of the lab, so your agent finds
+yours whenever it runs.</p>
+<h3 id="before-you-choose-get-your-seat-ready">Before you choose: get your seat ready<a class="headerlink" href="#before-you-choose-get-your-seat-ready" title="Permanent link">¶</a></h3>
+<ol>
+<li><strong>Your lane must be running.</strong> If a test stopped it (for example a failed Test 3), ask the proctor to
+   restart your seat. A stopped lane gives a healthy report and nothing to find.</li>
+<li>
+<p><strong>Reset your tile</strong>, so you see your agent turn it red. Select <strong>Run</strong>: it clears your alert on the room
+   wall with your seat token.</p>
+<p></p><div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset your tile: it goes back to quiet"></div><p></p>
+</li>
+</ol>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Option A: Scheduled</label><label for="__tabbed_2_2">Option B: On demand from Canvas</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Select <strong>Schedule</strong> (top right of the builder). It is blue only after a passing test of your latest
-saved version; otherwise it says <em>Run a test on the latest saved changes first</em>: rerun Test 4.</p>
-<p>In <strong>Schedule Agent</strong>:</p>
 <ol>
-<li><strong>Activation cadence</strong>: <strong>Daily</strong> (the choices are Hourly, Daily and Weekly; there is no "every
-   15 minutes").</li>
-<li><strong>Local run time</strong>: the Lights Out time the proctor announces, in 5-minute steps. It is your
-   browser's time zone; Studio converts it to UTC.</li>
-<li><strong>Max runs</strong>: <code>1</code>. One run at Lights Out is all you need, and the schedule stops by itself.</li>
-<li><strong>Trigger prompt</strong>: keep Studio's text (for example <em>Run the ... night-watch review.</em>). It is the
-   message your agent receives when the schedule fires.</li>
+<li><strong>Note the time now</strong> on your laptop clock. Pick the <strong>next 5-minute slot that is at least 5
+   minutes away</strong>, so the run starts after you finish here. For example: it is 9:07, choose 9:15.</li>
+<li>Select <strong>Schedule</strong> (top right of the builder). It is blue only after a passing test of your
+   latest saved version; otherwise it says <em>Run a test on the latest saved changes first</em>: rerun
+   Test 4.</li>
+<li>
+<ul>
+<li><strong>Activation cadence</strong>: <strong>Daily</strong> (the choices are Hourly, Daily and Weekly).</li>
+<li><strong>Local run time</strong>: the slot from step 1. The list is in 5-minute steps and in your laptop's
+  time zone; Studio converts it to UTC.</li>
+<li><strong>Max runs</strong>: <code>1</code>. One run is all you need, and the schedule stops by itself.</li>
+<li><strong>Trigger prompt</strong>: keep Studio's text (for example <em>Run the ... night-watch review.</em>). It is
+  the message your agent receives when the schedule fires.</li>
 <li>Select <strong>Schedule</strong>.</li>
-</ol>
+</ul>
+<p>In <strong>Schedule Agent</strong>:</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/18b-schedule-dialog.png" data-desc-position="bottom"><img alt="18b-schedule-dialog" loading="lazy" src="../../img/18b-schedule-dialog.png"></a></p>
-<p><em>Schedule Agent: (1) Daily, (2) the announced Lights Out time, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.</em></p>
-<p>Back in the builder, <strong>Review Agent → Current schedule</strong> shows the time instead of <em>This Agent is
-not scheduled</em>. A scheduled run reports and raises your alert; it never stops your lane. You approve
-the stop yourself in 3.5. If Schedule is not offered in your release, use the Canvas tab.</p>
+<p><em>Schedule Agent: (1) Daily, (2) the next 5-minute slot at least 5 minutes away, (3) Max runs 1, (4) the trigger prompt your agent gets, (5) Schedule.</em></p>
+</li>
+<li>
+<p>Check <strong>Review Agent → Current schedule</strong>: it shows your run time instead of <em>This Agent is not
+   scheduled</em>.</p>
+</li>
+</ol>
+<p>Then go to <a href="../3-5-lights-out/">3.5</a> and keep your hands off until your run time. A scheduled run
+reports and raises your alert; it never stops your lane. You approve the stop yourself, in Canvas.</p>
+<div class="admonition tip">
+<p class="admonition-title">Missed your slot?</p>
+<p>If the time passed before you selected Schedule, open <strong>Schedule</strong> again and pick the next slot.
+The run uses the version that passed its test, so you do not need to test again unless you changed
+the agent.</p>
+</div>
 </div>
 <div class="tabbed-block">
-<p>If scheduling is not available in your Studio release, you will run the same check from AI
-Canvas when the proctor says "go". Canvas uses the same Lab Tools, so your tile still turns red.
-Save this prompt now:</p>
-<div class="highlight"><pre><span></span><code>Using Lab Tools and the lane triage guidance: what is my watch source doing right now?
-Get my watch scope, then my security events for the last 30 minutes, use the business context
-for impact and severity, give the STATUS report, and call signal_issue if it is an issue.
-Then ask me before stop_my_lane.
+<p>You start the same check yourself, in AI Canvas. Canvas uses the same Lab Tools and your seat token,
+so your tile turns red the same way. It is quicker to start, but nobody is asleep: you are the one
+asking.</p>
+<ol>
+<li>Open <strong>Canvas</strong> and your board from Part 1 (or <strong>+ New</strong>).</li>
+<li>
+<p>Go to <a href="../3-5-lights-out/">3.5</a> and send this prompt there when you are ready:</p>
+<div class="highlight"><pre><span></span><code>Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
+watch scope, then my security events for the last 5 minutes and the last 60 minutes, use the
+business context for impact and severity, give the STATUS report, and call signal_issue if it
+is an issue. Then propose stop_my_lane and wait for my reply "approve stop".
 </code></pre></div>
+</li>
+</ol>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/10-lights-plan.png" data-desc-position="bottom"><img alt="10-lights-plan" loading="lazy" src="../../img/10-lights-plan.png"></a></p>
-<p><em>Running it from Canvas: (1) your saved prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.</em></p>
+<p><em>Running it from Canvas: (1) your prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.</em></p>
 </div>
 </div>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My agent is scheduled for the Lights Out time, or my Canvas prompt is saved.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My lane is running and my tile is quiet.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My agent is scheduled for the next slot (Option A), or I have the Canvas prompt ready (Option B).</li>
 </ul>
 
 
