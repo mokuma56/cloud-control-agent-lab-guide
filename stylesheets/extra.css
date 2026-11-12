@@ -80,7 +80,7 @@
 .sc-copytable td { white-space: normal; }
 .md-typeset code.sc-tokval { font-weight: 700; margin-left: .3em; }
 
-/* Run boxes (3.3 Path A): a terminal-style request and reply */
+/* Run boxes (2.3 Path A): a terminal-style request and reply */
 .sc-run { margin: .6em 0 1em; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 8px; overflow: hidden; }
 .sc-term-bar { display: flex; align-items: center; gap: .7em; padding: .45em .6em; background: var(--md-code-bg-color); }
 .sc-term-bar .md-button { margin: 0; padding: .2em 1.1em; font-size: .72rem; }
