@@ -25,6 +25,12 @@ in 2.1.
 3. The builder opens with the **Studio** chat on the left. Click in **Ask Studio to refine the Agent**,
    paste the prompt for the path you built in 2.3, and send it (Enter or the arrow).
 
+    !!! tip "Which tab do I use?"
+        Pick the tab that matches the path you chose in **2.3 step B**. You built only one of the two
+        integrations. **Path A** (REST API, no code) built **My Table Light**. **Path B** (MCP server,
+        code) built **My Lab Tools**. The two prompts are the same except for that integration name. Not
+        sure which one you built? Check **Studio → Manage → Integrations**.
+
     === "Path A: My Table Light"
 
         ```text
