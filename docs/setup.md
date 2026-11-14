@@ -22,7 +22,7 @@ What the card holds:
 | Field | Example | Used in |
 | --- | --- | --- |
 | Seat | `T3-C` (table 3, seat C, purple) | everywhere |
-| Cloud Control login | `lab13` | 1.1 |
+| Cloud Control login | `lab13@usc-engineering.com` | 1.1 |
 | **Seat token** | a long random string | 1.3, 2.3 |
 | Lab Tools MCP URL | `https://<lab host>:9443/mcp` | 2.3 |
 | Lab Actions spec URL | `https://<lab host>:8443/openapi-light.json` | 2.3 (REST path) |
@@ -45,7 +45,13 @@ stops traffic from *your* source IP and nothing else, and only after you approve
 
 ## Log in
 
-1. Open **https://cloud.cisco.com** and sign in with the login on your seat card.
+1. If your seat card shows a **Log in to Cloud Control** button, click it. Cloud Control opens in a new tab,
+   already signed in as your seat. No password needed. Otherwise open **https://cloud.cisco.com** and sign in
+   with the login on your seat card.
+
+    !!! note "Signed out, or the button says seat login is closed?"
+        Click **Log in to Cloud Control** on your card again. It only works in the browser where you picked up
+        your card, and only while the session is running. If it still fails, ask a proctor.
 2. Check the organization picker at the top shows **USC-Engineering**.
 
     ![01-canvas-boards](img/01-canvas-boards.png){ loading=lazy }
