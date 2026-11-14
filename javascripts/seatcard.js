@@ -4,7 +4,7 @@
   const LAB = "https://lab.usc-engineering.com:8443";
   const KEY = "ltrops2623.seatcard";
   const FIELDS = [
-    ["Cloud Control login", "login"], ["Seat token", "token"], ["Lab Tools MCP URL", "mcp_url"],
+    ["Cloud Control login", "email"], ["Seat token", "token"], ["Lab Tools MCP URL", "mcp_url"],
     ["Lab Actions spec URL", "spec_light"], ["Lab Context spec URL", "spec_context"],
     ["Your MCP workspace", "workspace"], ["Room wall", "wall"], ["Agent name (2.1)", "agent_name"],
     ["Night Watch Console spec URL (Part 3)", "spec_console"],
@@ -16,7 +16,8 @@
   const load = () => {
     let c = null;
     try { c = JSON.parse(localStorage.getItem(KEY) || "null"); } catch { return null; }
-    if (c && !c.spec_console) c.spec_console = consoleSpec(c);
+    if (c && c.card && !c.card.spec_console) c.card.spec_console = consoleSpec(c.card);
+    if (c && c.card && !c.card.email) c.card.email = c.card.login;   // cards saved before seat login existed
     return c;
   };
   const save = v => { try { v ? localStorage.setItem(KEY, JSON.stringify(v)) : localStorage.removeItem(KEY); } catch {} };
@@ -55,10 +56,13 @@
         <table>${FIELDS.map(([label, k]) => `<tr><th>${label}</th>
           <td><code class="${k === "token" ? "sc-token" : ""}">${esc(c[k])}</code></td>
           <td><button class="md-button sc-copy" type="button" data-k="${k}">Copy</button></td></tr>`).join("")}</table>
-        <p class="sc-actions"><button class="md-button md-button--primary sc-popout" type="button">Open in new window</button></p>
+        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button sc-popout" type="button">Open in new window</button></p>
         <p class="sc-note">Your seat token is a password: paste it only into the credential fields this guide names.
           This card stays in this browser. <a href="#" class="sc-forget">Forget this card</a></p></div>`;
     root.querySelector(".sc-popout").addEventListener("click", () => popout(c));
+    const login = root.querySelector(".sc-login");
+    if (login) login.addEventListener("click", () => ssoLogin(c, saved.claim));
+    if (!c.sso_login && saved.claim && !saved.refreshed) refresh(root, saved);
     root.querySelectorAll(".sc-copy").forEach(b => b.addEventListener("click", async () => {
       try { await navigator.clipboard.writeText(String(c[b.dataset.k])); b.textContent = "Copied"; }
       catch { b.textContent = "Select and copy"; }
@@ -68,6 +72,30 @@
       ev.preventDefault();
       if (confirm("Remove the card from this browser? Getting it again needs a proctor to release your seat.")) { save(null); render(root); }
     });
+  }
+
+  /* One-click Cloud Control login: a top-level form POST (new tab) to the lab server's seat IdP with this
+     browser's pickup claim. The server answers with a signed SAML login for this seat, and only while a
+     proctor has seat login armed. Nothing secret is in the URL. */
+  function ssoLogin(c, claim) {
+    const f = document.createElement("form");
+    f.method = "POST"; f.action = c.sso_login; f.target = "_blank"; f.rel = "noopener";
+    for (const [k, v] of [["seat", c.seat], ["claim", claim || ""]]) {
+      const i = document.createElement("input"); i.type = "hidden"; i.name = k; i.value = v; f.appendChild(i);
+    }
+    document.body.appendChild(f); f.submit(); f.remove();
+  }
+
+  /* Cards picked up before seat login was turned on have no Log in button: fetch the card again with the
+     claim this browser already holds (no new pickup needed). Once per saved card. */
+  async function refresh(root, saved) {
+    try {
+      const r = await fetch(LAB + "/v1/card", { method: "POST", headers: { "Content-Type": "application/json" },
+                                                 body: JSON.stringify({ seat: saved.card.seat, claim: saved.claim }) });
+      const j = await r.json().catch(() => ({}));
+      save(r.ok && j.card ? { card: j.card, claim: j.claim, refreshed: true } : Object.assign({}, saved, { refreshed: true }));
+      if (r.ok && j.card && j.card.sso_login) render(root);
+    } catch { /* lab server unreachable: keep the saved card */ }
   }
 
   /* The same card in its own small window, so it can sit next to Cloud Control while you work. */
