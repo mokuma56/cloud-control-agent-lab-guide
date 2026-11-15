@@ -56,15 +56,13 @@
         <table>${FIELDS.map(([label, k]) => `<tr><th>${label}</th>
           <td><code class="${k === "token" ? "sc-token" : ""}">${esc(c[k])}</code></td>
           <td><button class="md-button sc-copy" type="button" data-k="${k}">Copy</button></td></tr>`).join("")}</table>
-        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}${c.meraki_login ? '<button class="md-button sc-meraki" type="button">Open Meraki</button> ' : ""}<button class="md-button sc-popout" type="button">Open in new window</button></p>
+        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button sc-popout" type="button">Open in new window</button></p>
         <p class="sc-note">Your seat token is a password: paste it only into the credential fields this guide names.
           This card stays in this browser. <a href="#" class="sc-forget">Forget this card</a></p></div>`;
     root.querySelector(".sc-popout").addEventListener("click", () => popout(c));
     const login = root.querySelector(".sc-login");
     if (login) login.addEventListener("click", () => ssoLogin(c, saved.claim));
-    const meraki = root.querySelector(".sc-meraki");
-    if (meraki) meraki.addEventListener("click", () => ssoLogin(c, saved.claim, c.meraki_login));
-    if ((!c.sso_login || !("meraki_login" in c)) && saved.claim && !saved.refreshedM) refresh(root, saved);
+    if (!c.sso_login && saved.claim && !saved.refreshedM) refresh(root, saved);
     root.querySelectorAll(".sc-copy").forEach(b => b.addEventListener("click", async () => {
       try { await navigator.clipboard.writeText(String(c[b.dataset.k])); b.textContent = "Copied"; }
       catch { b.textContent = "Select and copy"; }
@@ -96,7 +94,7 @@
                                                  body: JSON.stringify({ seat: saved.card.seat, claim: saved.claim }) });
       const j = await r.json().catch(() => ({}));
       save(r.ok && j.card ? { card: j.card, claim: j.claim, refreshedM: true } : Object.assign({}, saved, { refreshedM: true }));
-      if (r.ok && j.card && (j.card.sso_login || j.card.meraki_login)) render(root);
+      if (r.ok && j.card && j.card.sso_login) render(root);
     } catch { /* lab server unreachable: keep the saved card */ }
   }
 
