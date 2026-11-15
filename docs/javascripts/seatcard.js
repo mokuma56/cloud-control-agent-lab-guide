@@ -56,13 +56,15 @@
         <table>${FIELDS.map(([label, k]) => `<tr><th>${label}</th>
           <td><code class="${k === "token" ? "sc-token" : ""}">${esc(c[k])}</code></td>
           <td><button class="md-button sc-copy" type="button" data-k="${k}">Copy</button></td></tr>`).join("")}</table>
-        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button sc-popout" type="button">Open in new window</button></p>
+        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}${c.meraki_login ? '<button class="md-button sc-meraki" type="button">Open Meraki</button> ' : ""}<button class="md-button sc-popout" type="button">Open in new window</button></p>
         <p class="sc-note">Your seat token is a password: paste it only into the credential fields this guide names.
           This card stays in this browser. <a href="#" class="sc-forget">Forget this card</a></p></div>`;
     root.querySelector(".sc-popout").addEventListener("click", () => popout(c));
     const login = root.querySelector(".sc-login");
     if (login) login.addEventListener("click", () => ssoLogin(c, saved.claim));
-    if (!c.sso_login && saved.claim && !saved.refreshed) refresh(root, saved);
+    const meraki = root.querySelector(".sc-meraki");
+    if (meraki) meraki.addEventListener("click", () => ssoLogin(c, saved.claim, c.meraki_login));
+    if ((!c.sso_login || !("meraki_login" in c)) && saved.claim && !saved.refreshedM) refresh(root, saved);
     root.querySelectorAll(".sc-copy").forEach(b => b.addEventListener("click", async () => {
       try { await navigator.clipboard.writeText(String(c[b.dataset.k])); b.textContent = "Copied"; }
       catch { b.textContent = "Select and copy"; }
@@ -77,9 +79,9 @@
   /* One-click Cloud Control login: a top-level form POST (new tab) to the lab server's seat IdP with this
      browser's pickup claim. The server answers with a signed SAML login for this seat, and only while a
      proctor has seat login armed. Nothing secret is in the URL. */
-  function ssoLogin(c, claim) {
+  function ssoLogin(c, claim, action) {
     const f = document.createElement("form");
-    f.method = "POST"; f.action = c.sso_login; f.target = "_blank"; f.rel = "noopener";
+    f.method = "POST"; f.action = action || c.sso_login; f.target = "_blank"; f.rel = "noopener";
     for (const [k, v] of [["seat", c.seat], ["claim", claim || ""]]) {
       const i = document.createElement("input"); i.type = "hidden"; i.name = k; i.value = v; f.appendChild(i);
     }
@@ -93,8 +95,8 @@
       const r = await fetch(LAB + "/v1/card", { method: "POST", headers: { "Content-Type": "application/json" },
                                                  body: JSON.stringify({ seat: saved.card.seat, claim: saved.claim }) });
       const j = await r.json().catch(() => ({}));
-      save(r.ok && j.card ? { card: j.card, claim: j.claim, refreshed: true } : Object.assign({}, saved, { refreshed: true }));
-      if (r.ok && j.card && j.card.sso_login) render(root);
+      save(r.ok && j.card ? { card: j.card, claim: j.claim, refreshedM: true } : Object.assign({}, saved, { refreshedM: true }));
+      if (r.ok && j.card && (j.card.sso_login || j.card.meraki_login)) render(root);
     } catch { /* lab server unreachable: keep the saved card */ }
   }
 
