@@ -1317,7 +1317,7 @@
 
 
 
-<h1 id="output-contract">Output contract<a class="headerlink" href="#output-contract" title="Permanent link">¶</a></h1>
+<h1 id="output-contract">Output contract</h1>
 <p>Every answer your prompt or agent gives uses the same fields in Part 1 and Part 2, whatever went wrong, so a human can read it in ten seconds
 and an agent can act on it without guessing.</p>
 <div class="highlight"><pre><span></span><code>STATUS:    healthy | issue
@@ -1327,7 +1327,7 @@ CAUSE:     the most likely cause: a change (with its ID), what a source is doing
 EVIDENCE:  bullets, each starting with its source
 NEXT STEP: the proposed fix or remediation; never a change made without approval
 </code></pre></div>
-<h2 id="how-to-set-severity">How to set severity<a class="headerlink" href="#how-to-set-severity" title="Permanent link">¶</a></h2>
+<h2 id="how-to-set-severity">How to set severity</h2>
 <p>Severity comes from the <strong>business service</strong>, not from the size of the network symptom.</p>
 <table>
 <thead>
@@ -1356,7 +1356,7 @@ NEXT STEP: the proposed fix or remediation; never a change made without approval
 </tbody>
 </table>
 <p>Then apply the on-call policy from <code>get_oncall</code>, and say in NEXT STEP whether it is met.</p>
-<h2 id="evidence-rules">Evidence rules<a class="headerlink" href="#evidence-rules" title="Permanent link">¶</a></h2>
+<h2 id="evidence-rules">Evidence rules</h2>
 <ul>
 <li>Every bullet names its source: <code>Cisco Meraki: change log</code>, <code>Secure Firewall (get_my_security_events): IPS</code>,
   <code>Lab Tools: get_recent_changes</code>.</li>

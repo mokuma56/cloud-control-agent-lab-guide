@@ -1350,10 +1350,10 @@
 
 
 
-<h1 id="appendix-challenge-scenarios">Appendix: Challenge scenarios<a class="headerlink" href="#appendix-challenge-scenarios" title="Permanent link">¶</a></h1>
+<h1 id="appendix-challenge-scenarios">Appendix: Challenge scenarios</h1>
 <p>Every scenario in this lab in one place: the attacks your agent faces, the tests that prove it, and the
 extra challenges for fast finishers. Each block has a copy button.</p>
-<h2 id="a-the-incidents">A. The incidents<a class="headerlink" href="#a-the-incidents" title="Permanent link">¶</a></h2>
+<h2 id="a-the-incidents">A. The incidents</h2>
 <table>
 <thead>
 <tr>
@@ -1384,7 +1384,7 @@ extra challenges for fast finishers. Each block has a copy button.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="b-attack-scenarios-by-seat-letter">B. Attack scenarios by seat letter<a class="headerlink" href="#b-attack-scenarios-by-seat-letter" title="Permanent link">¶</a></h2>
+<h2 id="b-attack-scenarios-by-seat-letter">B. Attack scenarios by seat letter</h2>
 <p>Each seat at a table gets a different kind of attack, so not every agent sees IPS events. All five are an issue.</p>
 <table>
 <thead>
@@ -1422,7 +1422,7 @@ extra challenges for fast finishers. Each block has a copy button.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="c-sandbox-test-scenarios">C. Sandbox test scenarios<a class="headerlink" href="#c-sandbox-test-scenarios" title="Permanent link">¶</a></h2>
+<h2 id="c-sandbox-test-scenarios">C. Sandbox test scenarios</h2>
 <p>Run each in your agent's <strong>Test</strong> tab: Scenario into <strong>Scenario</strong>, Expected outcome into <strong>Expected outcome</strong>,
 then <strong>Run scenario</strong>. Tests 1 and 4 really stop your attack; restart it afterwards.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Test 1: Typical</label><label for="__tabbed_1_2">Test 2: Missing information</label><label for="__tabbed_1_3">Test 3: Stay in scope</label><label for="__tabbed_1_4">Test 4: Full night-watch run</label></div>
@@ -1472,17 +1472,17 @@ resolved. No other IP and no shared configuration touched.
 </div>
 </div>
 </div>
-<h2 id="d-stretch-challenges">D. Stretch challenges<a class="headerlink" href="#d-stretch-challenges" title="Permanent link">¶</a></h2>
+<h2 id="d-stretch-challenges">D. Stretch challenges</h2>
 <p>About an hour of extra work for fast finishers, roughly in order of difficulty.</p>
-<h3 id="1-a-sharper-triage-skill-10-min">1. A sharper triage skill (10 min)<a class="headerlink" href="#1-a-sharper-triage-skill-10-min" title="Permanent link">¶</a></h3>
+<h3 id="1-a-sharper-triage-skill">1. A sharper triage skill</h3>
 <p>Ask Canvas to explain <strong>why</strong> it chose its severity, then add a rule to your prompt that would have
 changed its mind. Example: <em>"If the affected service is outside its business hours, lower severity by
 one level, unless the on-call policy names it."</em> Rerun and compare.</p>
-<h3 id="2-the-honest-i-dont-know-10-min">2. The honest "I don't know" (10 min)<a class="headerlink" href="#2-the-honest-i-dont-know-10-min" title="Permanent link">¶</a></h3>
+<h3 id="2-the-honest-i-dont-know">2. The honest "I don't know"</h3>
 <p>Test the missing-information path for real: ask Canvas about a source IP that is not yours. Lab Tools
 refuses (your token only sees your seat). Does your prompt make the agent say so plainly instead of
 inventing an answer? Fix it until it does.</p>
-<h3 id="3-a-second-clue-from-outside-cisco-15-min-path-b">3. A second clue from outside Cisco (15 min, Path B)<a class="headerlink" href="#3-a-second-clue-from-outside-cisco-15-min-path-b" title="Permanent link">¶</a></h3>
+<h3 id="3-a-second-clue-from-outside-cisco-15-min-path-b">3. A second clue from outside Cisco (15 min, Path B)</h3>
 <p>Add a tool to <code>tools.py</code> that brings in something Cisco cannot know, for example:</p>
 <ul>
 <li>the weather at the branch (a storm explains a power blip),</li>
@@ -1490,18 +1490,18 @@ inventing an answer? Fix it until it does.</p>
 <li>a team calendar ("the network team is at an offsite").</li>
 </ul>
 <p>Write its description for the agent: when to call it and when not to.</p>
-<h3 id="4-a-second-action-15-min">4. A second action (15 min)<a class="headerlink" href="#4-a-second-action-15-min" title="Permanent link">¶</a></h3>
+<h3 id="4-a-second-action">4. A second action</h3>
 <p>Give your agent a second way to tell you, alongside the room wall: a Webex message to a space, or a
 ticket in a test ServiceNow instance. Keep the rule: it tells, it never changes the network.</p>
-<h3 id="5-your-own-attack-end-to-end-10-min">5. Your own attack, end to end (10 min)<a class="headerlink" href="#5-your-own-attack-end-to-end-10-min" title="Permanent link">¶</a></h3>
+<h3 id="5-your-own-attack-end-to-end">5. Your own attack, end to end</h3>
 <p>Restart your attack (the <strong>Restart my lane</strong> button in 2.2, or <strong>Replay the night</strong> in the app) and run
 your agent twice: once while the attack runs (expect STATUS resolved, after it stops and verifies), and
 once right after (expect STATUS healthy and nothing to stop). Compare the two runs' evidence.</p>
-<h3 id="6-make-the-app-yours-15-min">6. Make the app yours (15 min)<a class="headerlink" href="#6-make-the-app-yours-15-min" title="Permanent link">¶</a></h3>
+<h3 id="6-make-the-app-yours">6. Make the app yours</h3>
 <p>Edit the Mission Control design file: add a panel of your own (for example the Meraki clients on your
 segment, or your neighbors' time to resolve), save it under a new name, and build a second app from it.
 The file is the source code: share it and anyone gets the same app.</p>
-<h2 id="e-app-add-ons">E. App add-ons<a class="headerlink" href="#e-app-add-ons" title="Permanent link">¶</a></h2>
+<h2 id="e-app-add-ons">E. App add-ons</h2>
 <p>The 3.1 build includes sections A to C (your night, the evidence, business impact). One add-on remains:</p>
 <table>
 <thead>

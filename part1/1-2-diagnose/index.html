@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#12-multi-domain-diagnosis-in-ai-canvas-025-25-min" class="md-skip">
+        <a href="#12-multi-domain-diagnosis-in-ai-canvas" class="md-skip">
           Skip to content
         </a>
       
@@ -1330,17 +1330,17 @@
 
 
 
-<h1 id="12-multi-domain-diagnosis-in-ai-canvas-025-25-min">1.2 Multi-domain diagnosis in AI Canvas (0:25, 25 min)<a class="headerlink" href="#12-multi-domain-diagnosis-in-ai-canvas-025-25-min" title="Permanent link">¶</a></h1>
+<h1 id="12-multi-domain-diagnosis-in-ai-canvas">1.2 Multi-domain diagnosis in AI Canvas</h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
 <p>Find the root cause of a user complaint using only Cisco data, and notice what Canvas cannot tell you.</p>
 </div>
-<h2 id="the-complaint">The complaint<a class="headerlink" href="#the-complaint" title="Permanent link">¶</a></h2>
+<h2 id="the-complaint">The complaint</h2>
 <blockquote>
 <p>"Since a few minutes ago, people plugged into the branch switch get a network link but no IP
 address. Wi-Fi is fine." - Branch office manager</p>
 </blockquote>
-<h2 id="climb-the-prompt-ladder">Climb the prompt ladder<a class="headerlink" href="#climb-the-prompt-ladder" title="Permanent link">¶</a></h2>
+<h2 id="climb-the-prompt-ladder">Climb the prompt ladder</h2>
 <p>Work in your Canvas board. Send one prompt at a time and read the answer before the next. Canvas
 shows its plan and the commands it runs; open them to see which Cisco integration it used.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><input id="__tabbed_1_4" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Rung 1: symptom</label><label for="__tabbed_1_2">Rung 2: correlate</label><label for="__tabbed_1_3">Rung 3: root cause with evidence</label><label for="__tabbed_1_4">Rung 4: proposed fix</label></div>
@@ -1382,7 +1382,7 @@ business impact, severity and on-call, part of a fixed answer format.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/06-fault-nextstep.png" data-desc-position="bottom"><img alt="06-fault-nextstep" loading="lazy" src="../../img/06-fault-nextstep.png"></a></p>
 <p><em>A good rung 4 answer: (1) a concrete fix that makes Leaf1 match Leaf2, then how to verify it, (2) no change made.</em></p>
 </div>
-<h2 id="what-you-did-and-learned">What you did and learned<a class="headerlink" href="#what-you-did-and-learned" title="Permanent link">¶</a></h2>
+<h2 id="what-you-did-and-learned">What you did and learned</h2>
 <p><strong>What you did:</strong> you started from a user complaint with no device names and climbed four prompts.
 Canvas picked the right system (the Meraki Cloud Fabric at SITE-105), read the configuration change
 log, compared Leaf1 with Leaf2, named the three ports moved to VLAN 999, and proposed a fix without
