@@ -1478,6 +1478,13 @@ stops your lane, restart it yourself with the <strong>Restart my lane</strong> b
 <p>All five are an issue. If your agent says <em>inconclusive</em> because there are no IPS events, its
 instructions are missing the activity patterns from the 2.1 description: add them by chatting with
 Studio and rerun Test 1.</p>
+<p>If it says <em>inconclusive</em> because there is <strong>no duration, byte or timing data</strong>, the firewall events
+never include those. Paste this into the Studio chat, then rerun Test 1:</p>
+<div class="highlight"><pre><span></span><code>The firewall events do not include connection duration or byte counts, so never require them.
+One source reaching 3 or more ports on one host in the last 5 minutes is a port scan. The same
+destination and port repeating at a steady rate is a beacon. Either one from my watch source is
+STATUS issue, even with zero IPS events: call signal_issue, then stop_my_lane.
+</code></pre></div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Sandbox tests are real</p>
