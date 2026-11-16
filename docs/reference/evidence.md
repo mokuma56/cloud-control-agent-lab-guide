@@ -2,13 +2,15 @@
 
 `get_my_security_events` summarizes what Cisco Secure Firewall logged for your source IP. Use the
 patterns below to name the activity. Your agent has the same guide (the night shift triage skill).
+The events carry counts, destinations, ports, rules, URLs and user agents. They do not carry connection
+durations or byte counts, so a pattern never depends on those.
 
 | What you see | Likely activity |
 | --- | --- |
-| Many destination ports or hosts, very short connections, few bytes | Port scan or host sweep |
+| 3 or more destination ports on one host, or one port on many hosts | Port scan or host sweep |
 | URLs with `' OR 1=1`, `../../`, `/etc/passwd`; scanner user agents such as Nikto; IPS signatures `SERVER-WEBAPP ...` or `SQL ...` | Web attack patterns |
 | File events with an EICAR or malware disposition | Malware test file transfer |
-| The same URI at a regular interval with a fixed user agent | C2-style beacon |
+| The same destination and URI repeating steadily through the window, with a fixed user agent | C2-style beacon |
 | ICMP to many addresses in one subnet | Ping sweep |
 | Totals are zero | Nothing from your source in the window: STATUS healthy |
 

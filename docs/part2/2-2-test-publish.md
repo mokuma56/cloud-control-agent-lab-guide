@@ -127,6 +127,16 @@ The reply should show `"lane_running": true`. This button only restarts **your**
     instructions are missing the activity patterns from the 2.1 description: add them by chatting with
     Studio and rerun Test 1.
 
+    If it says *inconclusive* because there is **no duration, byte or timing data**, the firewall events
+    never include those. Paste this into the Studio chat, then rerun Test 1:
+
+    ```text
+    The firewall events do not include connection duration or byte counts, so never require them.
+    One source reaching 3 or more ports on one host in the last 5 minutes is a port scan. The same
+    destination and port repeating at a steady rate is a beacon. Either one from my watch source is
+    STATUS issue, even with zero IPS events: call signal_issue, then stop_my_lane.
+    ```
+
 !!! warning "Sandbox tests are real"
     Test runs call your real integrations. The Typical test reads your live firewall events and
     **really turns your tile red on the room wall**, and its `stop_my_lane` **really stops your lane**.
