@@ -35,7 +35,7 @@
 
 ```text
 Name: [Directory Services Night Watch]. It protects [PseudoCo's core directory services (AD-1)].
-Use my integration "PseudoCo Lab Tools".
+Use my integration "Lab Tools Production".
 
 You are the night-shift engineer for that service, keeping watch while I sleep.
 Each run, answer one question: is anything hurting it right now, and what should happen next?
