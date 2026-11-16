@@ -1,4 +1,4 @@
-# 2.3 Build your custom workflow (2:20, 35 min)
+# 2.3 Build your custom workflow
 
 !!! abstract "Goal"
     Your own integration in Studio that your agent can call, proven by turning your seat red on the room wall.
@@ -6,7 +6,7 @@
 
 Everyone does **step A** (10 min). Then pick **one** path for step B (25 min).
 
-## A. Connect Lab Tools to Studio (everyone, 10 min)
+## A. Connect Lab Tools to Studio (everyone)
 
 Studio agents use MCP or REST integrations registered in Studio. Lab Tools offers a shared MCP
 server: one URL for all 30 seats, and your seat token decides which seat you are.
@@ -104,7 +104,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     *Done: (1) your integration card, (2) in the Personal group, (3) Configured. The URL is blurred in this guide.*
 
 
-## B. Your own workflow (pick one, 25 min)
+## B. Your own workflow (pick one)
 
 !!! info "Step B is practice, not setup"
     Your agent already has everything it needs for Lights Out from step A. Step B is where you learn how

@@ -99,13 +99,13 @@ then **Run scenario**. Tests 1 and 4 really stop your attack; restart it afterwa
 
 About an hour of extra work for fast finishers, roughly in order of difficulty.
 
-### 1. A sharper triage skill (10 min)
+### 1. A sharper triage skill
 
 Ask Canvas to explain **why** it chose its severity, then add a rule to your prompt that would have
 changed its mind. Example: *"If the affected service is outside its business hours, lower severity by
 one level, unless the on-call policy names it."* Rerun and compare.
 
-### 2. The honest "I don't know" (10 min)
+### 2. The honest "I don't know"
 
 Test the missing-information path for real: ask Canvas about a source IP that is not yours. Lab Tools
 refuses (your token only sees your seat). Does your prompt make the agent say so plainly instead of
@@ -121,18 +121,18 @@ Add a tool to `tools.py` that brings in something Cisco cannot know, for example
 
 Write its description for the agent: when to call it and when not to.
 
-### 4. A second action (15 min)
+### 4. A second action
 
 Give your agent a second way to tell you, alongside the room wall: a Webex message to a space, or a
 ticket in a test ServiceNow instance. Keep the rule: it tells, it never changes the network.
 
-### 5. Your own attack, end to end (10 min)
+### 5. Your own attack, end to end
 
 Restart your attack (the **Restart my lane** button in 2.2, or **Replay the night** in the app) and run
 your agent twice: once while the attack runs (expect STATUS resolved, after it stops and verifies), and
 once right after (expect STATUS healthy and nothing to stop). Compare the two runs' evidence.
 
-### 6. Make the app yours (15 min)
+### 6. Make the app yours
 
 Edit the Mission Control design file: add a panel of your own (for example the Meraki clients on your
 segment, or your neighbors' time to resolve), save it under a new name, and build a second app from it.

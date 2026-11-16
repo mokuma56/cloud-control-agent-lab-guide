@@ -1,4 +1,4 @@
-# 3.1 Build Mission Control: an app for the morning after (3:35, 15 min)
+# 3.1 Build Mission Control: an app for the morning after
 
 !!! abstract "Goal"
     Build a Studio **app** from a design file, open it, and replay the night: restart your attack and watch
@@ -16,7 +16,7 @@ an app shows and lets people act.
 | Built from | A description in plain words | A **design file** (Markdown), so anyone can rebuild the same app |
 | Here | Finds, stops and clears your attack | Shows the timeline, the evidence, the business impact and your group |
 
-## 1. Add the Night Watch Console integration (3 min)
+## 1. Add the Night Watch Console integration
 
 The app reads your seat's timeline from a small API made for it. Add it the same way as Path A in 2.3:
 
@@ -42,7 +42,7 @@ The app reads your seat's timeline from a small API made for it. Add it the same
     on the standard HTTPS port: Studio apps reach APIs on port 443 only. The app never gets `stop_my_lane`;
     containment stays the agent's job.
 
-## 2. Download the design file (1 min)
+## 2. Download the design file
 
 [Download NightWatch_Mission_Control.md](../app/NightWatch_Mission_Control.txt){ download="NightWatch_Mission_Control.md" .md-button }
 
@@ -52,7 +52,7 @@ fields each operation returns, so Studio does not have to guess), and four secti
 your agent saw) and **C** (business impact) in one go. **D** is an add-on you can ask for afterwards. A
 design file is how you make an app **repeatable**: the next person gets the same app from the same file.
 
-## 3. Build the app from the file (6 min)
+## 3. Build the app from the file
 
 1. **Studio → Build → App → Build**.
 2. Click **+** in the box, attach `NightWatch_Mission_Control.md`, and type:
@@ -91,7 +91,7 @@ design file is how you make an app **repeatable**: the next person gets the same
     Studio restores the last good version. Send the same prompt again; if it fails twice, ask for
     `Build section A of the attached design.` first, then `Add sections B and C of the design.`
 
-## 4. Open it and read your night (3 min)
+## 4. Open it and read your night
 
 When the build finishes, the app opens in **Preview** on the right.
 
@@ -135,7 +135,7 @@ Scroll down:
 - [ ] (1) **Recent changes** in the last 24 hours. (2) **same segment** marks a change on your service's
       segment: the first place to look when something breaks.
 
-## 5. Replay the night (3 min)
+## 5. Replay the night
 
 1. In the app, select **Replay the night**. (1) Read what it does, then (2) select **Replay the night**.
 

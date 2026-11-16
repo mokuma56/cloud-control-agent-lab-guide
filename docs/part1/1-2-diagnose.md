@@ -1,4 +1,4 @@
-# 1.2 Multi-domain diagnosis in AI Canvas (0:25, 25 min)
+# 1.2 Multi-domain diagnosis in AI Canvas
 
 !!! abstract "Goal"
     Find the root cause of a user complaint using only Cisco data, and notice what Canvas cannot tell you.

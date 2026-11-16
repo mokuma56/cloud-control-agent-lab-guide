@@ -1,4 +1,4 @@
-# 2.2 Sandbox test (2:05, 15 min)
+# 2.2 Sandbox test
 
 !!! abstract "Goal"
     Three passing sandbox tests, which unlock **Schedule**. Studio will not let you schedule an agent

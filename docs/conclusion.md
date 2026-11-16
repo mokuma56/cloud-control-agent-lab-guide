@@ -1,4 +1,4 @@
-# Conclusion: what you built tonight (3:50, 10 min)
+# Conclusion: what you built tonight
 
 !!! abstract "Goal"
     See the whole night in one picture, and leave with one agent idea for your own company.
@@ -27,7 +27,7 @@ so a person or a program can act on it.
   pattern from tonight's.
 - **Show the work.** An app over the agent's results is how the day shift learns to trust the night shift.
 
-## Your business: what would yours watch? (6 min)
+## Your business: what would yours watch?
 
 Each table picks one thing their own company depends on and fills in this card together:
 

@@ -1,4 +1,4 @@
-# 2.4 Wire it in and choose how it runs (2:55, 15 min)
+# 2.4 Wire it in and choose how it runs
 
 !!! abstract "Goal"
     Your agent uses your integration, passes a "light on" test, and is scheduled for Lights Out (or

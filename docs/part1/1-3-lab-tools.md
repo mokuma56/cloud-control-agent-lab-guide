@@ -1,4 +1,4 @@
-# 1.3 Make it yours: add Lab Tools (0:50, 25 min)
+# 1.3 Make it yours: add Lab Tools
 
 !!! abstract "Goal"
     Get the same root cause, now with the change ticket, the business impact, a severity you can

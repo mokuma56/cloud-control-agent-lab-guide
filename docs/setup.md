@@ -1,4 +1,4 @@
-# Before you start (0:00, 10 min)
+# Before you start
 
 !!! abstract "Goal"
     Find your seat card, log in to Cisco Cloud Control, and know the one rule that keeps 30 people

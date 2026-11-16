@@ -1,4 +1,4 @@
-# 1.1 Orientation (0:10, 15 min)
+# 1.1 Orientation
 
 !!! abstract "Goal"
     Find AI Canvas, Studio and the Lab Tools Production integration, and connect it to your seat.

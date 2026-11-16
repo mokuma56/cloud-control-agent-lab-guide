@@ -1,4 +1,4 @@
-# 2.5 Lights Out (3:10, 25 min)
+# 2.5 Lights Out
 
 !!! abstract "Goal"
     Hands off. Your agent runs on its own, finds your lane, raises the alert, stops your source,
@@ -8,7 +8,7 @@
 There is no race and no shared start time. Every seat's lane keeps sending traffic until the end of the
 lab, so you do this section at your own pace, whenever your agent runs.
 
-## 1. Hands off (about 5 min)
+## 1. Hands off
 
 === "Option A: Scheduled"
 
@@ -39,7 +39,7 @@ tiles change at their own times.
     2.4, then schedule the next slot. A tile that stays red: the run found events after the stop and kept
     the alert open; read its EVIDENCE.
 
-## 2. Wake up and read what your agent did (about 10 min)
+## 2. Wake up and read what your agent did
 
 === "Option A: Scheduled"
 
@@ -93,7 +93,7 @@ Check what it did:
     *Evidence for a web attack seat (T3-C): (1) Secure Firewall events and IPS signatures from get_my_security_events. This run is from Option B, so (2) NEXT STEP waits for approval.*
 
 
-## 3. Option B only: approve the stop in Canvas (about 5 min)
+## 3. Option B only: approve the stop in Canvas
 
 With Option A your agent already did steps 3 and 4 on its own: skip to the end. Canvas's triage note
 makes it ask before it stops anything, so with Option B you approve it:
@@ -113,7 +113,7 @@ Canvas calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · 
 *(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.*
 
 
-## 4. Option B only: verify and clear (about 5 min)
+## 4. Option B only: verify and clear
 
 **Wait 5 minutes after the stop.** Firewall events from before the stop stay in the 5-minute window
 until they age out, so a check right away still sees them and will not clear your light. Use the time to

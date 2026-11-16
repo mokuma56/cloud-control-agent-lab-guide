@@ -1,4 +1,4 @@
-# 2.1 Shape the agent from your triage method (1:40, 25 min)
+# 2.1 Shape the agent from your triage method
 
 !!! abstract "Goal"
     A draft Studio agent whose manifest you have read line by line: what it watches, which
