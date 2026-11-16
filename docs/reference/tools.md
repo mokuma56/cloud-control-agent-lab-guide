@@ -28,5 +28,5 @@ no call can read or change another seat. Rate limit: 30 requests per minute per 
 | What | Where |
 | --- | --- |
 | MCP (Streamable HTTP) | Lab Tools MCP URL on your seat card, path `/mcp` |
-| OpenAPI 3.1 specs | `/openapi-light.json` (Lab Actions, 6 operations), `/openapi-context.json` (Lab Context, 4 operations) |
+| OpenAPI 3.1 specs | `/openapi-labtools-prod.json` (**Lab Tools Production**: all 10 operations, server `/prod`), `/table/openapi-light.json` (Lab Actions, 6 operations, server `/table`: 2.3 Path A), `/openapi-light.json` and `/openapi-context.json` (the original two) |
 | Room wall | `/` (or `/wall`) |

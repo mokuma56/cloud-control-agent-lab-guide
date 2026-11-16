@@ -2,16 +2,18 @@
 
 ## Canvas cannot see Lab Tools
 
-- Canvas → **Integrations → Custom Integrations**: is **Lab Tools** there, with **Enabled for me**
-  ticked and your credential added? Add it with **⋯ → Replace my bearer token**.
+- Studio → **Manage → Integrations**: does **Lab Tools Production** (Tenant) show **Configured**? If it
+  shows **Configure**, select it and paste your seat token.
+- Canvas → **Integrations → Custom Integrations**: does **Lab Tools Production** show **Your credential:
+  Saved** and **Enabled for me** ticked?
 - Start a **new** board after adding the credential; an open board may not pick it up.
-- A Studio MCP integration with *Canvas Direct* does not make tools appear in Canvas chat. Canvas
-  uses its own **Custom Integrations** (OpenAPI). Use Lab Tools there.
+- Name it in your prompt: "Using **Lab Tools Production**, …". If Canvas also lists an older **Lab Tools**,
+  it may try that one first and be refused; that is harmless.
 
 ## Canvas looks at Hyperfabric (USC-HF-LEAF1/2) instead of the Meraki Cloud Fabric
 
-Canvas did not get the PseudoCo environment reference, which comes with Lab Tools. Check that Lab Tools
-is **Enabled for me** with your credential saved (above), start a **new** board, and ask again. You can
+Canvas did not get the PseudoCo environment reference, which comes with Lab Tools Production. Check that
+it is **Enabled for me** with your credential saved (above), start a **new** board, and ask again. You can
 also say it outright: "the Meraki Cloud Fabric, org USC-Engineering, network SITE-105".
 
 ## "missing or invalid bearer token" (401)
@@ -19,8 +21,8 @@ also say it outright: "the Meraki Cloud Fabric, org USC-Engineering, network SIT
 Your seat token was mistyped, has a trailing space, or belongs to an earlier session (tokens change
 between sessions). Copy it again from your seat card, then update the credential:
 
-- Canvas: Lab Tools card → **⋯ → Replace my bearer token**.
-- Studio: Manage → Integrations → your Lab Tools → **⋯ → Update credential**.
+- Studio: Manage → Integrations → **Lab Tools Production** → **⋯ → Update credential** (Canvas uses the same one).
+- Your own 2.3 integration, if you built one: Manage → Integrations → it → **⋯ → Update credential**.
 
 ## "rate limit" (429)
 

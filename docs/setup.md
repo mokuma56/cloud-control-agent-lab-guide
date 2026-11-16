@@ -25,7 +25,7 @@ What the card holds:
 | Cloud Control login | `lab13@usc-engineering.com` | 1.1 |
 | **Seat token** | a long random string | 1.3, 2.3 |
 | Lab Tools MCP URL | `https://<lab host>:9443/mcp` | 2.3 |
-| Lab Actions spec URL | `https://<lab host>:8443/openapi-light.json` | 2.3 (REST path) |
+| Lab Actions spec URL | `https://<lab host>:8443/table/openapi-light.json` | 2.3 (REST path) |
 | Lab Context spec URL | `https://<lab host>:8443/openapi-context.json` | 2.3 (REST path) |
 | Your MCP workspace | `https://<lab host>:9443/seat/<your seat>/` | 2.3 (Path B) |
 | Room wall | `https://<lab host>:8443/` (also on the room screen) | 2.3, 2.5 |

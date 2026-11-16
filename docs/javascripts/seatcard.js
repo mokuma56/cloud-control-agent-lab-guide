@@ -11,7 +11,7 @@
   ];
   // Studio apps reach port 443 only: cards saved before 2026-11-11 have no spec_console, so derive it without :8443
   const consoleSpec = c => c.spec_console ||
-    (c.spec_light || "").replace(":8443/", "/").replace("openapi-light.json", "openapi-console.json");
+    (c.spec_light || "").replace(":8443/", "/").replace("/table/", "/").replace("openapi-light.json", "openapi-console.json");
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const load = () => {
     let c = null;

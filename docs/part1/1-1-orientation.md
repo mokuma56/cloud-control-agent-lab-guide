@@ -1,7 +1,7 @@
 # 1.1 Orientation (0:10, 15 min)
 
 !!! abstract "Goal"
-    Find AI Canvas, Studio and the Lab Tools integration, and connect Lab Tools to your seat.
+    Find AI Canvas, Studio and the Lab Tools Production integration, and connect it to your seat.
 
 ## The lab network you are troubleshooting
 
@@ -26,7 +26,7 @@ POD-45 is a fully built PseudoCo network. You do not configure anything in this 
     *(1) Canvas, (2) Integrations, (3) + New creates a board. Board names and owners are blurred in this guide.*
 
 2. **Studio**: open the app launcher (the grid icon), then **Studio**. You will see three builders:
-   **Agent**, **App** and **Integrations**. You will use Agent and Integrations in Part 2.
+   **Agent**, **App** and **Integrations**. You connect Lab Tools here in a moment, and build an Agent in Part 2.
 
     ![07-studio-build](../img/07-studio-build.png){ loading=lazy }
 
@@ -36,28 +36,30 @@ POD-45 is a fully built PseudoCo network. You do not configure anything in this 
 
 ## Connect Lab Tools to your seat
 
-On the Canvas **Integrations** page:
+Integrations live in **Studio**. One integration, **Lab Tools Production**, is shared with the whole
+organization, and both Canvas and your Studio agent use it. Everyone sees the same integration, but each
+person adds their own credential, which stays private.
 
-1. **Default Integrations** lists what Canvas can already use: Cisco Meraki, Cisco Firewall Manager,
-   Cisco Secure Access and others. Leave them all on.
+1. In **Studio**, select **Manage**, then **Integrations**.
+2. Under **Custom integrations: Tenant**, find **Lab Tools Production** and select **Configure**.
+3. Paste your **seat token** from the seat card and save. The card now shows **Configured**.
+
+Your seat token: <span class="sc-tokenbtn"></span>
+
+Then check Canvas can use it:
+
+1. Go back to **Canvas → Integrations**. **Default Integrations** lists the Cisco integrations Canvas
+   already uses (Cisco Meraki, Cisco Firewall Manager, Cisco Secure Access and others). Leave them all on.
 
     ![02-canvas-integrations-default](../img/02-canvas-integrations-default.png){ loading=lazy }
 
     *(1) Default Integrations: (2) the Cisco integrations Canvas uses for multi-domain troubleshooting. Leave them ticked.*
 
-2. Select **Custom Integrations**. You will see **Lab Tools** (`lab-tools`). It is shared with the
-   organization, so everyone sees the same card, but each person's credential is private.
-3. On the **Lab Tools** card, open the **⋯** menu and add your credential
-   (**Replace my bearer token**). Paste your **seat token** from the seat card and save.
-4. Make sure **Enabled for me** is ticked.
+2. Select **Custom Integrations**. **Lab Tools Production** shows **Your credential: Saved** (you added it
+   in Studio) and **Enabled for me** ticked. There is nothing to change here.
 
-    ![03-canvas-custom-integrations](../img/03-canvas-custom-integrations.png){ loading=lazy }
-
-    *(1) Custom Integrations, (2) Lab Tools. When you are done, (3) Your credential shows Saved and (4) Enabled for me is ticked.*
-
-    ![04-lab-tools-menu](../img/04-lab-tools-menu.png){ loading=lazy }
-
-    *(1) The Lab Tools actions menu, (2) Replace my bearer token: paste your seat token here. The dimmed items exist only for proctors.*
+!!! note "Only use Lab Tools Production"
+    If Custom Integrations also lists an older **Lab Tools**, leave it alone. This lab uses **Lab Tools Production** only.
 
 ### What Lab Tools is
 
@@ -66,19 +68,17 @@ company knows: was that change approved, which business service sits on those po
 In a real company that lives in systems like ServiceNow, a service catalog, PagerDuty and vendor status
 pages. **Lab Tools stands in for those systems**, for a pretend company called PseudoCo.
 
-It is a Canvas **custom integration**: you describe an API to Canvas once, add notes on how to use it,
-and Canvas can call it in any board. You can do the same with your own company's APIs. The proctor
-set Lab Tools up with these files; you only add your credential:
+It is a Studio **custom integration**, published to the organization: you describe an API once, add
+notes on how to use it, and both Canvas and Studio agents can call it. You can do the same with your
+own company's APIs. The proctor set Lab Tools Production up with these files; you only add your credential:
 
-| File in the Lab Tools integration | What it is | What Canvas gets from it |
+| File in Lab Tools Production | What it is | What you get from it |
 | --- | --- | --- |
-| `openapi-context.json` | **Lab Context** API description (OpenAPI) | Four read-only lookups: change calendar, business services, on-call, SaaS status |
-| `openapi-light.json` | **Lab Actions** API description (OpenAPI) | Your seat's actions: what to watch, its firewall events, raise or clear your alert on the room wall, stop your lane |
+| `openapi-labtools-prod.json` | The Lab Tools API description (OpenAPI) | Ten operations. **Lab Context:** four read-only lookups (change calendar, business services, on-call, SaaS status). **Lab Actions:** your seat's watch scope, its firewall events, raise or clear your alert on the room wall, stop your lane |
 | `pseudoco_environment.md` | A usage note: the **PseudoCo environment map** | Which system is which ("Cloud Fabric" means Meraki site SITE-105, not Hyperfabric), how DHCP reaches AD-1, what is known and harmless, and the read-only rules. What a new engineer would get on day one. |
 | `lane_triage_skill.md` | A usage note: the **night shift triage method** | How to check one seat's watch source. Used by your agent in Part 2. |
-| Canvas instructions | Generated by Canvas from the files above | A short summary Canvas writes for itself |
 
-The two OpenAPI files are the *what* (which calls exist). The two notes are the *how* (when to use
+The OpenAPI file is the *what* (which calls exist). The two notes are the *how* (when to use
 them, and what the words mean at PseudoCo). Neither note contains the answer to any exercise. Every
 operation is listed in [Lab Tools reference](../reference/tools.md).
 
@@ -89,7 +89,7 @@ tools you use connect differently:
 
 | Way in | Who uses it | Set up in | What it is |
 | --- | --- | --- | --- |
-| **OpenAPI** (the custom integration above) | Canvas, and Studio agents as an *API integration* | 1.1 (now) | The two API descriptions plus your seat token |
+| **OpenAPI** (Lab Tools Production, above) | Canvas, and Studio agents as an *API integration* | 1.1 (now) | The API description plus your seat token |
 | **MCP** (Model Context Protocol) | Studio agents | 2.3 step A | One shared MCP server URL; your seat token tells it which seat you are |
 
 MCP is an open standard for giving an AI assistant tools: the server lists its tools and their
@@ -104,7 +104,7 @@ When you build your agent in Part 2, its manifest lists the servers it may use:
 | `secure-access` | Cisco-provided MCP server for **Cisco Secure Access** | Read access and DNS activity, alerts and policy for the users and sites it protects |
 | `firewall-server` (if listed) | Cisco-provided MCP server for **Cisco Secure Firewall** | Read firewall policy and objects |
 | `byo-…` (a random ID) | **"Bring your own"** MCP: the Lab Tools MCP integration you add in 2.3 | The ten Lab Tools operations, as your seat |
-| API integration *PseudoCo Business Context* | The Lab Tools OpenAPI integration from 1.1 | The same Lab Tools operations, over REST |
+| API integration *Lab Tools Production* | The Lab Tools OpenAPI integration from 1.1 | The same Lab Tools operations, over REST |
 
 The Cisco ones come with Cloud Control: nothing to install. The `byo-` one is the point of 2.3: it is
 how you would give an agent your own company's tools (in Path B you even write one). Its ID differs for
@@ -121,7 +121,7 @@ everyone. If your agent has no `byo-` entry yet, that is normal before 2.3.
 In your Canvas board, ask:
 
 ```text
-Using Lab Tools, call get_my_watch_scope and get_light_status. Show me the raw results.
+Using Lab Tools Production, call get_my_watch_scope and get_light_status. Show me the raw results.
 ```
 
 - [ ] Canvas shows **your** seat ID (for example `T3-C`) and a `watch_source_ip`.

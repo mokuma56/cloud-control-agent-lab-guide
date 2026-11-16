@@ -86,7 +86,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
     | `clear_issue` | Resolves your alert: your tile turns green. Only after the fix is verified. | Changes your tile |
     | `stop_my_lane` | Stops the attack traffic from your own watch source IP. Changes no shared configuration. **Your agent calls it once it confirms the activity.** | Stops your lane |
 
-    The same ten operations are what Canvas uses through the Lab Tools OpenAPI integration (see
+    The same ten operations are what Canvas uses through the Lab Tools Production OpenAPI integration (see
     [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}). Full
     details: [Lab Tools reference](../reference/tools.md){target="_blank" rel="noopener"}.
 
@@ -139,7 +139,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
         *(1) Use URL, (2) the Lab Actions spec URL, (3) Continue.*
 
     3. **Review API:** Studio reads the spec and lists what it found. Check it says **6 operations**,
-       endpoint `https://<lab host>:8443` and **Bearer token**, then **Continue**. The warning *This API can
+       endpoint `https://<lab host>:8443/table` and **Bearer token**, then **Continue**. The warning *This API can
        change external data* is expected: `signal_issue`, `clear_issue` and `stop_my_lane` change your tile
        and your lane. That is why the next step matters.
 
