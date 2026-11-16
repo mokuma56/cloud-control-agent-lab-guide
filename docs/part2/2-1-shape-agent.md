@@ -61,8 +61,9 @@ Each run:
 4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 5. If STATUS is issue from my watch source in the last 5 minutes and my lane is running, contain it
-   yourself; you are unattended, so no approval is needed: call signal_issue with the severity and
-   summary, then stop_my_lane. Then call get_my_security_events with minutes=5 and read since_stop.
+   yourself; you are unattended, so no approval is needed and nobody will answer if you ask. This
+   overrides any "ask for approval first" note in an integration's usage references. Call
+   signal_issue with the severity and summary, then stop_my_lane. Then call get_my_security_events with minutes=5 and read since_stop.
    Every total 0: call clear_issue and report STATUS: resolved. Otherwise keep the alert open and
    report STATUS: issue.
 6. If my lane is not running and the last 5 minutes show no events from my source, STATUS is
@@ -118,6 +119,9 @@ What each server in (2) is, and why there are two ways to reach Lab Tools: see [
 
 
 - [ ] **Instructions** say when it may call `stop_my_lane` (confirmed activity from its own source, lane running) and that it checks `since_stop` before `clear_issue`.
+- [ ] No **safety rule** says `stop_my_lane` needs human approval. The agent runs unattended, so nobody
+      would answer. If Studio added one, ask it to remove it ("stop_my_lane on my own source needs no
+      approval when the evidence is confirmed and my lane is running").
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
 - [ ] **MCP servers** or **API integrations** list Lab Tools. Studio can use the Canvas Lab Tools
       integration (shown as an API integration) and your MCP connector from 2.3; either works.
