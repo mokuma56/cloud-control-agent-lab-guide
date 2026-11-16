@@ -41,7 +41,17 @@ organization, and both Canvas and your Studio agent use it. Everyone sees the sa
 person adds their own credential, which stays private.
 
 1. In **Studio**, select **Manage**, then **Integrations**.
+
+    ![02b-studio-manage-integrations](../img/02b-studio-manage-integrations.png){ loading=lazy }
+
+    *(1) Manage, (2) Integrations.*
+
 2. Under **Custom integrations: Tenant**, find **Lab Tools Production** and select **Configure**.
+
+    ![02c-studio-lab-tools-tenant](../img/02c-studio-lab-tools-tenant.png){ loading=lazy }
+
+    *(1) Custom integrations: Tenant, (2) Lab Tools Production, (3) Configure.*
+
 3. Paste your **seat token** from the seat card and select **Save**.
 
     Your seat token: <span class="sc-tokenbtn"></span>
@@ -54,7 +64,7 @@ person adds their own credential, which stays private.
 
     ![03b-studio-lab-tools-configured](../img/03b-studio-lab-tools-configured.png){ loading=lazy }
 
-    *(1) Studio → Manage → Integrations, (2) Lab Tools Production under Custom integrations: Tenant, (3) Configured. The URL is blurred in this guide.*
+    *(1) Studio → Manage → Integrations, (2) Lab Tools Production under Custom integrations: Tenant, (3) Configured.*
 
 Then check Canvas can use it:
 
