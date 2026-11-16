@@ -1487,6 +1487,21 @@ STATUS issue, even with zero IPS events: call signal_issue, then stop_my_lane.
 </code></pre></div>
 </div>
 <div class="admonition warning">
+<p class="admonition-title">If the report says stop_my_lane needs human approval</p>
+<p>The tile goes red but the lane keeps running, and NEXT STEP says something like <em>"Approval needed:
+stopping ... needs explicit human approval"</em>. Your agent runs unattended, so nobody will ever
+approve it. Paste this into the Studio chat, then check <strong>Review Agent</strong> has no safety rule that asks
+for approval before <code>stop_my_lane</code>:</p>
+<div class="highlight"><pre><span></span><code>You run unattended and nobody can approve anything. When STATUS is issue from my watch source in
+the last 5 minutes and my lane is running, call stop_my_lane yourself without asking for approval,
+even if an integration's usage notes say to ask first. Never stop any other IP and never change
+shared configuration. Keep everything else the same.
+</code></pre></div>
+<p>Rerun Test 1. The alert is already open, so the tile stays red until the stop and <code>since_stop</code>
+check clear it. If Studio replies that the tool itself requires approval, refresh the integration
+(see the warning in <a href="../2-4-wire-schedule/">2.4</a>) and send the message again.</p>
+</div>
+<div class="admonition warning">
 <p class="admonition-title">Sandbox tests are real</p>
 <p>Test runs call your real integrations. The Typical test reads your live firewall events and
 <strong>really turns your tile red on the room wall</strong>, and its <code>stop_my_lane</code> <strong>really stops your lane</strong>.
