@@ -1428,22 +1428,24 @@
 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">¶</a></h1>
 <h2 id="canvas-cannot-see-lab-tools">Canvas cannot see Lab Tools<a class="headerlink" href="#canvas-cannot-see-lab-tools" title="Permanent link">¶</a></h2>
 <ul>
-<li>Canvas → <strong>Integrations → Custom Integrations</strong>: is <strong>Lab Tools</strong> there, with <strong>Enabled for me</strong>
-  ticked and your credential added? Add it with <strong>⋯ → Replace my bearer token</strong>.</li>
+<li>Studio → <strong>Manage → Integrations</strong>: does <strong>Lab Tools Production</strong> (Tenant) show <strong>Configured</strong>? If it
+  shows <strong>Configure</strong>, select it and paste your seat token.</li>
+<li>Canvas → <strong>Integrations → Custom Integrations</strong>: does <strong>Lab Tools Production</strong> show <strong>Your credential:
+  Saved</strong> and <strong>Enabled for me</strong> ticked?</li>
 <li>Start a <strong>new</strong> board after adding the credential; an open board may not pick it up.</li>
-<li>A Studio MCP integration with <em>Canvas Direct</em> does not make tools appear in Canvas chat. Canvas
-  uses its own <strong>Custom Integrations</strong> (OpenAPI). Use Lab Tools there.</li>
+<li>Name it in your prompt: "Using <strong>Lab Tools Production</strong>, …". If Canvas also lists an older <strong>Lab Tools</strong>,
+  it may try that one first and be refused; that is harmless.</li>
 </ul>
 <h2 id="canvas-looks-at-hyperfabric-usc-hf-leaf12-instead-of-the-meraki-cloud-fabric">Canvas looks at Hyperfabric (USC-HF-LEAF1/2) instead of the Meraki Cloud Fabric<a class="headerlink" href="#canvas-looks-at-hyperfabric-usc-hf-leaf12-instead-of-the-meraki-cloud-fabric" title="Permanent link">¶</a></h2>
-<p>Canvas did not get the PseudoCo environment reference, which comes with Lab Tools. Check that Lab Tools
-is <strong>Enabled for me</strong> with your credential saved (above), start a <strong>new</strong> board, and ask again. You can
+<p>Canvas did not get the PseudoCo environment reference, which comes with Lab Tools Production. Check that
+it is <strong>Enabled for me</strong> with your credential saved (above), start a <strong>new</strong> board, and ask again. You can
 also say it outright: "the Meraki Cloud Fabric, org USC-Engineering, network SITE-105".</p>
 <h2 id="missing-or-invalid-bearer-token-401">"missing or invalid bearer token" (401)<a class="headerlink" href="#missing-or-invalid-bearer-token-401" title="Permanent link">¶</a></h2>
 <p>Your seat token was mistyped, has a trailing space, or belongs to an earlier session (tokens change
 between sessions). Copy it again from your seat card, then update the credential:</p>
 <ul>
-<li>Canvas: Lab Tools card → <strong>⋯ → Replace my bearer token</strong>.</li>
-<li>Studio: Manage → Integrations → your Lab Tools → <strong>⋯ → Update credential</strong>.</li>
+<li>Studio: Manage → Integrations → <strong>Lab Tools Production</strong> → <strong>⋯ → Update credential</strong> (Canvas uses the same one).</li>
+<li>Your own 2.3 integration, if you built one: Manage → Integrations → it → <strong>⋯ → Update credential</strong>.</li>
 </ul>
 <h2 id="rate-limit-429">"rate limit" (429)<a class="headerlink" href="#rate-limit-429" title="Permanent link">¶</a></h2>
 <p>Your token made more than 30 calls in a minute, usually an agent stuck in a loop. Wait a minute and

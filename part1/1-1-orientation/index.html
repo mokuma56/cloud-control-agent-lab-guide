@@ -1344,7 +1344,7 @@
 <h1 id="11-orientation-010-15-min">1.1 Orientation (0:10, 15 min)<a class="headerlink" href="#11-orientation-010-15-min" title="Permanent link">¶</a></h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Find AI Canvas, Studio and the Lab Tools integration, and connect Lab Tools to your seat.</p>
+<p>Find AI Canvas, Studio and the Lab Tools Production integration, and connect it to your seat.</p>
 </div>
 <h2 id="the-lab-network-you-are-troubleshooting">The lab network you are troubleshooting<a class="headerlink" href="#the-lab-network-you-are-troubleshooting" title="Permanent link">¶</a></h2>
 <p>POD-45 is a fully built PseudoCo network. You do not configure anything in this lab.</p>
@@ -1399,7 +1399,7 @@
 </li>
 <li>
 <p><strong>Studio</strong>: open the app launcher (the grid icon), then <strong>Studio</strong>. You will see three builders:
-   <strong>Agent</strong>, <strong>App</strong> and <strong>Integrations</strong>. You will use Agent and Integrations in Part 2.</p>
+   <strong>Agent</strong>, <strong>App</strong> and <strong>Integrations</strong>. You connect Lab Tools here in a moment, and build an Agent in Part 2.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/07-studio-build.png" data-desc-position="bottom"><img alt="07-studio-build" loading="lazy" src="../../img/07-studio-build.png"></a></p>
 <p><em>Studio: (1) Agent builder, (2) add an Integration, (3) Manage lists what you have built.</em></p>
 </li>
@@ -1408,54 +1408,53 @@
 </li>
 </ol>
 <h2 id="connect-lab-tools-to-your-seat">Connect Lab Tools to your seat<a class="headerlink" href="#connect-lab-tools-to-your-seat" title="Permanent link">¶</a></h2>
-<p>On the Canvas <strong>Integrations</strong> page:</p>
+<p>Integrations live in <strong>Studio</strong>. One integration, <strong>Lab Tools Production</strong>, is shared with the whole
+organization, and both Canvas and your Studio agent use it. Everyone sees the same integration, but each
+person adds their own credential, which stays private.</p>
+<ol>
+<li>In <strong>Studio</strong>, select <strong>Manage</strong>, then <strong>Integrations</strong>.</li>
+<li>Under <strong>Custom integrations: Tenant</strong>, find <strong>Lab Tools Production</strong> and select <strong>Configure</strong>.</li>
+<li>Paste your <strong>seat token</strong> from the seat card and save. The card now shows <strong>Configured</strong>.</li>
+</ol>
+<p>Your seat token: <span class="sc-tokenbtn"></span></p>
+<p>Then check Canvas can use it:</p>
 <ol>
 <li>
-<p><strong>Default Integrations</strong> lists what Canvas can already use: Cisco Meraki, Cisco Firewall Manager,
-   Cisco Secure Access and others. Leave them all on.</p>
+<p>Go back to <strong>Canvas → Integrations</strong>. <strong>Default Integrations</strong> lists the Cisco integrations Canvas
+   already uses (Cisco Meraki, Cisco Firewall Manager, Cisco Secure Access and others). Leave them all on.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/02-canvas-integrations-default.png" data-desc-position="bottom"><img alt="02-canvas-integrations-default" loading="lazy" src="../../img/02-canvas-integrations-default.png"></a></p>
 <p><em>(1) Default Integrations: (2) the Cisco integrations Canvas uses for multi-domain troubleshooting. Leave them ticked.</em></p>
 </li>
 <li>
-<p>Select <strong>Custom Integrations</strong>. You will see <strong>Lab Tools</strong> (<code>lab-tools</code>). It is shared with the
-   organization, so everyone sees the same card, but each person's credential is private.</p>
-</li>
-<li>On the <strong>Lab Tools</strong> card, open the <strong>⋯</strong> menu and add your credential
-   (<strong>Replace my bearer token</strong>). Paste your <strong>seat token</strong> from the seat card and save.</li>
-<li>
-<p>Make sure <strong>Enabled for me</strong> is ticked.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/03-canvas-custom-integrations.png" data-desc-position="bottom"><img alt="03-canvas-custom-integrations" loading="lazy" src="../../img/03-canvas-custom-integrations.png"></a></p>
-<p><em>(1) Custom Integrations, (2) Lab Tools. When you are done, (3) Your credential shows Saved and (4) Enabled for me is ticked.</em></p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/04-lab-tools-menu.png" data-desc-position="bottom"><img alt="04-lab-tools-menu" loading="lazy" src="../../img/04-lab-tools-menu.png"></a></p>
-<p><em>(1) The Lab Tools actions menu, (2) Replace my bearer token: paste your seat token here. The dimmed items exist only for proctors.</em></p>
+<p>Select <strong>Custom Integrations</strong>. <strong>Lab Tools Production</strong> shows <strong>Your credential: Saved</strong> (you added it
+   in Studio) and <strong>Enabled for me</strong> ticked. There is nothing to change here.</p>
 </li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Only use Lab Tools Production</p>
+<p>If Custom Integrations also lists an older <strong>Lab Tools</strong>, leave it alone. This lab uses <strong>Lab Tools Production</strong> only.</p>
+</div>
 <h3 id="what-lab-tools-is">What Lab Tools is<a class="headerlink" href="#what-lab-tools-is" title="Permanent link">¶</a></h3>
 <p>Cisco integrations tell Canvas what the <strong>network</strong> is doing. They cannot tell it what only your
 company knows: was that change approved, which business service sits on those ports, who is on call.
 In a real company that lives in systems like ServiceNow, a service catalog, PagerDuty and vendor status
 pages. <strong>Lab Tools stands in for those systems</strong>, for a pretend company called PseudoCo.</p>
-<p>It is a Canvas <strong>custom integration</strong>: you describe an API to Canvas once, add notes on how to use it,
-and Canvas can call it in any board. You can do the same with your own company's APIs. The proctor
-set Lab Tools up with these files; you only add your credential:</p>
+<p>It is a Studio <strong>custom integration</strong>, published to the organization: you describe an API once, add
+notes on how to use it, and both Canvas and Studio agents can call it. You can do the same with your
+own company's APIs. The proctor set Lab Tools Production up with these files; you only add your credential:</p>
 <table>
 <thead>
 <tr>
-<th>File in the Lab Tools integration</th>
+<th>File in Lab Tools Production</th>
 <th>What it is</th>
-<th>What Canvas gets from it</th>
+<th>What you get from it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>openapi-context.json</code></td>
-<td><strong>Lab Context</strong> API description (OpenAPI)</td>
-<td>Four read-only lookups: change calendar, business services, on-call, SaaS status</td>
-</tr>
-<tr>
-<td><code>openapi-light.json</code></td>
-<td><strong>Lab Actions</strong> API description (OpenAPI)</td>
-<td>Your seat's actions: what to watch, its firewall events, raise or clear your alert on the room wall, stop your lane</td>
+<td><code>openapi-labtools-prod.json</code></td>
+<td>The Lab Tools API description (OpenAPI)</td>
+<td>Ten operations. <strong>Lab Context:</strong> four read-only lookups (change calendar, business services, on-call, SaaS status). <strong>Lab Actions:</strong> your seat's watch scope, its firewall events, raise or clear your alert on the room wall, stop your lane</td>
 </tr>
 <tr>
 <td><code>pseudoco_environment.md</code></td>
@@ -1467,14 +1466,9 @@ set Lab Tools up with these files; you only add your credential:</p>
 <td>A usage note: the <strong>night shift triage method</strong></td>
 <td>How to check one seat's watch source. Used by your agent in Part 2.</td>
 </tr>
-<tr>
-<td>Canvas instructions</td>
-<td>Generated by Canvas from the files above</td>
-<td>A short summary Canvas writes for itself</td>
-</tr>
 </tbody>
 </table>
-<p>The two OpenAPI files are the <em>what</em> (which calls exist). The two notes are the <em>how</em> (when to use
+<p>The OpenAPI file is the <em>what</em> (which calls exist). The two notes are the <em>how</em> (when to use
 them, and what the words mean at PseudoCo). Neither note contains the answer to any exercise. Every
 operation is listed in <a href="../../reference/tools/">Lab Tools reference</a>.</p>
 <h3 id="two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in: OpenAPI for Canvas, MCP for agents<a class="headerlink" href="#two-ways-in-openapi-for-canvas-mcp-for-agents" title="Permanent link">¶</a></h3>
@@ -1491,10 +1485,10 @@ tools you use connect differently:</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>OpenAPI</strong> (the custom integration above)</td>
+<td><strong>OpenAPI</strong> (Lab Tools Production, above)</td>
 <td>Canvas, and Studio agents as an <em>API integration</em></td>
 <td>1.1 (now)</td>
-<td>The two API descriptions plus your seat token</td>
+<td>The API description plus your seat token</td>
 </tr>
 <tr>
 <td><strong>MCP</strong> (Model Context Protocol)</td>
@@ -1538,7 +1532,7 @@ both act as your seat and only your seat.</p>
 <td>The ten Lab Tools operations, as your seat</td>
 </tr>
 <tr>
-<td>API integration <em>PseudoCo Business Context</em></td>
+<td>API integration <em>Lab Tools Production</em></td>
 <td>The Lab Tools OpenAPI integration from 1.1</td>
 <td>The same Lab Tools operations, over REST</td>
 </tr>
@@ -1554,7 +1548,7 @@ tells it who you are. The same pattern works for ServiceNow, a weather service o
 </div>
 <h2 id="checkpoint">Checkpoint<a class="headerlink" href="#checkpoint" title="Permanent link">¶</a></h2>
 <p>In your Canvas board, ask:</p>
-<div class="highlight"><pre><span></span><code>Using Lab Tools, call get_my_watch_scope and get_light_status. Show me the raw results.
+<div class="highlight"><pre><span></span><code>Using Lab Tools Production, call get_my_watch_scope and get_light_status. Show me the raw results.
 </code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Canvas shows <strong>your</strong> seat ID (for example <code>T3-C</code>) and a <code>watch_source_ip</code>.</li>
