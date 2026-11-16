@@ -26,7 +26,7 @@ POD-45 is a fully built PseudoCo network. You do not configure anything in this 
     *(1) Canvas, (2) Integrations, (3) + New creates a board. Board names and owners are blurred in this guide.*
 
 2. **Studio**: open the app launcher (the grid icon), then **Studio**. You will see three builders:
-   **Agent**, **App** and **Integrations**. You connect Lab Tools here in a moment, and build an Agent in Part 2.
+   **Agent**, **App** and **Integrations**. You connect Lab Tools Production here in a moment, and build an Agent in Part 2.
 
     ![07-studio-build](../img/07-studio-build.png){ loading=lazy }
 
@@ -42,9 +42,19 @@ person adds their own credential, which stays private.
 
 1. In **Studio**, select **Manage**, then **Integrations**.
 2. Under **Custom integrations: Tenant**, find **Lab Tools Production** and select **Configure**.
-3. Paste your **seat token** from the seat card and save. The card now shows **Configured**.
+3. Paste your **seat token** from the seat card and select **Save**.
 
-Your seat token: <span class="sc-tokenbtn"></span>
+    Your seat token: <span class="sc-tokenbtn"></span>
+
+    ![03-studio-lab-tools-configure](../img/03-studio-lab-tools-configure.png){ loading=lazy }
+
+    *Configure Lab Tools Production: (1) paste your seat token, (2) Save.*
+
+4. The card now shows **Configured**.
+
+    ![03b-studio-lab-tools-configured](../img/03b-studio-lab-tools-configured.png){ loading=lazy }
+
+    *(1) Studio → Manage → Integrations, (2) Lab Tools Production under Custom integrations: Tenant, (3) Configured. The URL is blurred in this guide.*
 
 Then check Canvas can use it:
 
@@ -57,6 +67,10 @@ Then check Canvas can use it:
 
 2. Select **Custom Integrations**. **Lab Tools Production** shows **Your credential: Saved** (you added it
    in Studio) and **Enabled for me** ticked. There is nothing to change here.
+
+    ![04-canvas-lab-tools-production](../img/04-canvas-lab-tools-production.png){ loading=lazy }
+
+    *(1) Custom Integrations, (2) Lab Tools Production, (3) Your credential: Saved, (4) Enabled for me.*
 
 !!! note "Only use Lab Tools Production"
     If Custom Integrations also lists an older **Lab Tools**, leave it alone. This lab uses **Lab Tools Production** only.

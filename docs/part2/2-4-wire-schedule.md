@@ -140,7 +140,7 @@ Your agent is ready. Now decide **how it starts** for Lights Out (2.5). There ar
 | --- | --- | --- |
 | Who starts it | Studio, at the time you set | You, by sending a prompt |
 | What it feels like | Real night shift: it runs while you are hands off | A colleague you ask to check now |
-| Uses | Your agent, its instructions and your integrations | Canvas, Lab Tools and the triage note |
+| Uses | Your agent, its instructions and your integrations | Canvas, Lab Tools Production and the triage note |
 | Who stops the threat | Your agent, on its own: red, striped, green | Canvas, after you reply "approve stop" |
 | Pick it when | You want the real-world experience | You want to start right away, or Schedule is still locked |
 
@@ -197,7 +197,7 @@ yours whenever it runs.
 
 === "Option B: On demand from Canvas"
 
-    You start the same check yourself, in AI Canvas. Canvas uses the same Lab Tools and your seat token,
+    You start the same check yourself, in AI Canvas. Canvas uses the same Lab Tools Production integration and your seat token,
     so your tile turns red the same way. It is quicker to start, but nobody is asleep: you are the one
     asking, and Canvas's triage note makes it ask you before it stops anything.
 
@@ -205,7 +205,7 @@ yours whenever it runs.
     2. Go to [2.5](2-5-lights-out.md) and send this prompt there when you are ready:
 
         ```text
-        Using Lab Tools and the lane triage guidance: what is my watch source doing right now? Get my
+        Using Lab Tools Production and the lane triage guidance: what is my watch source doing right now? Get my
         watch scope, then my security events for the last 5 minutes and the last 60 minutes, use the
         business context for impact and severity, give the STATUS report, and call signal_issue if it
         is an issue. Then propose stop_my_lane and wait for my reply "approve stop".
@@ -213,7 +213,7 @@ yours whenever it runs.
 
     ![10-lights-plan](../img/10-lights-plan.png){ loading=lazy }
 
-    *Running it from Canvas: (1) your prompt, (2) Canvas's plan: discover Lab Tools, get watch scope and events, assess and signal, ask before the stop.*
+    *Running it from Canvas: (1) your prompt, (2) Canvas's plan: discover Lab Tools Production, get watch scope and events, assess and signal, ask before the stop.*
 
 - [ ] My lane is running and my tile is quiet.
 - [ ] My agent is scheduled for the next slot (Option A), or I have the Canvas prompt ready (Option B).

@@ -36,7 +36,7 @@ Scope: USC-Engineering Meraki org, Cloud Fabric Leaf1 and Leaf2.
 
 1. Correlate across every Cisco domain you can see (Meraki switch ports and port config, the
    configuration change log, DHCP and client events) and find the root cause.
-2. Also check, using Lab Tools:
+2. Also check, using Lab Tools Production:
    - the change calendar for anything in the 2 hours before the symptom started
    - which business service this affects, how critical it is, and its business hours
    - third-party SaaS status, to rule a provider outage in or out
@@ -87,7 +87,7 @@ Common fixes when the answer is not there yet:
 Start a **new** board and ask:
 
 ```text
-Users say Salesforce is slow this morning. Is it the network? Use Lab Tools and any Cisco data
+Users say Salesforce is slow this morning. Is it the network? Use Lab Tools Production and any Cisco data
 you need, and answer in the same STATUS format.
 ```
 

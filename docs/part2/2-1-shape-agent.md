@@ -57,7 +57,7 @@ Each run:
    - the same destination, port and URL repeating steadily through the window: C2-style beacon
    Any of these from my watch source in the last 5 minutes is STATUS issue, even with zero IPS
    events. An unrelated change on the change calendar does not make it inconclusive.
-3. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
+3. Use Lab Tools Production for recent changes, business service impact, SaaS status and the on-call policy.
 4. Report: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 5. If STATUS is issue from my watch source in the last 5 minutes and my lane is running, contain it
@@ -101,7 +101,7 @@ Studio drafts a **manifest** and asks follow-up questions. Suggested answers:
 | How often should it run? | Hourly (you may change this in 2.4) |
 | Maximum runs | 10 |
 | Output | Markdown in the run output |
-| Which integrations? | Lab Tools. If Studio asks you to connect it now, skip; you do it in 2.3 |
+| Which integrations? | Lab Tools Production (you connected it in 1.1) |
 
 ## Review the manifest
 

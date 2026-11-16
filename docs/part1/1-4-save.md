@@ -63,7 +63,7 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    - network health and recent configuration changes (Meraki)
    - firewall, IPS and file events (Secure Firewall)
    - access, DNS and anything else I can see (Secure Access, Catalyst Center)
-2. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
+2. Use Lab Tools Production for recent changes, business service impact, SaaS status and the on-call policy.
 3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 ```
@@ -87,7 +87,7 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    - network health and recent configuration changes (Meraki)
    - firewall, IPS and file events (Secure Firewall)
    - access, DNS and anything else I can see (Secure Access, Catalyst Center)
-2. Use Lab Tools for recent changes, business service impact, SaaS status and the on-call policy.
+2. Use Lab Tools Production for recent changes, business service impact, SaaS status and the on-call policy.
 3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 ```

@@ -55,7 +55,7 @@ flowchart TB
     Gen["Traffic generator<br/>30 lanes, one per seat"]
   end
   Canvas -- "Cisco integrations" --> Meraki
-  Canvas -- "Lab Tools (OpenAPI)" --> Broker
+  Canvas -- "Lab Tools Production (OpenAPI)" --> Broker
   Studio -- "Lab Tools (MCP)" --> MCP --> Broker
   Broker -- "your source IP only" --> Splunk
   FTD --> Splunk
