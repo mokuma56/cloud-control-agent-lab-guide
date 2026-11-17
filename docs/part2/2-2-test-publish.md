@@ -65,8 +65,8 @@ For **each** test:
     **Scenario**
 
     ```text
-    Lab Tools is unreachable during this run, so you cannot get business context, the change
-    calendar or the on-call policy. Check the service I protect and report.
+    For this run, treat Lab Tools' business context as unavailable: do not call get_business_services,
+    get_recent_changes, get_oncall or get_saas_status. Check the service I protect and report.
     ```
 
     **Expected outcome**
