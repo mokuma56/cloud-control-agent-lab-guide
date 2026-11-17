@@ -1396,8 +1396,8 @@ gives clear_issue and STATUS resolved; otherwise the alert stays open and STATUS
 </div>
 <div class="tabbed-block">
 <p><strong>Scenario</strong></p>
-<div class="highlight"><pre><span></span><code>Lab Tools is unreachable during this run, so you cannot get business context, the change
-calendar or the on-call policy. Check the service I protect and report.
+<div class="highlight"><pre><span></span><code>For this run, treat Lab Tools' business context as unavailable: do not call get_business_services,
+get_recent_changes, get_oncall or get_saas_status. Check the service I protect and report.
 </code></pre></div>
 <p><strong>Expected outcome</strong></p>
 <div class="highlight"><pre><span></span><code>Says which source is missing and why that limits the answer. Still reports what the Cisco data
