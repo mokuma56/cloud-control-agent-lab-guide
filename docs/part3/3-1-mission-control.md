@@ -18,7 +18,8 @@ an app shows and lets people act.
 
 ## 1. Add the Night Watch Console integration
 
-The app reads your seat's timeline from a small API made for it. Add it the same way as Path A in 2.3:
+The app reads your seat's timeline from a small API made for it. You add it with the REST wizard, the
+same way as Path A in 2.3 (if you took Path B, this is your first REST integration: follow the steps below):
 
 1. **Studio → Build → Integrations → Add → REST API → Use URL** and paste:
 
@@ -38,9 +39,10 @@ The app reads your seat's timeline from a small API made for it. Add it the same
 
 !!! info "Why a separate integration"
     Your agent must never restart its own attack, so `replay_my_attack` lives only here, where only the app
-    can use it. The four read-only operations are the same data your agent reads through Lab Tools, served
-    on the standard HTTPS port: Studio apps reach APIs on port 443 only. The app never gets `stop_my_lane`;
-    containment stays the agent's job.
+    can use it. The four read-only operations are the same data your agent reads through Lab Tools Production,
+    served on the standard HTTPS port: Studio apps reach APIs on port 443 only. The app never gets
+    `stop_my_lane` or `signal_issue`: containment and alerts stay with your agent (Lab Tools Production and
+    your own My Lab Tools).
 
 ## 2. Download the design file
 
