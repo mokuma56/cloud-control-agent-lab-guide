@@ -1356,31 +1356,33 @@ in 2.1.</p>
    paste the prompt for the path you built in 2.3, and send it (Enter or the arrow).</p>
 <div class="admonition tip">
 <p class="admonition-title">Which tab do I use?</p>
-<p>Pick the tab that matches the path you chose in <strong>2.3 step B</strong>. You built only one of the two
-integrations. <strong>Path A</strong> (REST API, no code) built <strong>My Table Light</strong>. <strong>Path B</strong> (MCP server,
-code) built <strong>My Lab Tools</strong>. The two prompts are the same except for that integration name. Not
-sure which one you built? Check <strong>Studio → Manage → Integrations</strong>.</p>
+<p>Pick the tab for the path you chose in <strong>2.3</strong>: <strong>Path A</strong> built <strong>My Lab Tools - REST</strong>,
+<strong>Path B</strong> built <strong>My Lab Tools - MCP</strong>. Not sure? Check <strong>Studio → Manage → Integrations</strong>.</p>
 </div>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Path A: My Table Light</label><label for="__tabbed_1_2">Path B: My Lab Tools</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Path A: My Lab Tools - REST</label><label for="__tabbed_1_2">Path B: My Lab Tools - MCP</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>Add my integrations PseudoCo Lab Tools and My Table Light. Always call get_my_watch_scope
-first, then get_my_security_events. If STATUS is issue from my watch source in the last 5 minutes
-and my lane is running: call signal_issue, then stop_my_lane from PseudoCo Lab Tools yourself (no
-approval needed), then get_my_security_events with minutes=5. If every since_stop total is 0, call
-clear_issue and report STATUS: resolved; otherwise keep the alert open. Never stop on
-inconclusive evidence, never act on another IP, never change shared configuration. Keep
-everything else the same.
+<div class="highlight"><pre><span></span><code>Add my integration My Lab Tools - REST. Raise and clear my alert through My Lab Tools - REST
+(its signal_issue, get_light_status and clear_issue). Use Lab Tools Production for everything
+else: get_my_watch_scope first, then get_my_security_events, the business context and
+stop_my_lane. If STATUS is issue from my watch source in the last 5 minutes and my lane is
+running: call signal_issue, then stop_my_lane yourself (no approval needed), then
+get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
+STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
+each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+configuration. Keep everything else the same.
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>Add my integrations PseudoCo Lab Tools and My Lab Tools. Always call get_my_watch_scope
-first, then get_my_security_events. If STATUS is issue from my watch source in the last 5 minutes
-and my lane is running: call signal_issue, then stop_my_lane from PseudoCo Lab Tools yourself (no
-approval needed), then get_my_security_events with minutes=5. If every since_stop total is 0, call
-clear_issue and report STATUS: resolved; otherwise keep the alert open. Never stop on
-inconclusive evidence, never act on another IP, never change shared configuration. Keep
-everything else the same.
+<div class="highlight"><pre><span></span><code>Add my integration My Lab Tools - MCP. Raise and clear my alert through My Lab Tools - MCP
+(its signal_issue and clear_issue). Use Lab Tools Production for everything else:
+get_my_watch_scope first, then get_my_security_events, the business context, get_light_status
+and stop_my_lane. If STATUS is issue from my watch source in the last 5 minutes and my lane is
+running: call signal_issue, then stop_my_lane yourself (no approval needed), then
+get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
+STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
+each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+configuration. Keep everything else the same.
 </code></pre></div>
 </div>
 </div>
@@ -1391,13 +1393,6 @@ everything else the same.
 <p class="admonition-title">Why the prompt repeats the limits</p>
 <p>Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
 repeating the limits stops a refinement from loosening what you tested in 2.2.</p>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">If Studio says stop_my_lane requires human approval</p>
-<p>Studio judges a tool by the description it saved when you connected the integration. If it
-refuses to let the agent stop on its own, refresh it: <strong>Studio → Manage → Integrations →
-PseudoCo Lab Tools → ⋯ → Rediscover</strong>, paste your seat token, <strong>Rediscover tools</strong>, then send the
-prompt again.</p>
 </div>
 </li>
 <li>
@@ -1410,12 +1405,12 @@ prompt again.</p>
 <p>When it finishes (Studio shows <strong>Ready to test</strong>), stay on <strong>Review Agent</strong> and scroll down to
    <strong>MCP servers</strong> and <strong>API integrations</strong>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/24f-refine-done.png" data-desc-position="bottom"><img alt="24f-refine-done" loading="lazy" src="../../img/24f-refine-done.png"></a></p>
-<p><em>(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one <code>byo-</code> entry per MCP integration (here PseudoCo Lab Tools and My Lab Tools) plus the Cisco servers. Schedule is greyed until you rerun a test.</em></p>
+<p><em>(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one <code>byo-</code> entry per MCP integration (Path B: My Lab Tools - MCP) plus the Cisco servers. The screenshot is from an older version of the lab with two <code>byo-</code> entries. Schedule is greyed until you rerun a test.</em></p>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Studio's summary names your integrations. In the manifest, MCP integrations show as <code>byo-</code> IDs, not names:
-      Path B shows <strong>two</strong> <code>byo-</code> entries (PseudoCo Lab Tools and My Lab Tools); Path A shows one, with
-      <strong>My Table Light</strong> under <strong>API integrations</strong>.</p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Studio's summary names your integration. <strong>API integrations</strong> lists <strong>Lab Tools Production</strong> and,
+      for Path A, <strong>My Lab Tools - REST</strong>. For Path B, <strong>MCP servers</strong> shows one <code>byo-</code> entry (MCP
+      integrations show as IDs, not names): that is <strong>My Lab Tools - MCP</strong>.</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The instructions say <code>stop_my_lane</code> is for your own source only, and that <code>clear_issue</code> waits for a clean <code>since_stop</code>.</li>
 </ol>
@@ -1430,9 +1425,11 @@ running first (the <strong>Restart my lane</strong> button at the end of the 2.2
 <div class="highlight"><pre><span></span><code>Run the night-watch review for the service I protect. My lane is running.
 </code></pre></div>
 <p><strong>Expected outcome</strong></p>
-<div class="highlight"><pre><span></span><code>STATUS issue found from my watch source and signal_issue called. stop_my_lane called on my own
-source without asking. since_stop checked: if all totals are 0, clear_issue called and STATUS
-resolved. No other IP and no shared configuration touched.
+<div class="highlight"><pre><span></span><code>STATUS issue found from my watch source and signal_issue called through my own integration
+(My Lab Tools - REST or My Lab Tools - MCP). stop_my_lane called on my own source without asking.
+since_stop checked: if all totals are 0, clear_issue called through my own integration and STATUS
+resolved. The report names the integration used for each action. No other IP and no shared
+configuration touched.
 </code></pre></div>
 <p><strong>What a pass looks like</strong> (seat T1-A, port scan):</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/27a-autostop-result.png" data-desc-position="bottom"><img alt="27a-autostop-result" loading="lazy" src="../../img/27a-autostop-result.png"></a></p>
@@ -1442,7 +1439,8 @@ resolved. No other IP and no shared configuration touched.
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/27b-autostop-chain.png" data-desc-position="bottom"><img alt="27b-autostop-chain" loading="lazy" src="../../img/27b-autostop-chain.png"></a></p>
 <p><em>The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. About 20 seconds from alert to green.</em></p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile went red, striped, then green, and the report says STATUS resolved.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile went red, striped, then green, the report says STATUS resolved, and it
+      names <strong>your</strong> integration for <code>signal_issue</code> and <code>clear_issue</code>.</li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Restart your lane again (it is stopped now):</p>
 <p></p><div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>

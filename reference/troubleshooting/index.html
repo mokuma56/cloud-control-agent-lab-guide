@@ -1462,8 +1462,8 @@ attempt does not create an agent.</p>
 schedule. Nothing was scheduled. Reload the page (sign in again if asked), open <strong>Schedule</strong> again and
 choose the next 5-minute slot that is at least 5 minutes away: the dialog forgets your earlier choices.</p>
 <h2 id="a-run-says-a-tool-returned-http-503">A run says a tool "returned HTTP 503"</h2>
-<p>Your <strong>Path B</strong> workspace server (My Lab Tools) is not running, for example after a proctor reset. The
-run usually still works through PseudoCo Lab Tools, but the report may name the wrong integration. Open
+<p>Your <strong>Path B</strong> workspace server (My Lab Tools - MCP) is not running, for example after a proctor reset.
+The agent may fall back to Lab Tools Production for the alert, and the report then names the wrong integration. Open
 your MCP workspace (the link on your seat card), select <strong>Save</strong> (or <strong>Restart</strong>), and check that
 <strong>Test a tool</strong> answers again. Path A students never see this.</p>
 <h2 id="studio-discovers-fewer-than-10-tools">Studio discovers fewer than 10 tools</h2>
@@ -1481,7 +1481,7 @@ after the stop and run the check again. <code>get_light_status</code> shows whet
 are kept on the board.</p>
 <h2 id="a-caution-sign-next-to-my-agent-stale-skills">A caution sign next to my agent ("stale skills")</h2>
 <p>In <strong>Studio → Manage → Applications</strong>, a caution sign next to your agent opens <em>Products with stale
-skills</em> and names an integration (for example PseudoCo Lab Tools, or your own Path B server). Studio's
+skills</em> and names an integration (for example your own My Lab Tools - MCP). Studio's
 cached copy of that integration's tools is out of date, which happens after the server behind it changed.</p>
 <p><strong>Fix:</strong> Studio → Manage → <strong>Integrations</strong> → the named integration → <strong>⋯ → Rediscover</strong>, paste your seat
 token, <strong>Rediscover tools</strong>. The caution sign clears for every agent that uses it. Asking the agent's

@@ -1490,36 +1490,32 @@ own company's APIs. The proctor set Lab Tools Production up with these files; yo
 <p>The OpenAPI file is the <em>what</em> (which calls exist). The two notes are the <em>how</em> (when to use
 them, and what the words mean at PseudoCo). Neither note contains the answer to any exercise. Every
 operation is listed in <a href="../../reference/tools/">Lab Tools reference</a>.</p>
-<h3 id="two-ways-in-openapi-for-canvas-mcp-for-agents">Two ways in: OpenAPI for Canvas, MCP for agents</h3>
-<p>Lab Tools is one lab server that offers the same ten operations two ways, because the two Cloud Control
-tools you use connect differently:</p>
+<h3 id="two-ways-in-openapi-rest-and-mcp">Two ways in: OpenAPI (REST) and MCP</h3>
+<p>Studio accepts an integration in two forms. You use one now and build one of your own in 2.3:</p>
 <table>
 <thead>
 <tr>
-<th>Way in</th>
-<th>Who uses it</th>
-<th>Set up in</th>
+<th>Form</th>
 <th>What it is</th>
+<th>In this lab</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>OpenAPI</strong> (Lab Tools Production, above)</td>
-<td>Canvas, and Studio agents as an <em>API integration</em></td>
-<td>1.1 (now)</td>
-<td>The API description plus your seat token</td>
+<td><strong>OpenAPI (REST)</strong></td>
+<td>An API description file: every operation, its URL and arguments</td>
+<td><strong>Lab Tools Production</strong> (now, used by Canvas and your agent); <strong>My Lab Tools - REST</strong> if you take Path A in 2.3</td>
 </tr>
 <tr>
 <td><strong>MCP</strong> (Model Context Protocol)</td>
-<td>Studio agents</td>
-<td>2.3 step A</td>
-<td>One shared MCP server URL; your seat token tells it which seat you are</td>
+<td>A small program that offers tools to an agent</td>
+<td><strong>My Lab Tools - MCP</strong> if you take Path B in 2.3</td>
 </tr>
 </tbody>
 </table>
 <p>MCP is an open standard for giving an AI assistant tools: the server lists its tools and their
-inputs, and the assistant calls them. Both ways reach the same lab server with <strong>your seat token</strong>, so
-both act as your seat and only your seat.</p>
+inputs, and the assistant calls them. Either way, every call reaches the same lab server with <strong>your
+seat token</strong>, so it acts as your seat and only your seat.</p>
 <p>When you build your agent in Part 2, its manifest lists the servers it may use:</p>
 <table>
 <thead>
@@ -1546,20 +1542,20 @@ both act as your seat and only your seat.</p>
 <td>Read firewall policy and objects</td>
 </tr>
 <tr>
-<td><code>byo-…</code> (a random ID)</td>
-<td><strong>"Bring your own"</strong> MCP: the Lab Tools MCP integration you add in 2.3</td>
+<td>API integration <em>Lab Tools Production</em></td>
+<td>The Lab Tools OpenAPI integration from 1.1</td>
 <td>The ten Lab Tools operations, as your seat</td>
 </tr>
 <tr>
-<td>API integration <em>Lab Tools Production</em></td>
-<td>The Lab Tools OpenAPI integration from 1.1</td>
-<td>The same Lab Tools operations, over REST</td>
+<td>API integration <em>My Lab Tools - REST</em>, or <code>byo-…</code> (a random ID) for <em>My Lab Tools - MCP</em></td>
+<td><strong>Your own</strong> integration from 2.3 ("bring your own")</td>
+<td>Your seat's alert: raise and clear it, by your rules</td>
 </tr>
 </tbody>
 </table>
-<p>The Cisco ones come with Cloud Control: nothing to install. The <code>byo-</code> one is the point of 2.3: it is
-how you would give an agent your own company's tools (in Path B you even write one). Its ID differs for
-everyone. If your agent has no <code>byo-</code> entry yet, that is normal before 2.3.</p>
+<p>The Cisco ones come with Cloud Control: nothing to install. Your own integration is the point of 2.3: it
+is how you would give an agent your company's workflow (in Path B you even write the code). Until 2.3,
+your agent has only Lab Tools Production and the Cisco servers, which is normal.</p>
 <div class="admonition info">
 <p class="admonition-title">Why a token and not a login</p>
 <p>Lab Tools runs outside Cisco Cloud Control, like any system your business depends on. The token

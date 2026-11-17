@@ -1405,7 +1405,7 @@ point at any system your business depends on, and the take-home kit to rebuild i
   end
   subgraph Kit["Lab Kit (always on, public HTTPS)"]
     Broker["Lab Context + Lab Actions APIs&lt;br/&gt;OpenAPI specs, board"]
-    MCP["Shared MCP server&lt;br/&gt;your seat token = your seat"]
+    MCP["Your MCP workspace&lt;br/&gt;(2.3 Path B)"]
   end
   subgraph Pod["POD-45 lab network"]
     Meraki["Meraki Cloud Fabric"]
@@ -1415,7 +1415,8 @@ point at any system your business depends on, and the take-home kit to rebuild i
   end
   Canvas -- "Cisco integrations" --&gt; Meraki
   Canvas -- "Lab Tools Production (OpenAPI)" --&gt; Broker
-  Studio -- "Lab Tools (MCP)" --&gt; MCP --&gt; Broker
+  Studio -- "Lab Tools Production, My Lab Tools - REST (OpenAPI)" --&gt; Broker
+  Studio -- "My Lab Tools - MCP" --&gt; MCP --&gt; Broker
   Broker -- "your source IP only" --&gt; Splunk
   FTD --&gt; Splunk
   Gen -- "attack lane" --&gt; FTD
@@ -1424,10 +1425,12 @@ point at any system your business depends on, and the take-home kit to rebuild i
 <ul>
 <li><strong>AI Canvas</strong> does the Cisco multi-domain work with its built-in integrations (Meraki, Secure
   Firewall, Secure Access, Catalyst Center, Intersight, Nexus Dashboard).</li>
-<li><strong>Lab Tools</strong> is the custom integration. It brings in what Cisco cannot know: PseudoCo's change
-  calendar, business services, on-call policy and SaaS status. It also gives your agent its watch
-  scope, the firewall events for your seat, and two actions: raise your seat's alert on the room wall, and stop
-  your seat's attack traffic.</li>
+<li><strong>Lab Tools Production</strong> is the lab team's custom integration. It brings in what Cisco cannot know:
+  PseudoCo's change calendar, business services, on-call policy and SaaS status. It also gives your
+  agent its watch scope, the firewall events for your seat, and two actions: raise your seat's alert on
+  the room wall, and stop your seat's attack traffic.</li>
+<li><strong>My Lab Tools</strong> is <strong>your</strong> integration, built in 2.3 (REST or MCP) with your own rules. Your agent
+  switches to it to raise and clear its alert: your own workflow.</li>
 <li><strong>Lanes:</strong> in Part 2 the traffic generator sends one stream of simulated attack traffic per seat, called
   a <em>lane</em>. Each lane comes from that seat's own source IP and goes through the firewall to the service its table protects.</li>
 <li><strong>Your seat token</strong> is the key. Everyone uses the same URLs; the token decides which seat, which
@@ -1503,14 +1506,14 @@ point at any system your business depends on, and the take-home kit to rebuild i
 </tr>
 <tr>
 <td>2:20</td>
-<td>35</td>
+<td>30</td>
 <td>3</td>
 <td><a href="../part2/2-3-custom-workflow/">2.3 Build your custom workflow</a></td>
-<td>Your integration turns your seat red on the wall</td>
+<td>Your own integration turns your seat red on the wall</td>
 </tr>
 <tr>
-<td>2:55</td>
-<td>15</td>
+<td>2:50</td>
+<td>20</td>
 <td>3</td>
 <td><a href="../part2/2-4-wire-schedule/">2.4 Wire it in and choose how it runs</a></td>
 <td>Four tests passed, scheduled or Canvas chosen</td>
