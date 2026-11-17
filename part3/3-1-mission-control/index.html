@@ -1405,7 +1405,8 @@ an app shows and lets people act.</p>
 </tbody>
 </table>
 <h2 id="1-add-the-night-watch-console-integration">1. Add the Night Watch Console integration</h2>
-<p>The app reads your seat's timeline from a small API made for it. Add it the same way as Path A in 2.3:</p>
+<p>The app reads your seat's timeline from a small API made for it. You add it with the REST wizard, the
+same way as Path A in 2.3 (if you took Path B, this is your first REST integration: follow the steps below):</p>
 <ol>
 <li>
 <p><strong>Studio → Build → Integrations → Add → REST API → Use URL</strong> and paste:</p>
@@ -1437,9 +1438,10 @@ an app shows and lets people act.</p>
 <div class="admonition info">
 <p class="admonition-title">Why a separate integration</p>
 <p>Your agent must never restart its own attack, so <code>replay_my_attack</code> lives only here, where only the app
-can use it. The four read-only operations are the same data your agent reads through Lab Tools, served
-on the standard HTTPS port: Studio apps reach APIs on port 443 only. The app never gets <code>stop_my_lane</code>;
-containment stays the agent's job.</p>
+can use it. The four read-only operations are the same data your agent reads through Lab Tools Production,
+served on the standard HTTPS port: Studio apps reach APIs on port 443 only. The app never gets
+<code>stop_my_lane</code> or <code>signal_issue</code>: containment and alerts stay with your agent (Lab Tools Production and
+your own My Lab Tools).</p>
 </div>
 <h2 id="2-download-the-design-file">2. Download the design file</h2>
 <p><a class="md-button" download="NightWatch_Mission_Control.md" href="../../app/NightWatch_Mission_Control.txt">Download NightWatch_Mission_Control.md</a></p>
