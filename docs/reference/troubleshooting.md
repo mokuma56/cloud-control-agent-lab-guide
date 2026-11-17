@@ -46,8 +46,8 @@ choose the next 5-minute slot that is at least 5 minutes away: the dialog forget
 
 ## A run says a tool "returned HTTP 503"
 
-Your **Path B** workspace server (My Lab Tools) is not running, for example after a proctor reset. The
-run usually still works through PseudoCo Lab Tools, but the report may name the wrong integration. Open
+Your **Path B** workspace server (My Lab Tools - MCP) is not running, for example after a proctor reset.
+The agent may fall back to Lab Tools Production for the alert, and the report then names the wrong integration. Open
 your MCP workspace (the link on your seat card), select **Save** (or **Restart**), and check that
 **Test a tool** answers again. Path A students never see this.
 
@@ -75,7 +75,7 @@ are kept on the board.
 ## A caution sign next to my agent ("stale skills")
 
 In **Studio → Manage → Applications**, a caution sign next to your agent opens *Products with stale
-skills* and names an integration (for example PseudoCo Lab Tools, or your own Path B server). Studio's
+skills* and names an integration (for example your own My Lab Tools - MCP). Studio's
 cached copy of that integration's tools is out of date, which happens after the server behind it changed.
 
 **Fix:** Studio → Manage → **Integrations** → the named integration → **⋯ → Rediscover**, paste your seat

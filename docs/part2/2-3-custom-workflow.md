@@ -1,116 +1,47 @@
 # 2.3 Build your custom workflow
 
 !!! abstract "Goal"
-    Your own integration in Studio that your agent can call, proven by turning your seat red on the room wall.
-    This is the "custom workflow that does anything you want" part of the lab.
+    Build **your own** integration in Studio, give it your own rules, and prove it works by turning your
+    seat red on the room wall. In 2.4 your agent switches to it for raising and clearing its alert.
 
-Everyone does **step A** (10 min). Then pick **one** path for step B (25 min).
+## Whose integration is whose
 
-## A. Connect Lab Tools to Studio (everyone)
+Your agent already works: it passed Test 1 in 2.2 using **Lab Tools Production**. So why build anything?
 
-Studio agents use MCP or REST integrations registered in Studio. Lab Tools offers a shared MCP
-server: one URL for all 30 seats, and your seat token decides which seat you are.
+**Lab Tools Production is the lab team's integration.** Someone else built it, described it and decided
+how it behaves. You only added your credential. In a company, that is like the ServiceNow or monitoring
+integration your IT team set up for everyone.
 
-1. **Studio → Build → Integrations → Add → MCP**.
+**A custom workflow is the part you own.** It is the step where your agent stops reading and *does*
+something on your behalf: opens a ticket, pages the on-call, posts to a Webex space. Nobody can build
+that for you, because only you know your rules: *when* to act, *what* to send, and *when not to*.
 
-    ![08-studio-add-integration](../img/08-studio-add-integration.png){ loading=lazy }
+In this lab, "doing something" is your seat's alert on the room wall (`signal_issue` and `clear_issue`),
+the stand-in for a ticket or a page. You build an integration that carries that action, and you write
+its rules yourself:
 
-    *(1) Choose MCP. Path A in step B uses REST API instead.*
+| | Lab Tools Production (from 1.1) | **My Lab Tools** (you build it now) |
+| --- | --- | --- |
+| Built by | The lab team | **You** |
+| Rules | The lab team's descriptions | **Yours**: your usage guidance (REST) or your code and tool description (MCP) |
+| In 2.4 your agent uses it for | Watch scope, firewall events, business context, `stop_my_lane` | **Raising and clearing your alert**: `signal_issue`, `clear_issue` |
 
-2. **Connect**
+Swap the room wall for your own ticketing or paging system, and this is exactly how you would give an
+agent your company's workflow.
 
-    <div class="sc-copytable" markdown>
+## Pick your path
 
-    | Field | Value |
-    | --- | --- |
-    | MCP server URL | `<your Lab Tools MCP URL>` |
-    | Display name | `PseudoCo Lab Tools` |
-    | Advanced settings → Transport | `Streamable HTTP` |
-    | Advanced settings → Header name | `Authorization` |
-    | Advanced settings → Scheme | `Bearer` |
-    | Canvas visibility | leave **Canvas Direct** and **Canvas Planner** both off |
+Both paths end with the same thing: your own **My Lab Tools** integration that turns your tile red and
+green. They differ in *how* you build it, the two ways Studio accepts an integration:
 
-    </div>
+| | Path A: REST | Path B: MCP |
+| --- | --- | --- |
+| You start from | An API description (OpenAPI spec): a file listing what the API can do | A small program (an MCP server) that offers tools to an agent |
+| You make it yours by | Writing **usage guidance**: when your agent may raise or clear, what to send | Writing the **code** of `signal_issue` and its **description** |
+| Code | None | One line of Python (or load the finished version) |
+| Name in Studio | `My Lab Tools - REST` | `My Lab Tools - MCP` |
 
-    Each value has a **Copy** button. The MCP URL is filled in from your seat card (get it on
-    [Before you start](../setup.md#your-seat-card){target="_blank" rel="noopener"} if it still shows a placeholder). The screenshots use
-    the placeholder host `lab.example.com`.
-
-    ![09a-mcp-connect](../img/09a-mcp-connect.png){ loading=lazy }
-
-    *Connect: (1) the Lab Tools MCP URL from your seat card (the example host here is a placeholder), (2) the display name (the screenshot shows an older seat-based name; use PseudoCo Lab Tools), (3) open Advanced settings.*
-
-    ![09b-mcp-advanced](../img/09b-mcp-advanced.png){ loading=lazy }
-
-    *Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas visibility: leave both boxes off (this screenshot is from an older build with Canvas Direct ticked).*
-
-    !!! question "Why not Canvas Direct or Canvas Planner?"
-        Studio says it on this screen: the connector is always available in Studio, and the two boxes only
-        expose it to Canvas as well. Your agent runs in Studio, so it does not need them. Canvas already
-        reaches Lab Tools through the integration you set up in 1.1 (see
-        [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}), and a
-        second copy of the same tools in Canvas only invites it to mix the two.
-
-
-
-3. **Authenticate and discover**: authentication **API key / bearer token**, paste your **seat
-   token**, then **Discover tools**.
-
-    Your seat token: <span class="sc-tokenbtn"></span>
-
-    It is filled in from your seat card and hidden until you select **Show**. **Copy** copies the whole
-    token either way. It is a password: paste it only into this field.
-
-    After **Discover tools** you should see **10 tools**:
-    `get_my_watch_scope`, `get_my_security_events`, `get_recent_changes`, `get_business_services`,
-    `get_oncall`, `get_saas_status`, `signal_issue`, `clear_issue`, `get_light_status`, `stop_my_lane`.
-
-    ![09c-mcp-auth](../img/09c-mcp-auth.png){ loading=lazy }
-
-    *Authenticate and discover: (1) API key / bearer token, (2) paste your seat token, (3) Discover tools.*
-
-    What you just connected: ten tools the lab team built for PseudoCo, all scoped to **your seat** by
-    your seat token. Seven only read, two change your seat's alert on the room wall, and one stops your
-    own lane.
-
-    | Tool | What it does | Reads or changes |
-    | --- | --- | --- |
-    | `get_my_watch_scope` | Tells the agent who it is: your seat, the service your table protects, your watch source IP, segment and SGT, and whether your lane is running. Agents call it first. | Reads |
-    | `get_my_security_events` | Secure Firewall events for **your** source IP only, read from Splunk: IPS signatures and their action, connections, destinations and ports, access rules, sample URLs, file events. Pick 1 to 240 minutes. | Reads |
-    | `get_recent_changes` | PseudoCo's change calendar: ticket ID, system, what changed, who asked, when, implemented or scheduled. | Reads |
-    | `get_business_services` | Business services: criticality, business hours, owner, cost of downtime and what each depends on. Turns a network finding into business impact and severity. | Reads |
-    | `get_oncall` | Who is on call now and the wake-up policy. | Reads |
-    | `get_saas_status` | Status of Webex, Microsoft 365, the payments gateway and Salesforce, to rule a provider outage in or out. | Reads |
-    | `get_light_status` | Whether your seat's alert is open, with its severity and summary, and other open alerts at your table. | Reads |
-    | `signal_issue` | Raises your alert: your tile turns red on the room wall with a severity and a one-line summary. Calling it again updates them. | Changes your tile |
-    | `clear_issue` | Resolves your alert: your tile turns green. Only after the fix is verified. | Changes your tile |
-    | `stop_my_lane` | Stops the attack traffic from your own watch source IP. Changes no shared configuration. **Your agent calls it once it confirms the activity.** | Stops your lane |
-
-    The same ten operations are what Canvas uses through the Lab Tools Production OpenAPI integration (see
-    [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents){target="_blank" rel="noopener"}). Full
-    details: [Lab Tools reference](../reference/tools.md){target="_blank" rel="noopener"}.
-
-4. **Capabilities and access**: keep all 10 selected, then **Save draft**. When the confirmation
-   pop-up opens, click **Manage**. It takes you to **Studio → Manage**, where you check the integration below.
-
-!!! warning "Keep it Personal"
-    The integration is saved **Personal**. Do not use *Make available to tenant*: everyone in the
-    tenant would then act as your seat.
-
-- [ ] Studio → Manage → Integrations shows `PseudoCo Lab Tools`, Personal, **Configured**.
-
-    ![09d-studio-manage](../img/09d-studio-manage.png){ loading=lazy }
-
-    *Done: (1) your integration card, (2) in the Personal group, (3) Configured. The URL is blurred in this guide.*
-
-
-## B. Your own workflow (pick one)
-
-!!! info "Step B is practice, not setup"
-    Your agent already has everything it needs for Lights Out from step A. Step B is where you learn how
-    a custom integration is built, so you can do the same with your own company's systems later. Pick
-    **one** path. **Path A** needs no code. **Path B** shows the code behind a tool: one small edit, and
-    a button that fills in the answer if you would rather just see it work.
+Pick **one**. If you have never written code, take Path A.
 
 === "Path A: REST API (no code)"
 
@@ -154,7 +85,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         | Field | Value |
         | --- | --- |
-        | Display name | `My Table Light` |
+        | Display name | `My Lab Tools - REST` |
         | Authentication | API key / bearer token |
         | API key / token | <span class="sc-tokenbtn"></span> |
 
@@ -162,7 +93,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         ![23c-rest-configure](../img/23c-rest-configure.png){ loading=lazy }
 
-        *(1) Display name: change Lab Actions to My Table Light, (2) you are on the Configure step.*
+        *(1) Display name: change Lab Actions to `My Lab Tools - REST` (the screenshot shows an older name), (2) you are on the Configure step.*
 
     5. **Configure, part 2: tell the agent how to use it.** This is the point of Path A. The spec says
        *what* each operation does. **API usage guidance** says *when* your agent should use it, what to
@@ -188,13 +119,14 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         *(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.*
 
-    6. **Review and save:** check the name (`My Table Light`), the 6 operations and your guidance, then
-       **Save draft**. When the confirmation pop-up opens, click **Manage** (as in step A). It takes you to
+    6. **Review and save:** check the name (`My Lab Tools - REST`), the 6 operations and your guidance, then
+       **Save draft**. When the confirmation pop-up opens, click **Manage**. It takes you to
        **Studio → Manage**, where you check the integration:
 
-        - [ ] Studio → Manage → Integrations shows `My Table Light`, Personal, **Configured**.
+        - [ ] Studio → Manage → Integrations shows `My Lab Tools - REST`, Personal, **Configured**.
 
-        Like step A, keep it **Personal**: do not use *Make available to tenant*.
+        Keep it **Personal**: do not use *Make available to tenant*. It carries your seat token, so
+        everyone in the tenant would then act as your seat.
 
     **Done when:** you turn your own tile red with a direct call to the Lab Actions API, the same
     call your agent's integration makes. Select **Run**: the guide sends the request from this browser with
@@ -230,7 +162,7 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 === "Path B: MCP server (code)"
 
     **What you are building.** An **MCP server** is a small program that offers *tools* to an AI agent.
-    Lab Tools from step A is one, written by the lab team. Here you run your own copy, finish one tool
+    The lab team's Lab Tools has one behind it. Here you run your own copy, finish one tool
     in it, and connect it to Studio: exactly what you would do to give an agent your own company's
     ticketing system, CMDB or any other API.
 
@@ -304,21 +236,46 @@ server: one URL for all 30 seats, and your seat token decides which seat you are
 
         *Test a tool: (1) the tool, (2) its arguments, (3) Call, (4) the result: your light is on, (5) your server is running.*
 
-    6. **Connect it to Studio**, as in step A but with **your** workspace's URL (also shown at the top of
-       the workspace). Studio then discovers your tools, including the one you just finished.
+    6. **Connect it to Studio.** **Studio → Build → Integrations → Add → MCP**, then fill in the
+       connection. Your workspace's MCP URL is also shown at the top of the workspace.
+
+        ![08-studio-add-integration](../img/08-studio-add-integration.png){ loading=lazy }
+
+        *(1) Choose MCP.*
 
         <div class="sc-copytable" markdown>
 
         | Field | Value |
         | --- | --- |
         | MCP server URL | `<your workspace MCP URL>` |
-        | Display name | `My Lab Tools` |
+        | Display name | `My Lab Tools - MCP` |
         | Advanced settings → Transport | `Streamable HTTP` |
         | Advanced settings → Header name | `Authorization` |
         | Advanced settings → Scheme | `Bearer` |
-        | Bearer token | <span class="sc-tokenbtn"></span> |
+        | Canvas visibility | leave **Canvas Direct** and **Canvas Planner** both off |
 
         </div>
+
+        ![09a-mcp-connect](../img/09a-mcp-connect.png){ loading=lazy }
+
+        *Connect: (1) the MCP server URL (paste your workspace MCP URL; the screenshot shows the shared Lab Tools URL on a placeholder host), (2) the display name (use `My Lab Tools - MCP`), (3) open Advanced settings.*
+
+        ![09b-mcp-advanced](../img/09b-mcp-advanced.png){ loading=lazy }
+
+        *Advanced settings: (1) Streamable HTTP, (2) header Authorization, (3) scheme Bearer, (4) Canvas visibility: leave both boxes off (this screenshot is from an older build with Canvas Direct ticked).*
+
+    7. **Authenticate and discover:** authentication **API key / bearer token**, paste your seat token,
+       then **Discover tools**. Studio lists the tools in **your** `tools.py`, including the
+       `signal_issue` you just finished. Keep them all selected, then **Save draft**, and keep it
+       **Personal** (it carries your seat token).
+
+        Your seat token: <span class="sc-tokenbtn"></span>
+
+        ![09c-mcp-auth](../img/09c-mcp-auth.png){ loading=lazy }
+
+        *Authenticate and discover: (1) API key / bearer token, (2) paste your seat token, (3) Discover tools.*
+
+        - [ ] Studio → Manage → Integrations shows `My Lab Tools - MCP`, Personal, **Configured**.
 
     **Done when:** your own `signal_issue` turns your tile red, and Studio discovers your tools.
 

@@ -46,7 +46,7 @@ flowchart TB
   end
   subgraph Kit["Lab Kit (always on, public HTTPS)"]
     Broker["Lab Context + Lab Actions APIs<br/>OpenAPI specs, board"]
-    MCP["Shared MCP server<br/>your seat token = your seat"]
+    MCP["Your MCP workspace<br/>(2.3 Path B)"]
   end
   subgraph Pod["POD-45 lab network"]
     Meraki["Meraki Cloud Fabric"]
@@ -56,7 +56,8 @@ flowchart TB
   end
   Canvas -- "Cisco integrations" --> Meraki
   Canvas -- "Lab Tools Production (OpenAPI)" --> Broker
-  Studio -- "Lab Tools (MCP)" --> MCP --> Broker
+  Studio -- "Lab Tools Production, My Lab Tools - REST (OpenAPI)" --> Broker
+  Studio -- "My Lab Tools - MCP" --> MCP --> Broker
   Broker -- "your source IP only" --> Splunk
   FTD --> Splunk
   Gen -- "attack lane" --> FTD
@@ -66,10 +67,12 @@ flowchart TB
 
 - **AI Canvas** does the Cisco multi-domain work with its built-in integrations (Meraki, Secure
   Firewall, Secure Access, Catalyst Center, Intersight, Nexus Dashboard).
-- **Lab Tools** is the custom integration. It brings in what Cisco cannot know: PseudoCo's change
-  calendar, business services, on-call policy and SaaS status. It also gives your agent its watch
-  scope, the firewall events for your seat, and two actions: raise your seat's alert on the room wall, and stop
-  your seat's attack traffic.
+- **Lab Tools Production** is the lab team's custom integration. It brings in what Cisco cannot know:
+  PseudoCo's change calendar, business services, on-call policy and SaaS status. It also gives your
+  agent its watch scope, the firewall events for your seat, and two actions: raise your seat's alert on
+  the room wall, and stop your seat's attack traffic.
+- **My Lab Tools** is **your** integration, built in 2.3 (REST or MCP) with your own rules. Your agent
+  switches to it to raise and clear its alert: your own workflow.
 - **Lanes:** in Part 2 the traffic generator sends one stream of simulated attack traffic per seat, called
   a *lane*. Each lane comes from that seat's own source IP and goes through the firewall to the service its table protects.
 - **Your seat token** is the key. Everyone uses the same URLs; the token decides which seat, which
@@ -87,8 +90,8 @@ flowchart TB
 | 1:30 | 10 | - | Break | |
 | 1:40 | 25 | 3 | [2.1 Shape the agent](part2/2-1-shape-agent.md) | Draft agent, manifest reviewed |
 | 2:05 | 15 | 3 | [2.2 Sandbox test](part2/2-2-test-publish.md) | Three tests passed, Schedule unlocked |
-| 2:20 | 35 | 3 | [2.3 Build your custom workflow](part2/2-3-custom-workflow.md) | Your integration turns your seat red on the wall |
-| 2:55 | 15 | 3 | [2.4 Wire it in and choose how it runs](part2/2-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
+| 2:20 | 30 | 3 | [2.3 Build your custom workflow](part2/2-3-custom-workflow.md) | Your own integration turns your seat red on the wall |
+| 2:50 | 20 | 3 | [2.4 Wire it in and choose how it runs](part2/2-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
 | 3:10 | 25 | 3 | [2.5 Lights Out](part2/2-5-lights-out.md) | Light on at detection, off when fixed |
 | 3:35 | 15 | 4 | [3.1 Build Mission Control](part3/3-1-mission-control.md) | An app built from a design file; the night replayed live |
 | 3:50 | 10 | - | [Conclusion](conclusion.md) | What you built; one agent idea for your own company; wrap |

@@ -26,33 +26,35 @@ in 2.1.
    paste the prompt for the path you built in 2.3, and send it (Enter or the arrow).
 
     !!! tip "Which tab do I use?"
-        Pick the tab that matches the path you chose in **2.3 step B**. You built only one of the two
-        integrations. **Path A** (REST API, no code) built **My Table Light**. **Path B** (MCP server,
-        code) built **My Lab Tools**. The two prompts are the same except for that integration name. Not
-        sure which one you built? Check **Studio → Manage → Integrations**.
+        Pick the tab for the path you chose in **2.3**: **Path A** built **My Lab Tools - REST**,
+        **Path B** built **My Lab Tools - MCP**. Not sure? Check **Studio → Manage → Integrations**.
 
-    === "Path A: My Table Light"
+    === "Path A: My Lab Tools - REST"
 
         ```text
-        Add my integrations PseudoCo Lab Tools and My Table Light. Always call get_my_watch_scope
-        first, then get_my_security_events. If STATUS is issue from my watch source in the last 5 minutes
-        and my lane is running: call signal_issue, then stop_my_lane from PseudoCo Lab Tools yourself (no
-        approval needed), then get_my_security_events with minutes=5. If every since_stop total is 0, call
-        clear_issue and report STATUS: resolved; otherwise keep the alert open. Never stop on
-        inconclusive evidence, never act on another IP, never change shared configuration. Keep
-        everything else the same.
+        Add my integration My Lab Tools - REST. Raise and clear my alert through My Lab Tools - REST
+        (its signal_issue, get_light_status and clear_issue). Use Lab Tools Production for everything
+        else: get_my_watch_scope first, then get_my_security_events, the business context and
+        stop_my_lane. If STATUS is issue from my watch source in the last 5 minutes and my lane is
+        running: call signal_issue, then stop_my_lane yourself (no approval needed), then
+        get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
+        STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
+        each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+        configuration. Keep everything else the same.
         ```
 
-    === "Path B: My Lab Tools"
+    === "Path B: My Lab Tools - MCP"
 
         ```text
-        Add my integrations PseudoCo Lab Tools and My Lab Tools. Always call get_my_watch_scope
-        first, then get_my_security_events. If STATUS is issue from my watch source in the last 5 minutes
-        and my lane is running: call signal_issue, then stop_my_lane from PseudoCo Lab Tools yourself (no
-        approval needed), then get_my_security_events with minutes=5. If every since_stop total is 0, call
-        clear_issue and report STATUS: resolved; otherwise keep the alert open. Never stop on
-        inconclusive evidence, never act on another IP, never change shared configuration. Keep
-        everything else the same.
+        Add my integration My Lab Tools - MCP. Raise and clear my alert through My Lab Tools - MCP
+        (its signal_issue and clear_issue). Use Lab Tools Production for everything else:
+        get_my_watch_scope first, then get_my_security_events, the business context, get_light_status
+        and stop_my_lane. If STATUS is issue from my watch source in the last 5 minutes and my lane is
+        running: call signal_issue, then stop_my_lane yourself (no approval needed), then
+        get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
+        STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
+        each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+        configuration. Keep everything else the same.
         ```
 
     ![24d-refine-prompt](../img/24d-refine-prompt.png){ loading=lazy }
@@ -62,12 +64,6 @@ in 2.1.
     !!! info "Why the prompt repeats the limits"
         Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
         repeating the limits stops a refinement from loosening what you tested in 2.2.
-
-    !!! warning "If Studio says stop_my_lane requires human approval"
-        Studio judges a tool by the description it saved when you connected the integration. If it
-        refuses to let the agent stop on its own, refresh it: **Studio → Manage → Integrations →
-        PseudoCo Lab Tools → ⋯ → Rediscover**, paste your seat token, **Rediscover tools**, then send the
-        prompt again.
 
 4. Wait while Studio works through **Reviewing your request → Preparing the conversation → Updating
    your Agent → Preparing the response** (about a minute). Do not send another message until it finishes.
@@ -81,11 +77,11 @@ in 2.1.
 
     ![24f-refine-done](../img/24f-refine-done.png){ loading=lazy }
 
-    *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one `byo-` entry per MCP integration (here PseudoCo Lab Tools and My Lab Tools) plus the Cisco servers. Schedule is greyed until you rerun a test.*
+    *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one `byo-` entry per MCP integration (Path B: My Lab Tools - MCP) plus the Cisco servers. The screenshot is from an older version of the lab with two `byo-` entries. Schedule is greyed until you rerun a test.*
 
-- [ ] Studio's summary names your integrations. In the manifest, MCP integrations show as `byo-` IDs, not names:
-      Path B shows **two** `byo-` entries (PseudoCo Lab Tools and My Lab Tools); Path A shows one, with
-      **My Table Light** under **API integrations**.
+- [ ] Studio's summary names your integration. **API integrations** lists **Lab Tools Production** and,
+      for Path A, **My Lab Tools - REST**. For Path B, **MCP servers** shows one `byo-` entry (MCP
+      integrations show as IDs, not names): that is **My Lab Tools - MCP**.
 - [ ] The instructions say `stop_my_lane` is for your own source only, and that `clear_issue` waits for a clean `since_stop`.
 
 ## Add a fourth test
@@ -107,9 +103,11 @@ Run the night-watch review for the service I protect. My lane is running.
 **Expected outcome**
 
 ```text
-STATUS issue found from my watch source and signal_issue called. stop_my_lane called on my own
-source without asking. since_stop checked: if all totals are 0, clear_issue called and STATUS
-resolved. No other IP and no shared configuration touched.
+STATUS issue found from my watch source and signal_issue called through my own integration
+(My Lab Tools - REST or My Lab Tools - MCP). stop_my_lane called on my own source without asking.
+since_stop checked: if all totals are 0, clear_issue called through my own integration and STATUS
+resolved. The report names the integration used for each action. No other IP and no shared
+configuration touched.
 ```
 
 **What a pass looks like** (seat T1-A, port scan):
@@ -126,7 +124,8 @@ resolved. No other IP and no shared configuration touched.
 
 *The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. About 20 seconds from alert to green.*
 
-- [ ] Test 4 passed: your tile went red, striped, then green, and the report says STATUS resolved.
+- [ ] Test 4 passed: your tile went red, striped, then green, the report says STATUS resolved, and it
+      names **your** integration for `signal_issue` and `clear_issue`.
 - [ ] Restart your lane again (it is stopped now):
 
     <div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>

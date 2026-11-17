@@ -123,8 +123,7 @@ What each server in (2) is, and why there are two ways to reach Lab Tools: see [
       would answer. If Studio added one, ask it to remove it ("stop_my_lane on my own source needs no
       approval when the evidence is confirmed and my lane is running").
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
-- [ ] **API integrations** list **Lab Tools Production** (from 1.1). After 2.3, **MCP servers** may also
-      list your own connector; either works.
+- [ ] **API integrations** list **Lab Tools Production** (from 1.1). Your own **My Lab Tools** joins it in 2.4.
 - [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 2.4.
 - [ ] The draft is saved. There is no Save button: Studio saves the agent automatically after every
       change. Check that the card in the Studio panel says **Agent version v1 saved** (the number goes

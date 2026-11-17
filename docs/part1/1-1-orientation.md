@@ -106,19 +106,18 @@ The OpenAPI file is the *what* (which calls exist). The two notes are the *how* 
 them, and what the words mean at PseudoCo). Neither note contains the answer to any exercise. Every
 operation is listed in [Lab Tools reference](../reference/tools.md).
 
-### Two ways in: OpenAPI for Canvas, MCP for agents
+### Two ways in: OpenAPI (REST) and MCP
 
-Lab Tools is one lab server that offers the same ten operations two ways, because the two Cloud Control
-tools you use connect differently:
+Studio accepts an integration in two forms. You use one now and build one of your own in 2.3:
 
-| Way in | Who uses it | Set up in | What it is |
-| --- | --- | --- | --- |
-| **OpenAPI** (Lab Tools Production, above) | Canvas, and Studio agents as an *API integration* | 1.1 (now) | The API description plus your seat token |
-| **MCP** (Model Context Protocol) | Studio agents | 2.3 step A | One shared MCP server URL; your seat token tells it which seat you are |
+| Form | What it is | In this lab |
+| --- | --- | --- |
+| **OpenAPI (REST)** | An API description file: every operation, its URL and arguments | **Lab Tools Production** (now, used by Canvas and your agent); **My Lab Tools - REST** if you take Path A in 2.3 |
+| **MCP** (Model Context Protocol) | A small program that offers tools to an agent | **My Lab Tools - MCP** if you take Path B in 2.3 |
 
 MCP is an open standard for giving an AI assistant tools: the server lists its tools and their
-inputs, and the assistant calls them. Both ways reach the same lab server with **your seat token**, so
-both act as your seat and only your seat.
+inputs, and the assistant calls them. Either way, every call reaches the same lab server with **your
+seat token**, so it acts as your seat and only your seat.
 
 When you build your agent in Part 2, its manifest lists the servers it may use:
 
@@ -127,12 +126,12 @@ When you build your agent in Part 2, its manifest lists the servers it may use:
 | `meraki-server` | Cisco-provided MCP server for **Cisco Meraki** | Read the org: networks, switches and ports, clients, events, configuration change log |
 | `secure-access` | Cisco-provided MCP server for **Cisco Secure Access** | Read access and DNS activity, alerts and policy for the users and sites it protects |
 | `firewall-server` (if listed) | Cisco-provided MCP server for **Cisco Secure Firewall** | Read firewall policy and objects |
-| `byo-…` (a random ID) | **"Bring your own"** MCP: the Lab Tools MCP integration you add in 2.3 | The ten Lab Tools operations, as your seat |
-| API integration *Lab Tools Production* | The Lab Tools OpenAPI integration from 1.1 | The same Lab Tools operations, over REST |
+| API integration *Lab Tools Production* | The Lab Tools OpenAPI integration from 1.1 | The ten Lab Tools operations, as your seat |
+| API integration *My Lab Tools - REST*, or `byo-…` (a random ID) for *My Lab Tools - MCP* | **Your own** integration from 2.3 ("bring your own") | Your seat's alert: raise and clear it, by your rules |
 
-The Cisco ones come with Cloud Control: nothing to install. The `byo-` one is the point of 2.3: it is
-how you would give an agent your own company's tools (in Path B you even write one). Its ID differs for
-everyone. If your agent has no `byo-` entry yet, that is normal before 2.3.
+The Cisco ones come with Cloud Control: nothing to install. Your own integration is the point of 2.3: it
+is how you would give an agent your company's workflow (in Path B you even write the code). Until 2.3,
+your agent has only Lab Tools Production and the Cisco servers, which is normal.
 
 
 
