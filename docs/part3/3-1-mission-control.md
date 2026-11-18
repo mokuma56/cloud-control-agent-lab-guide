@@ -178,7 +178,7 @@ your agent handles it again for real.
     | 3 | **Night position** slider | Drag back to rewind, drag forward to jump ahead. Everything on screen shows the night *as of* that moment; entries after it are greyed |
     | 4 | **1x 2x 3x 4x 8x** | Playback speed. A 5-minute night takes under a minute at 8x |
     | 5 | Clock and **T+m:ss** | The time at the playhead, and how long after the attack started |
-    | 6 | **Run it live again** | Restarts your attack for real (below). If it is greyed out, select **Pause** first |
+    | 6 | **Run it live again** | Restarts your attack for real (below). It is dark red on purpose: it changes your lab |
 
 - [ ] Drag the slider to the moment your agent raised the alert: the pill turns red and the ticket your
       agent opened appears right next to it.
@@ -197,14 +197,17 @@ Playback makes no calls to the lab. Nothing changes until you select **Run it li
     ![Live mode after the replay](../img/28i-replay-live.png)
 
 3. In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → **Edit schedule**),
-   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, ticket,
+   as in 2.4, or run it now from its **Test** tab (**Typical task → Run scenario**). Then hands off: when the run starts, the timeline fills in step by step (alert, ticket,
    contained, resolved) and the card goes **red**, then **Verifying**, then **green**.
 
     ![Your agent handled it](../img/28j-replay-resolved.png)
 
-- [ ] (1) **Response times** fill in. In this run: 8:15 to detect (mostly waiting for the scheduled slot),
-      0:14 to contain, 8:44 to resolve.
+- [ ] (1) **Response times** fill in. In this run, started from **Test**: 3:45 to detect, 0:07 to contain,
+      4:08 to resolve. From a schedule, time to detect includes the wait for the slot.
 - [ ] (2) The **Timeline** shows each step, with your agent's alert in its own words and its ticket notes.
+
+![My group after the run](../img/28m-app-group.png)
+
 - [ ] (3) Your card in **My group** turns **Resolved**, with your agent's summary. In live mode the app
       also shows *"Your agent handled it in m:ss"*.
 - [ ] When live mode ends, the new night loads into **Playback**: play it back at 4x to see the whole run.
