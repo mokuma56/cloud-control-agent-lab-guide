@@ -220,5 +220,5 @@ for example **T3-C** is table 3, seat C. The small colored dot on your tile matc
 | Red stripes, **Stopped · verifying** | Your agent called `stop_my_lane` on your own source and has not confirmed it is quiet yet | your agent |
 | Green, **Resolved ✓** | Your agent verified the source is quiet and called `clear_issue` | your agent |
 
-When every seat is resolved, the wall shows **ALL CLEAR**. It is not a race: agents run at different
+When every open seat at a table is resolved, **ALL CLEAR** pops up over that table for a few seconds. It is not a race: agents run at different
 times, so tiles change at different times.
