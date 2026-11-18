@@ -1,8 +1,8 @@
 # 3.1 Build Mission Control: an app for the morning after
 
 !!! abstract "Goal"
-    Build a Studio **app** from a design file, open it, and replay the night: restart your attack and watch
-    your agent handle it again, live, with a stopwatch.
+    Build a Studio **app** from a design file, open it, and replay the night: play it back at 2x to 8x with a
+    slider to rewind and jump ahead, then run it again live and watch your agent handle it, with a stopwatch.
 
 Your agent works at night. In the morning, the day shift wants to know three things: *what happened,
 can I trust what the agent did, and what does it mean for the business?* An agent answers in a report. An
@@ -14,7 +14,7 @@ an app shows and lets people act.
 | Runs | On a schedule, by itself | When someone opens it |
 | Decides | Yes: what is wrong, what to do | No: it shows data and offers buttons |
 | Built from | A description in plain words | A **design file** (Markdown), so anyone can rebuild the same app |
-| Here | Finds, stops and clears your attack | Shows the timeline, the evidence, the business impact and your group |
+| Here | Finds, stops and clears your attack, works your ticket | Shows the timeline, your tickets, the evidence, the business impact and your group |
 
 ## 1. Add the Night Watch Console integration
 
@@ -31,9 +31,10 @@ same way as Path A in 2.3 (if you took Path B, this is your first REST integrati
 
     </div>
 
-2. **Review API**: 8 operations. Three are for the core app: `get_my_timeline`, `get_my_group_board`,
-   `replay_my_attack`. Five are read-only: `get_my_security_events`, `get_business_services`,
-   `get_oncall` and `get_recent_changes` for sections B and C, and `get_my_tickets` for add-on E.
+2. **Review API**: 8 operations. Four are for the core app: `get_my_timeline`, `get_my_group_board`,
+   `get_my_tickets` (your PseudoCo Service Desk queue, read-only) and `replay_my_attack`. The other four are
+   read-only too: `get_my_security_events`, `get_business_services`, `get_oncall` and `get_recent_changes`,
+   for sections B and C.
 3. **Configure**: Display name `Night Watch Console`, Bearer token <span class="sc-tokenbtn"></span>.
 4. **Review and save → Save draft**, then click **Manage** in the pop-up.
 
@@ -49,9 +50,10 @@ same way as Path A in 2.3 (if you took Path B, this is your first REST integrati
 [Download NightWatch_Mission_Control.md](../app/NightWatch_Mission_Control.txt){ download="NightWatch_Mission_Control.md" .md-button }
 
 It is plain Markdown: what the app is for, the rules it must follow, the **data contract** (the exact
-fields each operation returns, so Studio does not have to guess), and five sections. Studio builds
-**A** (your night: status, response times, timeline, your group, Replay the night), **B** (the evidence
-your agent saw) and **C** (business impact) in one go. **D** and **E** are add-ons you can ask for afterwards. A
+fields each operation returns, so Studio does not have to guess), and four sections. Studio builds
+**A** (your night: status, response times, a timeline that merges your attack with your Service Desk
+tickets, your tickets, your group, and the **Replay the night** player), **B** (the evidence your agent
+saw) and **C** (business impact) in one go. **D** is an add-on you can ask for afterwards. A
 design file is how you make an app **repeatable**: the next person gets the same app from the same file.
 
 ## 3. Build the app from the file
@@ -97,6 +99,16 @@ design file is how you make an app **repeatable**: the next person gets the same
 
 When the build finishes, the app opens in **Preview** on the right.
 
+!!! warning "The app shows only your latest night"
+    Mission Control shows what happened **since your attack last started**. If you restart your lane
+    (**Restart my lane** in 2.2, **Start my traffic** in 2.4), the earlier night is gone:
+    the app shows *No night recorded yet*, or only *Attack started* with every other step greyed, and the
+    response times say *not yet*. The same happens after the proctor resets the lab.
+
+    To get a night back: make sure your lane is running (**Replay the night → Run it live again** in the
+    app, or **Start my traffic**), then **trigger your agent**: run it from **Test** in Studio, or wait for
+    its next scheduled slot. When the card turns **Resolved**, the timeline, tickets and player fill in.
+
 ![The finished app: header, card state and response times](../img/28b-app-built.png)
 
 1. Your app's name, with your seat.
@@ -104,21 +116,27 @@ When the build finishes, the app opens in **Preview** on the right.
    refreshed.
 3. **Replay the night** (step 5).
 4. **Response times**: Time to detect, Time to contain and Time to resolve, or *not yet*.
-5. **Install** would add the app to your **Apps** menu. Skip it for this lab: use the app here in **Preview**.
+5. **Install** adds the app to your **Apps** menu (see the tip below).
 
-!!! warning "Use the app in the Preview pane"
-    Work in the **Preview** pane on the right of the builder. Two other views are not reliable yet:
-
-    - **Open full preview** (and the pop-out icon) can show *Try again later* for several minutes before
-      any data loads.
-    - An **installed** app cannot reach REST integrations in this tenant yet: every panel says *unavailable*.
-
-    Everything in this lab works in the Preview pane.
+!!! tip "Install it to keep it"
+    **Install** opens a dialog: set **App name** to `<your seat> Mission Control` and select **Install**. After a
+    minute the app is in your **Apps** menu and loads the same live data as the Preview. **Open full preview**
+    (and the pop-out icon) can show *Try again later* for a few minutes before data loads; use the Preview
+    pane or the installed app.
 
 Scroll down:
 
-- [ ] **Timeline**: when your attack started, your agent's alert in its own words, the stop and the clear.
-      Steps that have not happened yet are greyed.
+- [ ] **Timeline**: when your attack started, your agent's alert in its own words, the stop and the clear,
+      merged with your tickets: when each ticket opened, every note and action your agent wrote on it, and
+      when it was resolved and closed. Steps that have not happened yet are greyed.
+- [ ] **Tickets**: your PseudoCo Service Desk queue. Select a ticket to read its notes and comments.
+
+    ![Your tickets in the app](../img/28l-app-tickets.png)
+
+    (1) **First agent note**: how long after the ticket opened your agent wrote its first finding. *0:00*
+    means the agent opened the ticket itself, with its finding in the first note. (2) **Resolve time**: from
+    opened to resolved. (3) Tickets from test runs carry a grey **test** chip. The app only reads tickets;
+    you still confirm and close them in **My tickets**.
 - [ ] **My group**: the five seats in your group, yours marked **You**.
 
 ![The evidence your agent saw](../img/28d-app-evidence.png)
@@ -139,25 +157,59 @@ Scroll down:
 
 ## 5. Replay the night
 
-1. In the app, select **Replay the night**. (1) Read what it does, then (2) select **Replay the night**.
+**Replay the night** opens a player above the Timeline. It has two modes: **Playback** replays the night
+you already had, at any speed, without touching anything; **Run it live again** restarts your attack so
+your agent handles it again for real.
 
-    ![Replay the night: confirmation](../img/28h-replay-confirm.png)
+### Play it back
+
+1. Select **Replay the night**. The player opens in **Playback** at **2x**.
+2. Select **Play**. The night rebuilds itself: the card pill changes colour as each step is reached
+   (amber, red, Verifying, green), the timeline fills in entry by entry with your ticket notes in between,
+   and the response-time tiles count up.
+3. Try the controls:
+
+    ![The night player](../img/28k-app-player.png)
+
+    | # | Control | Does |
+    | --- | --- | --- |
+    | 1 | **Play / Pause** | Starts and stops the playback |
+    | 2 | **Back to start** | Rewinds to the moment your attack started |
+    | 3 | **Night position** slider | Drag back to rewind, drag forward to jump ahead. Everything on screen shows the night *as of* that moment; entries after it are greyed |
+    | 4 | **1x 2x 3x 4x 8x** | Playback speed. A 5-minute night takes under a minute at 8x |
+    | 5 | Clock and **T+m:ss** | The time at the playhead, and how long after the attack started |
+    | 6 | **Run it live again** | Restarts your attack for real (below). If it is greyed out, select **Pause** first |
+
+- [ ] Drag the slider to the moment your agent raised the alert: the pill turns red and the ticket your
+      agent opened appears right next to it.
+- [ ] Find the gap between *alert* and *contained*: that is how long your agent took to act once it knew.
+
+Playback makes no calls to the lab. Nothing changes until you select **Run it live again**.
+
+### Run it live again
+
+1. In the player, select **Run it live again**. (1) Read what it does, then (2) confirm.
+
+    ![Run it live again: confirmation](../img/28h-replay-confirm.png)
 
 2. The app goes (1) amber, *Attack running, not reported yet*, and (2) **Live**, with a stopwatch.
 
     ![Live mode after the replay](../img/28i-replay-live.png)
 
 3. In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → **Edit schedule**),
-   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, contained,
-   resolved) and the card goes **red**, then **Verifying**, then **green**.
+   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, ticket,
+   contained, resolved) and the card goes **red**, then **Verifying**, then **green**.
 
     ![Your agent handled it](../img/28j-replay-resolved.png)
 
 - [ ] (1) **Response times** fill in. In this run: 8:15 to detect (mostly waiting for the scheduled slot),
       0:14 to contain, 8:44 to resolve.
-- [ ] (2) The **Timeline** shows each step, with your agent's alert in its own words.
+- [ ] (2) The **Timeline** shows each step, with your agent's alert in its own words and its ticket notes.
 - [ ] (3) Your card in **My group** turns **Resolved**, with your agent's summary. In live mode the app
       also shows *"Your agent handled it in m:ss"*.
+- [ ] When live mode ends, the new night loads into **Playback**: play it back at 4x to see the whole run.
+- [ ] In **My tickets** (seat card → **Log in to Service Desk**), confirm and close the ticket your agent
+      resolved. Back in the app, the ticket row shows **closed** on the next refresh.
 
 ## 6. Add-on: shift handover notes (if you have time)
 
@@ -168,16 +220,8 @@ Add section D of the design.
 A note box your whole group shares: what your agent found, for the day shift. Notes are stored in the
 app, so everyone in your group sees them.
 
-## 7. Add-on: your tickets next to your night (if you have time)
-
-```text
-Add section E of the design.
-```
-
-A **Tickets** panel: your PseudoCo Service Desk tickets with time to first note and time to resolve,
-and each ticket's notes next to the night's timeline. Read-only: the app shows tickets, it never changes them.
-
 !!! success "What you just did"
     You built a second kind of Studio application from a file, on top of the same integrations your agent
-    uses. The agent does the night shift; the app is how people see and trust it. Change the design file
+    uses, and joined two systems on one screen: what happened on the network and what happened in the
+    ticket queue. The agent does the night shift; the app is how people see and trust it. Change the design file
     (another panel, another integration) and build again: the file is the source code.

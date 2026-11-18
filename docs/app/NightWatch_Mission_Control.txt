@@ -1,14 +1,15 @@
 # App design: Night Watch Mission Control
 
 **Build now, without asking questions.** This design is complete: build sections A, B and C in one go.
-Sections D and E are add-ons I may ask for later. Where the design is silent, choose the simplest option and
+Section D is an add-on I may ask for later. Where the design is silent, choose the simplest option and
 list your choices in the summary.
 
 ## Purpose and rules
 
-The morning after: my Studio agent found my attack, raised my card, stopped my own attack and cleared my
-card. This single-page app shows what happened and how fast, my group, and the evidence, and lets me
-replay the night. It never stops an attack and never changes configuration.
+The morning after: my Studio agent found my attack, raised my card, worked my PseudoCo Service Desk ticket,
+stopped my own attack and cleared my card. This single-page app shows what happened and how fast, my
+tickets, my group and the evidence, lets me play the night back at any speed, and lets me run it again live.
+It never stops an attack, never changes a ticket and never changes configuration.
 
 - Use only the integration **Night Watch Console**. Every operation already acts as my own seat, so never
   ask me to type a token, seat ID or IP address, and never show the token. Do show the seat and watch
@@ -40,9 +41,11 @@ unexpected type. Types: `group`, metrics, `connections` and the totals are numbe
   services yourself.
 - `get_oncall`: `{oncall: {primary: {name, team}, secondary: {name, team}, policy}}`.
 - `get_recent_changes` (query `hours`): `{changes: [{id, system, change, state, time}]}`.
-- `get_my_tickets` (add-on E only): `{seat, my_service, tickets: [{number, short_description, state, priority_label,
+- `get_my_tickets`: `{seat, my_service, tickets: [{number, short_description, state, priority_label,
   cmdb_ci, caller_id, opened_by, opened_at, resolved_at, closed_at, close_code, close_notes, parent_incident,
   test, work_notes: [{time, author, text}], comments: [{time, author, text}]}]}`. `test` is a boolean.
+  `work_notes` holds the agent's notes and its actions (`author` agent or service-desk, text such as
+  "Updated: priority P2, state in_progress"); `comments` are the caller's and mine.
 
 `card_state` is exactly one of: quiet = grey "Quiet"; attack_active = amber "Attack running, not reported
 yet"; alert = red "Alert" + severity; stopped_verifying = amber "Verifying"; resolved = green "Resolved".
@@ -50,18 +53,40 @@ yet"; alert = red "Alert" + severity; stopped_verifying = amber "Verifying"; res
 ## A. Core app
 
 1. **Header**: "Night Watch Mission Control", seat, protects, watch_source_ip, a large `card_state` pill,
-   "Last updated" and a Refresh button.
+   "Last updated", a Refresh button and a **Replay the night** button (item 6).
 2. **Response times**: three tiles from `metrics_seconds` (Time to detect, contain, resolve) as m:ss, or
    "not yet" when null.
-3. **Timeline**: `events` oldest first (time, name; for alert_raised the severity and quoted summary), then
-   the steps not reached yet, greyed: attack_started, alert_raised, contained, resolved.
-4. **My group**: five cards from `get_my_group_board` (seat, `card_state` color, first 80 characters of
+3. **Timeline**: one list, oldest first, merging two sources:
+   - `events` (time, name; for alert_raised the severity and quoted summary);
+   - ticket entries from `get_my_tickets` with a time at or after the night's start (the attack_started
+     time, else the first event): "INC… opened" (by My agent when `opened_by` is agent, else the caller),
+     each work note ("INC… · agent: text"), "INC… resolved" with close_code, "INC… closed".
+   Ticket rows get a small ticket icon and the ticket number. Then the attack steps not reached yet, greyed:
+   attack_started, alert_raised, contained, resolved.
+4. **Tickets**: a row per ticket, newest first: number, priority_label, state, short_description, caller
+   ("My agent" when `opened_by` is agent), a grey "test" chip when `test` is true, and two numbers as m:ss:
+   time to first note (opened_at to the first `work_notes` entry whose author is agent and whose text does
+   not start with "Updated:") and time to resolve (opened_at to resolved_at), "-" when missing. Selecting a
+   row shows its description, work notes and comments as one list, oldest first. Read-only: no buttons
+   that change a ticket. Empty: "No tickets in your queue."
+5. **My group**: five cards from `get_my_group_board` (seat, `card_state` color, first 80 characters of
    `agent_summary`); outline the card where `is_me` is true.
-5. **Replay the night** (header button). Confirm first: "This resets your card and restarts the attack
-   from your own watch source only. Your agent acts on its next run, so schedule it for the next 5-minute
-   slot." (The slot is advice only.) On confirm, call `replay_my_attack` at once and enter live mode: only
-   the timeline polls every 10 s, a "Live" badge and stopwatch show, and at `resolved` show "Your agent
-   handled it in m:ss". Leave live mode at resolved, after 30 minutes or on Stop watching.
+6. **Replay the night**: opens a player bar above the Timeline with two modes.
+   - **Playback** (the default, no API calls): rebuilds the recorded night in the browser from the merged
+     timeline. Controls: Play/Pause, Back to start, a slider from the night's start to its last entry (drag
+     to rewind or jump ahead), and speed buttons 1x 2x 3x 4x 8x (default 2x). A clock shows the playhead time
+     and "T+m:ss" since the start. At the playhead, only entries up to that time show (later ones greyed),
+     the response-time tiles count only steps already reached, and the card pill shows the state at that
+     moment: quiet before attack_started, attack_active after it, alert after alert_raised,
+     stopped_verifying after contained or attack_stopped_by_proctor, resolved after resolved. The newest
+     entry is highlighted. At the end it pauses. Close the player to return to the live view. With no
+     events, show "No night recorded yet. Use Run it live again." The 60 s refresh never moves the playhead.
+   - **Run it live again** (a button in the player). Confirm first: "This resets your card and restarts the
+     attack from your own watch source only. Your agent acts on its next run, so schedule it for the next
+     5-minute slot." (The slot is advice only.) On confirm, call `replay_my_attack` at once and enter live
+     mode: only the timeline and tickets poll, every 10 s; a "Live" badge and a stopwatch show; at
+     `resolved` show "Your agent handled it in m:ss". Leave live mode at resolved, after 30 minutes or on
+     Stop watching, then load the new night into Playback.
 
 ## B. Evidence my agent saw
 
@@ -80,12 +105,3 @@ hours=24 (id, system, change, state), marked "same segment" when `change` mentio
 
 A shared collection `handover_notes` (group, seat, note up to 500 characters, posted_at). Under My group:
 a text area, a Post note button and my group's notes, newest first. A user may delete only their own notes.
-
-## E. Add-on (only when I ask): my tickets
-
-A **Tickets** panel under B from `get_my_tickets`, hiding tickets where `test` is true. A row per ticket:
-number, priority, state, short description, caller ("My agent" when `opened_by` is agent). Two numbers per
-ticket: time to first work note and time to resolve (from `opened_at`, the first `work_notes` time and
-`resolved_at`), as m:ss. Selecting a row shows the work notes and comments as one timeline, oldest first,
-next to the night's timeline from A. Read-only: no buttons that change a ticket.
-

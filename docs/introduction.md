@@ -104,7 +104,7 @@ flowchart TB
 | 2:25 | 30 | 3 | [2.3 Build your custom workflow](part2/2-3-custom-workflow.md) | Your own integration turns your seat red on the wall |
 | 2:55 | 20 | 3 | [2.4 Wire it in and choose how it runs](part2/2-4-wire-schedule.md) | Weather added, four tests passed, scheduled or Canvas chosen |
 | 3:15 | 25 | 3 | [2.5 Lights Out](part2/2-5-lights-out.md) | Light on at detection, off when fixed, ticket resolved and closed |
-| 3:40 | 15 | 4 | [3.1 Build Mission Control](part3/3-1-mission-control.md) | An app built from a design file; the night replayed live |
+| 3:40 | 15 | 4 | [3.1 Build Mission Control](part3/3-1-mission-control.md) | An app built from a design file; the night played back and replayed live |
 | 3:55 | 5 | - | [Conclusion](conclusion.md) | What you built; one agent idea for your own company; wrap |
 
 Finished early? The [challenge scenarios](appendix/challenges.md) have another hour of work.

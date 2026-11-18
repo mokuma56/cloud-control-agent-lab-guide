@@ -112,3 +112,11 @@ Part 1 tickets arrive about 2 minutes after the proctor breaks the branch networ
 arrive when the proctor opens them at the start of 2.5. If yours is still missing after that, ask a proctor:
 they can open one for your seat only.
 
+## Mission Control says "No night recorded yet" (or only "Attack started")
+
+The app shows only the night since your attack last started. Restarting your lane (**Restart my lane**,
+**Start my traffic**, or **Run it live again**) or a proctor reset starts a new, empty
+night. Make sure your lane is running, then trigger your agent (**Test** in Studio, or its next scheduled
+slot). When your card turns **Resolved**, the timeline, response times, tickets and **Replay the night**
+fill in. Tickets stay in your queue either way: the **Tickets** panel still lists them.
+

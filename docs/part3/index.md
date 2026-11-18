@@ -6,12 +6,14 @@
 
 In Part 3 you build that app in Cloud Control Studio, not by writing code but from a **design file**: a
 Markdown document that says what the app is for, which data feeds each part of the screen, and what the
-buttons do. Studio turns it into a working app, tests it and runs it. Then you press **Replay the night**
-and watch your own agent catch your attack again, live, with a stopwatch.
+buttons do. Studio turns it into a working app, tests it and runs it. The app puts your night and your
+PseudoCo Service Desk tickets on one timeline. Then you press **Replay the night**: play the night back at
+up to 8x with a slider to rewind, and run it again live to watch your own agent catch your attack, with a
+stopwatch.
 
 | Module | Min | You finish with |
 | --- | --- | --- |
-| [3.1 Build Mission Control](3-1-mission-control.md) | 15 | An app built from a design file; the night replayed live |
+| [3.1 Build Mission Control](3-1-mission-control.md) | 15 | An app built from a design file; the night played back and replayed live |
 
 ```mermaid
 sequenceDiagram
@@ -21,13 +23,14 @@ sequenceDiagram
   participant C as Night Watch Console
   participant A as Your agent (scheduled)
   Y->>M: open the app
-  M->>C: get_my_timeline / get_my_group_board
-  C-->>M: what happened, how fast, my group
-  Y->>M: Replay the night
+  M->>C: get_my_timeline / get_my_tickets / get_my_group_board
+  C-->>M: what happened, how fast, my tickets, my group
+  Y->>M: Replay the night: Playback at 2x-8x (no calls)
+  Y->>M: Run it live again
   M->>C: replay_my_attack (reset my card, restart my attack)
   A->>A: next scheduled run: find, signal, stop, verify, clear
-  M->>C: get_my_timeline every 10 s
-  C-->>M: red, striped, green
+  M->>C: get_my_timeline + get_my_tickets every 10 s
+  C-->>M: red, ticket notes, striped, green
   M-->>Y: "Your agent handled it in m:ss"
 ```
 

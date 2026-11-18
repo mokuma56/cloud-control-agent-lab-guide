@@ -135,7 +135,7 @@ space. Keep the rule: it tells, it never changes the network.
 
 ### 5. Your own attack, end to end
 
-Restart your attack (the **Restart my lane** button in 2.2, or **Replay the night** in the app) and run
+Restart your attack (the **Restart my lane** button in 2.2, or **Replay the night → Run it live again** in the app) and run
 your agent twice: once while the attack runs (expect STATUS resolved, after it stops and verifies), and
 once right after (expect STATUS healthy and nothing to stop). Compare the two runs' evidence.
 
@@ -195,9 +195,9 @@ plainly when the weather is **not** the cause.
 
 ## F. App add-ons
 
-The 3.1 build includes sections A to C (your night, the evidence, business impact). Two add-ons remain:
+The 3.1 build includes sections A to C (your night with its tickets and the night player, the evidence,
+business impact). One add-on remains:
 
 | Add-on | Prompt | Adds |
 | --- | --- | --- |
 | D. Handover notes | `Add section D of the design.` | Shared notes for your group |
-| E. My tickets | `Add section E of the design.` | Your Service Desk tickets, time to first note and to resolve, notes next to your night |
