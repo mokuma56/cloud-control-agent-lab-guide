@@ -1087,17 +1087,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#7-add-on-your-tickets-next-to-your-night-if-you-have-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Add-on: your tickets next to your night (if you have time)
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1377,8 +1366,8 @@
 <h1 id="31-build-mission-control-an-app-for-the-morning-after">3.1 Build Mission Control: an app for the morning after</h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Build a Studio <strong>app</strong> from a design file, open it, and replay the night: restart your attack and watch
-your agent handle it again, live, with a stopwatch.</p>
+<p>Build a Studio <strong>app</strong> from a design file, open it, and replay the night: play it back at 2x to 8x with a
+slider to rewind and jump ahead, then run it again live and watch your agent handle it, with a stopwatch.</p>
 </div>
 <p>Your agent works at night. In the morning, the day shift wants to know three things: <em>what happened,
 can I trust what the agent did, and what does it mean for the business?</em> An agent answers in a report. An
@@ -1410,8 +1399,8 @@ an app shows and lets people act.</p>
 </tr>
 <tr>
 <td>Here</td>
-<td>Finds, stops and clears your attack</td>
-<td>Shows the timeline, the evidence, the business impact and your group</td>
+<td>Finds, stops and clears your attack, works your ticket</td>
+<td>Shows the timeline, your tickets, the evidence, the business impact and your group</td>
 </tr>
 </tbody>
 </table>
@@ -1439,9 +1428,10 @@ same way as Path A in 2.3 (if you took Path B, this is your first REST integrati
 </div>
 </li>
 <li>
-<p><strong>Review API</strong>: 8 operations. Three are for the core app: <code>get_my_timeline</code>, <code>get_my_group_board</code>,
-   <code>replay_my_attack</code>. Five are read-only: <code>get_my_security_events</code>, <code>get_business_services</code>,
-   <code>get_oncall</code> and <code>get_recent_changes</code> for sections B and C, and <code>get_my_tickets</code> for add-on E.</p>
+<p><strong>Review API</strong>: 8 operations. Four are for the core app: <code>get_my_timeline</code>, <code>get_my_group_board</code>,
+   <code>get_my_tickets</code> (your PseudoCo Service Desk queue, read-only) and <code>replay_my_attack</code>. The other four are
+   read-only too: <code>get_my_security_events</code>, <code>get_business_services</code>, <code>get_oncall</code> and <code>get_recent_changes</code>,
+   for sections B and C.</p>
 </li>
 <li><strong>Configure</strong>: Display name <code>Night Watch Console</code>, Bearer token <span class="sc-tokenbtn"></span>.</li>
 <li><strong>Review and save → Save draft</strong>, then click <strong>Manage</strong> in the pop-up.</li>
@@ -1457,9 +1447,10 @@ your own My Lab Tools).</p>
 <h2 id="2-download-the-design-file">2. Download the design file</h2>
 <p><a class="md-button" download="NightWatch_Mission_Control.md" href="../../app/NightWatch_Mission_Control.txt">Download NightWatch_Mission_Control.md</a></p>
 <p>It is plain Markdown: what the app is for, the rules it must follow, the <strong>data contract</strong> (the exact
-fields each operation returns, so Studio does not have to guess), and five sections. Studio builds
-<strong>A</strong> (your night: status, response times, timeline, your group, Replay the night), <strong>B</strong> (the evidence
-your agent saw) and <strong>C</strong> (business impact) in one go. <strong>D</strong> and <strong>E</strong> are add-ons you can ask for afterwards. A
+fields each operation returns, so Studio does not have to guess), and four sections. Studio builds
+<strong>A</strong> (your night: status, response times, a timeline that merges your attack with your Service Desk
+tickets, your tickets, your group, and the <strong>Replay the night</strong> player), <strong>B</strong> (the evidence your agent
+saw) and <strong>C</strong> (business impact) in one go. <strong>D</strong> is an add-on you can ask for afterwards. A
 design file is how you make an app <strong>repeatable</strong>: the next person gets the same app from the same file.</p>
 <h2 id="3-build-the-app-from-the-file">3. Build the app from the file</h2>
 <ol>
@@ -1514,6 +1505,16 @@ exception: if it offers to hide your seat or watch source, answer <code>Show the
 </div>
 <h2 id="4-open-it-and-read-your-night">4. Open it and read your night</h2>
 <p>When the build finishes, the app opens in <strong>Preview</strong> on the right.</p>
+<div class="admonition warning">
+<p class="admonition-title">The app shows only your latest night</p>
+<p>Mission Control shows what happened <strong>since your attack last started</strong>. If you restart your lane
+(<strong>Restart my lane</strong> in 2.2, <strong>Start my traffic</strong> in 2.4), the earlier night is gone:
+the app shows <em>No night recorded yet</em>, or only <em>Attack started</em> with every other step greyed, and the
+response times say <em>not yet</em>. The same happens after the proctor resets the lab.</p>
+<p>To get a night back: make sure your lane is running (<strong>Replay the night → Run it live again</strong> in the
+app, or <strong>Start my traffic</strong>), then <strong>trigger your agent</strong>: run it from <strong>Test</strong> in Studio, or wait for
+its next scheduled slot. When the card turns <strong>Resolved</strong>, the timeline, tickets and player fill in.</p>
+</div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28b-app-built.png" data-desc-position="bottom"><img alt="The finished app: header, card state and response times" src="../../img/28b-app-built.png"></a></p>
 <ol>
 <li>Your app's name, with your seat.</li>
@@ -1521,23 +1522,29 @@ exception: if it offers to hide your seat or watch source, answer <code>Show the
    refreshed.</li>
 <li><strong>Replay the night</strong> (step 5).</li>
 <li><strong>Response times</strong>: Time to detect, Time to contain and Time to resolve, or <em>not yet</em>.</li>
-<li><strong>Install</strong> would add the app to your <strong>Apps</strong> menu. Skip it for this lab: use the app here in <strong>Preview</strong>.</li>
+<li><strong>Install</strong> adds the app to your <strong>Apps</strong> menu (see the tip below).</li>
 </ol>
-<div class="admonition warning">
-<p class="admonition-title">Use the app in the Preview pane</p>
-<p>Work in the <strong>Preview</strong> pane on the right of the builder. Two other views are not reliable yet:</p>
-<ul>
-<li><strong>Open full preview</strong> (and the pop-out icon) can show <em>Try again later</em> for several minutes before
-  any data loads.</li>
-<li>An <strong>installed</strong> app cannot reach REST integrations in this tenant yet: every panel says <em>unavailable</em>.</li>
-</ul>
-<p>Everything in this lab works in the Preview pane.</p>
+<div class="admonition tip">
+<p class="admonition-title">Install it to keep it</p>
+<p><strong>Install</strong> opens a dialog: set <strong>App name</strong> to <code>&lt;your seat&gt; Mission Control</code> and select <strong>Install</strong>. After a
+minute the app is in your <strong>Apps</strong> menu and loads the same live data as the Preview. <strong>Open full preview</strong>
+(and the pop-out icon) can show <em>Try again later</em> for a few minutes before data loads; use the Preview
+pane or the installed app.</p>
 </div>
 <p>Scroll down:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Timeline</strong>: when your attack started, your agent's alert in its own words, the stop and the clear.
-      Steps that have not happened yet are greyed.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>My group</strong>: the five seats in your group, yours marked <strong>You</strong>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Timeline</strong>: when your attack started, your agent's alert in its own words, the stop and the clear,
+      merged with your tickets: when each ticket opened, every note and action your agent wrote on it, and
+      when it was resolved and closed. Steps that have not happened yet are greyed.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Tickets</strong>: your PseudoCo Service Desk queue. Select a ticket to read its notes and comments.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28l-app-tickets.png" data-desc-position="bottom"><img alt="Your tickets in the app" src="../../img/28l-app-tickets.png"></a></p>
+<p>(1) <strong>First agent note</strong>: how long after the ticket opened your agent wrote its first finding. <em>0:00</em>
+means the agent opened the ticket itself, with its finding in the first note. (2) <strong>Resolve time</strong>: from
+opened to resolved. (3) Tickets from test runs carry a grey <strong>test</strong> chip. The app only reads tickets;
+you still confirm and close them in <strong>My tickets</strong>.
+- [ ] <strong>My group</strong>: the five seats in your group, yours marked <strong>You</strong>.</p>
+</li>
 </ul>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28d-app-evidence.png" data-desc-position="bottom"><img alt="The evidence your agent saw" src="../../img/28d-app-evidence.png"></a></p>
 <ul class="task-list">
@@ -1556,10 +1563,72 @@ exception: if it offers to hide your seat or watch source, answer <code>Show the
       segment: the first place to look when something breaks.</li>
 </ul>
 <h2 id="5-replay-the-night">5. Replay the night</h2>
+<p><strong>Replay the night</strong> opens a player above the Timeline. It has two modes: <strong>Playback</strong> replays the night
+you already had, at any speed, without touching anything; <strong>Run it live again</strong> restarts your attack so
+your agent handles it again for real.</p>
+<h3 id="play-it-back">Play it back</h3>
+<ol class="task-list">
+<li>Select <strong>Replay the night</strong>. The player opens in <strong>Playback</strong> at <strong>2x</strong>.</li>
+<li>Select <strong>Play</strong>. The night rebuilds itself: the card pill changes colour as each step is reached
+   (amber, red, Verifying, green), the timeline fills in entry by entry with your ticket notes in between,
+   and the response-time tiles count up.</li>
+<li>
+<p>Try the controls:</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28k-app-player.png" data-desc-position="bottom"><img alt="The night player" src="../../img/28k-app-player.png"></a></p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Control</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Play / Pause</strong></td>
+<td>Starts and stops the playback</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Back to start</strong></td>
+<td>Rewinds to the moment your attack started</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Night position</strong> slider</td>
+<td>Drag back to rewind, drag forward to jump ahead. Everything on screen shows the night <em>as of</em> that moment; entries after it are greyed</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>1x 2x 3x 4x 8x</strong></td>
+<td>Playback speed. A 5-minute night takes under a minute at 8x</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Clock and <strong>T+m:ss</strong></td>
+<td>The time at the playhead, and how long after the attack started</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Run it live again</strong></td>
+<td>Restarts your attack for real (below). If it is greyed out, select <strong>Pause</strong> first</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Drag the slider to the moment your agent raised the alert: the pill turns red and the ticket your
+      agent opened appears right next to it.</p>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Find the gap between <em>alert</em> and <em>contained</em>: that is how long your agent took to act once it knew.</li>
+</ol>
+<p>Playback makes no calls to the lab. Nothing changes until you select <strong>Run it live again</strong>.</p>
+<h3 id="run-it-live-again">Run it live again</h3>
 <ol class="task-list">
 <li>
-<p>In the app, select <strong>Replay the night</strong>. (1) Read what it does, then (2) select <strong>Replay the night</strong>.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28h-replay-confirm.png" data-desc-position="bottom"><img alt="Replay the night: confirmation" src="../../img/28h-replay-confirm.png"></a></p>
+<p>In the player, select <strong>Run it live again</strong>. (1) Read what it does, then (2) confirm.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28h-replay-confirm.png" data-desc-position="bottom"><img alt="Run it live again: confirmation" src="../../img/28h-replay-confirm.png"></a></p>
 </li>
 <li>
 <p>The app goes (1) amber, <em>Attack running, not reported yet</em>, and (2) <strong>Live</strong>, with a stopwatch.</p>
@@ -1567,32 +1636,31 @@ exception: if it offers to hide your seat or watch source, answer <code>Show the
 </li>
 <li>
 <p>In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → <strong>Edit schedule</strong>),
-   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, contained,
-   resolved) and the card goes <strong>red</strong>, then <strong>Verifying</strong>, then <strong>green</strong>.</p>
+   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, ticket,
+   contained, resolved) and the card goes <strong>red</strong>, then <strong>Verifying</strong>, then <strong>green</strong>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28j-replay-resolved.png" data-desc-position="bottom"><img alt="Your agent handled it" src="../../img/28j-replay-resolved.png"></a></p>
 </li>
 <li class="task-list-item">
 <p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (1) <strong>Response times</strong> fill in. In this run: 8:15 to detect (mostly waiting for the scheduled slot),
       0:14 to contain, 8:44 to resolve.</p>
 </li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (2) The <strong>Timeline</strong> shows each step, with your agent's alert in its own words.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (2) The <strong>Timeline</strong> shows each step, with your agent's alert in its own words and its ticket notes.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (3) Your card in <strong>My group</strong> turns <strong>Resolved</strong>, with your agent's summary. In live mode the app
       also shows <em>"Your agent handled it in m:ss"</em>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> When live mode ends, the new night loads into <strong>Playback</strong>: play it back at 4x to see the whole run.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> In <strong>My tickets</strong> (seat card → <strong>Log in to Service Desk</strong>), confirm and close the ticket your agent
+      resolved. Back in the app, the ticket row shows <strong>closed</strong> on the next refresh.</li>
 </ol>
 <h2 id="6-add-on-shift-handover-notes-if-you-have-time">6. Add-on: shift handover notes (if you have time)</h2>
 <div class="highlight"><pre><span></span><code>Add section D of the design.
 </code></pre></div>
 <p>A note box your whole group shares: what your agent found, for the day shift. Notes are stored in the
 app, so everyone in your group sees them.</p>
-<h2 id="7-add-on-your-tickets-next-to-your-night-if-you-have-time">7. Add-on: your tickets next to your night (if you have time)</h2>
-<div class="highlight"><pre><span></span><code>Add section E of the design.
-</code></pre></div>
-<p>A <strong>Tickets</strong> panel: your PseudoCo Service Desk tickets with time to first note and time to resolve,
-and each ticket's notes next to the night's timeline. Read-only: the app shows tickets, it never changes them.</p>
 <div class="admonition success">
 <p class="admonition-title">What you just did</p>
 <p>You built a second kind of Studio application from a file, on top of the same integrations your agent
-uses. The agent does the night shift; the app is how people see and trust it. Change the design file
+uses, and joined two systems on one screen: what happened on the network and what happened in the
+ticket queue. The agent does the night shift; the app is how people see and trust it. Change the design file
 (another panel, another integration) and build again: the file is the source code.</p>
 </div>
 
