@@ -108,7 +108,7 @@ it on **My tickets**. Remove any "close the ticket" wording from its instruction
 
 ## There is no ticket in my queue
 
-Part 1 tickets arrive about 2 minutes after the proctor breaks the branch network; Lights Out tickets
+Part 1 tickets arrive as soon as the proctor breaks the branch network; Lights Out tickets
 arrive when the proctor opens them at the start of 2.5. If yours is still missing after that, ask a proctor:
 they can open one for your seat only.
 

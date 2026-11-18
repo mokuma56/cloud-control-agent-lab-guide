@@ -194,7 +194,7 @@ agent reads comments on its next run.
 
 | When | Ticket | Who works it |
 | --- | --- | --- |
-| Part 1, a few minutes after the branch breaks | *Branch-1: Wi-Fi says connected but nothing loads, card payments failing* | You, in Canvas (1.3). Resolved for you when the proctors back out the change (1.4); you close it |
+| Part 1, as soon as the branch breaks | *Branch-1: Wi-Fi says connected but nothing loads, card payments failing* | You, in Canvas (1.3). Resolved for you when the proctors back out the change (1.4); you close it |
 | 2.2 and 2.4 tests | Your agent's own incident, marked *test run* | Your agent opens and resolves it |
 | Start of 2.5 Lights Out | A user complaint about the service your table protects | Your agent, on its next run: it works that ticket instead of opening a new one |
 | Challenges (appendix E) | Extra tickets a proctor opens for you | You or your agent |
