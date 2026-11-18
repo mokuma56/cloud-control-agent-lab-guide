@@ -59,7 +59,7 @@
         <table>${FIELDS.map(([label, k]) => `<tr><th>${label}</th>
           <td><code class="${k === "token" ? "sc-token" : ""}">${esc(c[k])}</code></td>
           <td><button class="md-button sc-copy" type="button" data-k="${k}">Copy</button></td></tr>`).join("")}</table>
-        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button sc-tickets" type="button">My tickets</button> <button class="md-button sc-popout" type="button">Open in new window</button></p>
+        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button md-button--primary sc-tickets" type="button">Log in to Service Desk</button> <button class="md-button sc-popout" type="button">Open in new window</button></p>
         <p class="sc-note">Your seat token is a password: paste it only into the credential fields this guide names.
           This card stays in this browser. <a href="#" class="sc-forget">Forget this card</a></p></div>`;
     root.querySelector(".sc-popout").addEventListener("click", () => popout(c));
@@ -119,9 +119,10 @@ body{margin:0;padding:16px;background:var(--bg);color:var(--fg);font:14px/1.4 sy
 table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:7px 6px;border-top:1px solid var(--line);vertical-align:middle}
 th{white-space:nowrap;font-weight:600;color:var(--muted);font-size:13px}td code{word-break:break-all;background:var(--code);padding:2px 5px;border-radius:4px;font:13px ui-monospace,Menlo,Consolas,monospace}
 code.tok{font-size:15px;font-weight:700}button{font:600 13px system-ui,sans-serif;padding:5px 12px;border-radius:6px;border:0;background:var(--btn);color:var(--btnfg);cursor:pointer;white-space:nowrap}
-button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</style></head><body>
+button.ok{background:#2e8540;color:#fff}a.sd{display:inline-block;font:600 13px system-ui,sans-serif;padding:6px 12px;border-radius:6px;background:var(--btn);color:var(--btnfg);text-decoration:none}p{color:var(--muted);font-size:12px}</style></head><body>
 <div class="head"><span class="dot" style="background:${esc(c.color_hex)}"></span><b>${esc(c.seat)}</b>
 <span>Table ${esc(c.table)} · ${esc(c.color)} · protects ${esc(c.protects)}</span></div>
+<p><a class="sd" href="${esc(ticketsUrl(c))}" target="_blank" rel="noopener">Log in to Service Desk</a></p>
 <table>${rows}</table>
 <p>Your seat token is a password: paste it only into the credential fields the guide names. Close this window when you are done.</p>
 <script>document.querySelectorAll("button[data-v]").forEach(function(b){b.addEventListener("click",function(){
@@ -166,14 +167,14 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
       }
       else el.innerHTML = '(from your <a href="../../setup/#your-seat-card" target="_blank" rel="noopener">seat card</a>)';
     });
-    document.querySelectorAll(".sc-ticketsbtn").forEach(el => {   // "Open My tickets" button in the guide text
+    document.querySelectorAll(".sc-ticketsbtn").forEach(el => {   // "Log in to Service Desk" button in the guide text
       el.innerHTML = "";
       if (c && c.token) {
         const b = document.createElement("button");
-        b.type = "button"; b.className = "md-button md-button--primary sc-copy-inline"; b.textContent = "Open My tickets";
+        b.type = "button"; b.className = "md-button md-button--primary sc-copy-inline"; b.textContent = "Log in to Service Desk";
         b.addEventListener("click", () => openTickets(c));
         el.append(b);
-      } else el.innerHTML = '(the <b>My tickets</b> button on your <a href="../../setup/#your-seat-card" target="_blank" rel="noopener">seat card</a>)';
+      } else el.innerHTML = '(the <b>Log in to Service Desk</b> button on your <a href="../../setup/#your-seat-card" target="_blank" rel="noopener">seat card</a>)';
     });
   }
 
