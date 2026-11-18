@@ -69,6 +69,9 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 4. Use PseudoCo Service Desk: if an open ticket covers this, write the answer into it as a work note
    and answer the caller with a comment; if there is none and STATUS is issue, open one.
+   If STATUS is healthy and an open ticket's problem is now fixed, resolve that ticket: a work note
+   with the evidence, a comment telling the caller what fixed it, then state resolved with close_code
+   "Solved (Permanently)" and close_notes naming the change that fixed it.
 ```
 
 !!! tip "Why firewall events are in the list"
@@ -78,8 +81,7 @@ Each run, answer one question: is anything hurting it, and what should happen ne
 
 ## Before the break
 
-The proctors now clear the standing fault. Optional, if you have two minutes: run your general
-method once more, pointed at the service that had the fault, **PseudoCo's branch wired users**. Paste
+The proctors now clear the standing fault. Take two minutes to run your general method once more, pointed at the service that had the fault, **PseudoCo's branch wired users**. Paste
 this into a **new** Canvas board (or your own wording, with the same service):
 
 ```text
@@ -95,17 +97,28 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 4. Use PseudoCo Service Desk: if an open ticket covers this, write the answer into it as a work note
    and answer the caller with a comment; if there is none and STATUS is issue, open one.
+   If STATUS is healthy and an open ticket's problem is now fixed, resolve that ticket: a work note
+   with the evidence, a comment telling the caller what fixed it, then state resolved with close_code
+   "Solved (Permanently)" and close_notes naming the change that fixed it.
 ```
 
 It should come back `STATUS: healthy` and name the change ticket that backed out the Leaf1 change.
 A method that finds the fault and then reports healthy after the fix is one you can trust.
-On **My tickets**, the Branch-1 ticket is now **Resolved** (the back-out resolved it). Read the timeline,
-then select **Confirm and close**: you are the caller, and you agree it is fixed.
+
+The back-out does **not** close your ticket. Branch-ops only adds a note: *change implemented, please verify*.
+Your re-check is the verification: Canvas writes the evidence into the Branch-1 ticket, tells the caller
+what fixed it, and **resolves** it with the change that fixed it. That is the full loop: the same method
+that found the cause proves the fix and closes the incident.
+
+On **My tickets**, the Branch-1 ticket is now **Resolved** by your re-check. Read the timeline: the
+branch-ops note, then your agent's evidence, comment and resolution. Then select **Confirm and close**:
+you are the caller, and you agree it is fixed.
 
 ![31-my-tickets-resolved-close](../img/31-my-tickets-resolved-close.png){ loading=lazy }
 
-*(1) Resolved, (2) the close code and notes: branch-ops backed out the change, (3) Confirm and close,
-(4) Reopen if it is not fixed, (5) the activity that resolved it.*
+*(1) Resolved by your re-check, (2) the close code and notes: the back-out change that fixed it and how it
+was verified, (3) Confirm and close, (4) Reopen if it is not fixed, (5) your agent's resolution and its
+comment to the caller (scroll down for its evidence and the branch-ops note).*
 
 ![21d-healthy](../img/21d-healthy.png){ loading=lazy }
 
@@ -113,7 +126,9 @@ then select **Confirm and close**: you are the caller, and you agree it is fixed
 
 - [ ] Your board is named **Night shift triage**, pinned, and has the **Known-good answer** card.
 - [ ] Your general triage method is saved in a note.
-- [ ] (Optional) After the fault is cleared, your method returns `STATUS: healthy`.
-- [ ] Your Branch-1 ticket has your work note and comment, and is closed once the proctor backs out the change.
+- [ ] After the fault is cleared, your method returns `STATUS: healthy` and resolves your Branch-1 ticket
+      with the change that fixed it.
+- [ ] You closed the Branch-1 ticket in **My tickets**. (Ran out of time? The proctor resolves any open
+      Branch-1 tickets at the break.)
 
 **Break: 10 minutes.**

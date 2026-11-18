@@ -178,8 +178,8 @@ kinds of entry:
 ![31-my-tickets-resolved-close](img/31-my-tickets-resolved-close.png){ loading=lazy }
 
 *(1) State Resolved, (2) the close code and close notes: what fixed it and how it was verified,
-(3) Confirm and close, (4) Reopen, (5) the activity that resolved it (here the back-out of the Part 1
-change).*
+(3) Confirm and close, (4) Reopen, (5) the activity that resolved it (here your 1.4 re-check, after
+the back-out of the Part 1 change).*
 
 Read the close notes and the timeline the way the day shift would, then:
 

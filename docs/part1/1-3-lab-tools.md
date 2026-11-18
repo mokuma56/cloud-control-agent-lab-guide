@@ -119,7 +119,8 @@ business impact (payments at a critical service), (3) caused by the Leaf1 change
 !!! tip "Why two kinds of note"
     Work notes are for the team (internal, technical). Comments are what the caller sees. A good agent
     writes both, and never puts a guess in either. When the proctor backs out the change later, the
-    ticket is resolved for you, and you close it on **My tickets** as the caller would.
+    ticket stays open: in 1.4 your re-check verifies the fix and resolves it, and you close it on
+    **My tickets** as the caller would.
 
 ## Quick second test: the red herring
 
