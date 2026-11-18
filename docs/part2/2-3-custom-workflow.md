@@ -93,7 +93,7 @@ Pick **one**. If you have never written code, take Path A.
 
         ![23c-rest-configure](../img/23c-rest-configure.png){ loading=lazy }
 
-        *(1) Display name: change Lab Actions to `My Lab Tools - REST` (the screenshot shows an older name), (2) you are on the Configure step.*
+        *(1) Personal connector: only you can use it, (2) Display name: change Lab Actions to `My Lab Tools - REST`, (3) you are on the Configure step. Scroll down for the token field.*
 
     5. **Configure, part 2: tell the agent how to use it.** This is the point of Path A. The spec says
        *what* each operation does. **API usage guidance** says *when* your agent should use it, what to
@@ -117,13 +117,17 @@ Pick **one**. If you have never written code, take Path A.
 
         ![23d-rest-guidance](../img/23d-rest-guidance.png){ loading=lazy }
 
-        *(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.*
+        *(1) Your seat token from step 4 (it shows as dots), (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue. Tip: click Continue rather than pressing Enter in the token field, which jumps straight to Review and save.*
 
     6. **Review and save:** check the name (`My Lab Tools - REST`), the 6 operations and your guidance, then
        **Save draft**. When the confirmation pop-up opens, click **Manage**. It takes you to
        **Studio → Manage**, where you check the integration:
 
         - [ ] Studio → Manage → Integrations shows `My Lab Tools - REST`, Personal, **Configured**.
+
+        ![23e-rest-manage](../img/23e-rest-manage.png){ loading=lazy }
+
+        *(1) Custom integrations: Personal, (2) My Lab Tools - REST on your `/table` address, (3) Configured. The tenant integrations (Open-Meteo, PseudoCo Service Desk, Lab Tools Production) are listed below it.*
 
         Keep it **Personal**: do not use *Make available to tenant*. It carries your seat token, so
         everyone in the tenant would then act as your seat.

@@ -1,7 +1,8 @@
 # 1.1 Orientation
 
 !!! abstract "Goal"
-    Find AI Canvas, Studio and the Lab Tools Production integration, and connect it to your seat.
+    Find AI Canvas, Studio and the lab's integrations, connect Lab Tools Production and PseudoCo
+    Service Desk to your seat, and open your ticket queue.
 
 ## The lab network you are troubleshooting
 
@@ -85,12 +86,43 @@ Then check Canvas can use it:
 !!! note "Only use Lab Tools Production"
     If Custom Integrations also lists an older **Lab Tools**, leave it alone. This lab uses **Lab Tools Production** only.
 
+## Connect the Service Desk to your seat
+
+PseudoCo runs an IT service desk. When a user calls about a problem, the service desk opens an
+**incident ticket**. Your seat has its own ticket queue, and your token decides which queue you see.
+In this lab, Canvas and your agent read those tickets, write their findings into them, and open new
+ones when they find an issue first.
+
+1. In **Studio → Manage → Integrations**, under **Custom integrations: Tenant**, find
+   **PseudoCo Service Desk** and select **Configure**: the same screens as Lab Tools Production above.
+2. Paste the **same seat token** and select **Save**. The card shows **Configured**.
+
+    ![02d-studio-tenant-servicedesk](../img/02d-studio-tenant-servicedesk.png){ loading=lazy }
+
+    *(1) Custom integrations: Tenant, (2) PseudoCo Service Desk, (3) Configured after you save your token, (4) Open-Meteo Weather Forecast: a public weather API with no credential, already Configured. Your agent uses it in 2.4.*
+
+3. In **Canvas → Integrations → Custom Integrations**, check the **PseudoCo Service Desk** row.
+
+    ![04c-canvas-servicedesk](../img/04c-canvas-servicedesk.png){ loading=lazy }
+
+    *(1) PseudoCo Service Desk, (2) Your credential: Saved (from Studio), (3) Enabled for me, (4) Open-Meteo needs no credential. Other rows (an older Lab Tools, My Lab Tools) may show Unavailable: leave them.*
+
+4. Open your queue: <span class="sc-ticketsbtn"></span>. It opens in a new tab and stays live, so keep it open.
+   It may already show a ticket from Branch-1. Leave it for now: you work it in 1.3.
+
+!!! tip "What am I looking at?"
+    [PseudoCo Service Desk: what you see](../reference/service-desk.md) explains the queue, every
+    field, the three kinds of note and who does what, with screenshots. Read it once now (2 minutes).
+
 ### What Lab Tools is
 
 Cisco integrations tell Canvas what the **network** is doing. They cannot tell it what only your
 company knows: was that change approved, which business service sits on those ports, who is on call.
-In a real company that lives in systems like ServiceNow, a service catalog, PagerDuty and vendor status
-pages. **Lab Tools stands in for those systems**, for a pretend company called PseudoCo.
+In a real company that lives in systems like a change calendar, a service catalog, PagerDuty and vendor
+status pages. **Lab Tools stands in for those systems**, for a pretend company called PseudoCo. **PseudoCo
+Service Desk** stands in for an ITSM system such as ServiceNow: it uses the same ticket fields (number,
+state, priority, assignment group, affected service, caused by change, work notes and comments), so what
+you learn here carries over.
 
 It is a Studio **custom integration**, published to the organization: you describe an API once, add
 notes on how to use it, and both Canvas and Studio agents can call it. You can do the same with your
@@ -127,11 +159,13 @@ When you build your agent in Part 2, its manifest lists the servers it may use:
 | `secure-access` | Cisco-provided MCP server for **Cisco Secure Access** | Read access and DNS activity, alerts and policy for the users and sites it protects |
 | `firewall-server` (if listed) | Cisco-provided MCP server for **Cisco Secure Firewall** | Read firewall policy and objects |
 | API integration *Lab Tools Production* | The Lab Tools OpenAPI integration from 1.1 | The ten Lab Tools operations, as your seat |
+| API integration *PseudoCo Service Desk* | The ticket system from 1.1 | Your seat's tickets: list, read, open, add work notes and comments, update and resolve (never close) |
+| API integration *Open-Meteo Weather Forecast* | A public weather API, no credential | Current weather and forecast for a site's coordinates (added in 2.4) |
 | API integration *My Lab Tools - REST*, or `byo-…` (a random ID) for *My Lab Tools - MCP* | **Your own** integration from 2.3 ("bring your own") | Your seat's alert: raise and clear it, by your rules |
 
 The Cisco ones come with Cloud Control: nothing to install. Your own integration is the point of 2.3: it
 is how you would give an agent your company's workflow (in Path B you even write the code). Until 2.3,
-your agent has only Lab Tools Production and the Cisco servers, which is normal.
+your agent has Lab Tools Production, PseudoCo Service Desk and the Cisco servers, which is normal.
 
 
 
@@ -144,10 +178,12 @@ your agent has only Lab Tools Production and the Cisco servers, which is normal.
 In your Canvas board, ask:
 
 ```text
-Using Lab Tools Production, call get_my_watch_scope and get_light_status. Show me the raw results.
+Using Lab Tools Production, call get_my_watch_scope and get_light_status. Then using PseudoCo Service
+Desk, call list_my_tickets. Show me the raw results.
 ```
 
 - [ ] Canvas shows **your** seat ID (for example `T3-C`) and a `watch_source_ip`.
 - [ ] `get_light_status` says your light is `off`.
+- [ ] `list_my_tickets` answers for your seat. It may list a Branch-1 ticket already, or none yet.
 
 If Canvas says it cannot find Lab Tools, see [Troubleshooting](../reference/troubleshooting.md#canvas-cannot-see-lab-tools).

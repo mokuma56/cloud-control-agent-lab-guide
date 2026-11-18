@@ -29,9 +29,10 @@ What the card holds:
 | Lab Context spec URL | `https://<lab host>:8443/openapi-context.json` | 2.3 (REST path) |
 | Your MCP workspace | `https://<lab host>:9443/seat/<your seat>/` | 2.3 (Path B) |
 | Room wall | `https://<lab host>:8443/` (also on the room screen) | 2.3, 2.5 |
+| **My tickets** button | opens your PseudoCo Service Desk ticket queue in a new tab | 1.1, 1.3, 2.5 |
 
 !!! warning "Your seat token is a password"
-    It identifies your seat to every Lab Tools call. Paste it only into the credential fields named
+    It identifies your seat to every Lab Tools and Service Desk call. Paste it only into the credential fields named
     in this guide. Never paste it into a prompt, a Canvas chat, or an agent description: those are
     stored as plain text and can show up in run logs.
 

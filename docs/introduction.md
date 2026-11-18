@@ -6,8 +6,8 @@ You are the night-shift engineer at **PseudoCo**, and you would like to sleep to
 looks after one PseudoCo service: the Employee Intranet, the directory servers, the partner portal and so on.
 Its column on the room wall is headed with that service. In the next four hours you teach Cisco Cloud Control
 to do your night shift. It has to find what is hurting the business across every Cisco domain, add the
-business context only you know, decide how bad it is, wake you only when it matters, and take one safe
-action you approve.
+business context only you know, decide how bad it is, wake you only when it matters, take one safe
+action you approve, and keep the service desk ticket up to date so the day shift can trust it.
 
 ## Tonight: two incidents, one method
 
@@ -17,6 +17,7 @@ action you approve.
 | Who | The whole room, one shared fault | Every seat its own, at the same time |
 | Who drives | **You**: you troubleshoot in Canvas and refine the prompt | **Your agent**: you are "asleep" while it finds, stops and clears the attack |
 | What it really is | A port change on a branch switch (users get no IP address) | Hostile traffic against your table's service |
+| The ticket | A user calls the service desk; **you** write the root cause into their ticket | A user calls, or your agent finds it first; **your agent** writes the root cause into the ticket and resolves it |
 
 The two incidents have nothing in common, on purpose. In Part 1 you do not write a "Leaf1 prompt".
 You write a **general triage method**: look across every Cisco domain, check what changed, add the
@@ -46,6 +47,7 @@ flowchart TB
   end
   subgraph Kit["Lab Kit (always on, public HTTPS)"]
     Broker["Lab Context + Lab Actions APIs<br/>OpenAPI specs, board"]
+    SD["PseudoCo Service Desk<br/>your ticket queue"]
     MCP["Your MCP workspace<br/>(2.3 Path B)"]
   end
   subgraph Pod["POD-45 lab network"]
@@ -57,6 +59,9 @@ flowchart TB
   Canvas -- "Cisco integrations" --> Meraki
   Canvas -- "Lab Tools Production (OpenAPI)" --> Broker
   Studio -- "Lab Tools Production, My Lab Tools - REST (OpenAPI)" --> Broker
+  Canvas -- "PseudoCo Service Desk" --> SD
+  Studio -- "PseudoCo Service Desk" --> SD
+  Studio -- "Open-Meteo (weather)" --> Weather["Open-Meteo<br/>public weather API"]
   Studio -- "My Lab Tools - MCP" --> MCP --> Broker
   Broker -- "your source IP only" --> Splunk
   FTD --> Splunk
@@ -71,6 +76,12 @@ flowchart TB
   PseudoCo's change calendar, business services, on-call policy and SaaS status. It also gives your
   agent its watch scope, the firewall events for your seat, and two actions: raise your seat's alert on
   the room wall, and stop your seat's attack traffic.
+- **PseudoCo Service Desk** is PseudoCo's ticket system (it works like an ITSM such as ServiceNow). Each
+  seat has its own queue, opened from **My tickets** on your seat card. Users' calls arrive as tickets;
+  Canvas and your agent write the root cause into them, open tickets when they find a problem first, and
+  resolve them. Only you, as the caller, close a ticket.
+- **Open-Meteo** is a public weather API with no credential. Your agent adds the weather at its site to
+  its evidence: outside context no Cisco product has.
 - **My Lab Tools** is **your** integration, built in 2.3 (REST or MCP) with your own rules. Your agent
   switches to it to raise and clear its alert: your own workflow.
 - **Lanes:** in Part 2 the traffic generator sends one stream of simulated attack traffic per seat, called
@@ -83,18 +94,18 @@ flowchart TB
 | Clock | Min | Step | Module | You finish with |
 | --- | --- | --- | --- | --- |
 | 0:00 | 10 | - | [Before you start](setup.md) | Seat card, logged in |
-| 0:10 | 15 | 1 | [1.1 Orientation](part1/1-1-orientation.md) | Canvas, Studio and Lab Tools open |
-| 0:25 | 25 | 1 | [1.2 Multi-domain diagnosis](part1/1-2-diagnose.md) | Root cause from Cisco data alone |
-| 0:50 | 25 | 1 | [1.3 Make it yours: Lab Tools](part1/1-3-lab-tools.md) | Same answer plus change ID, business impact, severity |
-| 1:15 | 15 | 2 | [1.4 Save the triage method](part1/1-4-save.md) | Pinned Canvas and your general triage prompt |
-| 1:30 | 10 | - | Break | |
-| 1:40 | 25 | 3 | [2.1 Shape the agent](part2/2-1-shape-agent.md) | Draft agent, manifest reviewed |
-| 2:05 | 15 | 3 | [2.2 Sandbox test](part2/2-2-test-publish.md) | Three tests passed, Schedule unlocked |
-| 2:20 | 30 | 3 | [2.3 Build your custom workflow](part2/2-3-custom-workflow.md) | Your own integration turns your seat red on the wall |
-| 2:50 | 20 | 3 | [2.4 Wire it in and choose how it runs](part2/2-4-wire-schedule.md) | Four tests passed, scheduled or Canvas chosen |
-| 3:10 | 25 | 3 | [2.5 Lights Out](part2/2-5-lights-out.md) | Light on at detection, off when fixed |
-| 3:35 | 15 | 4 | [3.1 Build Mission Control](part3/3-1-mission-control.md) | An app built from a design file; the night replayed live |
-| 3:50 | 10 | - | [Conclusion](conclusion.md) | What you built; one agent idea for your own company; wrap |
+| 0:10 | 18 | 1 | [1.1 Orientation](part1/1-1-orientation.md) | Canvas, Studio, Lab Tools and your ticket queue open |
+| 0:28 | 25 | 1 | [1.2 Multi-domain diagnosis](part1/1-2-diagnose.md) | Root cause from Cisco data alone |
+| 0:53 | 30 | 1 | [1.3 Make it yours: Lab Tools](part1/1-3-lab-tools.md) | Same answer plus change ID, business impact, severity, written into the user's ticket |
+| 1:23 | 12 | 2 | [1.4 Save the triage method](part1/1-4-save.md) | Pinned Canvas and your general triage prompt |
+| 1:35 | 10 | - | Break | |
+| 1:45 | 25 | 3 | [2.1 Shape the agent](part2/2-1-shape-agent.md) | Draft agent, manifest reviewed |
+| 2:10 | 15 | 3 | [2.2 Sandbox test](part2/2-2-test-publish.md) | Three tests passed, Schedule unlocked |
+| 2:25 | 30 | 3 | [2.3 Build your custom workflow](part2/2-3-custom-workflow.md) | Your own integration turns your seat red on the wall |
+| 2:55 | 20 | 3 | [2.4 Wire it in and choose how it runs](part2/2-4-wire-schedule.md) | Weather added, four tests passed, scheduled or Canvas chosen |
+| 3:15 | 25 | 3 | [2.5 Lights Out](part2/2-5-lights-out.md) | Light on at detection, off when fixed, ticket resolved and closed |
+| 3:40 | 15 | 4 | [3.1 Build Mission Control](part3/3-1-mission-control.md) | An app built from a design file; the night replayed live |
+| 3:55 | 5 | - | [Conclusion](conclusion.md) | What you built; one agent idea for your own company; wrap |
 
 Finished early? The [challenge scenarios](appendix/challenges.md) have another hour of work.
 
@@ -106,12 +117,13 @@ for example **T3-C** is table 3, seat C. The small colored dot on your tile matc
 
 ![20-wall](img/20-wall.png){ loading=lazy }
 
-*(1) Live counts, (3) a lane running that no agent has reported yet, (4) an agent's alert with its summary, (5) a lane its agent stopped and is verifying, (6) resolved, (7) what the agents said.*
+*(1) Amber: a seat whose traffic is running and that no agent has reported yet, (2) red: an agent raised its alert, with its summary, (3) the ticket the agent is working, (4) tickets open in the PseudoCo Service Desk, (5) known change requests from the change calendar (last 24 hours and scheduled), (6) what the agents said. A tile goes striped while its agent verifies, then green when resolved. There is no leaderboard: agents run at different times.*
 
 | Your tile | Means | Who changes it |
 | --- | --- | --- |
 | Grey, **Quiet** | Nothing is happening at your seat | - |
-| Amber, **Threat active · undetected** | Your lane is running and no agent has reported it yet | the proctor starts lanes |
+| Amber, **Threat active · undetected** | Your lane is running and no agent has reported it yet | the proctor starts traffic after the break; you restart your own |
+| Ticket number on the tile (for example `INC0010042 · resolved`) | Your seat's current ticket in PseudoCo Service Desk | your agent and the service desk |
 | Red, **Alert** + your agent's summary | Your agent called `signal_issue`. Minor is steady, major pulses, critical pulses fast | your agent |
 | Red stripes, **Stopped · verifying** | Your agent called `stop_my_lane` on your own source and has not confirmed it is quiet yet | your agent |
 | Green, **Resolved ✓** | Your agent verified the source is quiet and called `clear_issue` | your agent |

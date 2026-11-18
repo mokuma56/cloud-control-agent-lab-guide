@@ -108,6 +108,7 @@ nav:
       - Conclusion: conclusion.md
       - "Appendix: Challenge scenarios": appendix/challenges.md
   - Reference:
+      - reference/service-desk.md
       - reference/tools.md
       - reference/output-contract.md
       - reference/evidence.md

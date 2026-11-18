@@ -31,9 +31,9 @@ same way as Path A in 2.3 (if you took Path B, this is your first REST integrati
 
     </div>
 
-2. **Review API**: 7 operations. Three are for the core app: `get_my_timeline`, `get_my_group_board`,
-   `replay_my_attack`. Four are read-only, for the add-ons: `get_my_security_events`, `get_business_services`,
-   `get_oncall`, `get_recent_changes`.
+2. **Review API**: 8 operations. Three are for the core app: `get_my_timeline`, `get_my_group_board`,
+   `replay_my_attack`. Five are read-only: `get_my_security_events`, `get_business_services`,
+   `get_oncall` and `get_recent_changes` for sections B and C, and `get_my_tickets` for add-on E.
 3. **Configure**: Display name `Night Watch Console`, Bearer token <span class="sc-tokenbtn"></span>.
 4. **Review and save → Save draft**, then click **Manage** in the pop-up.
 
@@ -49,9 +49,9 @@ same way as Path A in 2.3 (if you took Path B, this is your first REST integrati
 [Download NightWatch_Mission_Control.md](../app/NightWatch_Mission_Control.txt){ download="NightWatch_Mission_Control.md" .md-button }
 
 It is plain Markdown: what the app is for, the rules it must follow, the **data contract** (the exact
-fields each operation returns, so Studio does not have to guess), and four sections. Studio builds
+fields each operation returns, so Studio does not have to guess), and five sections. Studio builds
 **A** (your night: status, response times, timeline, your group, Replay the night), **B** (the evidence
-your agent saw) and **C** (business impact) in one go. **D** is an add-on you can ask for afterwards. A
+your agent saw) and **C** (business impact) in one go. **D** and **E** are add-ons you can ask for afterwards. A
 design file is how you make an app **repeatable**: the next person gets the same app from the same file.
 
 ## 3. Build the app from the file
@@ -167,6 +167,15 @@ Add section D of the design.
 
 A note box your whole group shares: what your agent found, for the day shift. Notes are stored in the
 app, so everyone in your group sees them.
+
+## 7. Add-on: your tickets next to your night (if you have time)
+
+```text
+Add section E of the design.
+```
+
+A **Tickets** panel: your PseudoCo Service Desk tickets with time to first note and time to resolve,
+and each ticket's notes next to the night's timeline. Read-only: the app shows tickets, it never changes them.
 
 !!! success "What you just did"
     You built a second kind of Studio application from a file, on top of the same integrations your agent

@@ -2,7 +2,8 @@
 
 !!! abstract "Goal"
     Get the same root cause, now with the change ticket, the business impact, a severity you can
-    defend, and a decision on whether to wake someone. Then make Canvas answer in a fixed format.
+    defend, and a decision on whether to wake someone. Then make Canvas answer in a fixed format, and
+    write that answer into the user's incident ticket.
 
 Cisco data told you *what* changed. Lab Tools adds what only PseudoCo knows:
 
@@ -81,6 +82,44 @@ Common fixes when the answer is not there yet:
 | Severity is "major" because "only three ports" | "Set severity from `get_business_services` criticality for the affected site and segment." |
 | Evidence has no sources | "Every evidence bullet starts with its source in brackets." |
 | It offers to fix it | "You are read-only. Propose; never change." |
+
+## Work the ticket
+
+While you were troubleshooting, the front desk at Branch-1 called the service desk. A ticket is now in
+your queue: <span class="sc-ticketsbtn"></span>. It is vague, the way users write: "Wi-Fi says connected but nothing
+loads". You already know the cause. Now write it into the ticket the way a good engineer would, with
+the technical detail for the team and a plain answer for the caller.
+
+In the **same** board, ask:
+
+```text
+Using PseudoCo Service Desk, find my newest open ticket about Branch-1 and read it. Then:
+1. Add a work note with your answer above, in the same STATUS format, every evidence line naming
+   its source.
+2. Update the ticket: caused_by = the change ID you found, the severity you chose, and the
+   assignment group the on-call policy points to.
+3. Add a comment for the caller in plain language, no jargon: what is wrong, that the team is on
+   it, and what they can do meanwhile.
+Do not resolve or close the ticket: the fix is not done yet.
+```
+
+Then check the ticket on **My tickets** (it refreshes by itself):
+
+- [ ] A **work note** with STATUS, CAUSE (with the change ID), EVIDENCE with sources, and NEXT STEP.
+- [ ] **Caused by change** shows the Leaf1 change ID, and the priority matches your severity.
+- [ ] A **comment** the front desk would understand, with no VLANs or port numbers in it.
+- [ ] State **In progress**, not Resolved: nothing is fixed yet.
+
+![30-my-tickets-work-the-ticket](../img/30-my-tickets-work-the-ticket.png){ loading=lazy }
+
+*What a pass looks like on My tickets: (1) your ticket, now P1 and In progress, (2) priority set from the
+business impact (payments at a critical service), (3) caused by the Leaf1 change from the change calendar,
+(4) the plain-language comment for the front desk, (5) the internal work note with the full STATUS report.*
+
+!!! tip "Why two kinds of note"
+    Work notes are for the team (internal, technical). Comments are what the caller sees. A good agent
+    writes both, and never puts a guess in either. When the proctor backs out the change later, the
+    ticket is resolved for you, and you close it on **My tickets** as the caller would.
 
 ## Quick second test: the red herring
 

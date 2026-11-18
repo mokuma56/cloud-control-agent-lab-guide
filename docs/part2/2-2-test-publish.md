@@ -55,10 +55,14 @@ For **each** test:
     or beacon), even if there are no IPS events, with each piece of evidence naming its source.
     signal_issue is called, then stop_my_lane on my own source. since_stop is checked: all totals 0
     gives clear_issue and STATUS resolved; otherwise the alert stays open and STATUS is issue.
+    A PseudoCo Service Desk incident is opened for the service I protect (or the open one is used)
+    with the report as a work note, a work note per action, and it is resolved after a clean check.
     ```
 
     - [ ] Test 1 passed: your tile went red, then **Stopped · verifying**, then green, and the report
           says STATUS resolved. Your lane is now **stopped**: leave it that way for Tests 2 and 3.
+    - [ ] **My tickets** shows the agent's incident, **Resolved**, marked *test run*, with a work note for
+          each step. Test-run tickets are cleared before Lights Out.
 
 === "Test 2: Missing information"
 
@@ -107,7 +111,7 @@ find. Select **Run**:
 The reply should show `"lane_running": true`. This button only restarts **your** lane.
 
 !!! info "Your lane is already sending traffic"
-    Since the break, the proctor has had **practice traffic** running: your seat's source IP sends test
+    Since the break, your seat's traffic has been running (the proctor started it): your source IP sends test
     attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
     It keeps running to the end of the lab, and it is the same traffic your agent finds in 2.5. When a test
     stops your lane, restart it yourself with the **Restart my lane** button below the tests.

@@ -2,11 +2,20 @@
 
 !!! abstract "Goal"
     Hands off. Your agent runs on its own, finds your lane, raises the alert, stops your source,
-    verifies it is quiet and turns your light off. Then you wake up and read what it did. (With
-    Option B, Canvas asks you before it stops anything.)
+    verifies it is quiet, turns your light off and writes it all into the user's ticket. Then you wake
+    up, read the ticket as your morning handover and close it. (With Option B, Canvas asks you before it
+    stops anything.)
 
 There is no race and no shared start time. Every seat's lane keeps sending traffic until the end of the
 lab, so you do this section at your own pace, whenever your agent runs.
+
+Your traffic must be running before your agent's run: your tile is **amber**. If it is grey or green,
+start it again with **Start my traffic** at the end of [2.4](2-4-wire-schedule.md#before-you-choose-start-your-traffic).
+
+At the start of 2.5 the proctor opens **Lights Out tickets**: the service desk gets a call about the
+service your table protects, and a ticket lands in your queue (for example *"Partner portal keeps timing
+out"*). Your agent finds it on its next run. Tickets your agent opened during the sandbox tests are
+cleared at the same time.
 
 ## 1. Hands off
 
@@ -25,17 +34,20 @@ Watch your tile on the room wall:
 2. **Red stripes, Stopped · verifying**: it called `stop_my_lane` on your own source.
 3. **Green, Resolved ✓**: `since_stop` showed nothing after the stop, so it called `clear_issue`.
 
+The ticket number shows on your tile, and **My tickets** fills in as the agent works:
+<span class="sc-ticketsbtn"></span>.
+
 With Option A this takes about 20 seconds once the run reaches the containment step. Your neighbors'
 tiles change at their own times.
 
 ![20-wall](../img/20-wall.png){ loading=lazy }
 
-*The room wall: (3) amber = a lane running that no agent has reported yet, (4) red = an agent's alert, (5) stopped and verifying, (6) resolved; (7) the agents' messages.*
+*(1) Amber: a seat whose traffic is running and that no agent has reported yet, (2) red: an agent raised its alert, with its summary, (3) the ticket the agent is working, (4) tickets open in the PseudoCo Service Desk, (5) known change requests from the change calendar (last 24 hours and scheduled), (6) what the agents said. A tile goes striped while its agent verifies, then green when resolved. There is no leaderboard: agents run at different times.*
 
 !!! tip "Nothing after a few minutes?"
     Check **Studio → Manage → Applications → your agent → View runs** for a run at your time. No run:
     the schedule time had already passed when you saved it; use **Edit schedule** for the next slot. A
-    run that says STATUS healthy: your lane was stopped; restart it with the **Restart my lane** button in
+    run that says STATUS healthy: your lane was stopped; start it with **Start my traffic** in
     2.4, then schedule the next slot. A tile that stays red: the run found events after the stop and kept
     the alert open; read its EVIDENCE.
 
@@ -88,6 +100,30 @@ Check what it did:
 - [ ] The CAUSE is supported by evidence, not assumed. See the [evidence guide](../reference/evidence.md).
 - [ ] It cleared the alert only after `since_stop` showed nothing, and your tile is green.
 
+## The morning handover: your ticket
+
+Open **My tickets** and select the Lights Out ticket. Read it as the day shift would:
+
+- [ ] A **work note** with the report: STATUS, CAUSE, EVIDENCE with sources (including the WEATHER line),
+      NEXT STEP.
+- [ ] A work note for **each action**: `signal_issue`, `stop_my_lane` on your own source, the `since_stop` totals.
+- [ ] A **comment** for the caller in plain language.
+- [ ] State **Resolved**, with a close code and close notes that say how the fix was verified.
+- [ ] If your agent opened its own incident before the call came in, the caller's ticket shows it under
+      **Parent incident**, and resolving the parent resolved it too. One incident, one answer.
+
+![33-my-tickets-caller-handover](../img/33-my-tickets-caller-handover.png){ loading=lazy }
+
+*A Lights Out handover: (1) the payroll team's ticket, which your agent worked instead of opening its own, (2) P2 and (3) Security Operations, set before it raised the alert, (4) what was stopped and how it was verified, (5) the plain-language answer to the caller. This one is already closed by the caller.*
+
+You are the caller now. If the handover is good enough, select **Confirm and close**. If not, select
+**Reopen** and say what is missing: your agent reads that comment on its next run.
+
+!!! tip "Why the agent can't close tickets"
+    The agent can go as far as **Resolved**. Closing is the caller's confirmation that the problem is
+    really gone, so the PseudoCo Service Desk API does not offer it to the agent at all. The limit is in
+    the system, not only in the prompt.
+
     ![11-lights-evidence](../img/11-lights-evidence.png){ loading=lazy }
 
     *Evidence for a web attack seat (T3-C): (1) Secure Firewall events and IPS signatures from get_my_security_events. This run is from Option B, so (2) NEXT STEP waits for approval.*
@@ -113,7 +149,7 @@ Canvas calls `stop_my_lane`. Only your lane stops; your tile shows **Stopped · 
 *(1) signal_issue raised the alert (red tile), (2) the agent asks before stop_my_lane, (3) the human approval.*
 
 
-## 4. Option B only: verify and clear
+## 4. Option B only: verify, clear and resolve the ticket
 
 **Wait 5 minutes after the stop.** Firewall events from before the stop stay in the 5-minute window
 until they age out, so a check right away still sees them and will not clear your light. Use the time to
@@ -123,7 +159,8 @@ Then, in the same Canvas chat, ask it to verify:
 
 ```text
 Re-check my security events for the last 5 minutes. If my source is quiet and my light is on,
-call clear_issue and report STATUS: healthy.
+call clear_issue and report STATUS: healthy. Then update my PseudoCo Service Desk ticket: a work note
+with the check, a comment for the caller, and state resolved with a close code and close notes.
 ```
 
 - [ ] Your tile turns green: **Resolved ✓**. If Canvas says events are still arriving, wait two more
@@ -136,5 +173,5 @@ call clear_issue and report STATUS: healthy.
 !!! success "What you just did"
     An agent you described in plain words ran on its own, used Cisco telemetry and your own integration
     to find a problem nobody told it about, raised the alert, contained it within the limits you set,
-    proved it was quiet and closed the alert. That is the night shift. Keeping a human in the loop for
+    proved it was quiet, closed the alert and left a ticket the day shift can trust. That is the night shift. Keeping a human in the loop for
     riskier actions is a different pattern, and you will build it in a later section.

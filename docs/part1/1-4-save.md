@@ -50,6 +50,7 @@ that is specific to tonight's branch fault, and keep the method:
 | Check what changed recently and cite the change ID | "in the 2 hours before the symptom started" |
 | Business impact, SaaS rule-out, on-call policy (Lab Tools) | The branch office and the payments service |
 | The fixed answer format, and "propose, never change" | |
+| Write the answer into the ticket (or open one) | "my newest ticket about Branch-1" |
 
 Copy this into a note on your laptop and adjust it to your own words from 1.3:
 
@@ -66,6 +67,8 @@ Each run, answer one question: is anything hurting it, and what should happen ne
 2. Use Lab Tools Production for recent changes, business service impact, SaaS status and the on-call policy.
 3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
+4. Use PseudoCo Service Desk: if an open ticket covers this, write the answer into it as a work note
+   and answer the caller with a comment; if there is none and STATUS is issue, open one.
 ```
 
 !!! tip "Why firewall events are in the list"
@@ -90,10 +93,19 @@ Each run, answer one question: is anything hurting it, and what should happen ne
 2. Use Lab Tools Production for recent changes, business service impact, SaaS status and the on-call policy.
 3. Answer: STATUS, SEVERITY (from business criticality), SUMMARY, CAUSE (with change ID if one
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
+4. Use PseudoCo Service Desk: if an open ticket covers this, write the answer into it as a work note
+   and answer the caller with a comment; if there is none and STATUS is issue, open one.
 ```
 
 It should come back `STATUS: healthy` and name the change ticket that backed out the Leaf1 change.
 A method that finds the fault and then reports healthy after the fix is one you can trust.
+On **My tickets**, the Branch-1 ticket is now **Resolved** (the back-out resolved it). Read the timeline,
+then select **Confirm and close**: you are the caller, and you agree it is fixed.
+
+![31-my-tickets-resolved-close](../img/31-my-tickets-resolved-close.png){ loading=lazy }
+
+*(1) Resolved, (2) the close code and notes: branch-ops backed out the change, (3) Confirm and close,
+(4) Reopen if it is not fixed, (5) the activity that resolved it.*
 
 ![21d-healthy](../img/21d-healthy.png){ loading=lazy }
 
@@ -102,5 +114,6 @@ A method that finds the fault and then reports healthy after the fix is one you 
 - [ ] Your board is named **Night shift triage**, pinned, and has the **Known-good answer** card.
 - [ ] Your general triage method is saved in a note.
 - [ ] (Optional) After the fault is cleared, your method returns `STATUS: healthy`.
+- [ ] Your Branch-1 ticket has your work note and comment, and is closed once the proctor backs out the change.
 
 **Break: 10 minutes.**

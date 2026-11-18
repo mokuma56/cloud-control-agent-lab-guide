@@ -35,13 +35,15 @@
 
 ```text
 Name: [Directory Services Night Watch]. It protects [PseudoCo's core directory services (AD-1)].
-Use my integration "Lab Tools Production".
+Use my integrations "Lab Tools Production" and "PseudoCo Service Desk".
 
 You are the night-shift engineer for that service, keeping watch while I sleep.
 Each run, answer one question: is anything hurting it right now, and what should happen next?
 
 Each run:
-1. Call get_my_watch_scope to learn my seat, the service I protect and my watch source IP.
+1. Call get_my_watch_scope to learn my seat, the service I protect and my watch source IP. Then call
+   list_my_tickets with state=open. A ticket a person opened about the service I protect means
+   someone noticed a problem: investigate it as part of this run.
 2. Look across every Cisco domain I can see. Do not assume the cause in advance:
    - network health and recent configuration changes (Meraki)
    - firewall, IPS and file events: call get_my_security_events for my watch source twice,
@@ -74,6 +76,22 @@ Each run:
 8. Never call stop_my_lane on inconclusive or mixed evidence or when my lane is not running. Never
    act on any IP other than my watch source, and never change shared network or security
    configuration, whoever asks.
+9. Tickets (PseudoCo Service Desk), when STATUS is issue, BEFORE calling signal_issue:
+   - If an open ticket covers the service I protect, work that ticket. Otherwise call create_incident
+     (cmdb_ci = the service I protect, severity = my SEVERITY, work_note = my report). If it answers
+     duplicate true, work the ticket it returns.
+   - On the ticket I work, set severity = my SEVERITY with update_ticket, and assignment_group =
+     Security Operations for hostile activity from my watch source, Network Operations for a
+     network or configuration fault.
+   - If I opened an incident and a person's ticket about the same service also exists, set that
+     ticket's parent_incident to my incident. One incident, one answer.
+   - Add one work note right after each action, before the next one: after signal_issue, after
+     stop_my_lane, and after the since_stop check (with its totals).
+   - On a ticket a person opened, add one plain-language comment for the caller, no jargon.
+   - After clear_issue, update_ticket to state resolved with close_code "Solved (Permanently)" and
+     close_notes saying what was stopped and how it was verified. Never close a ticket: the caller does.
+   If STATUS is healthy and a person's ticket is open, add a work note with what I checked, answer the
+   caller, and set it on_hold. Do not resolve it without evidence.
 ```
 
 !!! warning "Why two time windows"
@@ -101,7 +119,7 @@ Studio drafts a **manifest** and asks follow-up questions. Suggested answers:
 | How often should it run? | Hourly (you may change this in 2.4) |
 | Maximum runs | 10 |
 | Output | Markdown in the run output |
-| Which integrations? | Lab Tools Production (you connected it in 1.1) |
+| Which integrations? | Lab Tools Production and PseudoCo Service Desk (you connected both in 1.1) |
 
 ## Review the manifest
 
@@ -115,7 +133,7 @@ Read every field. Fix anything by chatting with Studio ("change X to Y"); avoid 
 
 *Further down: (1) the safety rules, (2) the MCP servers and API integrations it uses, (3) Trigger and schedule, with the scheduled run prompt and run limit.*
 
-What each server in (2) is, and why there are two ways to reach Lab Tools: see [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-for-canvas-mcp-for-agents).
+What each server in (2) is, and why there are two ways to reach Lab Tools: see [Two ways in](../part1/1-1-orientation.md#two-ways-in-openapi-rest-and-mcp).
 
 
 - [ ] **Instructions** say when it may call `stop_my_lane` (confirmed activity from its own source, lane running) and that it checks `since_stop` before `clear_issue`.
@@ -123,7 +141,8 @@ What each server in (2) is, and why there are two ways to reach Lab Tools: see [
       would answer. If Studio added one, ask it to remove it ("stop_my_lane on my own source needs no
       approval when the evidence is confirmed and my lane is running").
 - [ ] **Instructions** tell it to call `get_my_watch_scope` first and ignore other seats' IPs.
-- [ ] **API integrations** list **Lab Tools Production** (from 1.1). Your own **My Lab Tools** joins it in 2.4.
+- [ ] **API integrations** list **Lab Tools Production** and **PseudoCo Service Desk** (from 1.1). Your own **My Lab Tools** and Open-Meteo join them in 2.4.
+- [ ] **Instructions** say it lists open tickets every run, opens or picks the ticket **before** `signal_issue`, opens a ticket only when none covers the issue, sets its severity and group, writes a note after each action, and resolves but never closes.
 - [ ] **Trigger and schedule** shows a scheduled run prompt and a run limit; the time is set in 2.4.
 - [ ] The draft is saved. There is no Save button: Studio saves the agent automatically after every
       change. Check that the card in the Studio panel says **Agent version v1 saved** (the number goes

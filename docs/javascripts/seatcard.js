@@ -12,6 +12,9 @@
   // Studio apps reach port 443 only: cards saved before 2026-11-11 have no spec_console, so derive it without :8443
   const consoleSpec = c => c.spec_console ||
     (c.spec_light || "").replace(":8443/", "/").replace("/table/", "/").replace("openapi-light.json", "openapi-console.json");
+  // PseudoCo Service Desk queue page. The token travels in the #fragment, which the browser never sends to the server.
+  const ticketsUrl = c => (c.tickets_url || LAB + "/itsm/ui") + "#t=" + encodeURIComponent(c.token || "");
+  const openTickets = c => { const w = window.open(ticketsUrl(c), "_blank", "noopener"); if (w) w.opener = null; };
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const load = () => {
     let c = null;
@@ -56,10 +59,11 @@
         <table>${FIELDS.map(([label, k]) => `<tr><th>${label}</th>
           <td><code class="${k === "token" ? "sc-token" : ""}">${esc(c[k])}</code></td>
           <td><button class="md-button sc-copy" type="button" data-k="${k}">Copy</button></td></tr>`).join("")}</table>
-        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button sc-popout" type="button">Open in new window</button></p>
+        <p class="sc-actions">${c.sso_login ? '<button class="md-button md-button--primary sc-login" type="button">Log in to Cloud Control</button> ' : ""}<button class="md-button sc-tickets" type="button">My tickets</button> <button class="md-button sc-popout" type="button">Open in new window</button></p>
         <p class="sc-note">Your seat token is a password: paste it only into the credential fields this guide names.
           This card stays in this browser. <a href="#" class="sc-forget">Forget this card</a></p></div>`;
     root.querySelector(".sc-popout").addEventListener("click", () => popout(c));
+    root.querySelector(".sc-tickets").addEventListener("click", () => openTickets(c));
     const login = root.querySelector(".sc-login");
     if (login) login.addEventListener("click", () => ssoLogin(c, saved.claim));
     if (!c.sso_login && saved.claim && !saved.refreshedM) refresh(root, saved);
@@ -161,6 +165,15 @@ button.ok{background:#2e8540;color:#fff}p{color:var(--muted);font-size:12px}</st
         el.append(val, show, copyButton(() => c.token, "Copy"));
       }
       else el.innerHTML = '(from your <a href="../../setup/#your-seat-card" target="_blank" rel="noopener">seat card</a>)';
+    });
+    document.querySelectorAll(".sc-ticketsbtn").forEach(el => {   // "Open My tickets" button in the guide text
+      el.innerHTML = "";
+      if (c && c.token) {
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "md-button md-button--primary sc-copy-inline"; b.textContent = "Open My tickets";
+        b.addEventListener("click", () => openTickets(c));
+        el.append(b);
+      } else el.innerHTML = '(the <b>My tickets</b> button on your <a href="../../setup/#your-seat-card" target="_blank" rel="noopener">seat card</a>)';
     });
   }
 

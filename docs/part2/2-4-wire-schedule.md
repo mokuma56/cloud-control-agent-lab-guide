@@ -1,8 +1,8 @@
 # 2.4 Wire it in and choose how it runs
 
 !!! abstract "Goal"
-    Your agent uses your integration, passes a "light on" test, and is scheduled for Lights Out (or
-    ready to run from Canvas).
+    Your agent uses your integration, adds the weather at its site, passes a "light on" test that also
+    works its ticket, and is scheduled for Lights Out (or ready to run from Canvas).
 
 ## Wire the integration into the agent
 
@@ -39,7 +39,11 @@ in 2.1.
         running: call signal_issue, then stop_my_lane yourself (no approval needed), then
         get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
         STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
-        each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+        each action. Also add my integration Open-Meteo Weather Forecast: after get_my_watch_scope, call
+        getWeatherForecast for my site's location (current conditions and the next 24 hours,
+        timezone=auto) and add a WEATHER line to EVIDENCE with the source Open-Meteo. Weather is
+        context, never the cause unless other evidence matches it. Keep the PseudoCo Service Desk
+        ticket rules. Never stop on inconclusive evidence, never act on another IP, never change shared
         configuration. Keep everything else the same.
         ```
 
@@ -53,13 +57,23 @@ in 2.1.
         running: call signal_issue, then stop_my_lane yourself (no approval needed), then
         get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
         STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
-        each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+        each action. Also add my integration Open-Meteo Weather Forecast: after get_my_watch_scope, call
+        getWeatherForecast for my site's location (current conditions and the next 24 hours,
+        timezone=auto) and add a WEATHER line to EVIDENCE with the source Open-Meteo. Weather is
+        context, never the cause unless other evidence matches it. Keep the PseudoCo Service Desk
+        ticket rules. Never stop on inconclusive evidence, never act on another IP, never change shared
         configuration. Keep everything else the same.
         ```
 
     ![24d-refine-prompt](../img/24d-refine-prompt.png){ loading=lazy }
 
     *(1) Ask Studio to refine the Agent: your prompt goes here, (2) send. Review Agent on the right shows the current manifest.*
+
+    !!! info "Why weather?"
+        Open-Meteo is a public API with no credential: one integration and one sentence give your agent
+        outside context that no Cisco product has. A storm can explain a power blip at a site; a clear
+        night rules it out. The rule "context, never the cause unless other evidence matches it" stops
+        the agent from blaming the weather for an attack.
 
     !!! info "Why the prompt repeats the limits"
         Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
@@ -79,8 +93,8 @@ in 2.1.
 
     *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one `byo-` entry per MCP integration (Path B: My Lab Tools - MCP) plus the Cisco servers. The screenshot is from an older version of the lab with two `byo-` entries. Schedule is greyed until you rerun a test.*
 
-- [ ] Studio's summary names your integration. **API integrations** lists **Lab Tools Production** and,
-      for Path A, **My Lab Tools - REST**. For Path B, **MCP servers** shows one `byo-` entry (MCP
+- [ ] Studio's summary names your integration. **API integrations** lists **Lab Tools Production**,
+      **PseudoCo Service Desk**, **Open-Meteo Weather Forecast** and, for Path A, **My Lab Tools - REST**. For Path B, **MCP servers** shows one `byo-` entry (MCP
       integrations show as IDs, not names): that is **My Lab Tools - MCP**.
 - [ ] The instructions say `stop_my_lane` is for your own source only, and that `clear_issue` waits for a clean `since_stop`.
 
@@ -106,8 +120,9 @@ Run the night-watch review for the service I protect. My lane is running.
 STATUS issue found from my watch source and signal_issue called through my own integration
 (My Lab Tools - REST or My Lab Tools - MCP). stop_my_lane called on my own source without asking.
 since_stop checked: if all totals are 0, clear_issue called through my own integration and STATUS
-resolved. The report names the integration used for each action. No other IP and no shared
-configuration touched.
+resolved. The report names the integration used for each action. EVIDENCE has a WEATHER line from
+Open-Meteo for my site. One PseudoCo Service Desk incident for the service I protect, with a work note
+per action, resolved (not closed) after the clean check. No other IP and no shared configuration touched.
 ```
 
 **What a pass looks like** (seat T1-A, port scan):
@@ -126,9 +141,14 @@ configuration touched.
 
 - [ ] Test 4 passed: your tile went red, striped, then green, the report says STATUS resolved, and it
       names **your** integration for `signal_issue` and `clear_issue`.
-- [ ] Restart your lane again (it is stopped now):
+- [ ] The report has a **WEATHER** line naming your site (Dallas for every table: all six services run
+      in the data center) and Open-Meteo as the source.
+- [ ] **My tickets** shows one new incident (*test run*), resolved, with the work notes in order.
 
-    <div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
+    ![32-my-tickets-agent-incident](../img/32-my-tickets-agent-incident.png){ loading=lazy }
+
+    *Test 4 on My tickets: (1) the incident your agent opened, marked test run, (2) priority from its SEVERITY (major = P2), (3) Security Operations, because it is hostile activity from your source, (4) the close code and notes: what was stopped and how it was verified, (5) one work note per action, newest first: here the since_stop check. Resolved, not closed: closing is yours.*
+- [ ] Your lane is stopped now: you start it again in the next section, just before you choose how it runs.
 - [ ] All four tests pass on your latest saved version, so **Schedule** is blue.
 
 ## Choose how it runs
@@ -146,17 +166,21 @@ Your agent is ready. Now decide **how it starts** for Lights Out (2.5). There ar
 There is no race. Every seat's lane keeps sending traffic until the end of the lab, so your agent finds
 yours whenever it runs.
 
-### Before you choose: get your seat ready
+### Before you choose: start your traffic
 
-1. **Your lane must be running.** Your tests stopped it. Select **Run** to start it again (it only
-   restarts your own lane). A stopped lane gives a healthy report and nothing to find.
+Your tests stopped your lane, and a stopped lane gives a healthy report with nothing to find. Start it
+again (it only restarts your own lane):
 
-    <div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
+<div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Start my traffic: my source sends traffic again"></div>
 
-2. **Reset your tile**, so you see your agent turn it red. Select **Run**: it clears your alert on the room
-   wall with your seat token.
+The reply shows `"lane_running": true`, and your tile on the room wall turns **amber** (threat active,
+undetected). Your agent turns it red when it finds it.
 
-    <div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset your tile: it goes back to quiet"></div>
+!!! note "Only if your tile is still red"
+    Starting your traffic does not clear an alert that a test left open. If your tile is still **red**,
+    reset it first, then start your traffic again:
+
+    <div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset my tile: clears my open alert"></div>
 
 === "Option A: Scheduled"
 
@@ -214,5 +238,5 @@ yours whenever it runs.
 
     *Running it from Canvas: (1) your prompt, (2) Canvas's plan: discover Lab Tools Production, get watch scope and events, assess and signal, ask before the stop.*
 
-- [ ] My lane is running and my tile is quiet.
+- [ ] My traffic is running and my tile is **amber** (threat active, undetected).
 - [ ] My agent is scheduled for the next slot (Option A), or I have the Canvas prompt ready (Option B).

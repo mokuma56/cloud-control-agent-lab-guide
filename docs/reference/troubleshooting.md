@@ -82,3 +82,33 @@ cached copy of that integration's tools is out of date, which happens after the 
 token, **Rediscover tools**. The caution sign clears for every agent that uses it. Asking the agent's
 Studio chat to "refresh skills" does not help: the skills belong to the integration, not the agent.
 Your agent kept working the whole time; run its test again afterwards anyway.
+
+## My tickets says "That token was not accepted"
+
+Open it again from the **My tickets** button on your seat card (it passes your token for you), or paste
+the seat token from the card. After the proctor rotates tokens between sessions, old tokens stop working
+on purpose.
+
+## Canvas or my agent cannot see PseudoCo Service Desk
+
+Check **Studio → Manage → Integrations → PseudoCo Service Desk** shows **Configured**, and in
+**Canvas → Integrations → Custom Integrations** that it shows **Your credential: Saved** and **Enabled for
+me**. In the agent, ask Studio to "add my integration PseudoCo Service Desk", then rerun a test.
+
+## The agent answers "duplicate: true" when it opens a ticket
+
+That is the Service Desk protecting you: an open ticket already covers the same service, so no second one
+was opened. The agent should work the ticket it returns. If it keeps calling `create_incident`, add to its
+instructions: "List open tickets first; open a ticket only when none covers the issue."
+
+## "Only the caller closes a ticket" (403)
+
+The agent tried to close a ticket. It can only resolve it (with `close_code` and `close_notes`); you close
+it on **My tickets**. Remove any "close the ticket" wording from its instructions.
+
+## There is no ticket in my queue
+
+Part 1 tickets arrive about 2 minutes after the proctor breaks the branch network; Lights Out tickets
+arrive when the proctor opens them at the start of 2.5. If yours is still missing after that, ask a proctor:
+they can open one for your seat only.
+
