@@ -1612,7 +1612,7 @@ your agent handles it again for real.</p>
 <tr>
 <td>6</td>
 <td><strong>Run it live again</strong></td>
-<td>Restarts your attack for real (below). If it is greyed out, select <strong>Pause</strong> first</td>
+<td>Restarts your attack for real (below). It is dark red on purpose: it changes your lab</td>
 </tr>
 </tbody>
 </table>
@@ -1636,21 +1636,24 @@ your agent handles it again for real.</p>
 </li>
 <li>
 <p>In Studio, schedule your agent for the next 5-minute slot (Manage → your agent → <strong>Edit schedule</strong>),
-   as in 2.4. Then hands off: when the run starts, the timeline fills in step by step (alert, ticket,
+   as in 2.4, or run it now from its <strong>Test</strong> tab (<strong>Typical task → Run scenario</strong>). Then hands off: when the run starts, the timeline fills in step by step (alert, ticket,
    contained, resolved) and the card goes <strong>red</strong>, then <strong>Verifying</strong>, then <strong>green</strong>.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28j-replay-resolved.png" data-desc-position="bottom"><img alt="Your agent handled it" src="../../img/28j-replay-resolved.png"></a></p>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (1) <strong>Response times</strong> fill in. In this run: 8:15 to detect (mostly waiting for the scheduled slot),
-      0:14 to contain, 8:44 to resolve.</p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (1) <strong>Response times</strong> fill in. In this run, started from <strong>Test</strong>: 3:45 to detect, 0:07 to contain,
+      4:08 to resolve. From a schedule, time to detect includes the wait for the slot.</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (2) The <strong>Timeline</strong> shows each step, with your agent's alert in its own words and its ticket notes.</li>
+</ol>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/28m-app-group.png" data-desc-position="bottom"><img alt="My group after the run" src="../../img/28m-app-group.png"></a></p>
+<ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (3) Your card in <strong>My group</strong> turns <strong>Resolved</strong>, with your agent's summary. In live mode the app
       also shows <em>"Your agent handled it in m:ss"</em>.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> When live mode ends, the new night loads into <strong>Playback</strong>: play it back at 4x to see the whole run.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> In <strong>My tickets</strong> (seat card → <strong>Log in to Service Desk</strong>), confirm and close the ticket your agent
       resolved. Back in the app, the ticket row shows <strong>closed</strong> on the next refresh.</li>
-</ol>
+</ul>
 <h2 id="6-add-on-shift-handover-notes-if-you-have-time">6. Add-on: shift handover notes (if you have time)</h2>
 <div class="highlight"><pre><span></span><code>Add section D of the design.
 </code></pre></div>
