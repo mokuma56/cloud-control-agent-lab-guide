@@ -29,7 +29,7 @@ What the card holds:
 | Lab Context spec URL | `https://<lab host>:8443/openapi-context.json` | 2.3 (REST path) |
 | Your MCP workspace | `https://<lab host>:9443/seat/<your seat>/` | 2.3 (Path B) |
 | Room wall | `https://<lab host>:8443/` (also on the room screen) | 2.3, 2.5 |
-| **My tickets** button | opens your PseudoCo Service Desk ticket queue in a new tab | 1.1, 1.3, 2.5 |
+| **Log in to Service Desk** button | opens your PseudoCo Service Desk ticket queue (**My tickets**) in a new tab | 1.1, 1.3, 2.5 |
 
 !!! warning "Your seat token is a password"
     It identifies your seat to every Lab Tools and Service Desk call. Paste it only into the credential fields named
@@ -63,3 +63,5 @@ stops traffic from *your* source IP and nothing else, and only after you approve
 
 - [ ] I can see the Cloud Control home page with **USC-Engineering** selected.
 - [ ] My seat card is next to my keyboard, token side down.
+
+Next: read the [Introduction](introduction.md): tonight's two incidents, how the lab is built, the agenda, the PseudoCo Service Desk and the room wall.

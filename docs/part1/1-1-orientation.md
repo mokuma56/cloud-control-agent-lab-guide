@@ -111,7 +111,7 @@ ones when they find an issue first.
    It may already show a ticket from Branch-1. Leave it for now: you work it in 1.3.
 
 !!! tip "What am I looking at?"
-    [PseudoCo Service Desk: what you see](../reference/service-desk.md) explains the queue, every
+    [PseudoCo Service Desk: what you see](../introduction.md#pseudoco-service-desk-what-you-see) in the Introduction explains the queue, every
     field, the three kinds of note and who does what, with screenshots. Read it once now (2 minutes).
 
 ### What Lab Tools is

@@ -14,7 +14,7 @@ in 2.1.
 
     ![24a-manage-agent](../img/24a-manage-agent.png){ loading=lazy }
 
-    *(1) Manage, (2) Applications, (3) your agent (capability Agent). Your integrations from 2.3 are listed here too. Owners are blurred in this guide.*
+    *(1) Manage, (2) Applications, (3) your agent: capability Agent, status Draft until you schedule it. Select its name to open the Details page.*
 
 2. On the agent's **Details** page, select **Edit Agent** (top right).
 
@@ -91,7 +91,7 @@ in 2.1.
 
     ![24f-refine-done](../img/24f-refine-done.png){ loading=lazy }
 
-    *(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one `byo-` entry per MCP integration (Path B: My Lab Tools - MCP) plus the Cisco servers. The screenshot is from an older version of the lab with two `byo-` entries. Schedule is greyed until you rerun a test.*
+    *Path A after the refine: (1) the version went up (here v4), (2) the authorized operations: signal_issue, get_light_status and clear_issue now go through My Lab Tools - REST, everything else through Lab Tools Production, plus PseudoCo Service Desk and Open-Meteo, (3) MCP servers: the Cisco ones (Path B adds one `byo-` entry here for My Lab Tools - MCP), (4) API integrations: all four, (5) Schedule is greyed until you rerun a test.*
 
 - [ ] Studio's summary names your integration. **API integrations** lists **Lab Tools Production**,
       **PseudoCo Service Desk**, **Open-Meteo Weather Forecast** and, for Path A, **My Lab Tools - REST**. For Path B, **MCP servers** shows one `byo-` entry (MCP

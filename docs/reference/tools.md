@@ -42,7 +42,7 @@ comments, `close_code`, `close_notes`.
 Priority: impact + urgency, 1 (high) to 3 (low): 1/1 is P1, 1/2 or 2/1 is P2, 2/2 is P3, lower is P4.
 Severity shortcut: critical = P1, major = P2, minor = P3. Writes are limited to 20 a minute per seat.
 
-**My tickets** (the **My tickets** button on your seat card) shows your queue live and lets you, as the
+**My tickets** (**Log in to Service Desk** on your seat card) shows your queue live and lets you, as the
 caller, **Confirm and close** or **Reopen** a resolved ticket.
 
 ## Weather: Open-Meteo Weather Forecast

@@ -85,7 +85,7 @@ Your agent kept working the whole time; run its test again afterwards anyway.
 
 ## My tickets says "That token was not accepted"
 
-Open it again from the **My tickets** button on your seat card (it passes your token for you), or paste
+Open it again with **Log in to Service Desk** on your seat card (it passes your token for you), or paste
 the seat token from the card. After the proctor rotates tokens between sessions, old tokens stop working
 on purpose.
 

@@ -87,8 +87,8 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Lab:
-      - Introduction: introduction.md
       - Before you start: setup.md
+      - Introduction: introduction.md
       - "Part 1 - Test your prompt in AI Canvas":
           - part1/index.md
           - "1.1 Orientation": part1/1-1-orientation.md
@@ -108,7 +108,6 @@ nav:
       - Conclusion: conclusion.md
       - "Appendix: Challenge scenarios": appendix/challenges.md
   - Reference:
-      - reference/service-desk.md
       - reference/tools.md
       - reference/output-contract.md
       - reference/evidence.md
