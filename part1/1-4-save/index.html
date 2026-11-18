@@ -1413,6 +1413,9 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 4. Use PseudoCo Service Desk: if an open ticket covers this, write the answer into it as a work note
    and answer the caller with a comment; if there is none and STATUS is issue, open one.
+   If STATUS is healthy and an open ticket's problem is now fixed, resolve that ticket: a work note
+   with the evidence, a comment telling the caller what fixed it, then state resolved with close_code
+   "Solved (Permanently)" and close_notes naming the change that fixed it.
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Why firewall events are in the list</p>
@@ -1421,8 +1424,7 @@ that only checks where the last problem was will miss the next one, and in Part 
 not a switch change.</p>
 </div>
 <h2 id="before-the-break">Before the break</h2>
-<p>The proctors now clear the standing fault. Optional, if you have two minutes: run your general
-method once more, pointed at the service that had the fault, <strong>PseudoCo's branch wired users</strong>. Paste
+<p>The proctors now clear the standing fault. Take two minutes to run your general method once more, pointed at the service that had the fault, <strong>PseudoCo's branch wired users</strong>. Paste
 this into a <strong>new</strong> Canvas board (or your own wording, with the same service):</p>
 <div class="highlight"><pre><span></span><code>You are the night-shift engineer for PseudoCo's branch wired users.
 Each run, answer one question: is anything hurting it, and what should happen next?
@@ -1436,21 +1438,32 @@ Each run, answer one question: is anything hurting it, and what should happen ne
    matches), EVIDENCE (each bullet names its source), NEXT STEP (propose, never change).
 4. Use PseudoCo Service Desk: if an open ticket covers this, write the answer into it as a work note
    and answer the caller with a comment; if there is none and STATUS is issue, open one.
+   If STATUS is healthy and an open ticket's problem is now fixed, resolve that ticket: a work note
+   with the evidence, a comment telling the caller what fixed it, then state resolved with close_code
+   "Solved (Permanently)" and close_notes naming the change that fixed it.
 </code></pre></div>
 <p>It should come back <code>STATUS: healthy</code> and name the change ticket that backed out the Leaf1 change.
-A method that finds the fault and then reports healthy after the fix is one you can trust.
-On <strong>My tickets</strong>, the Branch-1 ticket is now <strong>Resolved</strong> (the back-out resolved it). Read the timeline,
-then select <strong>Confirm and close</strong>: you are the caller, and you agree it is fixed.</p>
+A method that finds the fault and then reports healthy after the fix is one you can trust.</p>
+<p>The back-out does <strong>not</strong> close your ticket. Branch-ops only adds a note: <em>change implemented, please verify</em>.
+Your re-check is the verification: Canvas writes the evidence into the Branch-1 ticket, tells the caller
+what fixed it, and <strong>resolves</strong> it with the change that fixed it. That is the full loop: the same method
+that found the cause proves the fix and closes the incident.</p>
+<p>On <strong>My tickets</strong>, the Branch-1 ticket is now <strong>Resolved</strong> by your re-check. Read the timeline: the
+branch-ops note, then your agent's evidence, comment and resolution. Then select <strong>Confirm and close</strong>:
+you are the caller, and you agree it is fixed.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/31-my-tickets-resolved-close.png" data-desc-position="bottom"><img alt="31-my-tickets-resolved-close" loading="lazy" src="../../img/31-my-tickets-resolved-close.png"></a></p>
-<p><em>(1) Resolved, (2) the close code and notes: branch-ops backed out the change, (3) Confirm and close,
-(4) Reopen if it is not fixed, (5) the activity that resolved it.</em></p>
+<p><em>(1) Resolved by your re-check, (2) the close code and notes: the back-out change that fixed it and how it
+was verified, (3) Confirm and close, (4) Reopen if it is not fixed, (5) your agent's resolution and its
+comment to the caller (scroll down for its evidence and the branch-ops note).</em></p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/21d-healthy.png" data-desc-position="bottom"><img alt="21d-healthy" loading="lazy" src="../../img/21d-healthy.png"></a></p>
 <p><em>(1) STATUS healthy after the fix, (2) CAUSE names both tickets: the change that broke the ports and the one that restored them.</em></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your board is named <strong>Night shift triage</strong>, pinned, and has the <strong>Known-good answer</strong> card.</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your general triage method is saved in a note.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> (Optional) After the fault is cleared, your method returns <code>STATUS: healthy</code>.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Your Branch-1 ticket has your work note and comment, and is closed once the proctor backs out the change.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> After the fault is cleared, your method returns <code>STATUS: healthy</code> and resolves your Branch-1 ticket
+      with the change that fixed it.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> You closed the Branch-1 ticket in <strong>My tickets</strong>. (Ran out of time? The proctor resolves any open
+      Branch-1 tickets at the break.)</li>
 </ul>
 <p><strong>Break: 10 minutes.</strong></p>
 
