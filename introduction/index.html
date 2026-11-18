@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../reference/tools/" class="md-tabs__link">
+        <a href="../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -1160,6 +1160,8 @@
       
         
       
+        
+      
     
     
     
@@ -1202,6 +1204,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1345,8 +1375,8 @@
 looks after one PseudoCo service: the Employee Intranet, the directory servers, the partner portal and so on.
 Its column on the room wall is headed with that service. In the next four hours you teach Cisco Cloud Control
 to do your night shift. It has to find what is hurting the business across every Cisco domain, add the
-business context only you know, decide how bad it is, wake you only when it matters, and take one safe
-action you approve.</p>
+business context only you know, decide how bad it is, wake you only when it matters, take one safe
+action you approve, and keep the service desk ticket up to date so the day shift can trust it.</p>
 <h2 id="tonight-two-incidents-one-method">Tonight: two incidents, one method</h2>
 <table>
 <thead>
@@ -1377,6 +1407,11 @@ action you approve.</p>
 <td>A port change on a branch switch (users get no IP address)</td>
 <td>Hostile traffic against your table's service</td>
 </tr>
+<tr>
+<td>The ticket</td>
+<td>A user calls the service desk; <strong>you</strong> write the root cause into their ticket</td>
+<td>A user calls, or your agent finds it first; <strong>your agent</strong> writes the root cause into the ticket and resolves it</td>
+</tr>
 </tbody>
 </table>
 <p>The two incidents have nothing in common, on purpose. In Part 1 you do not write a "Leaf1 prompt".
@@ -1405,6 +1440,7 @@ point at any system your business depends on, and the take-home kit to rebuild i
   end
   subgraph Kit["Lab Kit (always on, public HTTPS)"]
     Broker["Lab Context + Lab Actions APIs&lt;br/&gt;OpenAPI specs, board"]
+    SD["PseudoCo Service Desk&lt;br/&gt;your ticket queue"]
     MCP["Your MCP workspace&lt;br/&gt;(2.3 Path B)"]
   end
   subgraph Pod["POD-45 lab network"]
@@ -1416,6 +1452,9 @@ point at any system your business depends on, and the take-home kit to rebuild i
   Canvas -- "Cisco integrations" --&gt; Meraki
   Canvas -- "Lab Tools Production (OpenAPI)" --&gt; Broker
   Studio -- "Lab Tools Production, My Lab Tools - REST (OpenAPI)" --&gt; Broker
+  Canvas -- "PseudoCo Service Desk" --&gt; SD
+  Studio -- "PseudoCo Service Desk" --&gt; SD
+  Studio -- "Open-Meteo (weather)" --&gt; Weather["Open-Meteo&lt;br/&gt;public weather API"]
   Studio -- "My Lab Tools - MCP" --&gt; MCP --&gt; Broker
   Broker -- "your source IP only" --&gt; Splunk
   FTD --&gt; Splunk
@@ -1429,6 +1468,12 @@ point at any system your business depends on, and the take-home kit to rebuild i
   PseudoCo's change calendar, business services, on-call policy and SaaS status. It also gives your
   agent its watch scope, the firewall events for your seat, and two actions: raise your seat's alert on
   the room wall, and stop your seat's attack traffic.</li>
+<li><strong>PseudoCo Service Desk</strong> is PseudoCo's ticket system (it works like an ITSM such as ServiceNow). Each
+  seat has its own queue, opened from <strong>My tickets</strong> on your seat card. Users' calls arrive as tickets;
+  Canvas and your agent write the root cause into them, open tickets when they find a problem first, and
+  resolve them. Only you, as the caller, close a ticket.</li>
+<li><strong>Open-Meteo</strong> is a public weather API with no credential. Your agent adds the weather at its site to
+  its evidence: outside context no Cisco product has.</li>
 <li><strong>My Lab Tools</strong> is <strong>your</strong> integration, built in 2.3 (REST or MCP) with your own rules. Your agent
   switches to it to raise and clear its alert: your own workflow.</li>
 <li><strong>Lanes:</strong> in Part 2 the traffic generator sends one stream of simulated attack traffic per seat, called
@@ -1457,84 +1502,84 @@ point at any system your business depends on, and the take-home kit to rebuild i
 </tr>
 <tr>
 <td>0:10</td>
-<td>15</td>
+<td>18</td>
 <td>1</td>
 <td><a href="../part1/1-1-orientation/">1.1 Orientation</a></td>
-<td>Canvas, Studio and Lab Tools open</td>
+<td>Canvas, Studio, Lab Tools and your ticket queue open</td>
 </tr>
 <tr>
-<td>0:25</td>
+<td>0:28</td>
 <td>25</td>
 <td>1</td>
 <td><a href="../part1/1-2-diagnose/">1.2 Multi-domain diagnosis</a></td>
 <td>Root cause from Cisco data alone</td>
 </tr>
 <tr>
-<td>0:50</td>
-<td>25</td>
+<td>0:53</td>
+<td>30</td>
 <td>1</td>
 <td><a href="../part1/1-3-lab-tools/">1.3 Make it yours: Lab Tools</a></td>
-<td>Same answer plus change ID, business impact, severity</td>
+<td>Same answer plus change ID, business impact, severity, written into the user's ticket</td>
 </tr>
 <tr>
-<td>1:15</td>
-<td>15</td>
+<td>1:23</td>
+<td>12</td>
 <td>2</td>
 <td><a href="../part1/1-4-save/">1.4 Save the triage method</a></td>
 <td>Pinned Canvas and your general triage prompt</td>
 </tr>
 <tr>
-<td>1:30</td>
+<td>1:35</td>
 <td>10</td>
 <td>-</td>
 <td>Break</td>
 <td></td>
 </tr>
 <tr>
-<td>1:40</td>
+<td>1:45</td>
 <td>25</td>
 <td>3</td>
 <td><a href="../part2/2-1-shape-agent/">2.1 Shape the agent</a></td>
 <td>Draft agent, manifest reviewed</td>
 </tr>
 <tr>
-<td>2:05</td>
+<td>2:10</td>
 <td>15</td>
 <td>3</td>
 <td><a href="../part2/2-2-test-publish/">2.2 Sandbox test</a></td>
 <td>Three tests passed, Schedule unlocked</td>
 </tr>
 <tr>
-<td>2:20</td>
+<td>2:25</td>
 <td>30</td>
 <td>3</td>
 <td><a href="../part2/2-3-custom-workflow/">2.3 Build your custom workflow</a></td>
 <td>Your own integration turns your seat red on the wall</td>
 </tr>
 <tr>
-<td>2:50</td>
+<td>2:55</td>
 <td>20</td>
 <td>3</td>
 <td><a href="../part2/2-4-wire-schedule/">2.4 Wire it in and choose how it runs</a></td>
-<td>Four tests passed, scheduled or Canvas chosen</td>
+<td>Weather added, four tests passed, scheduled or Canvas chosen</td>
 </tr>
 <tr>
-<td>3:10</td>
+<td>3:15</td>
 <td>25</td>
 <td>3</td>
 <td><a href="../part2/2-5-lights-out/">2.5 Lights Out</a></td>
-<td>Light on at detection, off when fixed</td>
+<td>Light on at detection, off when fixed, ticket resolved and closed</td>
 </tr>
 <tr>
-<td>3:35</td>
+<td>3:40</td>
 <td>15</td>
 <td>4</td>
 <td><a href="../part3/3-1-mission-control/">3.1 Build Mission Control</a></td>
 <td>An app built from a design file; the night replayed live</td>
 </tr>
 <tr>
-<td>3:50</td>
-<td>10</td>
+<td>3:55</td>
+<td>5</td>
 <td>-</td>
 <td><a href="../conclusion/">Conclusion</a></td>
 <td>What you built; one agent idea for your own company; wrap</td>
@@ -1547,7 +1592,7 @@ point at any system your business depends on, and the take-home kit to rebuild i
 one column per table, headed by the service that table protects. Your seat ID is <code>T&lt;table&gt;-&lt;letter&gt;</code>,
 for example <strong>T3-C</strong> is table 3, seat C. The small colored dot on your tile matches your seat card.</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../img/20-wall.png" data-desc-position="bottom"><img alt="20-wall" loading="lazy" src="../img/20-wall.png"></a></p>
-<p><em>(1) Live counts, (3) a lane running that no agent has reported yet, (4) an agent's alert with its summary, (5) a lane its agent stopped and is verifying, (6) resolved, (7) what the agents said.</em></p>
+<p><em>(1) Amber: a seat whose traffic is running and that no agent has reported yet, (2) red: an agent raised its alert, with its summary, (3) the ticket the agent is working, (4) tickets open in the PseudoCo Service Desk, (5) known change requests from the change calendar (last 24 hours and scheduled), (6) what the agents said. A tile goes striped while its agent verifies, then green when resolved. There is no leaderboard: agents run at different times.</em></p>
 <table>
 <thead>
 <tr>
@@ -1565,7 +1610,12 @@ for example <strong>T3-C</strong> is table 3, seat C. The small colored dot on y
 <tr>
 <td>Amber, <strong>Threat active · undetected</strong></td>
 <td>Your lane is running and no agent has reported it yet</td>
-<td>the proctor starts lanes</td>
+<td>the proctor starts traffic after the break; you restart your own</td>
+</tr>
+<tr>
+<td>Ticket number on the tile (for example <code>INC0010042 · resolved</code>)</td>
+<td>Your seat's current ticket in PseudoCo Service Desk</td>
+<td>your agent and the service desk</td>
 </tr>
 <tr>
 <td>Red, <strong>Alert</strong> + your agent's summary</td>

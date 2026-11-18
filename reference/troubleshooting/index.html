@@ -260,7 +260,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../tools/" class="md-tabs__link">
+        <a href="../service-desk/" class="md-tabs__link">
           
   
   
@@ -1064,6 +1064,8 @@
       
         
       
+        
+      
     
     
     
@@ -1109,6 +1111,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1392,6 +1422,61 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#my-tickets-says-that-token-was-not-accepted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        My tickets says "That token was not accepted"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#canvas-or-my-agent-cannot-see-pseudoco-service-desk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Canvas or my agent cannot see PseudoCo Service Desk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-agent-answers-duplicate-true-when-it-opens-a-ticket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent answers "duplicate: true" when it opens a ticket
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#only-the-caller-closes-a-ticket-403" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        "Only the caller closes a ticket" (403)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#there-is-no-ticket-in-my-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        There is no ticket in my queue
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1487,6 +1572,25 @@ cached copy of that integration's tools is out of date, which happens after the 
 token, <strong>Rediscover tools</strong>. The caution sign clears for every agent that uses it. Asking the agent's
 Studio chat to "refresh skills" does not help: the skills belong to the integration, not the agent.
 Your agent kept working the whole time; run its test again afterwards anyway.</p>
+<h2 id="my-tickets-says-that-token-was-not-accepted">My tickets says "That token was not accepted"</h2>
+<p>Open it again from the <strong>My tickets</strong> button on your seat card (it passes your token for you), or paste
+the seat token from the card. After the proctor rotates tokens between sessions, old tokens stop working
+on purpose.</p>
+<h2 id="canvas-or-my-agent-cannot-see-pseudoco-service-desk">Canvas or my agent cannot see PseudoCo Service Desk</h2>
+<p>Check <strong>Studio → Manage → Integrations → PseudoCo Service Desk</strong> shows <strong>Configured</strong>, and in
+<strong>Canvas → Integrations → Custom Integrations</strong> that it shows <strong>Your credential: Saved</strong> and <strong>Enabled for
+me</strong>. In the agent, ask Studio to "add my integration PseudoCo Service Desk", then rerun a test.</p>
+<h2 id="the-agent-answers-duplicate-true-when-it-opens-a-ticket">The agent answers "duplicate: true" when it opens a ticket</h2>
+<p>That is the Service Desk protecting you: an open ticket already covers the same service, so no second one
+was opened. The agent should work the ticket it returns. If it keeps calling <code>create_incident</code>, add to its
+instructions: "List open tickets first; open a ticket only when none covers the issue."</p>
+<h2 id="only-the-caller-closes-a-ticket-403">"Only the caller closes a ticket" (403)</h2>
+<p>The agent tried to close a ticket. It can only resolve it (with <code>close_code</code> and <code>close_notes</code>); you close
+it on <strong>My tickets</strong>. Remove any "close the ticket" wording from its instructions.</p>
+<h2 id="there-is-no-ticket-in-my-queue">There is no ticket in my queue</h2>
+<p>Part 1 tickets arrive about 2 minutes after the proctor breaks the branch network; Lights Out tickets
+arrive when the proctor opens them at the start of 2.5. If yours is still missing after that, ask a proctor:
+they can open one for your seat only.</p>
 
 
 

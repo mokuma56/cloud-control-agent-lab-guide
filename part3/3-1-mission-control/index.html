@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/tools/" class="md-tabs__link">
+        <a href="../../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -1087,6 +1087,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-add-on-your-tickets-next-to-your-night-if-you-have-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Add-on: your tickets next to your night (if you have time)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1184,6 +1195,8 @@
       
         
       
+        
+      
     
     
     
@@ -1226,6 +1239,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1428,9 +1469,9 @@ same way as Path A in 2.3 (if you took Path B, this is your first REST integrati
 </div>
 </li>
 <li>
-<p><strong>Review API</strong>: 7 operations. Three are for the core app: <code>get_my_timeline</code>, <code>get_my_group_board</code>,
-   <code>replay_my_attack</code>. Four are read-only, for the add-ons: <code>get_my_security_events</code>, <code>get_business_services</code>,
-   <code>get_oncall</code>, <code>get_recent_changes</code>.</p>
+<p><strong>Review API</strong>: 8 operations. Three are for the core app: <code>get_my_timeline</code>, <code>get_my_group_board</code>,
+   <code>replay_my_attack</code>. Five are read-only: <code>get_my_security_events</code>, <code>get_business_services</code>,
+   <code>get_oncall</code> and <code>get_recent_changes</code> for sections B and C, and <code>get_my_tickets</code> for add-on E.</p>
 </li>
 <li><strong>Configure</strong>: Display name <code>Night Watch Console</code>, Bearer token <span class="sc-tokenbtn"></span>.</li>
 <li><strong>Review and save → Save draft</strong>, then click <strong>Manage</strong> in the pop-up.</li>
@@ -1446,9 +1487,9 @@ your own My Lab Tools).</p>
 <h2 id="2-download-the-design-file">2. Download the design file</h2>
 <p><a class="md-button" download="NightWatch_Mission_Control.md" href="../../app/NightWatch_Mission_Control.txt">Download NightWatch_Mission_Control.md</a></p>
 <p>It is plain Markdown: what the app is for, the rules it must follow, the <strong>data contract</strong> (the exact
-fields each operation returns, so Studio does not have to guess), and four sections. Studio builds
+fields each operation returns, so Studio does not have to guess), and five sections. Studio builds
 <strong>A</strong> (your night: status, response times, timeline, your group, Replay the night), <strong>B</strong> (the evidence
-your agent saw) and <strong>C</strong> (business impact) in one go. <strong>D</strong> is an add-on you can ask for afterwards. A
+your agent saw) and <strong>C</strong> (business impact) in one go. <strong>D</strong> and <strong>E</strong> are add-ons you can ask for afterwards. A
 design file is how you make an app <strong>repeatable</strong>: the next person gets the same app from the same file.</p>
 <h2 id="3-build-the-app-from-the-file">3. Build the app from the file</h2>
 <ol>
@@ -1573,6 +1614,11 @@ exception: if it offers to hide your seat or watch source, answer <code>Show the
 </code></pre></div>
 <p>A note box your whole group shares: what your agent found, for the day shift. Notes are stored in the
 app, so everyone in your group sees them.</p>
+<h2 id="7-add-on-your-tickets-next-to-your-night-if-you-have-time">7. Add-on: your tickets next to your night (if you have time)</h2>
+<div class="highlight"><pre><span></span><code>Add section E of the design.
+</code></pre></div>
+<p>A <strong>Tickets</strong> panel: your PseudoCo Service Desk tickets with time to first note and time to resolve,
+and each ticket's notes next to the night's timeline. Read-only: the app shows tickets, it never changes them.</p>
 <div class="admonition success">
 <p class="admonition-title">What you just did</p>
 <p>You built a second kind of Studio application from a file, on top of the same integrations your agent

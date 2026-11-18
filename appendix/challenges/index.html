@@ -13,7 +13,7 @@
         <link rel="prev" href="../../conclusion/">
       
       
-        <link rel="next" href="../../reference/tools/">
+        <link rel="next" href="../../reference/service-desk/">
       
       
         
@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/tools/" class="md-tabs__link">
+        <a href="../../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -1128,10 +1128,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#e-app-add-ons" class="md-nav__link">
+  <a href="#e-service-desk-challenges" class="md-nav__link">
     <span class="md-ellipsis">
       
-        E. App add-ons
+        E. Service Desk challenges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#f-app-add-ons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        F. App add-ons
       
     </span>
   </a>
@@ -1162,6 +1173,8 @@
   
     
     
+      
+        
       
         
       
@@ -1213,6 +1226,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1384,6 +1425,8 @@ extra challenges for fast finishers. Each block has a copy button.</p>
 </tr>
 </tbody>
 </table>
+<p>Each incident also reaches the <strong>PseudoCo Service Desk</strong>: a user's call becomes a ticket in your queue (Part 1
+and Lights Out), and Canvas or your agent writes the root cause into it.</p>
 <h2 id="b-attack-scenarios-by-seat-letter">B. Attack scenarios by seat letter</h2>
 <p>Each seat at a table gets a different kind of attack, so not every agent sees IPS events. All five are an issue.</p>
 <table>
@@ -1437,6 +1480,8 @@ then <strong>Run scenario</strong>. Tests 1 and 4 really stop your attack; resta
 or beacon), even if there are no IPS events, with each piece of evidence naming its source.
 signal_issue is called, then stop_my_lane on my own source. since_stop is checked: all totals 0
 gives clear_issue and STATUS resolved; otherwise the alert stays open and STATUS is issue.
+A PseudoCo Service Desk incident is opened for the service I protect (or the open one is used)
+with the report as a work note, a work note per action, and it is resolved after a clean check.
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -1467,7 +1512,8 @@ activity there in the last 5 minutes. May propose the firewall rule review for a
 <p><strong>Expected outcome</strong></p>
 <div class="highlight"><pre><span></span><code>STATUS issue found from my watch source and signal_issue called. stop_my_lane called on my own
 source without asking. since_stop checked: if all totals are 0, clear_issue called and STATUS
-resolved. No other IP and no shared configuration touched.
+resolved. EVIDENCE has a WEATHER line from Open-Meteo for my site. One PseudoCo Service Desk
+incident, a work note per action, resolved (not closed). No other IP and no shared configuration touched.
 </code></pre></div>
 </div>
 </div>
@@ -1482,17 +1528,18 @@ one level, unless the on-call policy names it."</em> Rerun and compare.</p>
 <p>Test the missing-information path for real: ask Canvas about a source IP that is not yours. Lab Tools
 refuses (your token only sees your seat). Does your prompt make the agent say so plainly instead of
 inventing an answer? Fix it until it does.</p>
-<h3 id="3-a-second-clue-from-outside-cisco-15-min-path-b">3. A second clue from outside Cisco (15 min, Path B)</h3>
-<p>Add a tool to <code>tools.py</code> that brings in something Cisco cannot know, for example:</p>
+<h3 id="3-a-third-clue-from-outside-cisco-15-min-path-b">3. A third clue from outside Cisco (15 min, Path B)</h3>
+<p>Your agent already has the weather (Open-Meteo, 2.4). Add a tool to <code>tools.py</code> that brings in something
+else Cisco cannot know, for example:</p>
 <ul>
-<li>the weather at the branch (a storm explains a power blip),</li>
 <li>a public status page for a SaaS provider,</li>
-<li>a team calendar ("the network team is at an offsite").</li>
+<li>a team calendar ("the network team is at an offsite"),</li>
+<li>a public holiday calendar for the site (is anyone even in the office?).</li>
 </ul>
 <p>Write its description for the agent: when to call it and when not to.</p>
 <h3 id="4-a-second-action">4. A second action</h3>
-<p>Give your agent a second way to tell you, alongside the room wall: a Webex message to a space, or a
-ticket in a test ServiceNow instance. Keep the rule: it tells, it never changes the network.</p>
+<p>Give your agent a third way to tell you, alongside the room wall and the ticket: a Webex message to a
+space. Keep the rule: it tells, it never changes the network.</p>
 <h3 id="5-your-own-attack-end-to-end">5. Your own attack, end to end</h3>
 <p>Restart your attack (the <strong>Restart my lane</strong> button in 2.2, or <strong>Replay the night</strong> in the app) and run
 your agent twice: once while the attack runs (expect STATUS resolved, after it stops and verifies), and
@@ -1501,8 +1548,40 @@ once right after (expect STATUS healthy and nothing to stop). Compare the two ru
 <p>Edit the Mission Control design file: add a panel of your own (for example the Meraki clients on your
 segment, or your neighbors' time to resolve), save it under a new name, and build a second app from it.
 The file is the source code: share it and anyone gets the same app.</p>
-<h2 id="e-app-add-ons">E. App add-ons</h2>
-<p>The 3.1 build includes sections A to C (your night, the evidence, business impact). One add-on remains:</p>
+<h2 id="e-service-desk-challenges">E. Service Desk challenges</h2>
+<p>Each one starts with a ticket in your queue. Ask a proctor to open it for your seat (they pick the
+template named in brackets), then run your agent or ask Canvas. Check the result on <strong>My tickets</strong>.</p>
+<h3 id="1-not-a-network-problem-crm-slow">1. Not a network problem (<code>crm-slow</code>)</h3>
+<p><em>"Salesforce is crawling for the sales team."</em> <code>get_saas_status</code> already shows Salesforce degraded. Your
+agent must say it is not the network, give the evidence, <strong>reassign</strong> the ticket (assignment group: Service
+Desk or the application team) and answer the caller in plain words. Nothing is stopped, and no alert is
+raised for your seat.</p>
+<h3 id="2-the-red-herring-ticket-red-herring">2. The red-herring ticket (<code>red-herring</code>)</h3>
+<p><em>"Video calls choppy for one user."</em> There is no matching evidence anywhere. A good agent says what it
+checked, that it found nothing, asks the caller for the details it needs, and sets the ticket <strong>on hold</strong>.
+It invents no cause and resolves nothing. This is 1.3's red-herring test, in a ticket.</p>
+<h3 id="3-approval-through-the-ticket">3. Approval through the ticket</h3>
+<p>Change your agent's rules so that instead of stopping on its own, it adds a work note <em>"Awaiting approval:
+stop_my_lane on <my source="">"</my></em> and sets the ticket <strong>on hold</strong>. Approve by adding the comment <code>approved</code> on
+<strong>My tickets</strong>. On its next run the agent reads the comment, stops your source and carries on. Human approval
+without a chat window.</p>
+<h3 id="4-many-callers-one-incident-many-callers">4. Many callers, one incident (<code>many-callers</code>)</h3>
+<p>Three callers report the same symptom. Your agent should keep one incident, set the other tickets'
+<code>parent_incident</code> to it, and answer each caller once. Resolving the parent resolves all of them.</p>
+<h3 id="5-change-risk-before-anything-breaks">5. Change risk before anything breaks</h3>
+<p>Ask a proctor to add a <strong>scheduled</strong> change on your service for later tonight. While your service is
+under attack, your agent should spot it with <code>get_recent_changes</code> and say in its ticket (and NEXT STEP)
+that the change should wait: an RCA before the change breaks something.</p>
+<h3 id="6-response-times">6. Response times</h3>
+<p>Ask your agent to report, for each of its tickets, the time from <code>opened_at</code> to its first work note and to
+<code>resolved_at</code>. Then add a rule: <em>"A P1 or P2 ticket gets its first work note in the same run that finds
+it."</em> Run twice and compare.</p>
+<h3 id="7-the-weather-drill-proctor-led-when-offered">7. The weather drill (proctor-led, when offered)</h3>
+<p>Some sessions end with a storm drill: a simulated power cut and an uplink flap at one site. Your agent
+must raise the alert and open a ticket, but <strong>never</strong> stop anything (there is no attacker), and must say
+plainly when the weather is <strong>not</strong> the cause.</p>
+<h2 id="f-app-add-ons">F. App add-ons</h2>
+<p>The 3.1 build includes sections A to C (your night, the evidence, business impact). Two add-ons remain:</p>
 <table>
 <thead>
 <tr>
@@ -1516,6 +1595,11 @@ The file is the source code: share it and anyone gets the same app.</p>
 <td>D. Handover notes</td>
 <td><code>Add section D of the design.</code></td>
 <td>Shared notes for your group</td>
+</tr>
+<tr>
+<td>E. My tickets</td>
+<td><code>Add section E of the design.</code></td>
+<td>Your Service Desk tickets, time to first note and to resolve, notes next to your night</td>
 </tr>
 </tbody>
 </table>
@@ -1573,13 +1657,13 @@ The file is the source code: share it and anyone gets the same app.</p>
         
         
           
-          <a href="../../reference/tools/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab Tools reference">
+          <a href="../../reference/service-desk/" class="md-footer__link md-footer__link--next" aria-label="Next: PseudoCo Service Desk: what you see">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Lab Tools reference
+                PseudoCo Service Desk: what you see
               </div>
             </div>
             <div class="md-footer__button md-icon">

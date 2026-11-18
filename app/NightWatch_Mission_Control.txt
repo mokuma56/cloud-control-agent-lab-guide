@@ -1,7 +1,7 @@
 # App design: Night Watch Mission Control
 
 **Build now, without asking questions.** This design is complete: build sections A, B and C in one go.
-Section D is an add-on I may ask for later. Where the design is silent, choose the simplest option and
+Sections D and E are add-ons I may ask for later. Where the design is silent, choose the simplest option and
 list your choices in the summary.
 
 ## Purpose and rules
@@ -40,6 +40,9 @@ unexpected type. Types: `group`, metrics, `connections` and the totals are numbe
   services yourself.
 - `get_oncall`: `{oncall: {primary: {name, team}, secondary: {name, team}, policy}}`.
 - `get_recent_changes` (query `hours`): `{changes: [{id, system, change, state, time}]}`.
+- `get_my_tickets` (add-on E only): `{seat, my_service, tickets: [{number, short_description, state, priority_label,
+  cmdb_ci, caller_id, opened_by, opened_at, resolved_at, closed_at, close_code, close_notes, parent_incident,
+  test, work_notes: [{time, author, text}], comments: [{time, author, text}]}]}`. `test` is a boolean.
 
 `card_state` is exactly one of: quiet = grey "Quiet"; attack_active = amber "Attack running, not reported
 yet"; alert = red "Alert" + severity; stopped_verifying = amber "Verifying"; resolved = green "Resolved".
@@ -77,3 +80,12 @@ hours=24 (id, system, change, state), marked "same segment" when `change` mentio
 
 A shared collection `handover_notes` (group, seat, note up to 500 characters, posted_at). Under My group:
 a text area, a Post note button and my group's notes, newest first. A user may delete only their own notes.
+
+## E. Add-on (only when I ask): my tickets
+
+A **Tickets** panel under B from `get_my_tickets`, hiding tickets where `test` is true. A row per ticket:
+number, priority, state, short description, caller ("My agent" when `opened_by` is agent). Two numbers per
+ticket: time to first work note and time to resolve (from `opened_at`, the first `work_notes` time and
+`resolved_at`), as m:ss. Selecting a row shows the work notes and comments as one timeline, oldest first,
+next to the night's timeline from A. Read-only: no buttons that change a ticket.
+

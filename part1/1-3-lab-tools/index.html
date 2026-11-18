@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/tools/" class="md-tabs__link">
+        <a href="../../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -683,6 +683,17 @@
     <span class="md-ellipsis">
       
         Iterate until it is right
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#work-the-ticket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Work the ticket
       
     </span>
   </a>
@@ -1151,6 +1162,8 @@
       
         
       
+        
+      
     
     
     
@@ -1193,6 +1206,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1334,7 +1375,8 @@
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
 <p>Get the same root cause, now with the change ticket, the business impact, a severity you can
-defend, and a decision on whether to wake someone. Then make Canvas answer in a fixed format.</p>
+defend, and a decision on whether to wake someone. Then make Canvas answer in a fixed format, and
+write that answer into the user's incident ticket.</p>
 </div>
 <p>Cisco data told you <em>what</em> changed. Lab Tools adds what only PseudoCo knows:</p>
 <table>
@@ -1446,6 +1488,38 @@ tighten the prompt: <em>"If you cannot confirm the impact, say so and say what w
 </tr>
 </tbody>
 </table>
+<h2 id="work-the-ticket">Work the ticket</h2>
+<p>While you were troubleshooting, the front desk at Branch-1 called the service desk. A ticket is now in
+your queue: <span class="sc-ticketsbtn"></span>. It is vague, the way users write: "Wi-Fi says connected but nothing
+loads". You already know the cause. Now write it into the ticket the way a good engineer would, with
+the technical detail for the team and a plain answer for the caller.</p>
+<p>In the <strong>same</strong> board, ask:</p>
+<div class="highlight"><pre><span></span><code>Using PseudoCo Service Desk, find my newest open ticket about Branch-1 and read it. Then:
+1. Add a work note with your answer above, in the same STATUS format, every evidence line naming
+   its source.
+2. Update the ticket: caused_by = the change ID you found, the severity you chose, and the
+   assignment group the on-call policy points to.
+3. Add a comment for the caller in plain language, no jargon: what is wrong, that the team is on
+   it, and what they can do meanwhile.
+Do not resolve or close the ticket: the fix is not done yet.
+</code></pre></div>
+<p>Then check the ticket on <strong>My tickets</strong> (it refreshes by itself):</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> A <strong>work note</strong> with STATUS, CAUSE (with the change ID), EVIDENCE with sources, and NEXT STEP.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>Caused by change</strong> shows the Leaf1 change ID, and the priority matches your severity.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> A <strong>comment</strong> the front desk would understand, with no VLANs or port numbers in it.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> State <strong>In progress</strong>, not Resolved: nothing is fixed yet.</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/30-my-tickets-work-the-ticket.png" data-desc-position="bottom"><img alt="30-my-tickets-work-the-ticket" loading="lazy" src="../../img/30-my-tickets-work-the-ticket.png"></a></p>
+<p><em>What a pass looks like on My tickets: (1) your ticket, now P1 and In progress, (2) priority set from the
+business impact (payments at a critical service), (3) caused by the Leaf1 change from the change calendar,
+(4) the plain-language comment for the front desk, (5) the internal work note with the full STATUS report.</em></p>
+<div class="admonition tip">
+<p class="admonition-title">Why two kinds of note</p>
+<p>Work notes are for the team (internal, technical). Comments are what the caller sees. A good agent
+writes both, and never puts a guess in either. When the proctor backs out the change later, the
+ticket is resolved for you, and you close it on <strong>My tickets</strong> as the caller would.</p>
+</div>
 <h2 id="quick-second-test-the-red-herring">Quick second test: the red herring</h2>
 <p>Start a <strong>new</strong> board and ask:</p>
 <div class="highlight"><pre><span></span><code>Users say Salesforce is slow this morning. Is it the network? Use Lab Tools Production and any Cisco data

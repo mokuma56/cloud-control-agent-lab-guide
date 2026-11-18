@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/tools/" class="md-tabs__link">
+        <a href="../../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -1140,6 +1140,8 @@
       
         
       
+        
+      
     
     
     
@@ -1182,6 +1184,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1388,10 +1418,14 @@ run makes it clear which behavior passed or failed, and which instruction to fix
 or beacon), even if there are no IPS events, with each piece of evidence naming its source.
 signal_issue is called, then stop_my_lane on my own source. since_stop is checked: all totals 0
 gives clear_issue and STATUS resolved; otherwise the alert stays open and STATUS is issue.
+A PseudoCo Service Desk incident is opened for the service I protect (or the open one is used)
+with the report as a work note, a work note per action, and it is resolved after a clean check.
 </code></pre></div>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 1 passed: your tile went red, then <strong>Stopped · verifying</strong>, then green, and the report
       says STATUS resolved. Your lane is now <strong>stopped</strong>: leave it that way for Tests 2 and 3.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>My tickets</strong> shows the agent's incident, <strong>Resolved</strong>, marked <em>test run</em>, with a work note for
+      each step. Test-run tickets are cleared before Lights Out.</li>
 </ul>
 </div>
 <div class="tabbed-block">
@@ -1431,7 +1465,7 @@ find. Select <strong>Run</strong>:</p>
 <p>The reply should show <code>"lane_running": true</code>. This button only restarts <strong>your</strong> lane.</p>
 <div class="admonition info">
 <p class="admonition-title">Your lane is already sending traffic</p>
-<p>Since the break, the proctor has had <strong>practice traffic</strong> running: your seat's source IP sends test
+<p>Since the break, your seat's traffic has been running (the proctor started it): your source IP sends test
 attacks to your table's service, so the Typical test finds real firewall events whenever you get to it.
 It keeps running to the end of the lab, and it is the same traffic your agent finds in 2.5. When a test
 stops your lane, restart it yourself with the <strong>Restart my lane</strong> button below the tests.</p>

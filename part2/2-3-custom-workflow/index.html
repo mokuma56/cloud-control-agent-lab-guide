@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/tools/" class="md-tabs__link">
+        <a href="../../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -1140,6 +1140,8 @@
       
         
       
+        
+      
     
     
     
@@ -1182,6 +1184,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1470,7 +1500,7 @@ when not to.</p>
 </table>
 </div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23c-rest-configure.png" data-desc-position="bottom"><img alt="23c-rest-configure" loading="lazy" src="../../img/23c-rest-configure.png"></a></p>
-<p><em>(1) Display name: change Lab Actions to <code>My Lab Tools - REST</code> (the screenshot shows an older name), (2) you are on the Configure step.</em></p>
+<p><em>(1) Personal connector: only you can use it, (2) Display name: change Lab Actions to <code>My Lab Tools - REST</code>, (3) you are on the Configure step. Scroll down for the token field.</em></p>
 </li>
 <li>
 <p><strong>Configure, part 2: tell the agent how to use it.</strong> This is the point of Path A. The spec says
@@ -1490,7 +1520,7 @@ stop_my_lane: call it only for my own watch source, after the activity is confir
 5 minutes and my lane is running. Never on inconclusive evidence, never for another IP.
 </code></pre></div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23d-rest-guidance.png" data-desc-position="bottom"><img alt="23d-rest-guidance" loading="lazy" src="../../img/23d-rest-guidance.png"></a></p>
-<p><em>(1) Your seat token from step 4, (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue.</em></p>
+<p><em>(1) Your seat token from step 4 (it shows as dots), (2) open Help agents use this API, (3) paste your guidance into API usage guidance (Add guidance file takes the same text as a .md or .txt file), (4) Continue. Tip: click Continue rather than pressing Enter in the token field, which jumps straight to Review and save.</em></p>
 </li>
 <li>
 <p><strong>Review and save:</strong> check the name (<code>My Lab Tools - REST</code>), the 6 operations and your guidance, then
@@ -1499,6 +1529,8 @@ stop_my_lane: call it only for my own watch source, after the activity is confir
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Studio → Manage → Integrations shows <code>My Lab Tools - REST</code>, Personal, <strong>Configured</strong>.</li>
 </ul>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/23e-rest-manage.png" data-desc-position="bottom"><img alt="23e-rest-manage" loading="lazy" src="../../img/23e-rest-manage.png"></a></p>
+<p><em>(1) Custom integrations: Personal, (2) My Lab Tools - REST on your <code>/table</code> address, (3) Configured. The tenant integrations (Open-Meteo, PseudoCo Service Desk, Lab Tools Production) are listed below it.</em></p>
 <p>Keep it <strong>Personal</strong>: do not use <em>Make available to tenant</em>. It carries your seat token, so
 everyone in the tenant would then act as your seat.</p>
 </li>

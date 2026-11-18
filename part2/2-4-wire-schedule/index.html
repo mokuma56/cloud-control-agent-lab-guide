@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/tools/" class="md-tabs__link">
+        <a href="../../reference/service-desk/" class="md-tabs__link">
           
   
   
@@ -1151,6 +1151,8 @@
       
         
       
+        
+      
     
     
     
@@ -1193,6 +1195,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/service-desk/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PseudoCo Service Desk: what you see
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1333,8 +1363,8 @@
 <h1 id="24-wire-it-in-and-choose-how-it-runs">2.4 Wire it in and choose how it runs</h1>
 <div class="admonition abstract">
 <p class="admonition-title">Goal</p>
-<p>Your agent uses your integration, passes a "light on" test, and is scheduled for Lights Out (or
-ready to run from Canvas).</p>
+<p>Your agent uses your integration, adds the weather at its site, passes a "light on" test that also
+works its ticket, and is scheduled for Lights Out (or ready to run from Canvas).</p>
 </div>
 <h2 id="wire-the-integration-into-the-agent">Wire the integration into the agent</h2>
 <p>You change an existing agent by reopening it in the builder and asking Studio, the same chat you used
@@ -1369,7 +1399,11 @@ stop_my_lane. If STATUS is issue from my watch source in the last 5 minutes and 
 running: call signal_issue, then stop_my_lane yourself (no approval needed), then
 get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
 STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
-each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+each action. Also add my integration Open-Meteo Weather Forecast: after get_my_watch_scope, call
+getWeatherForecast for my site's location (current conditions and the next 24 hours,
+timezone=auto) and add a WEATHER line to EVIDENCE with the source Open-Meteo. Weather is
+context, never the cause unless other evidence matches it. Keep the PseudoCo Service Desk
+ticket rules. Never stop on inconclusive evidence, never act on another IP, never change shared
 configuration. Keep everything else the same.
 </code></pre></div>
 </div>
@@ -1381,7 +1415,11 @@ and stop_my_lane. If STATUS is issue from my watch source in the last 5 minutes 
 running: call signal_issue, then stop_my_lane yourself (no approval needed), then
 get_my_security_events with minutes=5. If every since_stop total is 0, call clear_issue and report
 STATUS: resolved; otherwise keep the alert open. In the report, name the integration used for
-each action. Never stop on inconclusive evidence, never act on another IP, never change shared
+each action. Also add my integration Open-Meteo Weather Forecast: after get_my_watch_scope, call
+getWeatherForecast for my site's location (current conditions and the next 24 hours,
+timezone=auto) and add a WEATHER line to EVIDENCE with the source Open-Meteo. Weather is
+context, never the cause unless other evidence matches it. Keep the PseudoCo Service Desk
+ticket rules. Never stop on inconclusive evidence, never act on another IP, never change shared
 configuration. Keep everything else the same.
 </code></pre></div>
 </div>
@@ -1389,6 +1427,13 @@ configuration. Keep everything else the same.
 </div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/24d-refine-prompt.png" data-desc-position="bottom"><img alt="24d-refine-prompt" loading="lazy" src="../../img/24d-refine-prompt.png"></a></p>
 <p><em>(1) Ask Studio to refine the Agent: your prompt goes here, (2) send. Review Agent on the right shows the current manifest.</em></p>
+<div class="admonition info">
+<p class="admonition-title">Why weather?</p>
+<p>Open-Meteo is a public API with no credential: one integration and one sentence give your agent
+outside context that no Cisco product has. A storm can explain a power blip at a site; a clear
+night rules it out. The rule "context, never the cause unless other evidence matches it" stops
+the agent from blaming the weather for an attack.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">Why the prompt repeats the limits</p>
 <p>Studio rewrites the instructions from what you ask. Saying "keep everything else the same" and
@@ -1408,8 +1453,8 @@ repeating the limits stops a refinement from loosening what you tested in 2.2.</
 <p><em>(1) Studio's summary: what it added, and that the change is not tested yet, (2) the version went up (v3), (3) the stop rules, (4) MCP servers: one <code>byo-</code> entry per MCP integration (Path B: My Lab Tools - MCP) plus the Cisco servers. The screenshot is from an older version of the lab with two <code>byo-</code> entries. Schedule is greyed until you rerun a test.</em></p>
 </li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Studio's summary names your integration. <strong>API integrations</strong> lists <strong>Lab Tools Production</strong> and,
-      for Path A, <strong>My Lab Tools - REST</strong>. For Path B, <strong>MCP servers</strong> shows one <code>byo-</code> entry (MCP
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Studio's summary names your integration. <strong>API integrations</strong> lists <strong>Lab Tools Production</strong>,
+      <strong>PseudoCo Service Desk</strong>, <strong>Open-Meteo Weather Forecast</strong> and, for Path A, <strong>My Lab Tools - REST</strong>. For Path B, <strong>MCP servers</strong> shows one <code>byo-</code> entry (MCP
       integrations show as IDs, not names): that is <strong>My Lab Tools - MCP</strong>.</p>
 </li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The instructions say <code>stop_my_lane</code> is for your own source only, and that <code>clear_issue</code> waits for a clean <code>since_stop</code>.</li>
@@ -1428,8 +1473,9 @@ running first (the <strong>Restart my lane</strong> button at the end of the 2.2
 <div class="highlight"><pre><span></span><code>STATUS issue found from my watch source and signal_issue called through my own integration
 (My Lab Tools - REST or My Lab Tools - MCP). stop_my_lane called on my own source without asking.
 since_stop checked: if all totals are 0, clear_issue called through my own integration and STATUS
-resolved. The report names the integration used for each action. No other IP and no shared
-configuration touched.
+resolved. The report names the integration used for each action. EVIDENCE has a WEATHER line from
+Open-Meteo for my site. One PseudoCo Service Desk incident for the service I protect, with a work note
+per action, resolved (not closed) after the clean check. No other IP and no shared configuration touched.
 </code></pre></div>
 <p><strong>What a pass looks like</strong> (seat T1-A, port scan):</p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/27a-autostop-result.png" data-desc-position="bottom"><img alt="27a-autostop-result" loading="lazy" src="../../img/27a-autostop-result.png"></a></p>
@@ -1441,10 +1487,14 @@ configuration touched.
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile went red, striped, then green, the report says STATUS resolved, and it
       names <strong>your</strong> integration for <code>signal_issue</code> and <code>clear_issue</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> The report has a <strong>WEATHER</strong> line naming your site (Dallas for every table: all six services run
+      in the data center) and Open-Meteo as the source.</li>
 <li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Restart your lane again (it is stopped now):</p>
-<p></p><div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
-- [ ] All four tests pass on your latest saved version, so <strong>Schedule</strong> is blue.<p></p>
+<p><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> <strong>My tickets</strong> shows one new incident (<em>test run</em>), resolved, with the work notes in order.</p>
+<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/32-my-tickets-agent-incident.png" data-desc-position="bottom"><img alt="32-my-tickets-agent-incident" loading="lazy" src="../../img/32-my-tickets-agent-incident.png"></a></p>
+<p><em>Test 4 on My tickets: (1) the incident your agent opened, marked test run, (2) priority from its SEVERITY (major = P2), (3) Security Operations, because it is hostile activity from your source, (4) the close code and notes: what was stopped and how it was verified, (5) one work note per action, newest first: here the since_stop check. Resolved, not closed: closing is yours.</em>
+- [ ] Your lane is stopped now: you start it again in the next section, just before you choose how it runs.
+- [ ] All four tests pass on your latest saved version, so <strong>Schedule</strong> is blue.</p>
 </li>
 </ul>
 <h2 id="choose-how-it-runs">Choose how it runs</h2>
@@ -1487,19 +1537,19 @@ configuration touched.
 </table>
 <p>There is no race. Every seat's lane keeps sending traffic until the end of the lab, so your agent finds
 yours whenever it runs.</p>
-<h3 id="before-you-choose-get-your-seat-ready">Before you choose: get your seat ready</h3>
-<ol>
-<li>
-<p><strong>Your lane must be running.</strong> Your tests stopped it. Select <strong>Run</strong> to start it again (it only
-   restarts your own lane). A stopped lane gives a healthy report and nothing to find.</p>
-<p></p><div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div><p></p>
-</li>
-<li>
-<p><strong>Reset your tile</strong>, so you see your agent turn it red. Select <strong>Run</strong>: it clears your alert on the room
-   wall with your seat token.</p>
-<p></p><div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset your tile: it goes back to quiet"></div><p></p>
-</li>
-</ol>
+<h3 id="before-you-choose-start-your-traffic">Before you choose: start your traffic</h3>
+<p>Your tests stopped your lane, and a stopped lane gives a healthy report with nothing to find. Start it
+again (it only restarts your own lane):</p>
+<div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Start my traffic: my source sends traffic again"></div>
+
+<p>The reply shows <code>"lane_running": true</code>, and your tile on the room wall turns <strong>amber</strong> (threat active,
+undetected). Your agent turns it red when it finds it.</p>
+<div class="admonition note">
+<p class="admonition-title">Only if your tile is still red</p>
+<p>Starting your traffic does not clear an alert that a test left open. If your tile is still <strong>red</strong>,
+reset it first, then start your traffic again:</p>
+<p></p><div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset my tile: clears my open alert"></div><p></p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Option A: Scheduled</label><label for="__tabbed_2_2">Option B: On demand from Canvas</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -1561,7 +1611,7 @@ is an issue. Then propose stop_my_lane and wait for my reply "approve stop".
 </div>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My lane is running and my tile is quiet.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My traffic is running and my tile is <strong>amber</strong> (threat active, undetected).</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My agent is scheduled for the next slot (Option A), or I have the Canvas prompt ready (Option B).</li>
 </ul>
 
