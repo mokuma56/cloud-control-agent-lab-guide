@@ -102,8 +102,20 @@ in 2.1.
 
 Your change in the step above created a new version, so Schedule is locked until a test passes on it.
 Test 4 is a full night-watch run with your own integration: find the problem, raise the alert, stop
-your own source, check that nothing arrives after the stop, and clear the alert. Make sure your lane is
-running first (the **Restart my lane** button at the end of the 2.2 tests).
+your own source, check that nothing arrives after the stop, and clear the alert.
+
+Your 2.2 tests stopped your lane, so start it again first (it only restarts your own lane):
+
+<div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
+
+The reply shows `"lane_running": true` and your tile turns **amber**. If your tile is still **red** from an
+earlier test, reset it first, then restart your lane:
+
+<div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset my tile: clears my open alert"></div>
+
+!!! tip "Rerunning Test 4"
+    Test 4 stops your lane, so a second run finds nothing and reports healthy. Before each rerun, select
+    **Restart my lane** above again.
 
 Run it the same way as the three tests in 2.2: in the builder's right-hand panel open **Test**, copy the
 **Scenario** and the **Expected outcome** into their boxes, then **Run scenario** (about a minute).
@@ -137,7 +149,7 @@ per action, resolved (not closed) after the clean check. No other IP and no shar
 
 ![27b-autostop-chain](../img/27b-autostop-chain.png){ loading=lazy }
 
-*The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. About 20 seconds from alert to green.*
+*The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. Under a minute from alert to green: the since_stop check waits about 20 seconds after the stop, so the traffic that is already on its way has arrived before it counts.*
 
 - [ ] Test 4 passed: your tile went red, striped, then green, the report says STATUS resolved, and it
       names **your** integration for `signal_issue` and `clear_issue`.
