@@ -1432,8 +1432,19 @@ repeating the limits stops a refinement from loosening what you tested in 2.2.</
 <h2 id="add-a-fourth-test">Add a fourth test</h2>
 <p>Your change in the step above created a new version, so Schedule is locked until a test passes on it.
 Test 4 is a full night-watch run with your own integration: find the problem, raise the alert, stop
-your own source, check that nothing arrives after the stop, and clear the alert. Make sure your lane is
-running first (the <strong>Restart my lane</strong> button at the end of the 2.2 tests).</p>
+your own source, check that nothing arrives after the stop, and clear the alert.</p>
+<p>Your 2.2 tests stopped your lane, so start it again first (it only restarts your own lane):</p>
+<div class="sc-run" data-method="POST" data-path="/v1/lane/start" data-label="Restart my lane: my source sends traffic again"></div>
+
+<p>The reply shows <code>"lane_running": true</code> and your tile turns <strong>amber</strong>. If your tile is still <strong>red</strong> from an
+earlier test, reset it first, then restart your lane:</p>
+<div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="Reset my tile: clears my open alert"></div>
+
+<div class="admonition tip">
+<p class="admonition-title">Rerunning Test 4</p>
+<p>Test 4 stops your lane, so a second run finds nothing and reports healthy. Before each rerun, select
+<strong>Restart my lane</strong> above again.</p>
+</div>
 <p>Run it the same way as the three tests in 2.2: in the builder's right-hand panel open <strong>Test</strong>, copy the
 <strong>Scenario</strong> and the <strong>Expected outcome</strong> into their boxes, then <strong>Run scenario</strong> (about a minute).</p>
 <p><strong>Scenario</strong></p>
@@ -1453,7 +1464,7 @@ per action, resolved (not closed) after the clean check. No other IP and no shar
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/25c-test4-evidence.png" data-desc-position="bottom"><img alt="25c-test4-evidence" loading="lazy" src="../../img/25c-test4-evidence.png"></a></p>
 <p><em>Evidence: (1) the agent learned its own seat first and saw the lane running, (2) it decided from the 5-minute window: one source, five ports on one host, no IPS events, still a port scan.</em></p>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/27b-autostop-chain.png" data-desc-position="bottom"><img alt="27b-autostop-chain" loading="lazy" src="../../img/27b-autostop-chain.png"></a></p>
-<p><em>The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. About 20 seconds from alert to green.</em></p>
+<p><em>The containment chain, in order: (1) signal_issue raised the alert, (2) stop_my_lane on its own source, lane confirmed stopped, (3) since_stop all 0: nothing arrived after the stop, (4) clear_issue: the tile goes green. Under a minute from alert to green: the since_stop check waits about 20 seconds after the stop, so the traffic that is already on its way has arrived before it counts.</em></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> Test 4 passed: your tile went red, striped, then green, the report says STATUS resolved, and it
       names <strong>your</strong> integration for <code>signal_issue</code> and <code>clear_issue</code>.</li>
