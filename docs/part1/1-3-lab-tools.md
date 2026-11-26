@@ -70,7 +70,7 @@ Good enough when **all four** are true:
 !!! question "The judgment call"
     Those ports are at **Branch-1**, where the business service is **Branch payments and Webex**
     (critical, 08:00 to 21:00). The policy says *wake the primary only for critical services or
-    anything affecting payments*. Is a card terminal on ports 1, 3 or 4? A good answer says what it
+    anything affecting payments*. Is a card terminal on one of the affected ports? A good answer says what it
     knows, what it does not, and what it would check before paging someone. If Canvas guesses,
     tighten the prompt: *"If you cannot confirm the impact, say so and say what would confirm it."*
 

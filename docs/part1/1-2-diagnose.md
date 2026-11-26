@@ -13,15 +13,20 @@
 Work in your Canvas board. Send one prompt at a time and read the answer before the next. Canvas
 shows its plan and the commands it runs; open them to see which Cisco integration it used.
 
+!!! tip "Use the rungs as written"
+    Each rung names the system and the data to read. A short prompt of your own ("use live data") lets
+    Canvas guess, and it may pick another platform it can reach, such as Nexus Dashboard or Intersight.
+    If its plan shows anything other than Meraki, send Rung 2 as written.
+
 === "Rung 1: symptom"
 
     ```text
-    Wired users on the USC-Engineering Cloud Fabric leaf access ports get link but no IP address,
-    starting a few minutes ago. What could cause this?
+    Wired users on the USC-Engineering Meraki Cloud Fabric (SITE-105) leaf access ports get link but
+    no IP address, starting recently. What could cause this?
     ```
 
-    Canvas picks the right system (Meraki Cloud Fabric, SITE-105) and often already reads the change
-    log. Open its plan and note which data it chose. The next rungs make it show and source that data.
+    Canvas picks the Meraki Cloud Fabric and often already reads the change log. Open its plan and note
+    which data it chose. The next rungs make it show and source that data.
 
 === "Rung 2: correlate"
 
@@ -46,16 +51,18 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
     ```
 
 !!! success "What good looks like"
-    Canvas finds that **Leaf1 ports 1, 3 and 4 were moved to an unused VLAN** a few minutes ago
-    (the change log shows the edit), while Leaf2's matching ports still use the normal access VLAN
+    Canvas finds that **Leaf1 ports 1 and 3 were moved to an unused VLAN** (999) and
+    their access policy to Open (the change log shows the edit), while Leaf2's matching ports still use the normal access VLAN
     and policy. Clients on those ports never reach the DHCP server, so they get no address. The fix
     it proposes is to restore the ports to match Leaf2, then confirm clients get an address again.
-    Canvas may already quote the matching change ticket from Lab Tools. In 1.3 you make that, plus
+    If the fault started a while before you asked, Canvas may point out that the change is older than
+    "recently": that is fine, it is the same change. Canvas may already quote the matching change
+    ticket from Lab Tools. In 1.3 you make that, plus
     business impact, severity and on-call, part of a fixed answer format.
 
     ![04b-fault-cause](../img/04b-fault-cause.png){ loading=lazy }
 
-    *A good rung 3 answer: (1) the CAUSE ties the Leaf1 port change to a time, (2) the Meraki change log shows VLAN 1 changed to 999 on ports 1, 3 and 4.*
+    *A good rung 3 answer: (1) the CAUSE ties the Leaf1 port change to a time, (2) the Meraki change log shows VLAN 1 changed to 999 on the affected ports (this screenshot is from an earlier run that also moved port 4; today it is ports 1 and 3).*
 
     ![06-fault-nextstep](../img/06-fault-nextstep.png){ loading=lazy }
 
@@ -67,7 +74,7 @@ shows its plan and the commands it runs; open them to see which Cisco integratio
 
 **What you did:** you started from a user complaint with no device names and climbed four prompts.
 Canvas picked the right system (the Meraki Cloud Fabric at SITE-105), read the configuration change
-log, compared Leaf1 with Leaf2, named the three ports moved to VLAN 999, and proposed a fix without
+log, compared Leaf1 with Leaf2, named the ports moved to VLAN 999, and proposed a fix without
 changing anything.
 
 **What you learned:**
