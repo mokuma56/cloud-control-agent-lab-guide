@@ -31,8 +31,8 @@ agent your company's workflow.
 
 ## Pick your path
 
-Both paths end with the same thing: your own **My Lab Tools** integration that turns your tile red and
-green. They differ in *how* you build it, the two ways Studio accepts an integration:
+Both paths end with the same thing: your own **My Lab Tools** integration that raises your alert (red) and
+clears it. They differ in *how* you build it, the two ways Studio accepts an integration:
 
 | | Path A: REST | Path B: MCP |
 | --- | --- | --- |
@@ -138,9 +138,11 @@ Pick **one**. If you have never written code, take Path A.
 
     <div class="sc-run" data-method="POST" data-path="/v1/signal" data-label="1. Raise your alert: your tile turns red" data-body='{"severity":"minor","summary":"{seat} test from my REST integration"}'></div>
 
-    Watch your tile on the room wall turn red, then clear it:
+    Watch your tile on the room wall turn red, then clear it. It goes back to **amber**, not green: the alert
+    is cleared, but your traffic is still running. In 2.4 your agent also stops the traffic, and then the
+    tile turns green.
 
-    <div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="2. Resolve your alert: your tile turns green"></div>
+    <div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="2. Resolve your alert: your tile leaves red"></div>
 
     What you just did: an HTTPS `POST` to `/v1/signal` with a JSON body (`severity`, `summary`) and your
     seat token in the `Authorization: Bearer` header. That is all an agent tool call is underneath: the
@@ -230,7 +232,8 @@ Pick **one**. If you have never written code, take Path A.
 
     5. **Test it like an agent would.** In **Test a tool**, pick `signal_issue`. The example arguments fill
        in for you (or paste them), then select **Call**. Your tile turns red on the room wall. Pick
-       `clear_issue` and **Call** to turn it green.
+       `clear_issue` and **Call** to clear it: the tile goes back to amber (alert cleared, your
+       traffic still running; your agent stops it in 2.4).
 
         ```json
         {"severity": "minor", "summary": "MCP test"}
@@ -297,4 +300,4 @@ Pick **one**. If you have never written code, take Path A.
     Add a tool of your own: a weather lookup for the branch, a Webex message, a ticket. See
     [Challenge scenarios](../appendix/challenges.md#d-stretch-challenges).
 
-- [ ] My tile turned red on the wall, and I cleared it (green).
+- [ ] My tile turned red on the wall, and I cleared it (back to amber: my traffic keeps running until 2.4).
