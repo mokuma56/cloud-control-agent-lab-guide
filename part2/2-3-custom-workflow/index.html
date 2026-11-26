@@ -1365,8 +1365,8 @@ its rules yourself:</p>
 <p>Swap the room wall for your own ticketing or paging system, and this is exactly how you would give an
 agent your company's workflow.</p>
 <h2 id="pick-your-path">Pick your path</h2>
-<p>Both paths end with the same thing: your own <strong>My Lab Tools</strong> integration that turns your tile red and
-green. They differ in <em>how</em> you build it, the two ways Studio accepts an integration:</p>
+<p>Both paths end with the same thing: your own <strong>My Lab Tools</strong> integration that raises your alert (red) and
+clears it. They differ in <em>how</em> you build it, the two ways Studio accepts an integration:</p>
 <table>
 <thead>
 <tr>
@@ -1509,8 +1509,10 @@ everyone in the tenant would then act as your seat.</p>
 call your agent's integration makes. Select <strong>Run</strong>: the guide sends the request from this browser with
 your seat token and shows the server's reply, like a terminal. Nothing to install.</p>
 <p></p><div class="sc-run" data-method="POST" data-path="/v1/signal" data-label="1. Raise your alert: your tile turns red" data-body="{&quot;severity&quot;:&quot;minor&quot;,&quot;summary&quot;:&quot;{seat} test from my REST integration&quot;}"></div><p></p>
-<p>Watch your tile on the room wall turn red, then clear it:</p>
-<p></p><div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="2. Resolve your alert: your tile turns green"></div><p></p>
+<p>Watch your tile on the room wall turn red, then clear it. It goes back to <strong>amber</strong>, not green: the alert
+is cleared, but your traffic is still running. In 2.4 your agent also stops the traffic, and then the
+tile turns green.</p>
+<p></p><div class="sc-run" data-method="POST" data-path="/v1/clear" data-label="2. Resolve your alert: your tile leaves red"></div><p></p>
 <p>What you just did: an HTTPS <code>POST</code> to <code>/v1/signal</code> with a JSON body (<code>severity</code>, <code>summary</code>) and your
 seat token in the <code>Authorization: Bearer</code> header. That is all an agent tool call is underneath: the
 integration you imported describes this call, and the agent fills in the body.</p>
@@ -1623,7 +1625,8 @@ your tile red on the room wall. You never put your token in the code: the server
 <li>
 <p><strong>Test it like an agent would.</strong> In <strong>Test a tool</strong>, pick <code>signal_issue</code>. The example arguments fill
    in for you (or paste them), then select <strong>Call</strong>. Your tile turns red on the room wall. Pick
-   <code>clear_issue</code> and <strong>Call</strong> to turn it green.</p>
+   <code>clear_issue</code> and <strong>Call</strong> to clear it: the tile goes back to amber (alert cleared, your
+   traffic still running; your agent stops it in 2.4).</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"minor"</span><span class="p">,</span><span class="w"> </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MCP test"</span><span class="p">}</span>
 </code></pre></div>
 <p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../../img/22c-workspace-test.png" data-desc-position="bottom"><img alt="22c-workspace-test" loading="lazy" src="../../img/22c-workspace-test.png"></a></p>
@@ -1708,7 +1711,7 @@ answers (the take-home kit has them as <code>tools_solution.py</code>).</p>
 <a href="../../appendix/challenges/#d-stretch-challenges">Challenge scenarios</a>.</p>
 </div>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My tile turned red on the wall, and I cleared it (green).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox"><span class="task-list-indicator"></span></label> My tile turned red on the wall, and I cleared it (back to amber: my traffic keeps running until 2.4).</li>
 </ul>
 
 
